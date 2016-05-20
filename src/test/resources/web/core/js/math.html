@@ -5,15 +5,30 @@
 <title>Math.js</title>
 </head>
 <body>
+	<table border="1" style="width: 100%">
+		<tr>
+			<td align="center" colspan="3">Math.js</td>
+		</tr>
+		<tr>
+			<td>方法名</td>
+			<td>方法描述</td>
+			<td>效果</td>
+		</tr>
+		<tr>
+			<td>subtract(number, number, precision)</td>
+			<td>减法，number-number precision->精度</td>
+			<td>Math.subtract(91, 19, 2)=
+				<div id="subtract" style="float: right; color: red"></div>
+			</td>
+		</tr>
+	</table>
 </body>
 
-<script type="text/javascript" src="/~/core/resource/jquery-easyui-1.4.5/jquery.min.js"></script>
-
-<script type="text/javascript" src="/~/core/component/js/Math.js"></script>
+<script type="text/javascript" src="/~/core/js/Math.js"></script>
 <script type="text/javascript">
-	$(function() {
-		alert(Math.subtract(91, 19, 2));
-	})
+	window.onload = function() {
+		document.getElementById("subtract").innerHTML = Math.subtract(91, 19, 2);
+	}
 </script>
 
 </html>
