@@ -1,4 +1,4 @@
-var Font = new function() {
+var Font = function() {
 	// 获取浏览器语言设置
 	var language = navigator.language;
 	if (!language)

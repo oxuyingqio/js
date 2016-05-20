@@ -1,5 +1,5 @@
 // 全局Cookie对象
-var Cookie = new function() {
+var Cookie = function() {
 	/**
 	 * 添加Cookie
 	 * 
