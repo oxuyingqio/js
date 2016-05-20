@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF8">
+<title>String.js</title>
+</head>
+<body>
+	<table border="1" style="width: 100%">
+		<tr>
+			<td align="center" colspan="3">String.js</td>
+		</tr>
+		<tr>
+			<td>方法名</td>
+			<td>方法描述</td>
+			<td>效果</td>
+		</tr>
+		<tr>
+			<td>replaceAll("", "")</td>
+			<td>替换所有字符</td>
+			<td>"abcbcabc".replaceAll("abc", "a")=
+				<div id="replaceAll" style="float: right; color: red"></div>
+			</td>
+		</tr>
+	</table>
+</body>
+
+<script type="text/javascript" src="/~/core/component/js/String.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("replaceAll").innerHTML = "abcbcabc"
+				.replaceAll("abc", "a");
+	}
+</script>
+
+</html>

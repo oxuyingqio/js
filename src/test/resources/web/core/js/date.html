@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF8">
+<title>Date.js</title>
+</head>
+<body>
+	<table border="1" style="width: 100%">
+		<tr>
+			<td align="center" colspan="3">Date.js</td>
+		</tr>
+		<tr>
+			<td>方法名</td>
+			<td>方法描述</td>
+			<td>效果</td>
+		</tr>
+		<tr>
+			<td>format(String)</td>
+			<td>格式化时间</td>
+			<td>(new Date()).format('yyyyMMdd HH:mm:ss')=
+				<div id="format" style="float: right; color: red"></div>
+			</td>
+		</tr>
+	</table>
+</body>
+
+<script type="text/javascript" src="/~/core/component/js/Date.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		document.getElementById("format").innerHTML = (new Date())
+				.format("yyyyMMdd HH:mm:ss");
+	}
+</script>
+
+</html>
