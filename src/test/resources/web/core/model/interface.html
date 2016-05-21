@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Interface.js</title>
+</head>
+<body>
+</body>
+
+<script type="text/javascript" src="/~/core/model/Interface.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		var demo = new Interface("demo", [ "123", "456" ]);
+
+		var demo1 = {};
+
+		Interface.ensureImplements(demo1, demo1);
+	}
+</script>
+
+</html>
