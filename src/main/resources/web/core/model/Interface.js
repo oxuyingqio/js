@@ -4,14 +4,14 @@
  * 接口
  * 
  * @param name
- *            接口名称
+ *            名称
  * @param methods
- *            接口方法组
+ *            方法组
  */
 function Interface(name, methods) {
-	// 判断参数个数
+	// 判断构造参数个数
 	if (arguments["length"] != 2) {
-		throw "Interface的参数必须为2个,而得到" + arguments["length"] + "个参数";
+		throw "core.model.Interface:构造参数异常.参数个数必须为2个,得到" + arguments["length"] + "个";
 	}
 
 	// 接口名称
@@ -21,7 +21,7 @@ function Interface(name, methods) {
 	// 设置接口方法
 	for (var i = 0, length = methods["length"]; i < length; i++) {
 		if (typeof (methods[i]) != "string") {
-			throw "Interface方法名必须为字符串";
+			throw "core.model.Interface:构造参数异常.接口方法名必须为字符串";
 		}
 
 		this.methods.push(methods[i]);
@@ -37,17 +37,17 @@ function Interface(name, methods) {
 Interface.ensureImplements = function(object) {
 	// 判断参数个数
 	if (arguments["length"] < 2) {
-		throw "接口方法检查,参数至少要多于两个.首参数为实现接口的对象,后续参数为实现的接口对象";
+		throw "core.model.Interface.ensureImplements:参数异常.参数个数至少大于等于2.首参数为实现接口的对象,后续参数为实现的接口对象";
 	}
 
-	// 遍历实现的接口
+	// 遍历实现的接口对象
 	for (var i = 1, length = arguments["length"]; i < length; i++) {
-		// 获取实现的接口
+		// 获取实现的接口对象
 		var interface = arguments[i];
 
-		// 检查是否继承接口
+		// 检查是否继承Interface对象
 		if (interface.constructor != Interface) {
-			throw "接口对象必须继承Interface";
+			throw "core.model.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
 		}
 
 		// 遍历接口方法
@@ -57,7 +57,7 @@ Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) != "function") {
-				throw "接口" + interface.name + "(" + method + ")方法未实现";
+				throw "core.model.Interface.ensureImplements:对象异常.接口" + interface.name + "(" + method + ")方法未实现";
 			}
 		}
 	}
