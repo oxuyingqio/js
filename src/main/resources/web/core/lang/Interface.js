@@ -47,7 +47,7 @@ Interface.ensureImplements = function(object) {
 		// 获取实现的接口对象
 		var interface = arguments[i];
 
-		// 检查是否继承Interface对象
+		// 检查接口对象是否继承Interface对象
 		if (interface.constructor != Interface) {
 			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
 		}
