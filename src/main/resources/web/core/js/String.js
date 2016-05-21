@@ -4,9 +4,9 @@
  * 替换所有字符串
  * 
  * @param target
- *            目标
+ *            目标字符
  * @param result
- *            结果
+ *            替换字符
  * @returns
  */
 String.prototype.replaceAll = function(target, result) {

@@ -1,9 +1,10 @@
 // Date对象扩展
 
 /**
- * 格式化日期,yyyy-MM-dd HH:mm:ss
+ * 格式化日期
  * 
  * @param fmt
+ *            格式 yyyy-MM-dd HH:mm:ss
  * @returns
  */
 Date.prototype.format = function(fmt) {
