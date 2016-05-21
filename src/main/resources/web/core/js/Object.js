@@ -15,4 +15,4 @@ Object.prototype.clone = function() {
 	Clone.prototype = this;
 	// 返回空函数的一个实例
 	return new Clone();
-}
+};

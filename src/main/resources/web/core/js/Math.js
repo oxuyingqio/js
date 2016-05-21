@@ -16,4 +16,4 @@ Math.subtract = function(subtrahend, minuend, precision) {
 	var b = parseFloat(minuend);
 
 	return (a - b).toFixed(precision);
-}
+};

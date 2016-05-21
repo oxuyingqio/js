@@ -26,7 +26,7 @@ var Interface = function(name, methods) {
 
 		this.methods.push(methods[i]);
 	}
-}
+};
 
 /**
  * 静态方法-接口方法检查
@@ -48,7 +48,7 @@ Interface.ensureImplements = function(object) {
 		var interface = arguments[i];
 
 		// 检查接口对象是否继承Interface对象
-		if (interface.constructor != Interface) {
+		if (interface["constructor"] != Interface) {
 			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
 		}
 
@@ -59,8 +59,8 @@ Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) != "function") {
-				throw "core.lang.Interface.ensureImplements:对象异常.接口" + interface.name + "(" + method + ")方法未实现";
+				throw "core.lang.Interface.ensureImplements:对象异常.接口" + interface["name"] + "(" + method + ")方法未实现";
 			}
 		}
 	}
-}
+};

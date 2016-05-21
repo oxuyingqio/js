@@ -11,4 +11,4 @@
  */
 String.prototype.replaceAll = function(target, result) {
 	return this.replace(new RegExp(target, "g"), result);
-}
+};
