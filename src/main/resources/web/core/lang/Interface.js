@@ -31,6 +31,8 @@ function Interface(name, methods) {
 /**
  * 静态方法-接口方法检查
  * 
+ * 检查实现接口的对象是否已实现对应接口的方法
+ * 
  * @param object
  *            实现接口的对象
  */
