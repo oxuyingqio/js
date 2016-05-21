@@ -1,4 +1,4 @@
-// JS Date对象扩展
+// Date对象扩展
 
 /**
  * 格式化日期,yyyy-MM-dd HH:mm:ss

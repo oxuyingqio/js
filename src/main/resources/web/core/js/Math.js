@@ -1,7 +1,7 @@
-// JS Math对象扩展
+// Math对象扩展
 
 /**
- * 减法 subtrahend-minuend,精度precision
+ * 静态方法-减法 subtrahend-minuend,精度precision
  * 
  * @param subtrahend
  * @param minuend
