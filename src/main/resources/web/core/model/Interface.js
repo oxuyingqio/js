@@ -29,7 +29,7 @@ function Interface(name, methods) {
 }
 
 /**
- * 接口方法检查
+ * 静态方法-接口方法检查
  * 
  * @param object
  *            实现接口的对象

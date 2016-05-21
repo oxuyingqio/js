@@ -10,10 +10,22 @@
 <script type="text/javascript" src="/~/core/model/Interface.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-		var demo = new Interface("demo", [ "123", "456" ]);
-// 		var demo1 = {};
+		var Person = new Interface("Person", [ "setName", "getName" ]);
 
-// 		Interface.ensureImplements(demo1, demo1);
+		function Student() {
+			var name;
+
+			this.setName = function(_name) {
+				name = _name;
+			}
+
+			this.getName = function() {
+				return name;
+			}
+		}
+
+		var s = new Student();
+		Interface.ensureImplements(s, Person);
 	}
 </script>
 
