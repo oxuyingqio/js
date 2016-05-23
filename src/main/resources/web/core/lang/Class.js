@@ -21,7 +21,7 @@ Class.extend = function(subClass, superClass) {
 	Middleware.prototype = superClass.prototype;
 	// 子类函数指向中间函数
 	subClass.prototype = new Middleware();
-	
+
 	// 子类函数构造不变
 	subClass.prototype.constructor = subClass;
 	// 子类添加superClass静态属性
