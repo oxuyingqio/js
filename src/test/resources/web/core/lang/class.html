@@ -7,10 +7,24 @@
 <body>
 </body>
 
+<script type="text/javascript" src="/~/core/core.js"></script>
+<script type="text/javascript" src="/~/core/lang/lang.js"></script>
 <script type="text/javascript" src="/~/core/lang/Class.js"></script>
 <script type="text/javascript">
+	function AAA(_name) {
+		this.name = _name;
+	}
+
+	function BBB() {
+		var name = "B"
+		BBB.superClass.constructor.call(this, name);
+	}
+
 	window.onload = function() {
-		Class.extend();
+		core.lang.Class.extend(BBB, AAA);
+
+		var b = new BBB();
+		alert(b.name);
 	}
 </script>
 

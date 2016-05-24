@@ -7,10 +7,12 @@
 <body>
 </body>
 
+<script type="text/javascript" src="/~/core/core.js"></script>
+<script type="text/javascript" src="/~/core/lang/lang.js"></script>
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-		var Person = new Interface("Person", [ "setName", "getName" ]);
+		var Person = new core.lang.Interface("Person", [ "setName", "getName" ]);
 
 		function Student() {
 			var name;
@@ -25,7 +27,7 @@
 		}
 
 		var s = new Student();
-		Interface.ensureImplements(s, Person);
+		core.lang.Interface.ensureImplements(s, Person);
 	}
 </script>
 

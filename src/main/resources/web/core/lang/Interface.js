@@ -1,4 +1,8 @@
-// 基础类-接口对象
+/**
+ * Interface
+ * 
+ * 接口
+ */
 
 /**
  * 接口
@@ -8,7 +12,7 @@
  * @param methods
  *            方法组
  */
-var Interface = function(name, methods) {
+core.lang.Interface = function(name, methods) {
 	// 判断构造参数个数
 	if (arguments["length"] != 2) {
 		throw "core.lang.Interface:构造参数异常.参数个数必须为2个,得到" + arguments["length"] + "个";
@@ -36,7 +40,7 @@ var Interface = function(name, methods) {
  * @param object
  *            实现接口的对象
  */
-Interface.ensureImplements = function(object) {
+core.lang.Interface.ensureImplements = function(object) {
 	// 判断参数个数
 	if (arguments["length"] < 2) {
 		throw "core.lang.Interface.ensureImplements:参数异常.参数个数至少大于等于2.首参数为实现接口的对象,后续参数为实现的接口对象";
@@ -48,7 +52,7 @@ Interface.ensureImplements = function(object) {
 		var interface = arguments[i];
 
 		// 检查接口对象是否继承Interface对象
-		if (interface["constructor"] != Interface) {
+		if (interface["constructor"] != core.lang.Interface) {
 			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
 		}
 
