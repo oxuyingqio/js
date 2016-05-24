@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Singleton.js</title>
+</head>
+<body>
+</body>
+
+<script type="text/javascript" src="/~/core/core.js"></script>
+<script type="text/javascript" src="/~/core/example/example.js"></script>
+<script type="text/javascript" src="/~/core/example/Singleton.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		var s1 = new core.example.Singleton.getInstance("aaa");
+		var s2 = new core.example.Singleton.getInstance("bbb");
+		var s3 = new core.example.Singleton.getInstance("ccc");
+		var s4 = new core.example.Singleton.getInstance("ddd");
+	}
+</script>
+
+</html>

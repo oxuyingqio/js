@@ -5,7 +5,7 @@
  */
 
 /**
- * 类
+ * 构造方法
  */
 core.lang.Class = function() {
 };
