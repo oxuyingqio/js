@@ -3,4 +3,4 @@
  * 
  * JS 基础包
  */
-core.lang = {};
+core.lang = core.lang || {};
