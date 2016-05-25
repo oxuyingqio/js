@@ -14,7 +14,7 @@
  */
 core.lang.Interface = function(name, methods) {
 	// 判断构造参数个数
-	if (arguments["length"] != 2) {
+	if (arguments.length != 2) {
 		throw "core.lang.Interface:构造参数异常.参数个数必须为2个,得到" + arguments["length"] + "个";
 	}
 
