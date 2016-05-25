@@ -11,14 +11,14 @@ core.example.Singleton = (function() {
 	var singleton;
 
 	// 单例对象的构造函数
-	var constructor = function(_name) {
+	var Constructor = function(_name) {
 		this.name = _name;
 	}
 
 	/**
 	 * 打印名称
 	 */
-	constructor.prototype.printName = function() {
+	Constructor.prototype.printName = function() {
 		alert(this.name);
 	}
 
@@ -28,7 +28,7 @@ core.example.Singleton = (function() {
 			// 判断单例对象是否存在
 			if (!singleton) {
 				// 不存在则创建对象
-				singleton = new constructor(name);
+				singleton = new Constructor(name);
 			}
 
 			// 返回单例对象

@@ -11,7 +11,7 @@ core.log.output.Popup = (function() {
 	var output;
 
 	// 构造函数
-	var constructor = function() {
+	var Constructor = function() {
 		this.output = function(msg) {
 			alert(msg);
 		};
@@ -22,7 +22,7 @@ core.log.output.Popup = (function() {
 		getInstance : function() {
 			// 保证单例,仅创建一个对象
 			if (!output) {
-				output = new constructor();
+				output = new Constructor();
 			}
 
 			return output;
