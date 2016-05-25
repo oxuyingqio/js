@@ -12,10 +12,15 @@
 <script type="text/javascript" src="/~/core/example/Singleton.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-		var s1 = new core.example.Singleton.getInstance("aaa");
-		var s2 = new core.example.Singleton.getInstance("bbb");
-		var s3 = new core.example.Singleton.getInstance("ccc");
-		var s4 = new core.example.Singleton.getInstance("ddd");
+		var s1 = core.example.Singleton.getInstance("aaa");
+		var s2 = core.example.Singleton.getInstance("bbb");
+		var s3 = core.example.Singleton.getInstance("ccc");
+		var s4 = core.example.Singleton.getInstance("ddd");
+
+		s1.printName();
+		s2.printName();
+		s3.printName();
+		s4.printName();
 	}
 </script>
 

@@ -1,7 +1,7 @@
 /**
  * Singleton
  * 
- * 单例
+ * 单例,懒加载,仅在首次调用时创建一次
  */
 
 core.example.Singleton = (function() {
@@ -29,7 +29,7 @@ core.example.Singleton = (function() {
 			// 判断单例是否存在
 			if (!singleton) {
 				// 不存在则赋值
-				singleton = constructor(name);
+				singleton = new constructor(name);
 			}
 
 			// 返回单例
