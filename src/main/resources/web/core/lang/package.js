@@ -1,6 +1,9 @@
 /**
  * lang
  * 
- * JS 基础包
+ * JS基础
+ * 
+ * 包
  */
+
 core.lang = core.lang || {};

@@ -1,6 +1,9 @@
 /**
  * example
  * 
- * JS 示例包
+ * JS示例
+ * 
+ * 包
  */
+
 core.example = core.example || {};

@@ -2,6 +2,8 @@
  * Static Attribute
  * 
  * 静态属性
+ * 
+ * 类
  */
 
 /**
@@ -14,24 +16,27 @@
  * 而不会每次new core.example.StaticAttribute()对象时,都重新生成一个,并且实现了闭包
  */
 core.example.StaticAttribute = (function() {
-	// 静态属性,new StaticAttribute()对象的个数
+	// 静态属性,new core.example.StaticAttribute()对象的个数
 	var StaticAttributeObjCount = 0;
 
-	// 静态方法,获取new StaticAttribute()对象的个数
+	// 静态方法,获取new core.example.StaticAttribute()对象的个数
 	function getStaticAttributeObjCount() {
 		return StaticAttributeObjCount;
 	}
 
-	// 返回的对象
+	// 返回对象的构造函数
 	var constructor = function() {
-		// StaticAttributeObjCount对象个数+1;
+		// 静态属性StaticAttributeObjCount++;
 		StaticAttributeObjCount++;
 	}
 
-	// 返回对象的静态方法.调用静态方法getStaticAttributeObjCount
+	/**
+	 * 静态方法.调用静态方法getStaticAttributeObjCount
+	 */
 	constructor.getObjCount = function() {
 		return getStaticAttributeObjCount();
 	}
 
+	// 返回构造函数
 	return constructor;
 })();
