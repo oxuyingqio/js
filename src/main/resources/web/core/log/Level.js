@@ -2,15 +2,17 @@
  * Level
  * 
  * 日志级别
+ * 
+ * 枚举
  */
 
 core.log.Level = {
 	// 错误
-	error : "error",
+	error : 4,
 	// 警告
-	warn : "warn",
+	warn : 3,
 	// 信息
-	info : "info",
+	info : 2,
 	// 调试
-	debug : "debug"
+	debug : 1
 }

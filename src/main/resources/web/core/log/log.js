@@ -1,6 +1,8 @@
 /**
  * log
  * 
- * JS 日志包
+ * JS日志
+ * 
+ * 包
  */
 core.log = core.log || {};

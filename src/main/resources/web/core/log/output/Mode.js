@@ -2,6 +2,8 @@
  * Mode
  * 
  * 输出模式
+ * 
+ * 枚举
  */
 
 core.log.output.Mode = {
