@@ -7,26 +7,26 @@
 <body>
 </body>
 
-<script type="text/javascript" src="/~/core/core.js"></script>
+<script type="text/javascript" src="/~/core/package.js"></script>
 
-<script type="text/javascript" src="/~/core/lang/lang.js"></script>
+<script type="text/javascript" src="/~/core/lang/package.js"></script>
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 
 
-<script type="text/javascript" src="/~/core/log/log.js"></script>
+<script type="text/javascript" src="/~/core/log/package.js"></script>
 <script type="text/javascript" src="/~/core/log/Level.js"></script>
+<script type="text/javascript" src="/~/core/log/Logger.js"></script>
 <script type="text/javascript" src="/~/core/log/output/package.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Mode.js"></script>
 <script type="text/javascript" src="/~/core/log/output/OutputCreator.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Console.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Popup.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Output.js"></script>
-<script type="text/javascript" src="/~/core/log/Logger.js"></script>
 
 <script type="text/javascript">
 	window.onload = function() {
 		var log = core.log.Logger.getLogger();
-		log.level = core.log.Level.info;
+		log.level = core.log.Level.warn;
 		log.outputMode = core.log.output.Mode.popup;
 		log.error("error");
 		log.warn("warn");
