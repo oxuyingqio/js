@@ -3,11 +3,29 @@
  * 
  * 弹出框输出者
  * 
- * 类
+ * 对象
  */
 
-core.log.output.Popup = function() {
-	this.output = function(msg) {
-		alert(msg);
-	};
-}
+core.log.output.Popup = (function() {
+	// 输出者
+	var output;
+
+	// 构造函数
+	var constructor = function() {
+		this.output = function(msg) {
+			alert(msg);
+		};
+	}
+
+	return {
+		// 获取输出者
+		getInstance : function() {
+			// 保证单例,仅创建一个对象
+			if (!output) {
+				output = new constructor();
+			}
+
+			return output;
+		}
+	}
+})();

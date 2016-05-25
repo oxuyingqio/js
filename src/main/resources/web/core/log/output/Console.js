@@ -3,11 +3,29 @@
  * 
  * 控制台输出者
  * 
- * 类
+ * 对象
  */
 
-core.log.output.Console = function() {
-	this.output = function(msg) {
-		console.log(msg);
-	};
-}
+core.log.output.Console = (function() {
+	// 输出者
+	var output;
+
+	// 构造函数
+	var constructor = function() {
+		this.output = function(msg) {
+			console.log(msg);
+		};
+	}
+
+	return {
+		// 获取输出者
+		getInstance : function() {
+			// 保证单例,仅创建一个对象
+			if (!output) {
+				output = new constructor();
+			}
+
+			return output;
+		}
+	}
+})();

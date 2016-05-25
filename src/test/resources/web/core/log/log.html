@@ -26,8 +26,8 @@
 <script type="text/javascript">
 	window.onload = function() {
 		var log = core.log.Logger.getLogger();
-		log.level = core.log.Level.warn;
-		log.outputMode = core.log.output.Mode.popup;
+		log.level = core.log.Level.error;
+		log.outputMode = core.log.output.Mode.console;
 		log.error("error");
 		log.warn("warn");
 		log.info("info");

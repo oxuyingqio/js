@@ -5,4 +5,5 @@
  * 
  * 包
  */
+
 core.log = core.log || {};
