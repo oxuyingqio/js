@@ -20,7 +20,7 @@ core.lang.Class = function() {
  */
 core.lang.Class.extend = function(subClass, superClass) {
 	// 判断构造参数个数
-	if (arguments.length != 2) {
+	if (arguments.length !== 2) {
 		throw "core.lang.Class:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
 	}
 
@@ -36,7 +36,7 @@ core.lang.Class.extend = function(subClass, superClass) {
 	subClass.prototype.constructor = subClass;
 	// 子类添加superClass静态属性
 	subClass.superClass = superClass.prototype;
-	if (superClass.prototype.constructor == Object.prototype.constructor) {
+	if (superClass.prototype.constructor === Object.prototype.constructor) {
 		superClass.prototype.constructor = superClass;
 	}
 };
