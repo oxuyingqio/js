@@ -26,12 +26,12 @@
 
 <script type="text/javascript">
 	window.onload = function() {
-		demo();
+		loging();
 	}
 
-	function demo() {
+	function loging() {
 		var log = core.log.Logger.getLogger();
-		log.level = core.log.output.Level.error;
+		log.level = core.log.output.Level.info;
 		log.mode = core.log.output.Mode.console;
 		log.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.date
 				+ core.log.output.Format.enter + core.log.output.Format.msg;
@@ -39,6 +39,8 @@
 		log.warn("warn");
 		log.info("info");
 		log.debug("debug");
+
+		log.info(navigator);
 	}
 </script>
 
