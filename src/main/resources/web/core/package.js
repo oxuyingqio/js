@@ -20,6 +20,13 @@ core.constant = core.constant || {};
 // util 工具包
 core.util = core.util || {};
 
+// event 事件包
+core.event = core.event || {};
+// event.window window事件包
+core.event.window = core.event.window || {};
+// event.document document事件包
+core.event.document = core.event.document || {};
+
 // log 日志包
 core.log = core.log || {};
 // log.output 日志输出包
