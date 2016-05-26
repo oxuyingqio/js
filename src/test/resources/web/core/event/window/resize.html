@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Resize.js</title>
+</head>
+<body>
+</body>
+
+<script type="text/javascript" src="/~/core/package.js"></script>
+<script type="text/javascript" src="/~/core/event/window/Resize.js"></script>
+<script type="text/javascript">
+	window.onload = function() {
+		core.event.window.Resize.push(function() {
+			alert(123);
+		})
+	}
+</script>
+
+</html>

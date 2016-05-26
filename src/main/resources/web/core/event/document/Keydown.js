@@ -8,10 +8,8 @@
 
 core.event.document.Keydown = [];
 
-window.onload = function() {
-	document.onkeydown = function(event) {
-		for (var i = 0, length = core.event.document.Keydown.length; i < length; i++) {
-			core.event.document.Keydown[i](event);
-		}
-	};
-}
+document.onkeydown = function(event) {
+	for (var i = 0, length = core.event.document.Keydown.length; i < length; i++) {
+		core.event.document.Keydown[i](event);
+	}
+};
