@@ -7,11 +7,12 @@
 <body>
 </body>
 
-<script type="text/javascript" src="/~/core/component/tool/Cookie.js"></script>
+<script type="text/javascript" src="/~/core/package.js"></script>
+<script type="text/javascript" src="/~/core/util/Cookie.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-		Cookie.set("123", "aaaa");
-		alert(Cookie.get("123"));
+		core.util.Cookie.getCookie().set("123", "aaaa");
+		alert(core.util.Cookie.getCookie().get("123"));
 	}
 </script>
 

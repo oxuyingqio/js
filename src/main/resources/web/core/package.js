@@ -14,6 +14,9 @@
 // lang 基础包
 core.lang = core.lang || {};
 
+// constant 常量包
+core.constant = core.constant || {};
+
 // util 工具包
 core.util = core.util || {};
 

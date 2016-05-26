@@ -1,4 +1,12 @@
-var KeyCode = {
+/**
+ * KeyCode
+ * 
+ * 键盘Code值
+ * 
+ * 枚举
+ */
+
+core.constant.KeyCode = {
 	F1 : "112",
 	F2 : "113",
 	F3 : "114",
