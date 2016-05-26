@@ -9,13 +9,9 @@
 
 <script type="text/javascript" src="/~/core/package.js"></script>
 
-<script type="text/javascript" src="/~/core/lang/package.js"></script>
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 
-
-<script type="text/javascript" src="/~/core/log/package.js"></script>
 <script type="text/javascript" src="/~/core/log/Logger.js"></script>
-<script type="text/javascript" src="/~/core/log/output/package.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Level.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Mode.js"></script>
 <script type="text/javascript" src="/~/core/log/output/OutputCreator.js"></script>
@@ -27,8 +23,8 @@
 	window.onload = function() {
 		demo();
 	}
-	
-	function demo(){
+
+	function demo() {
 		var log = core.log.Logger.getLogger();
 		log.level = core.log.output.Level.error;
 		log.outputMode = core.log.output.Mode.console;
