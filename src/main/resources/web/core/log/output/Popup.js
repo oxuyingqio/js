@@ -8,12 +8,12 @@
 
 core.log.output.Popup = (function() {
 	// 输出者
-	var output;
+	var outputor;
 
 	// 构造函数
 	var Constructor = function() {
 		/**
-		 * 实现Output接口output方法
+		 * 实现Outputor接口output方法
 		 */
 		this.output = function(msg) {
 			alert(msg);
@@ -22,13 +22,13 @@ core.log.output.Popup = (function() {
 
 	return {
 		// 获取输出者
-		getInstance : function() {
+		getOutputor : function() {
 			// 保证单例,仅创建一个对象
-			if (!output) {
-				output = new Constructor();
+			if (!outputor) {
+				outputor = new Constructor();
 			}
 
-			return output;
+			return outputor;
 		}
 	}
 })();

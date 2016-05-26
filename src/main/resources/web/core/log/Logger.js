@@ -12,38 +12,52 @@ core.log.Logger = (function() {
 
 	// 构造函数
 	var Constructor = function() {
-		// 级别
+		// 输出级别
 		this.level = core.log.output.Level.debug;
 		// 输出模式
 		this.mode = core.log.output.Mode.console;
+		// 输出格式化参数
+		this.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.msg;
 	}
 
 	/**
 	 * 输出Error级别日志信息
 	 */
 	Constructor.prototype.error = function(msg) {
-		this.level <= core.log.output.Level.error && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.output.Level.error) {
+			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
+			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		}
 	}
 
 	/**
 	 * 输出Warn级别日志信息
 	 */
 	Constructor.prototype.warn = function(msg) {
-		this.level <= core.log.output.Level.warn && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.output.Level.warn) {
+			msg = core.log.output.FormatConvertor.getConvertor.convert(msg, "WARN", this.format);
+			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		}
 	}
 
 	/**
 	 * 输出Info级别日志信息
 	 */
 	Constructor.prototype.info = function(msg) {
-		this.level <= core.log.output.Level.info && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.output.Level.info) {
+			msg = core.log.output.FormatConvertor.getConvertor.convert(msg, "INFO", this.format);
+			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		}
 	}
 
 	/**
 	 * 输出Debug级别日志信息
 	 */
 	Constructor.prototype.debug = function(msg) {
-		this.level <= core.log.output.Level.debug && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.output.Level.debug) {
+			msg = core.log.output.FormatConvertor.getConvertor.convert(msg, "DEBUG", this.format);
+			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+		}
 	}
 
 	return {

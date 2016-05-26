@@ -10,7 +10,11 @@ core.log.output.Format = {
 	// 信息
 	msg : "%m",
 	// 级别
-	level : "%l",
+	level : "%p",
+	// 位置
+	location : "%l",
 	// 日期
-	date : "%d"
+	date : "%d",
+	// 换行
+	enter : "%n"
 }

@@ -7,6 +7,8 @@
 <body>
 </body>
 
+<script type="text/javascript" src="/~/core/js/String.js"></script>
+
 <script type="text/javascript" src="/~/core/package.js"></script>
 
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
@@ -14,10 +16,12 @@
 <script type="text/javascript" src="/~/core/log/Logger.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Level.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Mode.js"></script>
-<script type="text/javascript" src="/~/core/log/output/OutputCreator.js"></script>
+<script type="text/javascript" src="/~/core/log/output/Format.js"></script>
+<script type="text/javascript" src="/~/core/log/output/FormatConvertor.js"></script>
+<script type="text/javascript" src="/~/core/log/output/Outputor.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Console.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Popup.js"></script>
-<script type="text/javascript" src="/~/core/log/output/Output.js"></script>
+<script type="text/javascript" src="/~/core/log/output/OutputCreator.js"></script>
 
 <script type="text/javascript">
 	window.onload = function() {
@@ -27,7 +31,9 @@
 	function demo() {
 		var log = core.log.Logger.getLogger();
 		log.level = core.log.output.Level.error;
-		log.outputMode = core.log.output.Mode.console;
+		log.mode = core.log.output.Mode.console;
+		log.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.date + " "
+				+ core.log.output.Format.msg;
 		log.error("error");
 		log.warn("warn");
 		log.info("info");

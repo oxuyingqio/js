@@ -12,18 +12,18 @@ core.log.output.OutputCreator = {
 		switch (mode) {
 		case core.log.output.Mode.console:
 			// 获取控制台输出者实例
-			var console = new core.log.output.Console.getInstance();
+			var outputor = new core.log.output.Console.getOutputor();
 			// 判断是否实现接口方法
-			core.lang.Interface.ensureImplements(console, core.log.output.Output);
+			core.lang.Interface.ensureImplements(outputor, core.log.output.Outputor);
 			// 返回实例
-			return console;
+			return outputor;
 		case core.log.output.Mode.popup:
 			// 获取弹出框输出者实例
-			var popup = new core.log.output.Popup.getInstance();
+			var outputor = new core.log.output.Popup.getOutputor();
 			// 判断是否实现接口方法
-			core.lang.Interface.ensureImplements(popup, core.log.output.Output);
+			core.lang.Interface.ensureImplements(outputor, core.log.output.Outputor);
 			// 返回实例
-			return popup;
+			return outputor;
 		}
 	}
 };
