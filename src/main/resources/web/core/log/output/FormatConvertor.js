@@ -18,8 +18,16 @@ core.log.output.FormatConvertor = (function() {
 	 * 格式转换
 	 */
 	Constructor.prototype.convert = function(msg, level, format) {
-		return format.replaceAll(core.log.output.Format.msg, msg).replaceAll(core.log.output.Format.level, level)
-				.replaceAll(core.log.output.Format.date, new Date()).replaceAll(core.log.output.Format.enter, "\n");
+		// 替换消息
+		format = format.replaceAll(core.log.output.Format.msg, msg);
+		// 替换输出级别
+		format = format.replaceAll(core.log.output.Format.level, level);
+		// 替换日期??如何支持自定义format
+		format = format.replaceAll(core.log.output.Format.date, (new Date()).format("yyyy-MM-dd HH:mm:ss"));
+		// 替换换行
+		format = format.replaceAll(core.log.output.Format.enter, "\n");
+
+		return format;
 	}
 
 	return {
