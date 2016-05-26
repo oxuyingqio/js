@@ -17,9 +17,6 @@ core.log.output.Console = (function() {
 		 */
 		this.output = function(msg) {
 			console.log(msg);
-			var object = event.srcElement;
-			console.log(event);
-			console.log(object);
 		};
 	}
 
