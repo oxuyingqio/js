@@ -1,4 +1,13 @@
-var Font = function() {
+/**
+ * Font
+ * 
+ * 常用字
+ * 
+ * 枚举
+ */
+
+core.constant.Font = (function() {
+
 	// 获取浏览器语言设置
 	var language = navigator.language;
 	if (!language)
@@ -37,4 +46,4 @@ var Font = function() {
 			download : "Download"
 		}
 	}
-}
+})();
