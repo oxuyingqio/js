@@ -12,8 +12,14 @@ core.log.output.Console = (function() {
 
 	// 构造函数
 	var Constructor = function() {
+		/**
+		 * 实现Output接口output方法
+		 */
 		this.output = function(msg) {
 			console.log(msg);
+			var object = event.srcElement;
+			console.log(event);
+			console.log(object);
 		};
 	}
 

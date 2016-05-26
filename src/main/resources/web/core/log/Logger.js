@@ -13,37 +13,37 @@ core.log.Logger = (function() {
 	// 构造函数
 	var Constructor = function() {
 		// 级别
-		this.level = core.log.Level.debug;
+		this.level = core.log.output.Level.debug;
 		// 输出模式
-		this.outputMode = core.log.output.Mode.console;
+		this.mode = core.log.output.Mode.console;
 	}
 
 	/**
 	 * 输出Error级别日志信息
 	 */
 	Constructor.prototype.error = function(msg) {
-		this.level <= core.log.Level.error && core.log.output.OutputCreator.getOutputor(this.outputMode).output(msg);
+		this.level <= core.log.output.Level.error && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
 	}
 
 	/**
 	 * 输出Warn级别日志信息
 	 */
 	Constructor.prototype.warn = function(msg) {
-		this.level <= core.log.Level.warn && core.log.output.OutputCreator.getOutputor(this.outputMode).output(msg);
+		this.level <= core.log.output.Level.warn && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
 	}
 
 	/**
 	 * 输出Info级别日志信息
 	 */
 	Constructor.prototype.info = function(msg) {
-		this.level <= core.log.Level.info && core.log.output.OutputCreator.getOutputor(this.outputMode).output(msg);
+		this.level <= core.log.output.Level.info && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
 	}
 
 	/**
 	 * 输出Debug级别日志信息
 	 */
 	Constructor.prototype.debug = function(msg) {
-		this.level <= core.log.Level.debug && core.log.output.OutputCreator.getOutputor(this.outputMode).output(msg);
+		this.level <= core.log.output.Level.debug && core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
 	}
 
 	return {

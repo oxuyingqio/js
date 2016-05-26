@@ -12,6 +12,9 @@ core.log.output.Popup = (function() {
 
 	// 构造函数
 	var Constructor = function() {
+		/**
+		 * 实现Output接口output方法
+		 */
 		this.output = function(msg) {
 			alert(msg);
 		};
