@@ -27,6 +27,9 @@ core.event.window = core.event.window || {};
 // event.document document事件包
 core.event.document = core.event.document || {};
 
+// component 组件包
+core.component = core.component || {};
+
 // log 日志包
 core.log = core.log || {};
 // log.output 日志输出包
