@@ -7,6 +7,7 @@
  */
 
 core.log.output.Format = {
+
 	// 信息
 	msg : "%m",
 	// 级别

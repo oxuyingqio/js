@@ -7,6 +7,7 @@
  */
 
 core.log.output.Mode = {
+
 	// 控制台
 	console : "console",
 	// 弹出框

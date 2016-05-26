@@ -7,6 +7,7 @@
  */
 
 core.constant.KeyCode = {
+
 	F1 : "112",
 	F2 : "113",
 	F3 : "114",

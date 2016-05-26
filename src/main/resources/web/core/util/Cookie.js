@@ -8,10 +8,12 @@
 
 core.util.Cookie = (function() {
 
-	// cookie操作对象
+	// cookie操作者
 	var cookie;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 
 	}
@@ -44,7 +46,7 @@ core.util.Cookie = (function() {
 	 */
 	Constructor.prototype.set = function(name, value, expiredays) {
 		// 过期天数不存在,则默认7天
-		var day = expiredays == null ? 7 : expiredays;
+		var day = expiredays === null ? 7 : expiredays;
 		// 当前时间
 		var exp = new Date()
 		// 设置过期时间
