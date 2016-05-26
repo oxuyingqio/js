@@ -1,7 +1,12 @@
 /**
- * 扩展对象-Map
+ * Map
+ * 
+ * 集合
+ * 
+ * 类
  */
-function Map() {
+
+core.util.Map = function() {
 
 	// 备份this对象
 	var _this = this;

@@ -7,15 +7,15 @@
 <body>
 </body>
 
-<script type="text/javascript" src="/~/core/component/js/Map.js"></script>
+<script type="text/javascript" src="/~/core/package.js"></script>
+<script type="text/javascript" src="/~/core/util/Map.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-		var map = new Map();
+		var map = new core.util.Map();
 
 		map.put("demo", "123");
 		alert(map.get("demo"));
 		map.put("demo", "1231");
-		alert(map.size())
 		alert(map.get("demo"));
 	}
 </script>
