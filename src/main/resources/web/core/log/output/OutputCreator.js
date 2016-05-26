@@ -7,6 +7,7 @@
  */
 
 core.log.output.OutputCreator = {
+
 	// 获取输出者
 	getOutputor : function(mode) {
 		switch (mode) {

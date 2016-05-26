@@ -7,6 +7,7 @@
  */
 
 core.log.output.Popup = (function() {
+
 	// 输出者
 	var outputor;
 
@@ -23,7 +24,7 @@ core.log.output.Popup = (function() {
 	return {
 		// 获取输出者
 		getOutputor : function() {
-			// 保证单例,仅创建一个对象
+			// 懒加载,调用时才创建,同时仅创建一个
 			if (!outputor) {
 				outputor = new Constructor();
 			}

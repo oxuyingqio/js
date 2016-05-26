@@ -14,6 +14,9 @@
 // lang 基础包
 core.lang = core.lang || {};
 
+// util 工具包
+core.util = core.util || {};
+
 // log 日志包
 core.log = core.log || {};
 // log.output 日志输出包

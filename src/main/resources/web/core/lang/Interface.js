@@ -15,6 +15,7 @@
  *            方法组
  */
 core.lang.Interface = function(name, methods) {
+	
 	// 判断构造参数个数
 	if (arguments.length !== 2) {
 		throw "core.lang.Interface:构造参数异常.参数个数必须为2个,得到" + arguments.length + "个";
@@ -43,6 +44,7 @@ core.lang.Interface = function(name, methods) {
  *            实现接口的对象
  */
 core.lang.Interface.ensureImplements = function(object) {
+	
 	// 判断参数个数
 	if (arguments.length < 2) {
 		throw "core.lang.Interface.ensureImplements:参数异常.参数个数至少大于等于2.首参数为实现接口的对象,后续参数为实现的接口对象";

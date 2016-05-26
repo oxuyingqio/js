@@ -7,6 +7,7 @@
  */
 
 core.log.output.FormatConvertor = (function() {
+
 	// 转换器
 	var convertor;
 
@@ -33,7 +34,7 @@ core.log.output.FormatConvertor = (function() {
 	return {
 		// 返回转换器
 		getConvertor : function() {
-			// 保证单例,仅创建一个对象
+			// 懒加载,调用时才创建,同时仅创建一个
 			if (!convertor) {
 				convertor = new Constructor();
 			}

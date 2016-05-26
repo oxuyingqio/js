@@ -7,6 +7,7 @@
  */
 
 core.log.Logger = (function() {
+
 	// 日志管理者
 	var logger;
 
@@ -62,9 +63,8 @@ core.log.Logger = (function() {
 
 	return {
 		getLogger : function() {
-			// 判断日志管理者是否存在
+			// 懒加载,调用时才创建,同时仅创建一个
 			if (!logger) {
-				// 不存在则创建
 				logger = new Constructor();
 			}
 

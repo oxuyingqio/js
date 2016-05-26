@@ -7,6 +7,7 @@
  */
 
 core.example.Singleton = (function() {
+	
 	// 单例对象
 	var singleton;
 
