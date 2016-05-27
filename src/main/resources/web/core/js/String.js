@@ -22,17 +22,16 @@ String.prototype.replaceAll = function(target, result) {
 /**
  * 字符串转2进制
  * 
- * @param str
  * @returns
  */
-String.toBinaryString = function(str) {
+String.prototype.toBinaryString = function() {
 	// 返回的字符串
 	var rtnStr = [];
 
 	// 遍历每一个字符
-	for (var i = 0, length = str.length; i < length; i++) {
+	for (var i = 0, length = this.length; i < length; i++) {
 		// 获取对应字符的2进制
-		var bs = str.charCodeAt(i).toString(2);
+		var bs = this.charCodeAt(i).toString(2);
 
 		// 不足8位的补0
 		for (var j = bs.length; j < 8; j++) {
@@ -49,17 +48,16 @@ String.toBinaryString = function(str) {
 /**
  * 字符串转16进制
  * 
- * @param str
  * @returns
  */
-String.toHexString = function(str) {
+String.prototype.toHexString = function() {
 	// 返回的字符串
 	var rtnStr = [];
 
 	// 遍历每一个字符
-	for (var i = 0, length = str.length; i < length; i++) {
+	for (var i = 0, length = this.length; i < length; i++) {
 		// 获取对应字符的16进制
-		var hs = str.charCodeAt(i).toString(16);
+		var hs = this.charCodeAt(i).toString(16);
 
 		// 不足2位的补0
 		for (var j = hs.length; j < 2; j++) {
