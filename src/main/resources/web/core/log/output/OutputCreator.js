@@ -6,7 +6,7 @@
  * 对象
  */
 
-core.log.output.OutputCreator = {
+core.log.output.OutputorCreator = {
 
 	// 获取输出者
 	getOutputor : function(mode) {

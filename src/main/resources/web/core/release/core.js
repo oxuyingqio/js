@@ -589,7 +589,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.error = function(msg) {
 		if (this.level <= core.log.output.Level.error) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
@@ -599,7 +599,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.warn = function(msg) {
 		if (this.level <= core.log.output.Level.warn) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
@@ -609,7 +609,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.info = function(msg) {
 		if (this.level <= core.log.output.Level.info) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
@@ -779,7 +779,7 @@ core.log.output.Mode = {
  * 对象
  */
 
-core.log.output.OutputCreator = {
+core.log.output.OutputorCreator = {
 
 	// 获取输出者
 	getOutputor : function(mode) {

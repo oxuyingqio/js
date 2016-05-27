@@ -27,7 +27,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.error = function(msg) {
 		if (this.level <= core.log.output.Level.error) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
@@ -37,7 +37,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.warn = function(msg) {
 		if (this.level <= core.log.output.Level.warn) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
@@ -47,7 +47,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.info = function(msg) {
 		if (this.level <= core.log.output.Level.info) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
@@ -57,7 +57,7 @@ core.log.Logger = (function() {
 	Constructor.prototype.debug = function(msg) {
 		if (this.level <= core.log.output.Level.debug) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
