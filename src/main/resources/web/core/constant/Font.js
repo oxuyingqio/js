@@ -63,7 +63,6 @@ core.constant.Font = (function() {
 				font = new Constructor();
 			}
 
-			// 返回日志管理者
 			return font;
 		}
 	}
