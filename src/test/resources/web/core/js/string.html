@@ -21,6 +21,20 @@
 				<div id="replaceAll" style="float: right; color: red"></div>
 			</td>
 		</tr>
+		<tr>
+			<td>String.toBinaryString("")</td>
+			<td>字符串转2进制</td>
+			<td>String.toBinaryString("asd")=
+				<div id="toBinaryString" style="float: right; color: red"></div>
+			</td>
+		</tr>
+		<tr>
+			<td>String.toHexString("")</td>
+			<td>字符串转16进制</td>
+			<td>String.toHexString("asd")=
+				<div id="toHexString" style="float: right; color: red"></div>
+			</td>
+		</tr>
 	</table>
 </body>
 
@@ -28,6 +42,8 @@
 <script type="text/javascript">
 	window.onload = function() {
 		document.getElementById("replaceAll").innerHTML = "abcbcabc".replaceAll("abc", "a");
+		document.getElementById("toBinaryString").innerHTML = String.toBinaryString("asd");
+		document.getElementById("toHexString").innerHTML = String.toHexString("asd");
 	}
 </script>
 
