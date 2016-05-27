@@ -9,7 +9,7 @@ import cn.xuyingqi.util.tool.operatefile.impl.HandleSpecifyFormatFile;
 import cn.xuyingqi.util.util.FileUtils;
 
 /**
- * 合并前台核心JS
+ * 合并前台核心JS为一个文件
  * 
  * @author XuYQ
  *
