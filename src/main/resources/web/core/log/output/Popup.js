@@ -11,7 +11,9 @@ core.log.output.Popup = (function() {
 	// 输出者
 	var outputor;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 
 		/**
@@ -23,9 +25,9 @@ core.log.output.Popup = (function() {
 	}
 
 	return {
-		// 获取输出者
+		// 获取单例弹框输出者
 		getOutputor : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+			// 懒加载,调用时才创建,且仅创建一个
 			if (!outputor) {
 				outputor = new Constructor();
 			}

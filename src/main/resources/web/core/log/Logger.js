@@ -11,7 +11,9 @@ core.log.Logger = (function() {
 	// 日志管理者
 	var logger;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 		// 输出级别
 		this.level = core.log.output.Level.debug;
@@ -62,13 +64,13 @@ core.log.Logger = (function() {
 	}
 
 	return {
+		// 获取单例日志管理者
 		getLogger : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+			// 懒加载,调用时才创建,且仅创建一个
 			if (!logger) {
 				logger = new Constructor();
 			}
 
-			// 返回日志管理者
 			return logger;
 		}
 	}

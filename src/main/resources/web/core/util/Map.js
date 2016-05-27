@@ -8,8 +8,6 @@
 
 core.util.Map = function() {
 
-	// 备份this对象
-	var _this = this;
 	// 条目
 	var elements = {};
 	// 条目数
@@ -60,7 +58,7 @@ core.util.Map = function() {
 	 * 将指定的值与此映射中的指定键关联（可选操作）。
 	 */
 	this.put = function(_key, _value) {
-		if (!_this.containsKey(_key)) {
+		if (!this.containsKey(_key)) {
 			length++;
 		}
 

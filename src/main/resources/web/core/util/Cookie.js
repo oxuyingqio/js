@@ -70,8 +70,9 @@ core.util.Cookie = (function() {
 	}
 
 	return {
+		// 获取单例cookie操作者
 		getCookie : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+			// 懒加载,调用时才进行创建,且仅创建一个
 			if (!cookie) {
 				cookie = new Constructor();
 			}

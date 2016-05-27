@@ -11,8 +11,11 @@ core.log.output.FormatConvertor = (function() {
 	// 转换器
 	var convertor;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
+
 	}
 
 	/**
