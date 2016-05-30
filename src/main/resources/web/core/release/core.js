@@ -67,25 +67,29 @@ Math.subtract = function(subtrahend, minuend, precision) {
  * 超类
  * 
  * 对象扩展
+ * 
+ * 由于后续使用了jQuery,不能对Object的prototype进行扩展,否则会出现异常。
+ * 只能增加一些静态方法.使用Object.XXX来进行调用
  */
 
 /**
- * 克隆本对象
+ * 静态方法-克隆对象
  * 
  * 使用原型式继承,进行克隆的实现
  * 
- * @returns {Clone}
+ * @param object
+ *            待复制的对象
  */
-// Object.prototype.clone = function() {
-//	
-// // 一个空函数
-// function Clone() {
-// }
-// // 函数原型指向本对象
-// Clone.prototype = this;
-// // 返回空函数的一个实例
-// return new Clone();
-// };
+Object.clone = function(object) {
+
+	// 一个空函数
+	function Clone() {
+	}
+	// 函数原型指向本对象
+	Clone.prototype = object;
+	// 返回空函数的一个实例
+	return new Clone();
+};
 /**
  * String
  * 
@@ -423,7 +427,7 @@ core.constant.KeyCode = {
 	Up : "38",
 	Right : "39",
 	Down : "40"
-}
+};
 /**
  * Cookie
  * 
@@ -442,7 +446,7 @@ core.util.Cookie = (function() {
 	 */
 	var Constructor = function() {
 
-	}
+	};
 
 	/**
 	 * 获取cookie
@@ -458,7 +462,7 @@ core.util.Cookie = (function() {
 			return (arr[2]);
 		else
 			return null;
-	}
+	};
 
 	/**
 	 * 设置cookie
@@ -479,7 +483,7 @@ core.util.Cookie = (function() {
 		exp.setDate(exp.getDate() + day * 24 * 60 * 60 * 1000);
 		// 设置cookie
 		document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-	}
+	};
 
 	/**
 	 * 删除cookie
@@ -493,7 +497,7 @@ core.util.Cookie = (function() {
 		var cval = getCookie(name);
 		if (cval != null)
 			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-	}
+	};
 
 	return {
 		// 获取单例cookie操作者
@@ -505,7 +509,7 @@ core.util.Cookie = (function() {
 
 			return cookie;
 		}
-	}
+	};
 })();
 /**
  * Map
@@ -587,7 +591,7 @@ core.util.Map = function() {
 	this.clear = function() {
 		elements = {};
 	};
-}
+};
 /**
  * Keydown
  * 
@@ -617,7 +621,7 @@ window.onresize = function() {
 	for (var i = 0, length = core.event.window.Resize.length; i < length; i++) {
 		core.event.window.Resize[i]();
 	}
-}
+};
 
 /**
  * Logger
@@ -642,7 +646,7 @@ core.log.Logger = (function() {
 		this.mode = core.log.output.Mode.console;
 		// 输出格式化参数
 		this.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.msg;
-	}
+	};
 
 	/**
 	 * 输出Error级别日志信息
@@ -652,7 +656,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	/**
 	 * 输出Warn级别日志信息
@@ -662,7 +666,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	/**
 	 * 输出Info级别日志信息
@@ -672,7 +676,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	/**
 	 * 输出Debug级别日志信息
@@ -682,7 +686,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	return {
 		// 获取单例日志管理者
@@ -694,7 +698,7 @@ core.log.Logger = (function() {
 
 			return logger;
 		}
-	}
+	};
 })();
 /**
  * Console
@@ -718,7 +722,7 @@ core.log.output.Console = (function() {
 		this.output = function(msg) {
 			console.log(msg);
 		};
-	}
+	};
 
 	return {
 		// 获取输出者
@@ -730,7 +734,7 @@ core.log.output.Console = (function() {
 
 			return outputor;
 		}
-	}
+	};
 })();
 /**
  * Format
@@ -752,7 +756,7 @@ core.log.output.Format = {
 	date : "%d",
 	// 换行
 	enter : "%n"
-}
+};
 /**
  * FormatConvertor
  * 
@@ -771,7 +775,7 @@ core.log.output.FormatConvertor = (function() {
 	 */
 	var Constructor = function() {
 
-	}
+	};
 
 	/**
 	 * 格式转换
@@ -787,7 +791,7 @@ core.log.output.FormatConvertor = (function() {
 		format = format.replaceAll(core.log.output.Format.enter, "\n");
 
 		return format;
-	}
+	};
 
 	return {
 		// 返回转换器
@@ -799,7 +803,7 @@ core.log.output.FormatConvertor = (function() {
 
 			return convertor;
 		}
-	}
+	};
 })();
 /**
  * Level
@@ -819,7 +823,7 @@ core.log.output.Level = {
 	info : 2,
 	// 调试
 	debug : 1
-}
+};
 /**
  * Mode
  * 
@@ -834,7 +838,7 @@ core.log.output.Mode = {
 	console : "console",
 	// 弹出框
 	popup : "popup"
-}
+};
 /**
  * OutputorCreator
  * 
@@ -902,7 +906,7 @@ core.log.output.Popup = (function() {
 		this.output = function(msg) {
 			alert(msg);
 		};
-	}
+	};
 
 	return {
 		// 获取单例弹框输出者
@@ -914,5 +918,5 @@ core.log.output.Popup = (function() {
 
 			return outputor;
 		}
-	}
+	};
 })();

@@ -31,6 +31,11 @@ public class Release {
 		// 生成文件路径
 		File coreFile = new File("D:/Users/XuYQ/Desktop/core.js");
 
+		// 若文件存在,则删除
+		if (coreFile.exists()) {
+			coreFile.delete();
+		}
+
 		for (int i = 0; i < packagePaths.length; i++) {
 			FileUtils.recursionFile(new File(projectPath + jsCommonPath + packagePaths[i]),
 					new HandleSpecifyFormatFile(fileType, new CopyFileContent2SpecifiedFile(coreFile)));
