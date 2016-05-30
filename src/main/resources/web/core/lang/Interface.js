@@ -55,9 +55,13 @@ core.lang.Interface.ensureImplements = function(object) {
 		// 获取实现的接口对象
 		var interface = arguments[i];
 
-		// 检查接口对象是否继承Interface对象
-		if (interface.constructor !== core.lang.Interface) {
-			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
+		if (interface) {
+			// 检查接口对象是否继承Interface对象
+			if (interface.constructor !== core.lang.Interface) {
+				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
+			}
+		} else {
+			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象不存在";
 		}
 
 		// 遍历接口方法
