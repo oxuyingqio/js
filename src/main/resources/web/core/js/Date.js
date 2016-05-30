@@ -17,7 +17,7 @@ Date.prototype.format = function(fmt) {
 	var obj = {
 		"M+" : this.getMonth() + 1, // 月份
 		"d+" : this.getDate(), // 日
-		"h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, // 小时
+		"h+" : this.getHours() % 12 === 0 ? 12 : this.getHours() % 12, // 小时
 		"H+" : this.getHours(), // 小时
 		"m+" : this.getMinutes(), // 分
 		"s+" : this.getSeconds(), // 秒
@@ -29,7 +29,7 @@ Date.prototype.format = function(fmt) {
 	}
 	for ( var el in obj) {
 		if (new RegExp("(" + el + ")").test(fmt)) {
-			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (obj[el]) : (("00" + obj[el])
+			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (obj[el]) : (("00" + obj[el])
 					.substr(("" + obj[el]).length)));
 		}
 	}

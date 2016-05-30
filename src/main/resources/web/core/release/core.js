@@ -17,7 +17,7 @@ Date.prototype.format = function(fmt) {
 	var obj = {
 		"M+" : this.getMonth() + 1, // 月份
 		"d+" : this.getDate(), // 日
-		"h+" : this.getHours() % 12 == 0 ? 12 : this.getHours() % 12, // 小时
+		"h+" : this.getHours() % 12 === 0 ? 12 : this.getHours() % 12, // 小时
 		"H+" : this.getHours(), // 小时
 		"m+" : this.getMinutes(), // 分
 		"s+" : this.getSeconds(), // 秒
@@ -29,7 +29,7 @@ Date.prototype.format = function(fmt) {
 	}
 	for ( var el in obj) {
 		if (new RegExp("(" + el + ")").test(fmt)) {
-			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (obj[el]) : (("00" + obj[el])
+			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (obj[el]) : (("00" + obj[el])
 					.substr(("" + obj[el]).length)));
 		}
 	}
@@ -537,7 +537,7 @@ core.util.Map = function() {
 	 * 如果此映射未包含键-值映射关系，则返回 true。
 	 */
 	this.isEmpty = function() {
-		return (length == 0);
+		return (length === 0);
 	};
 
 	/**
@@ -552,7 +552,7 @@ core.util.Map = function() {
 	 */
 	this.containsValue = function(_value) {
 		for (key in elements) {
-			if (elements[key] == _value) {
+			if (elements[key] === _value) {
 				return true;
 			}
 		}

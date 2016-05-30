@@ -24,7 +24,7 @@ core.util.Map = function() {
 	 * 如果此映射未包含键-值映射关系，则返回 true。
 	 */
 	this.isEmpty = function() {
-		return (length == 0);
+		return (length === 0);
 	};
 
 	/**
@@ -39,7 +39,7 @@ core.util.Map = function() {
 	 */
 	this.containsValue = function(_value) {
 		for (key in elements) {
-			if (elements[key] == _value) {
+			if (elements[key] === _value) {
 				return true;
 			}
 		}
