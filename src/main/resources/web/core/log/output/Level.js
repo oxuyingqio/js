@@ -16,4 +16,4 @@ core.log.output.Level = {
 	info : 2,
 	// 调试
 	debug : 1
-}
+};

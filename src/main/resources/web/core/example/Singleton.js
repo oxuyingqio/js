@@ -14,14 +14,14 @@ core.example.Singleton = (function() {
 	// 单例对象的构造函数
 	var Constructor = function(_name) {
 		this.name = _name;
-	}
+	};
 
 	/**
 	 * 打印名称
 	 */
 	Constructor.prototype.printName = function() {
 		alert(this.name);
-	}
+	};
 
 	return {
 		// 获取单例对象
@@ -35,5 +35,5 @@ core.example.Singleton = (function() {
 			// 返回单例对象
 			return singleton;
 		}
-	}
+	};
 })();

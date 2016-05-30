@@ -16,7 +16,7 @@ core.util.Cookie = (function() {
 	 */
 	var Constructor = function() {
 
-	}
+	};
 
 	/**
 	 * 获取cookie
@@ -32,7 +32,7 @@ core.util.Cookie = (function() {
 			return (arr[2]);
 		else
 			return null;
-	}
+	};
 
 	/**
 	 * 设置cookie
@@ -53,7 +53,7 @@ core.util.Cookie = (function() {
 		exp.setDate(exp.getDate() + day * 24 * 60 * 60 * 1000);
 		// 设置cookie
 		document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-	}
+	};
 
 	/**
 	 * 删除cookie
@@ -67,7 +67,7 @@ core.util.Cookie = (function() {
 		var cval = getCookie(name);
 		if (cval != null)
 			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
-	}
+	};
 
 	return {
 		// 获取单例cookie操作者
@@ -79,5 +79,5 @@ core.util.Cookie = (function() {
 
 			return cookie;
 		}
-	}
+	};
 })();

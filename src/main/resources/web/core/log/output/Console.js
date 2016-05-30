@@ -20,7 +20,7 @@ core.log.output.Console = (function() {
 		this.output = function(msg) {
 			console.log(msg);
 		};
-	}
+	};
 
 	return {
 		// 获取输出者
@@ -32,5 +32,5 @@ core.log.output.Console = (function() {
 
 			return outputor;
 		}
-	}
+	};
 })();

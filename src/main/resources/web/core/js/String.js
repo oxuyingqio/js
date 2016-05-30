@@ -45,7 +45,7 @@ String.prototype.toBinaryString = function() {
 
 	// 返回
 	return rtnStr.join("");
-}
+};
 
 /**
  * 字符串转16进制
@@ -72,4 +72,4 @@ String.prototype.toHexString = function() {
 
 	// 返回
 	return rtnStr.join("");
-}
+};

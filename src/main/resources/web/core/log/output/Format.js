@@ -18,4 +18,4 @@ core.log.output.Format = {
 	date : "%d",
 	// 换行
 	enter : "%n"
-}
+};

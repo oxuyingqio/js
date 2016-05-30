@@ -16,7 +16,7 @@ core.log.output.FormatConvertor = (function() {
 	 */
 	var Constructor = function() {
 
-	}
+	};
 
 	/**
 	 * 格式转换
@@ -32,7 +32,7 @@ core.log.output.FormatConvertor = (function() {
 		format = format.replaceAll(core.log.output.Format.enter, "\n");
 
 		return format;
-	}
+	};
 
 	return {
 		// 返回转换器
@@ -44,5 +44,5 @@ core.log.output.FormatConvertor = (function() {
 
 			return convertor;
 		}
-	}
+	};
 })();

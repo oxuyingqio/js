@@ -13,13 +13,13 @@
  * 
  * @returns {Clone}
  */
-Object.prototype.clone = function() {
-	
-	// 一个空函数
-	function Clone() {
-	}
-	// 函数原型指向本对象
-	Clone.prototype = this;
-	// 返回空函数的一个实例
-	return new Clone();
-};
+//Object.prototype.clone = function() {
+//	
+//	// 一个空函数
+//	function Clone() {
+//	}
+//	// 函数原型指向本对象
+//	Clone.prototype = this;
+//	// 返回空函数的一个实例
+//	return new Clone();
+//};

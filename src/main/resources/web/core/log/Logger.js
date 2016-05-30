@@ -21,7 +21,7 @@ core.log.Logger = (function() {
 		this.mode = core.log.output.Mode.console;
 		// 输出格式化参数
 		this.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.msg;
-	}
+	};
 
 	/**
 	 * 输出Error级别日志信息
@@ -31,7 +31,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	/**
 	 * 输出Warn级别日志信息
@@ -41,7 +41,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	/**
 	 * 输出Info级别日志信息
@@ -51,7 +51,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	/**
 	 * 输出Debug级别日志信息
@@ -61,7 +61,7 @@ core.log.Logger = (function() {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
-	}
+	};
 
 	return {
 		// 获取单例日志管理者
@@ -73,5 +73,5 @@ core.log.Logger = (function() {
 
 			return logger;
 		}
-	}
+	};
 })();

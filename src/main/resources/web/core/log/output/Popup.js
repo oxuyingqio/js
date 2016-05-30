@@ -22,7 +22,7 @@ core.log.output.Popup = (function() {
 		this.output = function(msg) {
 			alert(msg);
 		};
-	}
+	};
 
 	return {
 		// 获取单例弹框输出者
@@ -34,5 +34,5 @@ core.log.output.Popup = (function() {
 
 			return outputor;
 		}
-	}
+	};
 })();

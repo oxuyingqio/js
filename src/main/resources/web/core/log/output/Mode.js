@@ -12,4 +12,4 @@ core.log.output.Mode = {
 	console : "console",
 	// 弹出框
 	popup : "popup"
-}
+};

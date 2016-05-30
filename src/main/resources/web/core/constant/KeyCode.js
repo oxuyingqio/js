@@ -99,4 +99,4 @@ core.constant.KeyCode = {
 	Up : "38",
 	Right : "39",
 	Down : "40"
-}
+};

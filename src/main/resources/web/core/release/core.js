@@ -76,15 +76,16 @@ Math.subtract = function(subtrahend, minuend, precision) {
  * 
  * @returns {Clone}
  */
-Object.prototype.clone = function() {
-	// 一个空函数
-	function Clone() {
-	}
-	// 函数原型指向本对象
-	Clone.prototype = this;
-	// 返回空函数的一个实例
-	return new Clone();
-};
+// Object.prototype.clone = function() {
+//	
+// // 一个空函数
+// function Clone() {
+// }
+// // 函数原型指向本对象
+// Clone.prototype = this;
+// // 返回空函数的一个实例
+// return new Clone();
+// };
 /**
  * String
  * 
@@ -103,44 +104,99 @@ Object.prototype.clone = function() {
  * @returns
  */
 String.prototype.replaceAll = function(target, result) {
+
 	return this.replace(new RegExp(target, "g"), result);
+};
+
+/**
+ * 字符串转2进制
+ * 
+ * @returns
+ */
+String.prototype.toBinaryString = function() {
+
+	// 返回的字符串
+	var rtnStr = [];
+
+	// 遍历每一个字符
+	for (var i = 0, length = this.length; i < length; i++) {
+		// 获取对应字符的2进制
+		var bs = this.charCodeAt(i).toString(2);
+
+		// 不足8位的补0
+		for (var j = bs.length; j < 8; j++) {
+			rtnStr.push(0);
+		}
+
+		rtnStr.push(bs);
+	}
+
+	// 返回
+	return rtnStr.join("");
+};
+
+/**
+ * 字符串转16进制
+ * 
+ * @returns
+ */
+String.prototype.toHexString = function() {
+
+	// 返回的字符串
+	var rtnStr = [];
+
+	// 遍历每一个字符
+	for (var i = 0, length = this.length; i < length; i++) {
+		// 获取对应字符的16进制
+		var hs = this.charCodeAt(i).toString(16);
+
+		// 不足2位的补0
+		for (var j = hs.length; j < 2; j++) {
+			rtnStr.push(0);
+		}
+
+		rtnStr.push(hs);
+	}
+
+	// 返回
+	return rtnStr.join("");
 };
 /**
  * 包
  */
 
-// core 核心包
 (function() {
-	if (typeof (core) == "undefined") {
-		core = {};
-	} else {
+	if (typeof (core) !== "undefined") {
 		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
 	}
+
+	// core 核心包
+	core = {};
+
+	// lang 基础包
+	core.lang = {};
+
+	// constant 常量包
+	core.constant = {};
+
+	// util 工具包
+	core.util = {};
+
+	// event 事件包
+	core.event = {};
+	// event.window window事件包
+	core.event.window = {};
+	// event.document document事件包
+	core.event.document = {};
+
+	// log 日志包
+	core.log = {};
+	// log.output 日志输出包
+	core.log.output = {};
+
+	// example 示例包
+	core.example = {};
 })();
-
-// lang 基础包
-core.lang = core.lang || {};
-
-// constant 常量包
-core.constant = core.constant || {};
-
-// util 工具包
-core.util = core.util || {};
-
-// event 事件包
-core.event = core.event || {};
-// event.window window事件包
-core.event.window = core.event.window || {};
-// event.document document事件包
-core.event.document = core.event.document || {};
-
-// log 日志包
-core.log = core.log || {};
-// log.output 日志输出包
-core.log.output = core.log.output || {};
-
-// example 示例包
-core.example = core.example || {};
 
 /**
  * Class
@@ -245,9 +301,13 @@ core.lang.Interface.ensureImplements = function(object) {
 		// 获取实现的接口对象
 		var interface = arguments[i];
 
-		// 检查接口对象是否继承Interface对象
-		if (interface.constructor !== core.lang.Interface) {
-			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
+		if (interface) {
+			// 检查接口对象是否继承Interface对象
+			if (interface.constructor !== core.lang.Interface) {
+				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
+			}
+		} else {
+			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象不存在";
 		}
 
 		// 遍历接口方法
@@ -436,8 +496,9 @@ core.util.Cookie = (function() {
 	}
 
 	return {
+		// 获取单例cookie操作者
 		getCookie : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+			// 懒加载,调用时才进行创建,且仅创建一个
 			if (!cookie) {
 				cookie = new Constructor();
 			}
@@ -456,8 +517,6 @@ core.util.Cookie = (function() {
 
 core.util.Map = function() {
 
-	// 备份this对象
-	var _this = this;
 	// 条目
 	var elements = {};
 	// 条目数
@@ -508,7 +567,7 @@ core.util.Map = function() {
 	 * 将指定的值与此映射中的指定键关联（可选操作）。
 	 */
 	this.put = function(_key, _value) {
-		if (!_this.containsKey(_key)) {
+		if (!this.containsKey(_key)) {
 			length++;
 		}
 
@@ -573,7 +632,9 @@ core.log.Logger = (function() {
 	// 日志管理者
 	var logger;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 		// 输出级别
 		this.level = core.log.output.Level.debug;
@@ -619,18 +680,18 @@ core.log.Logger = (function() {
 	Constructor.prototype.debug = function(msg) {
 		if (this.level <= core.log.output.Level.debug) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
-			core.log.output.OutputCreator.getOutputor(this.mode).output(msg);
+			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	}
 
 	return {
+		// 获取单例日志管理者
 		getLogger : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+			// 懒加载,调用时才创建,且仅创建一个
 			if (!logger) {
 				logger = new Constructor();
 			}
 
-			// 返回日志管理者
 			return logger;
 		}
 	}
@@ -705,8 +766,11 @@ core.log.output.FormatConvertor = (function() {
 	// 转换器
 	var convertor;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
+
 	}
 
 	/**
@@ -772,7 +836,7 @@ core.log.output.Mode = {
 	popup : "popup"
 }
 /**
- * Output
+ * OutputorCreator
  * 
  * 输出创建者
  * 
@@ -789,9 +853,11 @@ core.log.output.OutputorCreator = {
 		case core.log.output.Mode.console:
 			// 获取控制台输出者实例
 			outputor = new core.log.output.Console.getOutputor();
+			break;
 		case core.log.output.Mode.popup:
 			// 获取弹出框输出者实例
 			outputor = new core.log.output.Popup.getOutputor();
+			break;
 		}
 
 		// 判断是否实现接口方法
@@ -825,7 +891,9 @@ core.log.output.Popup = (function() {
 	// 输出者
 	var outputor;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 
 		/**
@@ -837,9 +905,9 @@ core.log.output.Popup = (function() {
 	}
 
 	return {
-		// 获取输出者
+		// 获取单例弹框输出者
 		getOutputor : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+			// 懒加载,调用时才创建,且仅创建一个
 			if (!outputor) {
 				outputor = new Constructor();
 			}

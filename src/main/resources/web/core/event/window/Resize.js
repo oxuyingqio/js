@@ -12,4 +12,4 @@ window.onresize = function() {
 	for (var i = 0, length = core.event.window.Resize.length; i < length; i++) {
 		core.event.window.Resize[i]();
 	}
-}
+};

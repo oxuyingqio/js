@@ -78,4 +78,4 @@ core.util.Map = function() {
 	this.clear = function() {
 		elements = {};
 	};
-}
+};

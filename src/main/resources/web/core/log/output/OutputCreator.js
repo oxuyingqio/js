@@ -16,9 +16,11 @@ core.log.output.OutputorCreator = {
 		case core.log.output.Mode.console:
 			// 获取控制台输出者实例
 			outputor = new core.log.output.Console.getOutputor();
+			break;
 		case core.log.output.Mode.popup:
 			// 获取弹出框输出者实例
 			outputor = new core.log.output.Popup.getOutputor();
+			break;
 		}
 
 		// 判断是否实现接口方法
