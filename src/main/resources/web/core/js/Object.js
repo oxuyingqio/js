@@ -14,6 +14,7 @@
  * @returns {Clone}
  */
 Object.prototype.clone = function() {
+	
 	// 一个空函数
 	function Clone() {
 	}

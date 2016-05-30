@@ -16,6 +16,7 @@
  * @returns
  */
 String.prototype.replaceAll = function(target, result) {
+
 	return this.replace(new RegExp(target, "g"), result);
 };
 
@@ -25,6 +26,7 @@ String.prototype.replaceAll = function(target, result) {
  * @returns
  */
 String.prototype.toBinaryString = function() {
+
 	// 返回的字符串
 	var rtnStr = [];
 
@@ -51,6 +53,7 @@ String.prototype.toBinaryString = function() {
  * @returns
  */
 String.prototype.toHexString = function() {
+
 	// 返回的字符串
 	var rtnStr = [];
 
