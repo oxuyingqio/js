@@ -18,7 +18,7 @@ public class Release {
 
 	private static Logger logger = Logger.getLogger(Release.class);
 
-	public static void main(String[] args) {
+	public static void releaseJs() {
 		// 项目路径
 		String projectPath = System.getProperty("user.dir");
 		// 前台核心公共路径
@@ -42,5 +42,9 @@ public class Release {
 		}
 
 		logger.debug("操作结束");
+	}
+
+	public static void main(String[] args) {
+		Release.releaseJs();
 	}
 }
