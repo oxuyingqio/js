@@ -51,6 +51,9 @@
 				<filtering>false</filtering>
 			</resource>
 			<resource>
+				<directory>src/main/config</directory>
+			</resource>
+			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
 			<!-- 测试用,发布时删除 -->
