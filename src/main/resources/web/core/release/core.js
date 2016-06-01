@@ -1,4 +1,80 @@
 /**
+ * Array
+ * 
+ * 数组
+ * 
+ * 对象扩展
+ */
+
+/**
+ * 清空数组
+ */
+Array.prototype.clear = function() {
+	this.length > 0 && this.splice(0, this.length);
+};
+
+/**
+ * 判断是否存在指定元素
+ * 
+ * @param item
+ * @returns {Boolean}
+ */
+Array.prototype.contains = function(item) {
+	var index = this.indexOf(item);
+	return (index >= 0);
+};
+
+/**
+ * 获取指定元素下标值
+ * 
+ * @param item
+ * @returns {Number}
+ */
+Array.prototype.indexOf = function(item) {
+	var length = this.length;
+
+	if (length != 0) {
+		for (var index = 0; index < length; index++) {
+			if (this[index] === item) {
+				return index;
+			}
+		}
+	}
+
+	return -1;
+};
+
+/**
+ * 指定下标值插入元素
+ * 
+ * @param index
+ * @param item
+ */
+Array.prototype.insert = function(index, item) {
+	this.splice(index, 0, item);
+};
+
+/**
+ * 删除指定元素
+ * 
+ * @param item
+ */
+Array.prototype.remove = function(item) {
+	var index = this.indexOf(item);
+
+	index >= 0 && this.splice(index, 1);
+};
+
+/**
+ * 删除指定下标位置的元素
+ * 
+ * @param index
+ */
+Array.prototype.removeAt = function(index) {
+	this.splice(index, 1);
+};
+
+/**
  * Date
  * 
  * 日期
@@ -174,31 +250,31 @@ String.prototype.toHexString = function() {
 		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
 	}
 
-	// core 核心包
+	// 核心包
 	core = {};
 
-	// lang 基础包
+	// 基础包
 	core.lang = {};
 
-	// constant 常量包
+	// 常量包
 	core.constant = {};
 
-	// util 工具包
+	// 工具包
 	core.util = {};
 
-	// event 事件包
+	// 事件包
 	core.event = {};
-	// event.window window事件包
+	// window事件包
 	core.event.window = {};
-	// event.document document事件包
+	// document事件包
 	core.event.document = {};
 
-	// log 日志包
+	// 日志包
 	core.log = {};
-	// log.output 日志输出包
+	// 日志输出包
 	core.log.output = {};
 
-	// example 示例包
+	// 示例包
 	core.example = {};
 })();
 
