@@ -8,29 +8,31 @@
 	}
 
 	// 核心包
-	core = {};
+	core = {
+		// 常量包
+		constant : {},
 
-	// 基础包
-	core.lang = {};
+		// 事件包
+		event : {
+			// document事件包
+			document : {},
+			// window事件包
+			window : {}
+		},
 
-	// 常量包
-	core.constant = {};
+		// 示例包
+		example : {},
 
-	// 工具包
-	core.util = {};
+		// 基础包
+		lang : {},
 
-	// 事件包
-	core.event = {};
-	// window事件包
-	core.event.window = {};
-	// document事件包
-	core.event.document = {};
+		// 工具包
+		util : {},
+
+	};
 
 	// 日志包
 	core.log = {};
 	// 日志输出包
 	core.log.output = {};
-
-	// 示例包
-	core.example = {};
 })();
