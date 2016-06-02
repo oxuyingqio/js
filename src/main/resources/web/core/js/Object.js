@@ -5,8 +5,8 @@
  * 
  * 对象扩展
  * 
- * 由于后续使用了jQuery,不能对Object的prototype进行扩展,否则会出现异常。
- * 只能增加一些静态方法.使用Object.XXX来进行调用
+ * 扩展Object.prototype,引入jQuery会产生未知错误
+ * 因此仅扩展Object静态方法
  */
 
 /**
@@ -16,11 +16,13 @@
  * 
  * @param object
  *            待复制的对象
+ * @returns {Object}
  */
 Object.clone = function(object) {
 
 	// 一个空函数
 	function Clone() {
+
 	}
 	// 函数原型指向本对象
 	Clone.prototype = object;

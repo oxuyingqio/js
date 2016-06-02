@@ -20,8 +20,17 @@ core.log.output.FormatConvertor = (function() {
 
 	/**
 	 * 格式转换
+	 * 
+	 * @param msg
+	 *            信息
+	 * @param level
+	 *            级别信息
+	 * @param format
+	 *            格式化信息
+	 * @returns {String}
 	 */
 	Constructor.prototype.convert = function(msg, level, format) {
+
 		// 替换消息
 		format = format.replaceAll(core.log.output.Format.msg, msg);
 		// 替换输出级别
@@ -35,9 +44,13 @@ core.log.output.FormatConvertor = (function() {
 	};
 
 	return {
-		// 返回转换器
+
+		/**
+		 * 获取转换器 懒加载,且仅创建一个
+		 */
 		getConvertor : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+
+			// 不存在,则创建
 			if (!convertor) {
 				convertor = new Constructor();
 			}

@@ -15,6 +15,7 @@ core.log.Logger = (function() {
 	 * 构造函数
 	 */
 	var Constructor = function() {
+
 		// 输出级别
 		this.level = core.log.output.Level.debug;
 		// 输出模式
@@ -25,8 +26,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Error级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.error = function(msg) {
+
 		if (this.level <= core.log.output.Level.error) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -35,8 +41,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Warn级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.warn = function(msg) {
+
 		if (this.level <= core.log.output.Level.warn) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -45,8 +56,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Info级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.info = function(msg) {
+
 		if (this.level <= core.log.output.Level.info) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -55,8 +71,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Debug级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.debug = function(msg) {
+
 		if (this.level <= core.log.output.Level.debug) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -64,9 +85,13 @@ core.log.Logger = (function() {
 	};
 
 	return {
-		// 获取单例日志管理者
+
+		/**
+		 * 获取日志管理者 懒加载,且仅创建一个
+		 */
 		getLogger : function() {
-			// 懒加载,调用时才创建,且仅创建一个
+
+			// 不存在,则创建
 			if (!logger) {
 				logger = new Constructor();
 			}

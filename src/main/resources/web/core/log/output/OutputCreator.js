@@ -1,15 +1,19 @@
 /**
  * OutputorCreator
  * 
- * 输出创建者
+ * 输出者创建者
  * 
  * 对象
  */
 
 core.log.output.OutputorCreator = {
 
-	// 获取输出者
+	/**
+	 * 获取输出者
+	 */
 	getOutputor : function(mode) {
+
+		// 输出者
 		var outputor;
 
 		switch (mode) {

@@ -15,9 +15,10 @@
  *            被减数
  * @param precision
  *            结果精度
- * @returns
+ * @returns {Number}
  */
 Math.subtract = function(subtrahend, minuend, precision) {
+
 	var a = parseFloat(subtrahend);
 	var b = parseFloat(minuend);
 

@@ -11,21 +11,33 @@ core.log.output.Console = (function() {
 	// 输出者
 	var outputor;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 
-		/**
-		 * 实现Outputor接口output方法
-		 */
-		this.output = function(msg) {
-			console.log(msg);
-		};
+	};
+
+	/**
+	 * 输出消息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
+	 */
+	Constructor.prototype.output = function(msg) {
+
+		console.log(msg);
 	};
 
 	return {
-		// 获取输出者
+
+		/**
+		 * 获取输出者 懒加载,且仅创建一个
+		 */
 		getOutputor : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+
+			// 不存在,则创建
 			if (!outputor) {
 				outputor = new Constructor();
 			}
