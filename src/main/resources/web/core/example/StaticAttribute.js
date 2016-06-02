@@ -22,11 +22,13 @@ core.example.StaticAttribute = (function() {
 
 	// 静态方法,获取new core.example.StaticAttribute()对象的个数
 	function getStaticAttributeObjCount() {
+
 		return staticAttributeObjCount;
 	}
 
 	// 返回对象的构造函数
 	var Constructor = function() {
+
 		// 静态属性staticAttributeObjCount++;
 		staticAttributeObjCount++;
 	};
@@ -35,6 +37,7 @@ core.example.StaticAttribute = (function() {
 	 * 静态方法.调用静态方法getStaticAttributeObjCount
 	 */
 	Constructor.getObjCount = function() {
+
 		return getStaticAttributeObjCount();
 	};
 
