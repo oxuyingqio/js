@@ -8,34 +8,42 @@
 
 /**
  * 清空数组
+ * 
+ * @returns
  */
 Array.prototype.clear = function() {
+
 	this.length > 0 && this.splice(0, this.length);
 };
 
 /**
- * 判断是否存在指定元素
+ * 判断是否存在指定对象
  * 
- * @param item
+ * @param obj
+ *            对象
  * @returns {Boolean}
  */
-Array.prototype.contains = function(item) {
-	var index = this.indexOf(item);
+Array.prototype.contains = function(obj) {
+
+	var index = this.indexOf(obj);
 	return (index >= 0);
 };
 
 /**
- * 获取指定元素下标值
+ * 获取指定对象下标值
  * 
- * @param item
+ * @param obj
+ *            对象
  * @returns {Number}
  */
-Array.prototype.indexOf = function(item) {
+Array.prototype.indexOf = function(obj) {
+
 	var length = this.length;
 
 	if (length != 0) {
 		for (var index = 0; index < length; index++) {
-			if (this[index] === item) {
+
+			if (this[index] === obj) {
 				return index;
 			}
 		}
@@ -45,32 +53,41 @@ Array.prototype.indexOf = function(item) {
 };
 
 /**
- * 指定下标值插入元素
+ * 指定下标值插入对象
  * 
  * @param index
- * @param item
+ *            下标索引
+ * @param obj
+ *            对象
+ * @returns
  */
-Array.prototype.insert = function(index, item) {
-	this.splice(index, 0, item);
+Array.prototype.insert = function(index, obj) {
+
+	this.splice(index, 0, obj);
 };
 
 /**
- * 删除指定元素
+ * 删除指定对象
  * 
- * @param item
+ * @param obj
+ *            对象
+ * @returns
  */
-Array.prototype.remove = function(item) {
-	var index = this.indexOf(item);
+Array.prototype.remove = function(obj) {
 
+	var index = this.indexOf(obj);
 	index >= 0 && this.splice(index, 1);
 };
 
 /**
- * 删除指定下标位置的元素
+ * 删除指定下标位置的对象
  * 
  * @param index
+ *            下标索引
+ * @returns
  */
 Array.prototype.removeAt = function(index) {
+
 	this.splice(index, 1);
 };
 
@@ -87,23 +104,34 @@ Array.prototype.removeAt = function(index) {
  * 
  * @param fmt
  *            格式 yyyy-MM-dd HH:mm:ss
- * @returns
+ * @returns {String}
  */
 Date.prototype.format = function(fmt) {
+
 	var obj = {
-		"M+" : this.getMonth() + 1, // 月份
-		"d+" : this.getDate(), // 日
-		"h+" : this.getHours() % 12 === 0 ? 12 : this.getHours() % 12, // 小时
-		"H+" : this.getHours(), // 小时
-		"m+" : this.getMinutes(), // 分
-		"s+" : this.getSeconds(), // 秒
+
+		// 月份
+		"M+" : this.getMonth() + 1,
+		// 日
+		"d+" : this.getDate(),
+		// 小时
+		"h+" : this.getHours() % 12 === 0 ? 12 : this.getHours() % 12,
+		// 小时
+		"H+" : this.getHours(),
+		// 分
+		"m+" : this.getMinutes(),
+		// 秒
+		"s+" : this.getSeconds(),
+		// 毫秒
 		"S" : this.getMilliseconds()
-	// 毫秒
 	};
+
 	if (/(y+)/.test(fmt)) {
 		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
 	}
+
 	for ( var el in obj) {
+
 		if (new RegExp("(" + el + ")").test(fmt)) {
 			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (obj[el]) : (("00" + obj[el])
 					.substr(("" + obj[el]).length)));
@@ -129,9 +157,10 @@ Date.prototype.format = function(fmt) {
  *            被减数
  * @param precision
  *            结果精度
- * @returns
+ * @returns {Number}
  */
 Math.subtract = function(subtrahend, minuend, precision) {
+
 	var a = parseFloat(subtrahend);
 	var b = parseFloat(minuend);
 
@@ -144,8 +173,8 @@ Math.subtract = function(subtrahend, minuend, precision) {
  * 
  * 对象扩展
  * 
- * 由于后续使用了jQuery,不能对Object的prototype进行扩展,否则会出现异常。
- * 只能增加一些静态方法.使用Object.XXX来进行调用
+ * 扩展Object.prototype,引入jQuery会产生未知错误
+ * 因此仅扩展Object静态方法
  */
 
 /**
@@ -155,11 +184,13 @@ Math.subtract = function(subtrahend, minuend, precision) {
  * 
  * @param object
  *            待复制的对象
+ * @returns {Object}
  */
 Object.clone = function(object) {
 
 	// 一个空函数
 	function Clone() {
+
 	}
 	// 函数原型指向本对象
 	Clone.prototype = object;
@@ -181,7 +212,7 @@ Object.clone = function(object) {
  *            目标字符
  * @param result
  *            替换字符
- * @returns
+ * @returns {String}
  */
 String.prototype.replaceAll = function(target, result) {
 
@@ -191,7 +222,7 @@ String.prototype.replaceAll = function(target, result) {
 /**
  * 字符串转2进制
  * 
- * @returns
+ * @returns {String}
  */
 String.prototype.toBinaryString = function() {
 
@@ -200,11 +231,13 @@ String.prototype.toBinaryString = function() {
 
 	// 遍历每一个字符
 	for (var i = 0, length = this.length; i < length; i++) {
+
 		// 获取对应字符的2进制
 		var bs = this.charCodeAt(i).toString(2);
 
 		// 不足8位的补0
 		for (var j = bs.length; j < 8; j++) {
+
 			rtnStr.push(0);
 		}
 
@@ -218,7 +251,7 @@ String.prototype.toBinaryString = function() {
 /**
  * 字符串转16进制
  * 
- * @returns
+ * @returns {String}
  */
 String.prototype.toHexString = function() {
 
@@ -227,11 +260,13 @@ String.prototype.toHexString = function() {
 
 	// 遍历每一个字符
 	for (var i = 0, length = this.length; i < length; i++) {
+
 		// 获取对应字符的16进制
 		var hs = this.charCodeAt(i).toString(16);
 
 		// 不足2位的补0
 		for (var j = hs.length; j < 2; j++) {
+
 			rtnStr.push(0);
 		}
 
@@ -251,31 +286,33 @@ String.prototype.toHexString = function() {
 	}
 
 	// 核心包
-	core = {};
+	core = {
+		// 常量包
+		constant : {},
 
-	// 基础包
-	core.lang = {};
+		// 事件包
+		event : {
+			// document事件包
+			document : {},
+			// window事件包
+			window : {}
+		},
 
-	// 常量包
-	core.constant = {};
+		// 示例包
+		example : {},
 
-	// 工具包
-	core.util = {};
+		// 基础包
+		lang : {},
 
-	// 事件包
-	core.event = {};
-	// window事件包
-	core.event.window = {};
-	// document事件包
-	core.event.document = {};
+		// 日志包
+		log : {
+			// 日志输出包
+			output : {}
+		},
 
-	// 日志包
-	core.log = {};
-	// 日志输出包
-	core.log.output = {};
-
-	// 示例包
-	core.example = {};
+		// 工具包
+		util : {}
+	};
 })();
 
 /**
@@ -300,6 +337,7 @@ core.lang.Class = function() {
  *            子类
  * @param SuperClass
  *            父类
+ * @returns
  */
 core.lang.Class.extend = function(SubClass, SuperClass) {
 
@@ -310,6 +348,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 中间函数
 	var Middleware = function() {
+
 	}
 	// 中间函数指向父类
 	Middleware.prototype = SuperClass.prototype;
@@ -353,6 +392,7 @@ core.lang.Interface = function(name, methods) {
 	this.methods = [];
 	// 设置接口方法
 	for (var i = 0, length = methods.length; i < length; i++) {
+
 		if (typeof (methods[i]) !== "string") {
 			throw "core.lang.Interface:构造参数异常.接口方法名必须为字符串";
 		}
@@ -368,6 +408,7 @@ core.lang.Interface = function(name, methods) {
  * 
  * @param object
  *            实现接口的对象
+ * @returns
  */
 core.lang.Interface.ensureImplements = function(object) {
 
@@ -378,6 +419,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 	// 遍历实现的接口对象
 	for (var i = 1, length = arguments.length; i < length; i++) {
+
 		// 获取实现的接口对象
 		var interface = arguments[i];
 
@@ -392,6 +434,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 		// 遍历接口方法
 		for (var j = 0, jLength = interface.methods.length; j < jLength; j++) {
+
 			// 获取接口方法
 			var method = interface.methods[j];
 
@@ -529,9 +572,10 @@ core.util.Cookie = (function() {
 	 * 
 	 * @param name
 	 *            cookie名称
-	 * @returns
+	 * @returns {Object}
 	 */
 	Constructor.prototype.get = function(name) {
+
 		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
 		if (arr = document.cookie.match(reg))
@@ -549,8 +593,10 @@ core.util.Cookie = (function() {
 	 *            值
 	 * @param expiredays
 	 *            过期天数
+	 * @returns
 	 */
 	Constructor.prototype.set = function(name, value, expiredays) {
+
 		// 过期天数不存在,则默认7天
 		var day = expiredays === null ? 7 : expiredays;
 		// 当前时间
@@ -566,8 +612,10 @@ core.util.Cookie = (function() {
 	 * 
 	 * @param name
 	 *            名称
+	 * @returns
 	 */
 	Constructor.prototype.del = function(name) {
+
 		var exp = new Date();
 		exp.setTime(exp.getTime() - 1);
 		var cval = getCookie(name);
@@ -576,9 +624,13 @@ core.util.Cookie = (function() {
 	};
 
 	return {
-		// 获取单例cookie操作者
+
+		/**
+		 * 获取cookie操作者 懒加载,且仅创建一个
+		 */
 		getCookie : function() {
-			// 懒加载,调用时才进行创建,且仅创建一个
+
+			// 不存在,则创建
 			if (!cookie) {
 				cookie = new Constructor();
 			}
@@ -603,31 +655,48 @@ core.util.Map = function() {
 	var length = 0;
 
 	/**
-	 * 返回此映射中的键-值映射关系数。
+	 * 返回此映射中的键-值映射关系数
+	 * 
+	 * @returns {Number}
 	 */
 	this.size = function() {
+
 		return length;
 	};
 
 	/**
 	 * 如果此映射未包含键-值映射关系，则返回 true。
+	 * 
+	 * @returns {Boolean}
 	 */
 	this.isEmpty = function() {
+
 		return (length === 0);
 	};
 
 	/**
 	 * 如果此映射包含指定键的映射关系，则返回 true。
+	 * 
+	 * @param key
+	 *            键
+	 * @returns {Boolean}
 	 */
 	this.containsKey = function(_key) {
+
 		return (elements[_key] != undefined);
 	};
 
 	/**
 	 * 如果此映射将一个或多个键映射到指定值，则返回 true。
+	 * 
+	 * @param value
+	 *            值
+	 * @returns {Boolean}
 	 */
 	this.containsValue = function(_value) {
+
 		for (key in elements) {
+
 			if (elements[key] === _value) {
 				return true;
 			}
@@ -638,15 +707,27 @@ core.util.Map = function() {
 
 	/**
 	 * 返回指定键所映射的值；如果此映射不包含该键的映射关系，则返回 null。
+	 * 
+	 * @param key
+	 *            键
+	 * @returns {Object}
 	 */
 	this.get = function(_key) {
+
 		return elements[_key];
 	};
 
 	/**
 	 * 将指定的值与此映射中的指定键关联（可选操作）。
+	 * 
+	 * @param key
+	 *            键
+	 * @param value
+	 *            值
+	 * @returns
 	 */
 	this.put = function(_key, _value) {
+
 		if (!this.containsKey(_key)) {
 			length++;
 		}
@@ -656,46 +737,60 @@ core.util.Map = function() {
 
 	/**
 	 * 如果存在一个键的映射关系，则将其从此映射中移除（可选操作）。
+	 * 
+	 * @param key
+	 *            键
+	 * @returns
 	 */
 	this.remove = function(_key) {
+
 		delete elements[_key];
 	};
 
 	/**
 	 * 从此映射中移除所有映射关系
+	 * 
+	 * @returns
 	 */
 	this.clear = function() {
+
 		elements = {};
 	};
 };
 /**
  * Keydown
  * 
- * document键盘事件
+ * 键盘事件
  * 
- * 对象
+ * 数组<函数>
  */
 
 core.event.document.Keydown = [];
 
 document.onkeydown = function(event) {
+
 	for (var i = 0, length = core.event.document.Keydown.length; i < length; i++) {
-		core.event.document.Keydown[i](event);
+
+		var keydown = core.event.document.Keydown[i];
+		typeof (keydown) === "function" && keydown(event);
 	}
 };
 /**
  * Resize
  * 
- * window窗口改变事件
+ * 窗口改变事件
  * 
- * 对象
+ * 数组<函数>
  */
 
 core.event.window.Resize = [];
 
 window.onresize = function() {
+
 	for (var i = 0, length = core.event.window.Resize.length; i < length; i++) {
-		core.event.window.Resize[i]();
+
+		var resize = core.event.window.Resize[i];
+		typeof (resize) === "function" && resize();
 	}
 };
 
@@ -716,6 +811,7 @@ core.log.Logger = (function() {
 	 * 构造函数
 	 */
 	var Constructor = function() {
+
 		// 输出级别
 		this.level = core.log.output.Level.debug;
 		// 输出模式
@@ -726,8 +822,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Error级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.error = function(msg) {
+
 		if (this.level <= core.log.output.Level.error) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -736,8 +837,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Warn级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.warn = function(msg) {
+
 		if (this.level <= core.log.output.Level.warn) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -746,8 +852,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Info级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.info = function(msg) {
+
 		if (this.level <= core.log.output.Level.info) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -756,8 +867,13 @@ core.log.Logger = (function() {
 
 	/**
 	 * 输出Debug级别日志信息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
 	 */
 	Constructor.prototype.debug = function(msg) {
+
 		if (this.level <= core.log.output.Level.debug) {
 			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
 			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
@@ -765,9 +881,13 @@ core.log.Logger = (function() {
 	};
 
 	return {
-		// 获取单例日志管理者
+
+		/**
+		 * 获取日志管理者 懒加载,且仅创建一个
+		 */
 		getLogger : function() {
-			// 懒加载,调用时才创建,且仅创建一个
+
+			// 不存在,则创建
 			if (!logger) {
 				logger = new Constructor();
 			}
@@ -789,21 +909,33 @@ core.log.output.Console = (function() {
 	// 输出者
 	var outputor;
 
-	// 构造函数
+	/**
+	 * 构造函数
+	 */
 	var Constructor = function() {
 
-		/**
-		 * 实现Outputor接口output方法
-		 */
-		this.output = function(msg) {
-			console.log(msg);
-		};
+	};
+
+	/**
+	 * 输出消息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
+	 */
+	Constructor.prototype.output = function(msg) {
+
+		console.log(msg);
 	};
 
 	return {
-		// 获取输出者
+
+		/**
+		 * 获取输出者 懒加载,且仅创建一个
+		 */
 		getOutputor : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+
+			// 不存在,则创建
 			if (!outputor) {
 				outputor = new Constructor();
 			}
@@ -855,8 +987,17 @@ core.log.output.FormatConvertor = (function() {
 
 	/**
 	 * 格式转换
+	 * 
+	 * @param msg
+	 *            信息
+	 * @param level
+	 *            级别信息
+	 * @param format
+	 *            格式化信息
+	 * @returns {String}
 	 */
 	Constructor.prototype.convert = function(msg, level, format) {
+
 		// 替换消息
 		format = format.replaceAll(core.log.output.Format.msg, msg);
 		// 替换输出级别
@@ -870,9 +1011,13 @@ core.log.output.FormatConvertor = (function() {
 	};
 
 	return {
-		// 返回转换器
+
+		/**
+		 * 获取转换器 懒加载,且仅创建一个
+		 */
 		getConvertor : function() {
-			// 懒加载,调用时才创建,同时仅创建一个
+
+			// 不存在,则创建
 			if (!convertor) {
 				convertor = new Constructor();
 			}
@@ -918,15 +1063,19 @@ core.log.output.Mode = {
 /**
  * OutputorCreator
  * 
- * 输出创建者
+ * 输出者创建者
  * 
  * 对象
  */
 
 core.log.output.OutputorCreator = {
 
-	// 获取输出者
+	/**
+	 * 获取输出者
+	 */
 	getOutputor : function(mode) {
+
+		// 输出者
 		var outputor;
 
 		switch (mode) {
@@ -976,18 +1125,28 @@ core.log.output.Popup = (function() {
 	 */
 	var Constructor = function() {
 
-		/**
-		 * 实现Outputor接口output方法
-		 */
-		this.output = function(msg) {
-			alert(msg);
-		};
+	};
+
+	/**
+	 * 输出消息
+	 * 
+	 * @param msg
+	 *            信息
+	 * @returns
+	 */
+	Constructor.prototype.output = function(msg) {
+
+		alert(msg);
 	};
 
 	return {
-		// 获取单例弹框输出者
+
+		/**
+		 * 获取输出者 懒加载,且仅创建一个
+		 */
 		getOutputor : function() {
-			// 懒加载,调用时才创建,且仅创建一个
+
+			// 不存在,则创建
 			if (!outputor) {
 				outputor = new Constructor();
 			}

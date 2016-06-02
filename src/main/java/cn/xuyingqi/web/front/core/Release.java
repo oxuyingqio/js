@@ -29,7 +29,8 @@ public class Release {
 		// 文件类型
 		String fileType = ".js";
 		// 生成文件路径
-		File coreFile = new File("D:/Users/XuYQ/Desktop/core.js");
+		// File coreFile = new File("D:/Users/XuYQ/Desktop/core.js");
+		File coreFile = new File("D:/用户目录/我的桌面/core.js");
 
 		// 若文件存在,则删除
 		if (coreFile.exists()) {
