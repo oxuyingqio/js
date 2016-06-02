@@ -3,7 +3,7 @@
  * 
  * document键盘事件
  * 
- * 对象
+ * 数组
  */
 
 core.event.document.Keydown = [];
