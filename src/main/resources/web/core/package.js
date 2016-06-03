@@ -17,6 +17,9 @@
 			// 常量包
 			constant : {},
 
+			// 元素包
+			element : {},
+
 			// 事件包
 			event : {
 				// document事件包
