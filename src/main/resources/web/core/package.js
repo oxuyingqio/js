@@ -26,7 +26,7 @@
 				// 展示实现包
 				viewer : {
 					// 按钮实现包
-					bar : {
+					button : {
 						// EasyUI按钮实现包
 						easyui : {}
 					},
