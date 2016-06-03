@@ -14,6 +14,10 @@ core.html.element.model.InputType = {
 		numberbox : "easyui.numberbox",
 		datebox : "easyui.datebox",
 		datetimebox : "easyui.datetimebox",
+		numberspinner : "easyui.numberspinner",
+		timespinner : "eaysui.timespinner",
+		slider : "easyui.slider",
+		filebox : "easyui.filebox",
 		searchbox : "easyui.searchbox"
 	}
 };
