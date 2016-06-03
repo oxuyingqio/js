@@ -29,7 +29,8 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 */
 	Constructor.prototype.exist = function(id, config) {
 
-		return ($("#" + id).length !== 0);
+		var $button = $("#" + id);
+		return ($button.length !== 0);
 	};
 
 	/**
@@ -43,7 +44,8 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 */
 	Constructor.prototype.show = function(id, config) {
 
-		$("#" + id).show();
+		var $button = $("#" + id);
+		$button.show();
 	};
 
 	/**
@@ -57,7 +59,8 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 */
 	Constructor.prototype.hide = function(id, config) {
 
-		$("#" + id).hide();
+		var $button = $("#" + id);
+		$button.hide();
 	};
 
 	/**
@@ -71,7 +74,8 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 */
 	Constructor.prototype.destroy = function(id, config) {
 
-		$("#" + id).remove();
+		var $button = $("#" + id);
+		$button.remove();
 	};
 
 	/**
@@ -105,10 +109,12 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 */
 	Constructor.prototype.dealHtml = function(id, config) {
 
+		var $button = $("#" + id);
+
 		// 获取EasyUI配置
 		var easyui = config.easyui;
 
-		$("#" + id).linkbutton(easyui);
+		$button.linkbutton(easyui);
 	};
 
 	return {

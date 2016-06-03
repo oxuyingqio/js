@@ -29,7 +29,8 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	Constructor.prototype.exist = function(id, config) {
 
-		return ($("#" + id).length !== 0);
+		var $button = $("#" + id);
+		return ($button.length !== 0);
 	};
 
 	/**
@@ -43,7 +44,8 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	Constructor.prototype.show = function(id, config) {
 
-		$("#" + id).show();
+		var $button = $("#" + id);
+		$button.show();
 	};
 
 	/**
@@ -57,7 +59,8 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	Constructor.prototype.hide = function(id, config) {
 
-		$("#" + id).hide();
+		var $button = $("#" + id);
+		$button.hide();
 	};
 
 	/**
@@ -71,7 +74,8 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	Constructor.prototype.destroy = function(id, config) {
 
-		$("#" + id).remove();
+		var $button = $("#" + id);
+		$button.remove();
 	};
 
 	/**

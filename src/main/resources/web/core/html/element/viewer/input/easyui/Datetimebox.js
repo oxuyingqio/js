@@ -29,7 +29,8 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	Constructor.prototype.exist = function(id, config) {
 
-		return ($("#" + id).length !== 0);
+		var $input = $("#" + id);
+		return ($input.length !== 0);
 	};
 
 	/**
@@ -43,7 +44,8 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	Constructor.prototype.show = function(id, config) {
 
-		$("#" + id).show();
+		var $input = $("#" + id);
+		$input.show();
 	};
 
 	/**
@@ -57,7 +59,8 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	Constructor.prototype.hide = function(id, config) {
 
-		$("#" + id).hide();
+		var $input = $("#" + id);
+		$input.hide();
 	};
 
 	/**
@@ -71,7 +74,8 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	Constructor.prototype.destroy = function(id, config) {
 
-		$("#" + id).remove();
+		var $input = $("#" + id);
+		$input.remove();
 	};
 
 	/**
@@ -110,10 +114,12 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function(id, config) {
 
+		var $input = $("#" + id);
+
 		// 获取EasyUI配置
 		var easyui = config.easyui;
 
-		$("#" + id).datetimebox(easyui);
+		$input.datetimebox(easyui);
 	};
 
 	return {
