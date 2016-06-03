@@ -6,7 +6,7 @@
  * 对象
  */
 
-core.log.output.FormatConvertor = (function() {
+core.log.controller.FormatConvertor = (function() {
 
 	// 转换器
 	var convertor;
@@ -32,13 +32,13 @@ core.log.output.FormatConvertor = (function() {
 	Constructor.prototype.convert = function(msg, level, format) {
 
 		// 替换消息
-		format = format.replaceAll(core.log.output.Format.msg, msg);
+		format = format.replaceAll(core.log.model.Format.msg, msg);
 		// 替换输出级别
-		format = format.replaceAll(core.log.output.Format.level, level);
+		format = format.replaceAll(core.log.model.Format.level, level);
 		// 替换日期??如何支持自定义format
-		format = format.replaceAll(core.log.output.Format.date, (new Date()).format("yyyy-MM-dd HH:mm:ss"));
+		format = format.replaceAll(core.log.model.Format.date, (new Date()).format("yyyy-MM-dd HH:mm:ss"));
 		// 替换换行
-		format = format.replaceAll(core.log.output.Format.enter, "\n");
+		format = format.replaceAll(core.log.model.Format.enter, "\n");
 
 		return format;
 	};

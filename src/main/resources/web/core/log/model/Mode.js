@@ -6,7 +6,7 @@
  * 枚举
  */
 
-core.log.output.Mode = {
+core.log.model.Mode = {
 
 	// 控制台
 	console : "console",

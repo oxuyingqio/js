@@ -9,4 +9,4 @@
 /**
  * @method output 输出信息
  */
-core.log.output.Outputor = new core.lang.Interface("core.log.output.Outputor", [ "output" ]);
+core.log.model.Outputor = new core.lang.Interface("core.log.model.Outputor", [ "output" ]);

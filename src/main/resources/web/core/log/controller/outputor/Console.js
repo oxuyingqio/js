@@ -1,12 +1,12 @@
 /**
- * Pop-up
+ * Console
  * 
- * 弹出框输出者
+ * 控制台输出者
  * 
  * 对象
  */
 
-core.log.output.Popup = (function() {
+core.log.controller.outputor.Console = (function() {
 
 	// 输出者
 	var outputor;
@@ -27,7 +27,7 @@ core.log.output.Popup = (function() {
 	 */
 	Constructor.prototype.output = function(msg) {
 
-		alert(msg);
+		console.log(msg);
 	};
 
 	return {

@@ -6,7 +6,7 @@
  * 枚举
  */
 
-core.log.output.Format = {
+core.log.model.Format = {
 
 	// 信息
 	msg : "%m",

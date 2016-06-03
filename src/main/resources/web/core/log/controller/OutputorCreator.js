@@ -6,7 +6,7 @@
  * 对象
  */
 
-core.log.output.OutputorCreator = {
+core.log.controller.OutputorCreator = {
 
 	/**
 	 * 获取输出者
@@ -17,18 +17,18 @@ core.log.output.OutputorCreator = {
 		var outputor;
 
 		switch (mode) {
-		case core.log.output.Mode.console:
+		case core.log.model.Mode.console:
 			// 获取控制台输出者实例
-			outputor = new core.log.output.Console.getOutputor();
+			outputor = new core.log.controller.outputor.Console.getOutputor();
 			break;
-		case core.log.output.Mode.popup:
+		case core.log.model.Mode.popup:
 			// 获取弹出框输出者实例
-			outputor = new core.log.output.Popup.getOutputor();
+			outputor = new core.log.controller.outputor.Popup.getOutputor();
 			break;
 		}
 
 		// 判断是否实现接口方法
-		core.lang.Interface.ensureImplements(outputor, core.log.output.Outputor);
+		core.lang.Interface.ensureImplements(outputor, core.log.model.Outputor);
 		// 返回实例
 		return outputor;
 	}

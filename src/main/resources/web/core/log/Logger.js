@@ -17,11 +17,11 @@ core.log.Logger = (function() {
 	var Constructor = function() {
 
 		// 输出级别
-		this.level = core.log.output.Level.debug;
+		this.level = core.log.model.Level.debug;
 		// 输出模式
-		this.mode = core.log.output.Mode.console;
+		this.mode = core.log.model.Mode.console;
 		// 输出格式化参数
-		this.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.msg;
+		this.format = "[" + core.log.model.Format.level + "] " + core.log.model.Format.msg;
 	};
 
 	/**
@@ -33,9 +33,9 @@ core.log.Logger = (function() {
 	 */
 	Constructor.prototype.error = function(msg) {
 
-		if (this.level <= core.log.output.Level.error) {
-			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
-			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.model.Level.error) {
+			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
+			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
 
@@ -48,9 +48,9 @@ core.log.Logger = (function() {
 	 */
 	Constructor.prototype.warn = function(msg) {
 
-		if (this.level <= core.log.output.Level.warn) {
-			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
-			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.model.Level.warn) {
+			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
+			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
 
@@ -63,9 +63,9 @@ core.log.Logger = (function() {
 	 */
 	Constructor.prototype.info = function(msg) {
 
-		if (this.level <= core.log.output.Level.info) {
-			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
-			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.model.Level.info) {
+			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
+			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
 
@@ -78,9 +78,9 @@ core.log.Logger = (function() {
 	 */
 	Constructor.prototype.debug = function(msg) {
 
-		if (this.level <= core.log.output.Level.debug) {
-			msg = core.log.output.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
-			core.log.output.OutputorCreator.getOutputor(this.mode).output(msg);
+		if (this.level <= core.log.model.Level.debug) {
+			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
+			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
 

@@ -7,8 +7,6 @@
 <body>
 </body>
 
-<!-- <script type="text/javascript" src="/~/core/release/core.js"></script> -->
-
 <script type="text/javascript" src="/~/core/js/Date.js"></script>
 <script type="text/javascript" src="/~/core/js/String.js"></script>
 
@@ -19,7 +17,7 @@
 <script type="text/javascript" src="/~/core/log/Logger.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Level.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Mode.js"></script>
-<script type="text/javascript" src="/~/core/log/output/Format.js"></script>
+<script type="text/javascript" src="/~/core/log/model/Format.js"></script>
 <script type="text/javascript" src="/~/core/log/output/FormatConvertor.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Outputor.js"></script>
 <script type="text/javascript" src="/~/core/log/output/Console.js"></script>
@@ -33,10 +31,10 @@
 
 	function loging() {
 		var log = core.log.Logger.getLogger();
-		log.level = core.log.output.Level.error;
-		log.mode = core.log.output.Mode.console;
-		log.format = "[" + core.log.output.Format.level + "] " + core.log.output.Format.date
-				+ core.log.output.Format.enter + core.log.output.Format.msg;
+		log.level = core.log.model.Level.error;
+		log.mode = core.log.model.Mode.console;
+		log.format = "[" + core.log.model.Format.level + "] " + core.log.model.Format.date
+				+ core.log.model.Format.enter + core.log.model.Format.msg;
 		log.error("error");
 		log.warn("warn");
 		log.info("info");

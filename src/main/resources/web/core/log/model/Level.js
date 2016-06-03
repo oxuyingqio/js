@@ -6,7 +6,7 @@
  * 枚举
  */
 
-core.log.output.Level = {
+core.log.model.Level = {
 
 	// 错误
 	error : 4,
