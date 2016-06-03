@@ -24,7 +24,7 @@ public class Release {
 		// 前台核心公共路径
 		String jsCommonPath = "/src/main/resources/web/core/";
 		// 前台核心包路径集合
-		String[] packagePaths = { "js", "package.js", "lang", "constant", "util", "event", "log" };
+		String[] packagePaths = { "js", "package.js", "lang", "util", "log", "html" };
 
 		// 文件类型
 		String fileType = ".js";
