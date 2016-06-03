@@ -13,15 +13,23 @@ core.html.element.viewer.Input = (function() {
 	 * 
 	 * @param id
 	 *            输入框ID
-	 * @param name
-	 *            输入框名称
+	 * @param type
+	 *            输入框类型
 	 */
-	var Constructor = function(_id, _name) {
+	var Constructor = function(_id, _type) {
 
 		// ID
 		var id = _id;
-		// 名称
-		var name = _name;
+		// 类型
+		var type = _type || core.html.element.model.InputType.text;
+		// 配置项
+		var config = {};
+
+		// 输入框
+		var input = core.html.element.controller.InputCreator.getInput(type);
+		if (input === undefined) {
+			throw "core.html.element.viewer.Input:构造参数异常.类型(" + type + ")暂不支持";
+		}
 
 		/**
 		 * 获取元素ID
@@ -36,12 +44,24 @@ core.html.element.viewer.Input = (function() {
 			id = _id;
 		};
 
-		this.getName = function() {
-			return name;
+		this.getType = function() {
+			return type;
 		};
 
-		this.setName = function(_name) {
-			name = _name;
+		this.setType = function(_type) {
+			type = _type;
+		};
+
+		this.getConfig = function() {
+			return config;
+		};
+
+		this.setConfig = function(_config) {
+			config = _config;
+		};
+
+		this.getInput = function() {
+			return input;
 		};
 	};
 
@@ -52,14 +72,19 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.show = function() {
 
-		// 元素的jQuery对象
-		var $input = $("#" + this.getId());
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
 
 		// 不存在则添加,存在则展示
-		if ($input.length === 0) {
-			$("body").append(this.convertHtml());
+		if (input.exist(id, config)) {
+			input.show(id, config);
 		} else {
-			$input.show();
+			$("body").append(this.convertHtml());
+			this.dealHtml();
 		}
 	};
 
@@ -70,9 +95,14 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.hide = function() {
 
-		// 元素的jQuery对象
-		var $input = $("#" + this.getId());
-		$input.hide();
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		input.hide(id, config);
 	};
 
 	/**
@@ -82,9 +112,14 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.destroy = function() {
 
-		// 元素的jQuery对象
-		var $input = $("#" + this.getId());
-		$input.remove();
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		input.destroy(id, config);
 	};
 
 	/**
@@ -121,15 +156,14 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
 
-		return html.join("");
+		return input.convertHtml(id, config);
 	};
 
 	/**
@@ -139,7 +173,14 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		alert("处理了输入框:" + this.getId());
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		input.dealHtml(id, config);
 	};
 
 	/**

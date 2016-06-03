@@ -3,20 +3,41 @@
 <head>
 <meta charset="UTF-8">
 <title>core.html.element</title>
+
+<link rel="stylesheet" type="text/css" href="/~/core/resource/jquery-easyui-1.4.5/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="/~/core/resource/jquery-easyui-1.4.5/themes/icon.css">
+
 </head>
 <body>
 </body>
 
 <script type="text/javascript" src="/~/core/resource/jquery-1.12.4/jquery-1.12.4.js"></script>
 
+<script type="text/javascript" src="/~/core/resource/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="/~/core/resource/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
+
+<script type="text/javascript" src="/~/core/js/Date.js"></script>
+<script type="text/javascript" src="/~/core/js/String.js"></script>
+
 <script type="text/javascript" src="/~/core/package.js"></script>
 
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
+
+<script type="text/javascript" src="/~/core/log/Logger.js"></script>
+<script type="text/javascript" src="/~/core/log/model/Level.js"></script>
+<script type="text/javascript" src="/~/core/log/model/Mode.js"></script>
+<script type="text/javascript" src="/~/core/log/model/Format.js"></script>
+<script type="text/javascript" src="/~/core/log/model/Outputor.js"></script>
+<script type="text/javascript" src="/~/core/log/controller/FormatConvertor.js"></script>
+<script type="text/javascript" src="/~/core/log/controller/OutputorCreator.js"></script>
+<script type="text/javascript" src="/~/core/log/controller/outputor/Console.js"></script>
+<script type="text/javascript" src="/~/core/log/controller/outputor/Popup.js"></script>
 
 <script type="text/javascript" src="/~/core/html/element/Element.js"></script>
 <script type="text/javascript" src="/~/core/html/element/controller/InputCreator.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/BarType.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script>
+<script type="text/javascript" src="/~/core/html/element/model/Input.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/InputType.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Bar.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script>
@@ -47,27 +68,29 @@
 		var barDiv = new core.html.element.viewer.Div();
 		barDiv.add(bar1, bar2, bar3, bar4);
 		var label1 = new core.html.element.viewer.Label("label1", "标签1");
-		var input1 = new core.html.element.viewer.Input("input1", "文本框1");
+		var input1 = new core.html.element.viewer.Input("input1", core.html.element.model.InputType.easyui.combobox);
 		var label2 = new core.html.element.viewer.Label("label2", "标签2");
-		var input2 = new core.html.element.viewer.Input("input2", "文本框2");
+		var input2 = new core.html.element.viewer.Input("input2", core.html.element.model.InputType.easyui.datebox);
 		var label3 = new core.html.element.viewer.Label("label3", "标签3");
-		var input3 = new core.html.element.viewer.Input("input3", "文本框3");
+		var input3 = new core.html.element.viewer.Input("input3", core.html.element.model.InputType.easyui.datetimebox);
 		var label4 = new core.html.element.viewer.Label("label4", "标签4");
-		var input4 = new core.html.element.viewer.Input("input4", "文本框4");
-		var label5 = new core.html.element.viewer.Label("label3", "标签5");
-		var input5 = new core.html.element.viewer.Input("input3", "文本框5");
+		var input4 = new core.html.element.viewer.Input("input4", core.html.element.model.InputType.easyui.filebox);
+		var label5 = new core.html.element.viewer.Label("label5", "标签5");
+		var input5 = new core.html.element.viewer.Input("input5", core.html.element.model.InputType.easyui.numberbox);
 		var tr1 = new core.html.element.viewer.Tr();
 		tr1.add(label1, input1, label2, input2, label3, input3, label4, input4, label5, input5);
 		var label6 = new core.html.element.viewer.Label("label6", "标签6");
-		var input6 = new core.html.element.viewer.Input("input6", "文本框6");
+		var input6 = new core.html.element.viewer.Input("input6",
+				core.html.element.model.InputType.easyui.numberspinner);
 		var label7 = new core.html.element.viewer.Label("label7", "标签7");
-		var input7 = new core.html.element.viewer.Input("input7", "文本框7");
+		var input7 = new core.html.element.viewer.Input("input7", core.html.element.model.InputType.easyui.searchbox);
 		var label8 = new core.html.element.viewer.Label("label8", "标签8");
-		var input8 = new core.html.element.viewer.Input("input8", "文本框8");
+		var input8 = new core.html.element.viewer.Input("input8", core.html.element.model.InputType.easyui.slider);
 		var label9 = new core.html.element.viewer.Label("label9", "标签9");
-		var input9 = new core.html.element.viewer.Input("input9", "文本框9");
+		var input9 = new core.html.element.viewer.Input("input9", core.html.element.model.InputType.easyui.textbox);
 		var label10 = new core.html.element.viewer.Label("label10", "标签10");
-		var input10 = new core.html.element.viewer.Input("input10", "文本框10");
+		var input10 = new core.html.element.viewer.Input("input10",
+				core.html.element.model.InputType.easyui.timespinner);
 		var tr2 = new core.html.element.viewer.Tr();
 		tr2.add(label6, input6, label7, input7, label8, input8, label9, input9, label10, input10);
 		var table = new core.html.element.viewer.Table();

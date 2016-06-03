@@ -69,6 +69,7 @@ core.html.element.viewer.Td = (function() {
 		// 不存在则添加,存在则展示
 		if ($td.length === 0) {
 			$("body").append(this.convertHtml());
+			this.dealHtml();
 		} else {
 			$td.show();
 		}

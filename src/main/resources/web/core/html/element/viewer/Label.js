@@ -84,6 +84,7 @@ core.html.element.viewer.Label = (function() {
 		// 不存在则添加,存在则展示
 		if ($label.length === 0) {
 			$("body").append(this.convertHtml());
+			this.dealHtml();
 		} else {
 			$label.show();
 		}
@@ -169,7 +170,7 @@ core.html.element.viewer.Label = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		alert("处理了标签:" + this.getId());
+		core.log.Logger.getLogger().info("处理了标签:" + this.getId());
 	};
 
 	/**

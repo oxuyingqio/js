@@ -71,6 +71,7 @@ core.html.element.viewer.Fieldset = (function() {
 		// 不存在则添加,存在则展示
 		if ($fieldset.length === 0) {
 			$("body").append(this.convertHtml());
+			this.dealHtml();
 		} else {
 			$fieldset.show();
 		}

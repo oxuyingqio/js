@@ -77,6 +77,7 @@ core.html.element.viewer.Form = (function() {
 		// 不存在则添加,存在则展示
 		if ($form.length === 0) {
 			$("body").append(this.convertHtml());
+			this.dealHtml();
 		} else {
 			$form.show();
 		}

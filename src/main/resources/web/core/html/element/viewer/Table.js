@@ -59,6 +59,7 @@ core.html.element.viewer.Table = (function() {
 		// 不存在则添加,存在则展示
 		if ($table.length === 0) {
 			$("body").append(this.convertHtml());
+			this.dealHtml();
 		} else {
 			$table.show();
 		}

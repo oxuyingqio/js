@@ -10,6 +10,10 @@ core.log.controller.OutputorCreator = {
 
 	/**
 	 * 获取输出者
+	 * 
+	 * @param mode
+	 *            模式
+	 * @returns {core.log.model.Outputor}
 	 */
 	getOutputor : function(mode) {
 
