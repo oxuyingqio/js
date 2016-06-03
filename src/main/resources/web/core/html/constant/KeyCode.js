@@ -6,7 +6,7 @@
  * 枚举
  */
 
-core.constant.KeyCode = {
+core.html.constant.KeyCode = {
 
 	F1 : "112",
 	F2 : "113",

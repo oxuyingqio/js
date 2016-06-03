@@ -9,9 +9,6 @@
 
 	// 核心包
 	core = {
-		// 常量包
-		constant : {},
-
 		// 事件包
 		event : {
 			// document事件包
@@ -22,6 +19,12 @@
 
 		// 示例包
 		example : {},
+
+		// HTML 包
+		html : {
+			// 常量包
+			constant : {}
+		},
 
 		// 基础包
 		lang : {},
