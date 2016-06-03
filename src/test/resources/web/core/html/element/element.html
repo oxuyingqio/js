@@ -18,6 +18,7 @@
 <script type="text/javascript" src="/~/core/html/element/viewer/Bar.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Fieldset.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Form.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Input.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Label.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Table.js"></script>
@@ -46,7 +47,9 @@
 		var div = new core.html.element.viewer.Div();
 		div.add(barDiv, fieldset);
 
-		div.show();
+		var form = new core.html.element.viewer.Form("form");
+		form.add(div);
+		form.show();
 	});
 </script>
 
