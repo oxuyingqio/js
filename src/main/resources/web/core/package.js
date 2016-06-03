@@ -9,21 +9,21 @@
 
 	// 核心包
 	core = {
-		// 事件包
-		event : {
-			// document事件包
-			document : {},
-			// window事件包
-			window : {}
-		},
-
 		// 示例包
 		example : {},
 
 		// HTML 包
 		html : {
 			// 常量包
-			constant : {}
+			constant : {},
+
+			// 事件包
+			event : {
+				// document事件包
+				document : {},
+				// window事件包
+				window : {}
+			}
 		},
 
 		// 基础包
