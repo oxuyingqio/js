@@ -18,7 +18,12 @@
 			constant : {},
 
 			// 元素包
-			element : {},
+			element : {
+				// 模型包
+				model : {},
+				// 展示实现包
+				viewer : {}
+			},
 
 			// 事件包
 			event : {

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>core.html.element</title>
+</head>
+<body>
+</body>
+
+<script type="text/javascript" src="/~/core/resource/jquery-1.12.4/jquery-1.12.4.js"></script>
+
+<script type="text/javascript" src="/~/core/package.js"></script>
+
+<script type="text/javascript" src="/~/core/lang/Interface.js"></script>
+
+<script type="text/javascript" src="/~/core/html/element/Element.js"></script>
+<script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Bar.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Fieldset.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Input.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Label.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Table.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Td.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Tr.js"></script>
+<script type="text/javascript">
+	$(function() {
+		var bar1 = new core.html.element.viewer.Bar();
+		var bar2 = new core.html.element.viewer.Bar();
+		var bar3 = new core.html.element.viewer.Bar();
+		var bar4 = new core.html.element.viewer.Bar();
+		var barDiv = new core.html.element.viewer.Div();
+		barDiv.add(bar1, bar2, bar3, bar4);
+		var label1 = new core.html.element.viewer.Label("label1", "标签1");
+		var input1 = new core.html.element.viewer.Input("input1", "文本框1");
+		var label2 = new core.html.element.viewer.Label("label2", "标签2");
+		var input2 = new core.html.element.viewer.Input("input2", "文本框2");
+		var label3 = new core.html.element.viewer.Label("label3", "标签3");
+		var input3 = new core.html.element.viewer.Input("input3", "文本框3");
+		var tr = new core.html.element.viewer.Tr();
+		tr.add(label1, input1, label2, input2, label3, input3);
+		var table = new core.html.element.viewer.Table();
+		table.add(tr);
+		var fieldset = new core.html.element.viewer.Fieldset("fieldset", "框");
+		fieldset.add(table);
+		var div = new core.html.element.viewer.Div();
+		div.add(barDiv, fieldset);
+
+		div.show();
+	});
+</script>
+
+</html>
