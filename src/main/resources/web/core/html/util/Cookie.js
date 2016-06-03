@@ -6,7 +6,7 @@
  * 对象
  */
 
-core.util.Cookie = (function() {
+core.html.util.Cookie = (function() {
 
 	// cookie操作者
 	var cookie;

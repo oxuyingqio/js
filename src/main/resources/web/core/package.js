@@ -23,7 +23,10 @@
 				document : {},
 				// window事件包
 				window : {}
-			}
+			},
+
+			// 工具包
+			util : {}
 		},
 
 		// 基础包
