@@ -19,10 +19,23 @@
 
 			// 元素包
 			element : {
+				// 控制包
+				controller : {},
 				// 模型包
 				model : {},
 				// 展示实现包
-				viewer : {}
+				viewer : {
+					// 按钮实现包
+					bar : {
+						// EasyUI按钮实现包
+						easyui : {}
+					},
+					// 输入框实现包
+					input : {
+						// EasyUI输入框实现包
+						easyui : {}
+					}
+				}
 			},
 
 			// 事件包
