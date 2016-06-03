@@ -8,16 +8,18 @@
 
 core.html.element.model.InputType = {
 
+	text : "text",
+
 	easyui : {
-		textbox : "easyui.textbox",
 		combobox : "easyui.combobox",
-		numberbox : "easyui.numberbox",
 		datebox : "easyui.datebox",
 		datetimebox : "easyui.datetimebox",
-		numberspinner : "easyui.numberspinner",
-		timespinner : "eaysui.timespinner",
-		slider : "easyui.slider",
 		filebox : "easyui.filebox",
-		searchbox : "easyui.searchbox"
+		numberbox : "easyui.numberbox",
+		numberspinner : "easyui.numberspinner",
+		searchbox : "easyui.searchbox",
+		slider : "easyui.slider",
+		textbox : "easyui.textbox",
+		timespinner : "eaysui.timespinner"
 	}
 };

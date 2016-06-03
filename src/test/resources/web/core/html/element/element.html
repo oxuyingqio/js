@@ -14,6 +14,7 @@
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 
 <script type="text/javascript" src="/~/core/html/element/Element.js"></script>
+<script type="text/javascript" src="/~/core/html/element/controller/InputCreator.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/BarType.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/InputType.js"></script>
@@ -26,6 +27,17 @@
 <script type="text/javascript" src="/~/core/html/element/viewer/Table.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Td.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Tr.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/Text.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Combobox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datebox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datetimebox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Filebox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Numberbox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Numberspinner.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Searchbox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Slider.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Textbox.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Timespinner.js"></script>
 <script type="text/javascript">
 	$(function() {
 		var bar1 = new core.html.element.viewer.Bar();
@@ -40,10 +52,27 @@
 		var input2 = new core.html.element.viewer.Input("input2", "文本框2");
 		var label3 = new core.html.element.viewer.Label("label3", "标签3");
 		var input3 = new core.html.element.viewer.Input("input3", "文本框3");
-		var tr = new core.html.element.viewer.Tr();
-		tr.add(label1, input1, label2, input2, label3, input3);
+		var label4 = new core.html.element.viewer.Label("label4", "标签4");
+		var input4 = new core.html.element.viewer.Input("input4", "文本框4");
+		var label5 = new core.html.element.viewer.Label("label3", "标签5");
+		var input5 = new core.html.element.viewer.Input("input3", "文本框5");
+		var tr1 = new core.html.element.viewer.Tr();
+		tr1.add(label1, input1, label2, input2, label3, input3, label4, input4, label5, input5);
+		var label6 = new core.html.element.viewer.Label("label6", "标签6");
+		var input6 = new core.html.element.viewer.Input("input6", "文本框6");
+		var label7 = new core.html.element.viewer.Label("label7", "标签7");
+		var input7 = new core.html.element.viewer.Input("input7", "文本框7");
+		var label8 = new core.html.element.viewer.Label("label8", "标签8");
+		var input8 = new core.html.element.viewer.Input("input8", "文本框8");
+		var label9 = new core.html.element.viewer.Label("label9", "标签9");
+		var input9 = new core.html.element.viewer.Input("input9", "文本框9");
+		var label10 = new core.html.element.viewer.Label("label10", "标签10");
+		var input10 = new core.html.element.viewer.Input("input10", "文本框10");
+		var tr2 = new core.html.element.viewer.Tr();
+		tr2.add(label6, input6, label7, input7, label8, input8, label9, input9, label10, input10);
 		var table = new core.html.element.viewer.Table();
-		table.add(tr);
+		table.add(tr1);
+		table.add(tr2);
 		var fieldset = new core.html.element.viewer.Fieldset("fieldset", "框");
 		fieldset.add(table);
 		var div = new core.html.element.viewer.Div();
