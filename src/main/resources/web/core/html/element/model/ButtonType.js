@@ -9,6 +9,7 @@
 core.html.element.model.ButtonType = {
 
 	button : "button",
+
 	easyui : {
 		linkbutton : "easyui.linkbutton"
 	}

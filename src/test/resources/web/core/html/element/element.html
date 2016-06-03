@@ -34,6 +34,7 @@
 <script type="text/javascript" src="/~/core/log/controller/outputor/Popup.js"></script>
 
 <script type="text/javascript" src="/~/core/html/element/Element.js"></script>
+<script type="text/javascript" src="/~/core/html/element/controller/ButtonCreator.js"></script>
 <script type="text/javascript" src="/~/core/html/element/controller/InputCreator.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/Button.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/ButtonType.js"></script>
@@ -49,6 +50,8 @@
 <script type="text/javascript" src="/~/core/html/element/viewer/Table.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Td.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Tr.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/button/Button.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/button/easyui/Linkbutton.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/input/Text.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Combobox.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datebox.js"></script>
@@ -63,11 +66,14 @@
 <script type="text/javascript">
 	$(function() {
 		var button1 = new core.html.element.viewer.Button();
-		var button2 = new core.html.element.viewer.Button();
-		var button3 = new core.html.element.viewer.Button();
-		var button4 = new core.html.element.viewer.Button();
+		button1.setConfig({
+			text : "button"
+		});
+		var button2 = new core.html.element.viewer.Button("button2",
+				core.html.element.model.ButtonType.easyui.linkbutton);
+
 		var buttonDiv = new core.html.element.viewer.Div();
-		buttonDiv.add(button1, button2, button3, button4);
+		buttonDiv.add(button1, button2);
 		var label1 = new core.html.element.viewer.Label("label1", "标签1");
 		var input1 = new core.html.element.viewer.Input("input1", core.html.element.model.InputType.easyui.combobox);
 		var label2 = new core.html.element.viewer.Label("label2", "标签2");
