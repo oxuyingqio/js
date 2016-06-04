@@ -72,6 +72,19 @@ core.html.element.viewer.Label = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -80,14 +93,7 @@ core.html.element.viewer.Label = (function() {
 
 		// 元素的jQuery对象
 		var $label = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($label.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$label.show();
-		}
+		$label.show();
 	};
 
 	/**
@@ -139,6 +145,17 @@ core.html.element.viewer.Label = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $label = $("#" + this.getId());
+		return ($label.length !== 0);
 	};
 
 	/**

@@ -1077,6 +1077,7 @@ core.html.constant.KeyCode = {
  */
 
 /**
+ * @method appendTo 添加元素到
  * @method show 展示元素
  * @method hide 隐藏元素
  * @method destroy 销毁元素
@@ -1084,8 +1085,8 @@ core.html.constant.KeyCode = {
  * @method remove 移除子元素
  * @method find 检索子元素集合,包含子元素的子元素
  */
-core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "show", "hide", "destroy", "add",
-		"remove", "find" ]);
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "appendTo", "show", "hide",
+		"destroy", "add", "remove", "find" ]);
 /**
  * ButtonCreator
  * 
@@ -1248,6 +1249,7 @@ core.html.element.model.ButtonType = {
 
 /**
  * @method getId 获取元素ID
+ * @method exist 元素是否存在
  * @method convertHtml 转为HTML
  * @method dealHtml 处理HTML
  * @method getChildren 获取子元素集合
@@ -1371,6 +1373,19 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -1384,13 +1399,7 @@ core.html.element.viewer.Button = (function() {
 		// 配置项
 		var config = this.getConfig();
 
-		// 不存在则添加,存在则展示
-		if (button.exist(id, config)) {
-			button.show(id, config);
-		} else {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		}
+		button.show(id, config);
 	};
 
 	/**
@@ -1452,6 +1461,23 @@ core.html.element.viewer.Button = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		// 获取按钮
+		var button = this.getButton();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		button.exist(id, config);
 	};
 
 	/**
@@ -1549,6 +1575,19 @@ core.html.element.viewer.Div = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -1557,14 +1596,7 @@ core.html.element.viewer.Div = (function() {
 
 		// 元素的jQuery对象
 		var $div = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($div.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$div.show();
-		}
+		$div.show();
 	};
 
 	/**
@@ -1617,6 +1649,8 @@ core.html.element.viewer.Div = (function() {
 
 			// 添加子元素
 			this.getElements().push(child);
+			// 若元素存在,则直接展示添加的子元素
+			this.exist() && child.appendTo(this.getId());
 		}
 	};
 
@@ -1690,6 +1724,17 @@ core.html.element.viewer.Div = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $div = $("#" + this.getId());
+		return ($div.length !== 0);
 	};
 
 	/**
@@ -1805,6 +1850,19 @@ core.html.element.viewer.Fieldset = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -1813,14 +1871,7 @@ core.html.element.viewer.Fieldset = (function() {
 
 		// 元素的jQuery对象
 		var $fieldset = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($fieldset.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$fieldset.show();
-		}
+		$fieldset.show();
 	};
 
 	/**
@@ -1873,6 +1924,8 @@ core.html.element.viewer.Fieldset = (function() {
 
 			// 添加子元素
 			this.getElements().push(child);
+			// 若元素存在,则直接展示添加的子元素
+			this.exist() && child.appendTo(this.getId());
 		}
 	};
 
@@ -1946,6 +1999,17 @@ core.html.element.viewer.Fieldset = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $fieldset = $("#" + this.getId());
+		return ($fieldset.length !== 0);
 	};
 
 	/**
@@ -2070,6 +2134,19 @@ core.html.element.viewer.Form = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -2078,14 +2155,7 @@ core.html.element.viewer.Form = (function() {
 
 		// 元素的jQuery对象
 		var $form = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($form.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$form.show();
-		}
+		$form.show();
 	};
 
 	/**
@@ -2138,6 +2208,8 @@ core.html.element.viewer.Form = (function() {
 
 			// 添加子元素
 			this.getElements().push(child);
+			// 若元素存在,则直接展示添加的子元素
+			this.exist() && child.appendTo(this.getId());
 		}
 	};
 
@@ -2211,6 +2283,17 @@ core.html.element.viewer.Form = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $form = $("#" + this.getId());
+		return ($form.length !== 0);
 	};
 
 	/**
@@ -2338,6 +2421,19 @@ core.html.element.viewer.Frameset = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -2346,14 +2442,7 @@ core.html.element.viewer.Frameset = (function() {
 
 		// 元素的jQuery对象
 		var $frameset = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($frameset.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$frameset.show();
-		}
+		$frameset.show();
 	};
 
 	/**
@@ -2406,6 +2495,8 @@ core.html.element.viewer.Frameset = (function() {
 
 			// 添加子元素
 			this.getElements().push(child);
+			// 若元素存在,则直接展示添加的子元素
+			this.exist() && child.appendTo(this.getId());
 		}
 	};
 
@@ -2479,6 +2570,17 @@ core.html.element.viewer.Frameset = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $frameset = $("#" + this.getId());
+		return ($frameset.length !== 0);
 	};
 
 	/**
@@ -2605,6 +2707,19 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -2618,13 +2733,7 @@ core.html.element.viewer.Input = (function() {
 		// 配置项
 		var config = this.getConfig();
 
-		// 不存在则添加,存在则展示
-		if (input.exist(id, config)) {
-			input.show(id, config);
-		} else {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		}
+		input.show(id, config);
 	};
 
 	/**
@@ -2686,6 +2795,23 @@ core.html.element.viewer.Input = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		input.exist(id, config);
 	};
 
 	/**
@@ -2808,6 +2934,19 @@ core.html.element.viewer.Label = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -2816,14 +2955,7 @@ core.html.element.viewer.Label = (function() {
 
 		// 元素的jQuery对象
 		var $label = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($label.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$label.show();
-		}
+		$label.show();
 	};
 
 	/**
@@ -2875,6 +3007,17 @@ core.html.element.viewer.Label = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $label = $("#" + this.getId());
+		return ($label.length !== 0);
 	};
 
 	/**
@@ -2968,6 +3111,19 @@ core.html.element.viewer.Table = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -2976,14 +3132,7 @@ core.html.element.viewer.Table = (function() {
 
 		// 元素的jQuery对象
 		var $table = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($table.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$table.show();
-		}
+		$table.show();
 	};
 
 	/**
@@ -3038,6 +3187,8 @@ core.html.element.viewer.Table = (function() {
 			if (child.constructor === core.html.element.viewer.Tr) {
 				// 添加子元素
 				this.getElements().push(child);
+				// 若元素存在,则直接展示添加的子元素
+				this.exist() && child.appendTo(this.getId());
 			} else {
 				var tr = new core.html.element.viewer.Tr();
 				tr.add(child);
@@ -3116,6 +3267,17 @@ core.html.element.viewer.Table = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $table = $("#" + this.getId());
+		return ($table.length !== 0);
 	};
 
 	/**
@@ -3227,6 +3389,19 @@ core.html.element.viewer.Td = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -3235,14 +3410,7 @@ core.html.element.viewer.Td = (function() {
 
 		// 元素的jQuery对象
 		var $td = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($td.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$td.show();
-		}
+		$td.show();
 	};
 
 	/**
@@ -3295,6 +3463,8 @@ core.html.element.viewer.Td = (function() {
 
 			// 添加子元素
 			this.getElements().push(child);
+			// 若元素存在,则直接展示添加的子元素
+			this.exist() && child.appendTo(this.getId());
 		}
 	};
 
@@ -3368,6 +3538,17 @@ core.html.element.viewer.Td = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $td = $("#" + this.getId());
+		return ($td.length !== 0);
 	};
 
 	/**
@@ -3473,6 +3654,19 @@ core.html.element.viewer.Tr = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -3481,14 +3675,7 @@ core.html.element.viewer.Tr = (function() {
 
 		// 元素的jQuery对象
 		var $tr = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($tr.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$tr.show();
-		}
+		$tr.show();
 	};
 
 	/**
@@ -3543,6 +3730,8 @@ core.html.element.viewer.Tr = (function() {
 			if (child.constructor === core.html.element.viewer.Td) {
 				// 添加子元素
 				this.getElements().push(child);
+				// 若元素存在,则直接展示添加的子元素
+				this.exist() && child.appendTo(this.getId());
 			} else {
 				var td = new core.html.element.viewer.Td();
 				td.add(child);
@@ -3621,6 +3810,17 @@ core.html.element.viewer.Tr = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $tr = $("#" + this.getId());
+		return ($tr.length !== 0);
 	};
 
 	/**
@@ -4062,7 +4262,6 @@ core.html.element.viewer.input.Text = (function() {
 	 */
 	Constructor.prototype.dealHtml = function(id, config) {
 
-		core.log.Logger.getLogger().info("处理了输入框" + id);
 	};
 
 	return {

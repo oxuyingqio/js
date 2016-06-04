@@ -66,6 +66,19 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -79,13 +92,7 @@ core.html.element.viewer.Input = (function() {
 		// 配置项
 		var config = this.getConfig();
 
-		// 不存在则添加,存在则展示
-		if (input.exist(id, config)) {
-			input.show(id, config);
-		} else {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		}
+		input.show(id, config);
 	};
 
 	/**
@@ -147,6 +154,23 @@ core.html.element.viewer.Input = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		// 获取输入框
+		var input = this.getInput();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		input.exist(id, config);
 	};
 
 	/**

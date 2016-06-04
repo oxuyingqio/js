@@ -114,7 +114,6 @@ core.html.element.viewer.input.Text = (function() {
 	 */
 	Constructor.prototype.dealHtml = function(id, config) {
 
-		core.log.Logger.getLogger().info("处理了输入框" + id);
 	};
 
 	return {

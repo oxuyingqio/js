@@ -47,6 +47,19 @@ core.html.element.viewer.Tr = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -55,14 +68,7 @@ core.html.element.viewer.Tr = (function() {
 
 		// 元素的jQuery对象
 		var $tr = $("#" + this.getId());
-
-		// 不存在则添加,存在则展示
-		if ($tr.length === 0) {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		} else {
-			$tr.show();
-		}
+		$tr.show();
 	};
 
 	/**
@@ -117,6 +123,8 @@ core.html.element.viewer.Tr = (function() {
 			if (child.constructor === core.html.element.viewer.Td) {
 				// 添加子元素
 				this.getElements().push(child);
+				// 若元素存在,则直接展示添加的子元素
+				this.exist() && child.appendTo(this.getId());
 			} else {
 				var td = new core.html.element.viewer.Td();
 				td.add(child);
@@ -195,6 +203,17 @@ core.html.element.viewer.Tr = (function() {
 		}
 
 		return result;
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $tr = $("#" + this.getId());
+		return ($tr.length !== 0);
 	};
 
 	/**

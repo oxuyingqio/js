@@ -72,6 +72,19 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
+	};
+
+	/**
 	 * 展示元素
 	 * 
 	 * @returns
@@ -85,13 +98,7 @@ core.html.element.viewer.Button = (function() {
 		// 配置项
 		var config = this.getConfig();
 
-		// 不存在则添加,存在则展示
-		if (button.exist(id, config)) {
-			button.show(id, config);
-		} else {
-			$("body").append(this.convertHtml());
-			this.dealHtml();
-		}
+		button.show(id, config);
 	};
 
 	/**
@@ -153,6 +160,23 @@ core.html.element.viewer.Button = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		// 获取按钮
+		var button = this.getButton();
+		// ID
+		var id = this.getId();
+		// 配置项
+		var config = this.getConfig();
+
+		button.exist(id, config);
 	};
 
 	/**
