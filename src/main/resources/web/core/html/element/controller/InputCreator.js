@@ -21,48 +21,48 @@ core.html.element.controller.InputCreator = {
 		var input;
 
 		switch (type) {
-		// 基础Text输入框
 		case core.html.element.model.InputType.text:
+			// 基础Text输入框
 			input = core.html.element.viewer.input.Text.getInput();
 			break;
-		// EasyUI Combobox输入框
 		case core.html.element.model.InputType.easyui.combobox:
+			// EasyUI Combobox输入框
 			input = core.html.element.viewer.input.easyui.Combobox.getInput();
 			break;
-		// EasyUI Datebox输入框
 		case core.html.element.model.InputType.easyui.datebox:
+			// EasyUI Datebox输入框
 			input = core.html.element.viewer.input.easyui.Datebox.getInput();
 			break;
-		// EasyUI Datetimebox输入框
 		case core.html.element.model.InputType.easyui.datetimebox:
+			// EasyUI Datetimebox输入框
 			input = core.html.element.viewer.input.easyui.Datetimebox.getInput();
 			break;
-		// EasyUI Filebox输入框
 		case core.html.element.model.InputType.easyui.filebox:
+			// EasyUI Filebox输入框
 			input = core.html.element.viewer.input.easyui.Filebox.getInput();
 			break;
-		// EasyUI Numberbox输入框
 		case core.html.element.model.InputType.easyui.numberbox:
+			// EasyUI Numberbox输入框
 			input = core.html.element.viewer.input.easyui.Numberbox.getInput();
 			break;
-		// EasyUI Numberspinner输入框
 		case core.html.element.model.InputType.easyui.numberspinner:
+			// EasyUI Numberspinner输入框
 			input = core.html.element.viewer.input.easyui.Numberspinner.getInput();
 			break;
-		// EasyUI Searchbox输入框
 		case core.html.element.model.InputType.easyui.searchbox:
+			// EasyUI Searchbox输入框
 			input = core.html.element.viewer.input.easyui.Searchbox.getInput();
 			break;
-		// EasyUI Slider输入框
 		case core.html.element.model.InputType.easyui.slider:
+			// EasyUI Slider输入框
 			input = core.html.element.viewer.input.easyui.Slider.getInput();
 			break;
-		// EasyUI Textbox输入框
 		case core.html.element.model.InputType.easyui.textbox:
+			// EasyUI Textbox输入框
 			input = core.html.element.viewer.input.easyui.Textbox.getInput();
 			break;
-		// EasyUI Timespinner输入框
 		case core.html.element.model.InputType.easyui.timespinner:
+			// EasyUI Timespinner输入框
 			input = core.html.element.viewer.input.easyui.Timespinner.getInput();
 			break;
 		default:

@@ -34,6 +34,8 @@ core.log.controller.outputor.Popup = (function() {
 
 		/**
 		 * 获取输出者 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.log.model.Outputor}
 		 */
 		getOutputor : function() {
 

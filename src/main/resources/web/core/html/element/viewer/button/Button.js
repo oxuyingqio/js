@@ -114,7 +114,6 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	Constructor.prototype.dealHtml = function(id, config) {
 
-		core.log.Logger.getLogger().info("处理了按钮" + id);
 	};
 
 	return {

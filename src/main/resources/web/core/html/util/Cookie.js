@@ -50,7 +50,7 @@ core.html.util.Cookie = (function() {
 	Constructor.prototype.set = function(name, value, expiredays) {
 
 		// 过期天数不存在,则默认7天
-		var day = expiredays === null ? 7 : expiredays;
+		var day = expiredays === undefined ? 7 : expiredays;
 		// 当前时间
 		var exp = new Date();
 		// 设置过期时间
@@ -80,6 +80,8 @@ core.html.util.Cookie = (function() {
 
 		/**
 		 * 获取cookie操作者 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.html.util.Cookie}
 		 */
 		getCookie : function() {
 

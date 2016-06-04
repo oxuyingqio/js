@@ -169,8 +169,6 @@ core.html.element.viewer.Label = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-
-		core.log.Logger.getLogger().info("处理了标签:" + this.getId());
 	};
 
 	/**

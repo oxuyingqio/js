@@ -21,12 +21,12 @@ core.html.element.controller.ButtonCreator = {
 		var button;
 
 		switch (type) {
-		// 基础Button按钮
 		case core.html.element.model.ButtonType.button:
+			// 基础Button按钮
 			button = core.html.element.viewer.button.Button.getButton();
 			break;
-		// EasyUI Linkbutton按钮
 		case core.html.element.model.ButtonType.easyui.linkbutton:
+			// EasyUI Linkbutton按钮
 			button = core.html.element.viewer.button.easyui.Linkbutton.getButton();
 			break;
 		default:

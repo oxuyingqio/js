@@ -121,11 +121,11 @@ core.html.element.viewer.Div = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -135,13 +135,13 @@ core.html.element.viewer.Div = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};

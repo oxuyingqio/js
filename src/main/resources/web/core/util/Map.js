@@ -40,9 +40,9 @@ core.util.Map = function() {
 	 *            键
 	 * @returns {Boolean}
 	 */
-	this.containsKey = function(_key) {
+	this.containsKey = function(key) {
 
-		return (elements[_key] != undefined);
+		return (elements[key] !== undefined);
 	};
 
 	/**
@@ -52,11 +52,11 @@ core.util.Map = function() {
 	 *            值
 	 * @returns {Boolean}
 	 */
-	this.containsValue = function(_value) {
+	this.containsValue = function(value) {
 
 		for (key in elements) {
 
-			if (elements[key] === _value) {
+			if (elements[key] === value) {
 				return true;
 			}
 		}
@@ -71,9 +71,9 @@ core.util.Map = function() {
 	 *            键
 	 * @returns {Object}
 	 */
-	this.get = function(_key) {
+	this.get = function(key) {
 
-		return elements[_key];
+		return elements[key];
 	};
 
 	/**
@@ -85,13 +85,11 @@ core.util.Map = function() {
 	 *            值
 	 * @returns
 	 */
-	this.put = function(_key, _value) {
+	this.put = function(key, value) {
 
-		if (!this.containsKey(_key)) {
-			length++;
-		}
+		!this.containsKey(key) && length++;
 
-		elements[_key] = _value;
+		elements[key] = value;
 	};
 
 	/**
@@ -101,9 +99,9 @@ core.util.Map = function() {
 	 *            键
 	 * @returns
 	 */
-	this.remove = function(_key) {
+	this.remove = function(key) {
 
-		delete elements[_key];
+		delete elements[key];
 	};
 
 	/**
