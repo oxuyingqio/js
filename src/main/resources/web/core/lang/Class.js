@@ -32,7 +32,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 	// 中间函数
 	var Middleware = function() {
 
-	}
+	};
 	// 中间函数指向父类
 	Middleware.prototype = SuperClass.prototype;
 	// 子类指向中间函数

@@ -56,11 +56,11 @@ core.lang.Interface.ensureImplements = function(object) {
 	for (var i = 1, length = arguments.length; i < length; i++) {
 
 		// 获取实现的接口对象
-		var interface = arguments[i];
+		var _interface = arguments[i];
 
-		if (interface) {
+		if (_interface) {
 			// 检查接口对象是否继承Interface对象
-			if (interface.constructor !== core.lang.Interface) {
+			if (_interface.constructor !== core.lang.Interface) {
 				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
 			}
 		} else {
@@ -68,14 +68,14 @@ core.lang.Interface.ensureImplements = function(object) {
 		}
 
 		// 遍历接口方法
-		for (var j = 0, jLength = interface.methods.length; j < jLength; j++) {
+		for (var j = 0, jLength = _interface.methods.length; j < jLength; j++) {
 
 			// 获取接口方法
-			var method = interface.methods[j];
+			var method = _interface.methods[j];
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
-				throw "core.lang.Interface.ensureImplements:对象异常.接口" + interface.name + "(" + method + ")方法未实现";
+				throw "core.lang.Interface.ensureImplements:对象异常.接口" + _interface.name + "(" + method + ")方法未实现";
 			}
 		}
 	}

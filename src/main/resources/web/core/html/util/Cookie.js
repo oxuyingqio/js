@@ -29,10 +29,11 @@ core.html.util.Cookie = (function() {
 
 		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
-		if (arr = document.cookie.match(reg))
+		if (arr = document.cookie.match(reg)) {
 			return (arr[2]);
-		else
+		} else {
 			return null;
+		}
 	};
 
 	/**
@@ -51,7 +52,7 @@ core.html.util.Cookie = (function() {
 		// 过期天数不存在,则默认7天
 		var day = expiredays === null ? 7 : expiredays;
 		// 当前时间
-		var exp = new Date()
+		var exp = new Date();
 		// 设置过期时间
 		exp.setDate(exp.getDate() + day * 24 * 60 * 60 * 1000);
 		// 设置cookie
@@ -70,8 +71,9 @@ core.html.util.Cookie = (function() {
 		var exp = new Date();
 		exp.setTime(exp.getTime() - 1);
 		var cval = getCookie(name);
-		if (cval != null)
+		if (cval !== null) {
 			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+		}
 	};
 
 	return {

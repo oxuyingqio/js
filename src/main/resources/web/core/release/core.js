@@ -381,7 +381,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 	// 中间函数
 	var Middleware = function() {
 
-	}
+	};
 	// 中间函数指向父类
 	Middleware.prototype = SuperClass.prototype;
 	// 子类指向中间函数
@@ -453,11 +453,11 @@ core.lang.Interface.ensureImplements = function(object) {
 	for (var i = 1, length = arguments.length; i < length; i++) {
 
 		// 获取实现的接口对象
-		var interface = arguments[i];
+		var _interface = arguments[i];
 
-		if (interface) {
+		if (_interface) {
 			// 检查接口对象是否继承Interface对象
-			if (interface.constructor !== core.lang.Interface) {
+			if (_interface.constructor !== core.lang.Interface) {
 				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
 			}
 		} else {
@@ -465,14 +465,14 @@ core.lang.Interface.ensureImplements = function(object) {
 		}
 
 		// 遍历接口方法
-		for (var j = 0, jLength = interface.methods.length; j < jLength; j++) {
+		for (var j = 0, jLength = _interface.methods.length; j < jLength; j++) {
 
 			// 获取接口方法
-			var method = interface.methods[j];
+			var method = _interface.methods[j];
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
-				throw "core.lang.Interface.ensureImplements:对象异常.接口" + interface.name + "(" + method + ")方法未实现";
+				throw "core.lang.Interface.ensureImplements:对象异常.接口" + _interface.name + "(" + method + ")方法未实现";
 			}
 		}
 	}
@@ -5570,10 +5570,11 @@ core.html.util.Cookie = (function() {
 
 		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
-		if (arr = document.cookie.match(reg))
+		if (arr = document.cookie.match(reg)) {
 			return (arr[2]);
-		else
+		} else {
 			return null;
+		}
 	};
 
 	/**
@@ -5592,7 +5593,7 @@ core.html.util.Cookie = (function() {
 		// 过期天数不存在,则默认7天
 		var day = expiredays === null ? 7 : expiredays;
 		// 当前时间
-		var exp = new Date()
+		var exp = new Date();
 		// 设置过期时间
 		exp.setDate(exp.getDate() + day * 24 * 60 * 60 * 1000);
 		// 设置cookie
@@ -5611,8 +5612,9 @@ core.html.util.Cookie = (function() {
 		var exp = new Date();
 		exp.setTime(exp.getTime() - 1);
 		var cval = getCookie(name);
-		if (cval != null)
+		if (cval !== null) {
 			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+		}
 	};
 
 	return {
