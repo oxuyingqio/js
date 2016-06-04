@@ -519,9 +519,9 @@ core.util.Map = function() {
 	 *            键
 	 * @returns {Boolean}
 	 */
-	this.containsKey = function(_key) {
+	this.containsKey = function(key) {
 
-		return (elements[_key] != undefined);
+		return (elements[key] !== undefined);
 	};
 
 	/**
@@ -531,11 +531,11 @@ core.util.Map = function() {
 	 *            值
 	 * @returns {Boolean}
 	 */
-	this.containsValue = function(_value) {
+	this.containsValue = function(value) {
 
 		for (key in elements) {
 
-			if (elements[key] === _value) {
+			if (elements[key] === value) {
 				return true;
 			}
 		}
@@ -550,9 +550,9 @@ core.util.Map = function() {
 	 *            键
 	 * @returns {Object}
 	 */
-	this.get = function(_key) {
+	this.get = function(key) {
 
-		return elements[_key];
+		return elements[key];
 	};
 
 	/**
@@ -564,13 +564,11 @@ core.util.Map = function() {
 	 *            值
 	 * @returns
 	 */
-	this.put = function(_key, _value) {
+	this.put = function(key, value) {
 
-		if (!this.containsKey(_key)) {
-			length++;
-		}
+		!this.containsKey(key) && length++;
 
-		elements[_key] = _value;
+		elements[key] = value;
 	};
 
 	/**
@@ -580,9 +578,9 @@ core.util.Map = function() {
 	 *            键
 	 * @returns
 	 */
-	this.remove = function(_key) {
+	this.remove = function(key) {
 
-		delete elements[_key];
+		delete elements[key];
 	};
 
 	/**
@@ -685,6 +683,8 @@ core.log.Logger = (function() {
 
 		/**
 		 * 获取日志管理者 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.log.Logger}
 		 */
 		getLogger : function() {
 
@@ -746,6 +746,8 @@ core.log.controller.FormatConvertor = (function() {
 
 		/**
 		 * 获取转换器 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.log.controller.FormatConvertor}
 		 */
 		getConvertor : function() {
 
@@ -833,6 +835,8 @@ core.log.controller.outputor.Console = (function() {
 
 		/**
 		 * 获取输出者 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.log.model.Outputor}
 		 */
 		getOutputor : function() {
 
@@ -881,6 +885,8 @@ core.log.controller.outputor.Popup = (function() {
 
 		/**
 		 * 获取输出者 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.log.model.Outputor}
 		 */
 		getOutputor : function() {
 
@@ -1103,12 +1109,12 @@ core.html.element.controller.ButtonCreator = {
 		var button;
 
 		switch (type) {
-		// 基础Button按钮
 		case core.html.element.model.ButtonType.button:
+			// 基础Button按钮
 			button = core.html.element.viewer.button.Button.getButton();
 			break;
-		// EasyUI Linkbutton按钮
 		case core.html.element.model.ButtonType.easyui.linkbutton:
+			// EasyUI Linkbutton按钮
 			button = core.html.element.viewer.button.easyui.Linkbutton.getButton();
 			break;
 		default:
@@ -1144,48 +1150,48 @@ core.html.element.controller.InputCreator = {
 		var input;
 
 		switch (type) {
-		// 基础Text输入框
 		case core.html.element.model.InputType.text:
+			// 基础Text输入框
 			input = core.html.element.viewer.input.Text.getInput();
 			break;
-		// EasyUI Combobox输入框
 		case core.html.element.model.InputType.easyui.combobox:
+			// EasyUI Combobox输入框
 			input = core.html.element.viewer.input.easyui.Combobox.getInput();
 			break;
-		// EasyUI Datebox输入框
 		case core.html.element.model.InputType.easyui.datebox:
+			// EasyUI Datebox输入框
 			input = core.html.element.viewer.input.easyui.Datebox.getInput();
 			break;
-		// EasyUI Datetimebox输入框
 		case core.html.element.model.InputType.easyui.datetimebox:
+			// EasyUI Datetimebox输入框
 			input = core.html.element.viewer.input.easyui.Datetimebox.getInput();
 			break;
-		// EasyUI Filebox输入框
 		case core.html.element.model.InputType.easyui.filebox:
+			// EasyUI Filebox输入框
 			input = core.html.element.viewer.input.easyui.Filebox.getInput();
 			break;
-		// EasyUI Numberbox输入框
 		case core.html.element.model.InputType.easyui.numberbox:
+			// EasyUI Numberbox输入框
 			input = core.html.element.viewer.input.easyui.Numberbox.getInput();
 			break;
-		// EasyUI Numberspinner输入框
 		case core.html.element.model.InputType.easyui.numberspinner:
+			// EasyUI Numberspinner输入框
 			input = core.html.element.viewer.input.easyui.Numberspinner.getInput();
 			break;
-		// EasyUI Searchbox输入框
 		case core.html.element.model.InputType.easyui.searchbox:
+			// EasyUI Searchbox输入框
 			input = core.html.element.viewer.input.easyui.Searchbox.getInput();
 			break;
-		// EasyUI Slider输入框
 		case core.html.element.model.InputType.easyui.slider:
+			// EasyUI Slider输入框
 			input = core.html.element.viewer.input.easyui.Slider.getInput();
 			break;
-		// EasyUI Textbox输入框
 		case core.html.element.model.InputType.easyui.textbox:
+			// EasyUI Textbox输入框
 			input = core.html.element.viewer.input.easyui.Textbox.getInput();
 			break;
-		// EasyUI Timespinner输入框
 		case core.html.element.model.InputType.easyui.timespinner:
+			// EasyUI Timespinner输入框
 			input = core.html.element.viewer.input.easyui.Timespinner.getInput();
 			break;
 		default:
@@ -1617,11 +1623,11 @@ core.html.element.viewer.Div = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -1631,13 +1637,13 @@ core.html.element.viewer.Div = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -1873,11 +1879,11 @@ core.html.element.viewer.Fieldset = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -1887,13 +1893,13 @@ core.html.element.viewer.Fieldset = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -2138,11 +2144,11 @@ core.html.element.viewer.Form = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -2152,13 +2158,13 @@ core.html.element.viewer.Form = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -2281,8 +2287,6 @@ core.html.element.viewer.Frameset = (function() {
 	 * 
 	 * @param id
 	 *            元素ID
-	 * @param legend
-	 *            legend
 	 */
 	var Constructor = function(_id) {
 
@@ -2408,11 +2412,11 @@ core.html.element.viewer.Frameset = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -2422,13 +2426,13 @@ core.html.element.viewer.Frameset = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -2901,8 +2905,6 @@ core.html.element.viewer.Label = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-
-		core.log.Logger.getLogger().info("处理了标签:" + this.getId());
 	};
 
 	/**
@@ -3047,11 +3049,11 @@ core.html.element.viewer.Table = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -3061,13 +3063,13 @@ core.html.element.viewer.Table = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -3299,11 +3301,11 @@ core.html.element.viewer.Td = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -3313,13 +3315,13 @@ core.html.element.viewer.Td = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -3552,11 +3554,11 @@ core.html.element.viewer.Tr = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param child
-	 *            子元素
+	 * @param removeChild
+	 *            待移除的子元素
 	 * @returns
 	 */
-	Constructor.prototype.remove = function(_child) {
+	Constructor.prototype.remove = function(removeChild) {
 
 		// 获取子元素集合
 		var children = this.getChildren();
@@ -3566,13 +3568,13 @@ core.html.element.viewer.Tr = (function() {
 			var child = children[i];
 
 			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === _child) {
+			if (child === removeChild) {
 				// 删除子元素
 				this.getElements().remove(child);
 				// 调用子元素销毁方法
 				child.destroy();
 			} else {
-				child.remove(_child);
+				child.remove(removeChild);
 			}
 		}
 	};
@@ -3787,7 +3789,6 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	Constructor.prototype.dealHtml = function(id, config) {
 
-		core.log.Logger.getLogger().info("处理了按钮" + id);
 	};
 
 	return {
@@ -5591,7 +5592,7 @@ core.html.util.Cookie = (function() {
 	Constructor.prototype.set = function(name, value, expiredays) {
 
 		// 过期天数不存在,则默认7天
-		var day = expiredays === null ? 7 : expiredays;
+		var day = expiredays === undefined ? 7 : expiredays;
 		// 当前时间
 		var exp = new Date();
 		// 设置过期时间
@@ -5621,6 +5622,8 @@ core.html.util.Cookie = (function() {
 
 		/**
 		 * 获取cookie操作者 懒加载,且仅创建一个
+		 * 
+		 * @returns {core.html.util.Cookie}
 		 */
 		getCookie : function() {
 
