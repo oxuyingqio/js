@@ -1552,6 +1552,8 @@ core.html.element.viewer.Div = (function() {
 
 		// ID
 		var id = _id || "coreHtmlElementViewerDiv" + count;
+		// class
+		var clazz = "";
 
 		// 子元素
 		var elements = [];
@@ -1567,6 +1569,14 @@ core.html.element.viewer.Div = (function() {
 
 		this.setId = function(_id) {
 			id = _id;
+		};
+
+		this.getClass = function() {
+			return clazz;
+		};
+
+		this.setClass = function(_clazz) {
+			clazz = _clazz;
 		};
 
 		this.getElements = function() {
@@ -1758,6 +1768,8 @@ core.html.element.viewer.Div = (function() {
 		var html = [];
 		html.push("<div id='");
 		html.push(this.getId());
+		html.push("' class='");
+		html.push(this.getClass());
 		html.push("'>");
 
 		// 获取子元素集合
