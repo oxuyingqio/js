@@ -1,103 +1,104 @@
 /**
  * Button
  * 
- * 基础Button按钮
+ * 基础按钮
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.button.Button = (function() {
 
-	// 按钮
-	var button;
-
 	/**
 	 * 构造函数
 	 */
-	var Constructor = function() {
+	var Constructor = function(_id) {
 
+		// 继承按钮抽象类
+		core.html.element.viewer.button.Button.superClass.constructor.call(this, _id);
+
+		// text
+		var text = "";
+
+		this.getText = function() {
+			return text;
+		};
+
+		this.setText = function(_text) {
+			text = _text;
+		};
 	};
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
 
 	/**
-	 * 元素是否存在
+	 * 添加元素到
 	 * 
 	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            添加到的位置
+	 * @returns
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	Constructor.prototype.appendTo = function(id) {
 
-		var $button = $("#" + id);
-		return ($button.length !== 0);
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $button = $("#" + this.getId());
+		return ($button.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 按钮描述
-		var text = config.text || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<button id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("'>");
-		html.push(text);
+		html.push(this.getText());
 		html.push("</button>");
 
 		return html.join("");
@@ -106,31 +107,11 @@ core.html.element.viewer.button.Button = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
 	};
 
-	return {
-
-		/**
-		 * 获取按钮 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Button}
-		 */
-		getButton : function() {
-
-			// 不存在,则创建
-			if (!button) {
-				button = new Constructor();
-			}
-
-			return button;
-		}
-	};
+	return Constructor;
 })();

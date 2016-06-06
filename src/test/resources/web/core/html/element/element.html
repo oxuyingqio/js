@@ -21,6 +21,7 @@
 
 <script type="text/javascript" src="/~/core/package.js"></script>
 
+<script type="text/javascript" src="/~/core/lang/Class.js"></script>
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 
 <script type="text/javascript" src="/~/core/log/Logger.js"></script>
@@ -66,12 +67,9 @@
 <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Timespinner.js"></script>
 <script type="text/javascript">
 	$(function() {
-		var button1 = new core.html.element.viewer.Button();
-		button1.setConfig({
-			text : "button"
-		});
-		var button2 = new core.html.element.viewer.Button("button2",
-				core.html.element.model.ButtonType.easyui.linkbutton);
+		var button1 = new core.html.element.viewer.button.Button();
+		button1.setText("111")
+		var button2 = new core.html.element.viewer.button.Button("button2");
 
 		var buttonDiv = new core.html.element.viewer.Div();
 		buttonDiv.add(button1, button2);
@@ -111,7 +109,7 @@
 
 		var form = new core.html.element.viewer.Form("form");
 		form.add(div);
-		form.show();
+		form.appendTo("body");
 	});
 </script>
 
