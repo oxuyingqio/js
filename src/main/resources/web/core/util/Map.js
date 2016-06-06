@@ -8,9 +8,9 @@
 
 core.util.Map = function() {
 
-	// 条目
+	// 元素
 	var elements = {};
-	// 条目数
+	// 元素数
 	var length = 0;
 
 	/**
