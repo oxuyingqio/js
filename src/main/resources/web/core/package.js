@@ -17,8 +17,6 @@
 
 			// 元素包
 			element : {
-				// 控制包
-				controller : {},
 				// 模型包
 				model : {},
 				// 展示包
