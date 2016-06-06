@@ -147,6 +147,16 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return [];
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @returns {Array}
@@ -205,16 +215,6 @@ core.html.element.viewer.Input = (function() {
 		var config = this.getConfig();
 
 		input.dealHtml(id, config);
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
 	};
 
 	return Constructor;

@@ -13,7 +13,8 @@
  * @method destroy 销毁元素
  * @method add 添加子元素
  * @method remove 移除子元素
+ * @method getChildren 获取子元素集合
  * @method find 检索子元素集合,包含子元素的子元素
  */
 core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "appendTo", "show", "hide",
-		"destroy", "add", "remove", "find" ]);
+		"destroy", "add", "remove", "getChildren", "find" ]);

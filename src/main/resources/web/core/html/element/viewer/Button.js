@@ -153,6 +153,16 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return [];
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @returns {Array}
@@ -211,16 +221,6 @@ core.html.element.viewer.Button = (function() {
 		var config = this.getConfig();
 
 		button.dealHtml(id, config);
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
 	};
 
 	return Constructor;

@@ -167,6 +167,16 @@ core.html.element.viewer.Fieldset = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -262,16 +272,6 @@ core.html.element.viewer.Fieldset = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
