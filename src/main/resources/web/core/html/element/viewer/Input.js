@@ -3,7 +3,7 @@
  * 
  * 输入框
  * 
- * 类
+ * 抽象类
  */
 
 core.html.element.viewer.Input = (function() {
@@ -13,23 +13,15 @@ core.html.element.viewer.Input = (function() {
 	 * 
 	 * @param id
 	 *            输入框ID
-	 * @param type
-	 *            输入框类型
+	 * @param name
+	 *            输入框名称
 	 */
-	var Constructor = function(_id, _type) {
+	var Constructor = function(_id, _name) {
 
 		// ID
 		var id = _id;
-		// 类型
-		var type = _type || core.html.element.model.InputType.text;
-		// 配置项
-		var config = {};
-
-		// 输入框
-		var input = core.html.element.controller.InputCreator.getInput(type);
-		if (input === undefined) {
-			throw "core.html.element.viewer.Input:构造参数异常.类型(" + type + ")暂不支持";
-		}
+		// name
+		var name = _name || id;
 
 		/**
 		 * 获取元素ID
@@ -44,89 +36,13 @@ core.html.element.viewer.Input = (function() {
 			id = _id;
 		};
 
-		this.getType = function() {
-			return type;
+		this.getName = function() {
+			return name;
 		};
 
-		this.setType = function(_type) {
-			type = _type;
-		};
-
-		this.getConfig = function() {
-			return config;
-		};
-
-		this.setConfig = function(_config) {
-			config = _config;
-		};
-
-		this.getInput = function() {
-			return input;
-		};
-	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.show(id, config);
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.hide(id, config);
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.destroy(id, config);
+		this.setName = function(_name) {
+			name = _name;
+		}
 	};
 
 	/**
@@ -164,57 +80,6 @@ core.html.element.viewer.Input = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.exist(id, config);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		return input.convertHtml(id, config);
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.dealHtml(id, config);
 	};
 
 	return Constructor;

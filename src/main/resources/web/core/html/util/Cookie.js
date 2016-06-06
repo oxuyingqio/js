@@ -81,7 +81,7 @@ core.html.util.Cookie = (function() {
 		/**
 		 * 获取cookie操作者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.html.util.Cookie}
+		 * @returns {core.html.util.Cookie.Constructor}
 		 */
 		getCookie : function() {
 

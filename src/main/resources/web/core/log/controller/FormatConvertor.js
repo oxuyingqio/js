@@ -48,7 +48,7 @@ core.log.controller.FormatConvertor = (function() {
 		/**
 		 * 获取转换器 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.controller.FormatConvertor}
+		 * @returns {core.log.controller.FormatConvertor.Constructor}
 		 */
 		getConvertor : function() {
 

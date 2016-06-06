@@ -89,7 +89,7 @@ core.log.Logger = (function() {
 		/**
 		 * 获取日志管理者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.Logger}
+		 * @returns {core.log.Logger.Constructor}
 		 */
 		getLogger : function() {
 

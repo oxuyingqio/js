@@ -88,7 +88,6 @@ core.util.Map = function() {
 	this.put = function(key, value) {
 
 		!this.containsKey(key) && length++;
-
 		elements[key] = value;
 	};
 
@@ -101,6 +100,7 @@ core.util.Map = function() {
 	 */
 	this.remove = function(key) {
 
+		this.containsKey(key) && length--;
 		delete elements[key];
 	};
 

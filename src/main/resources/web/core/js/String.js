@@ -35,7 +35,6 @@ String.prototype.toBinaryString = function() {
 
 		// 获取对应字符的2进制
 		var bs = this.charCodeAt(i).toString(2);
-
 		// 不足8位的补0
 		for (var j = bs.length; j < 8; j++) {
 
@@ -64,7 +63,6 @@ String.prototype.toHexString = function() {
 
 		// 获取对应字符的16进制
 		var hs = this.charCodeAt(i).toString(16);
-
 		// 不足2位的补0
 		for (var j = hs.length; j < 2; j++) {
 

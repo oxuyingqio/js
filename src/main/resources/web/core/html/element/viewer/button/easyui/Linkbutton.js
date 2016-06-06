@@ -3,96 +3,104 @@
  * 
  * EasyUI Linkbutton按钮
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.button.easyui.Linkbutton = (function() {
 
-	// 按钮
-	var button;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id) {
 
-		var $button = $("#" + id);
-		return ($button.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.button.easyui.Linkbutton.superClass.constructor.call(this, id);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承按钮抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $button = $("#" + this.getId());
+		return ($button.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<a id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' />");
 
 		return html.join("");
@@ -101,37 +109,13 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $button = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$button.linkbutton(easyui);
+		var $button = $("#" + this.getId());
+		$button.linkbutton(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取按钮 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Button}
-		 */
-		getButton : function() {
-
-			// 不存在,则创建
-			if (!button) {
-				button = new Constructor();
-			}
-
-			return button;
-		}
-	};
+	return Constructor;
 })();

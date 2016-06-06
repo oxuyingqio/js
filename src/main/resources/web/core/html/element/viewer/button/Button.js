@@ -10,11 +10,14 @@ core.html.element.viewer.button.Button = (function() {
 
 	/**
 	 * 构造函数
+	 * 
+	 * @param id
+	 *            元素ID
 	 */
-	var Constructor = function(_id) {
+	var Constructor = function(id) {
 
-		// 继承按钮抽象类
-		core.html.element.viewer.button.Button.superClass.constructor.call(this, _id);
+		// 调用父类构造
+		core.html.element.viewer.button.Button.superClass.constructor.call(this, id);
 
 		// text
 		var text = "";
@@ -27,6 +30,7 @@ core.html.element.viewer.button.Button = (function() {
 			text = _text;
 		};
 	};
+	// 继承按钮抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
 
 	/**

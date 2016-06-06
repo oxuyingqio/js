@@ -39,7 +39,6 @@ Array.prototype.contains = function(obj) {
 Array.prototype.indexOf = function(obj) {
 
 	var length = this.length;
-
 	if (length != 0) {
 		for (var index = 0; index < length; index++) {
 

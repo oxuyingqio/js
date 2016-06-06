@@ -35,7 +35,7 @@ core.log.controller.outputor.Console = (function() {
 		/**
 		 * 获取输出者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.model.Outputor}
+		 * @returns {core.log.model.Outputor.Constructor}
 		 */
 		getOutputor : function() {
 

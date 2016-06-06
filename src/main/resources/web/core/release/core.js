@@ -39,7 +39,6 @@ Array.prototype.contains = function(obj) {
 Array.prototype.indexOf = function(obj) {
 
 	var length = this.length;
-
 	if (length != 0) {
 		for (var index = 0; index < length; index++) {
 
@@ -234,7 +233,6 @@ String.prototype.toBinaryString = function() {
 
 		// 获取对应字符的2进制
 		var bs = this.charCodeAt(i).toString(2);
-
 		// 不足8位的补0
 		for (var j = bs.length; j < 8; j++) {
 
@@ -263,7 +261,6 @@ String.prototype.toHexString = function() {
 
 		// 获取对应字符的16进制
 		var hs = this.charCodeAt(i).toString(16);
-
 		// 不足2位的补0
 		for (var j = hs.length; j < 2; j++) {
 
@@ -287,8 +284,6 @@ String.prototype.toHexString = function() {
 
 	// 核心包
 	core = {
-		// 示例包
-		example : {},
 
 		// HTML 包
 		html : {
@@ -301,7 +296,7 @@ String.prototype.toHexString = function() {
 				controller : {},
 				// 模型包
 				model : {},
-				// 展示实现包
+				// 展示包
 				viewer : {
 					// 按钮实现包
 					button : {
@@ -487,9 +482,9 @@ core.lang.Interface.ensureImplements = function(object) {
 
 core.util.Map = function() {
 
-	// 条目
+	// 元素
 	var elements = {};
-	// 条目数
+	// 元素数
 	var length = 0;
 
 	/**
@@ -567,7 +562,6 @@ core.util.Map = function() {
 	this.put = function(key, value) {
 
 		!this.containsKey(key) && length++;
-
 		elements[key] = value;
 	};
 
@@ -580,6 +574,7 @@ core.util.Map = function() {
 	 */
 	this.remove = function(key) {
 
+		this.containsKey(key) && length--;
 		delete elements[key];
 	};
 
@@ -684,7 +679,7 @@ core.log.Logger = (function() {
 		/**
 		 * 获取日志管理者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.Logger}
+		 * @returns {core.log.Logger.Constructor}
 		 */
 		getLogger : function() {
 
@@ -747,7 +742,7 @@ core.log.controller.FormatConvertor = (function() {
 		/**
 		 * 获取转换器 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.controller.FormatConvertor}
+		 * @returns {core.log.controller.FormatConvertor.Constructor}
 		 */
 		getConvertor : function() {
 
@@ -836,7 +831,7 @@ core.log.controller.outputor.Console = (function() {
 		/**
 		 * 获取输出者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.model.Outputor}
+		 * @returns {core.log.model.Outputor.Constructor}
 		 */
 		getOutputor : function() {
 
@@ -886,7 +881,7 @@ core.log.controller.outputor.Popup = (function() {
 		/**
 		 * 获取输出者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.log.model.Outputor}
+		 * @returns {core.log.model.Outputor.Constructor}
 		 */
 		getOutputor : function() {
 
@@ -1304,7 +1299,7 @@ core.html.element.model.InputType = {
  * 
  * 按钮
  * 
- * 类
+ * 抽象类
  */
 
 core.html.element.viewer.Button = (function() {
@@ -1317,26 +1312,14 @@ core.html.element.viewer.Button = (function() {
 	 * 
 	 * @param id
 	 *            元素ID
-	 * @param type
-	 *            按钮类型
 	 */
-	var Constructor = function(_id, _type) {
+	var Constructor = function(_id) {
 
 		// 对象个数+1
 		count++;
 
 		// ID
 		var id = _id || "coreHtmlElementViewerButton" + count;
-		// 类型
-		var type = _type || core.html.element.model.ButtonType.button;
-		// 配置项
-		var config = {};
-
-		// 按钮
-		var button = core.html.element.controller.ButtonCreator.getButton(type);
-		if (button === undefined) {
-			throw "core.html.element.viewer.Button:构造参数异常.类型(" + type + ")暂不支持";
-		}
 
 		/**
 		 * 获取元素ID
@@ -1350,90 +1333,6 @@ core.html.element.viewer.Button = (function() {
 		this.setId = function(_id) {
 			id = _id;
 		};
-
-		this.getType = function() {
-			return type;
-		};
-
-		this.setType = function(_type) {
-			type = _type;
-		};
-
-		this.getConfig = function() {
-			return config;
-		};
-
-		this.setConfig = function(_config) {
-			config = _config;
-		};
-
-		this.getButton = function() {
-			return button;
-		};
-	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 获取按钮
-		var button = this.getButton();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		button.show(id, config);
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 获取按钮
-		var button = this.getButton();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		button.hide(id, config);
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取按钮
-		var button = this.getButton();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		button.destroy(id, config);
 	};
 
 	/**
@@ -1471,57 +1370,6 @@ core.html.element.viewer.Button = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		// 获取按钮
-		var button = this.getButton();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		button.exist(id, config);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// 获取按钮
-		var button = this.getButton();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		return button.convertHtml(id, config);
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取按钮
-		var button = this.getButton();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		button.dealHtml(id, config);
 	};
 
 	return Constructor;
@@ -2656,7 +2504,7 @@ core.html.element.viewer.Frameset = (function() {
  * 
  * 输入框
  * 
- * 类
+ * 抽象类
  */
 
 core.html.element.viewer.Input = (function() {
@@ -2666,23 +2514,15 @@ core.html.element.viewer.Input = (function() {
 	 * 
 	 * @param id
 	 *            输入框ID
-	 * @param type
-	 *            输入框类型
+	 * @param name
+	 *            输入框名称
 	 */
-	var Constructor = function(_id, _type) {
+	var Constructor = function(_id, _name) {
 
 		// ID
 		var id = _id;
-		// 类型
-		var type = _type || core.html.element.model.InputType.text;
-		// 配置项
-		var config = {};
-
-		// 输入框
-		var input = core.html.element.controller.InputCreator.getInput(type);
-		if (input === undefined) {
-			throw "core.html.element.viewer.Input:构造参数异常.类型(" + type + ")暂不支持";
-		}
+		// name
+		var name = _name || id;
 
 		/**
 		 * 获取元素ID
@@ -2697,89 +2537,13 @@ core.html.element.viewer.Input = (function() {
 			id = _id;
 		};
 
-		this.getType = function() {
-			return type;
+		this.getName = function() {
+			return name;
 		};
 
-		this.setType = function(_type) {
-			type = _type;
-		};
-
-		this.getConfig = function() {
-			return config;
-		};
-
-		this.setConfig = function(_config) {
-			config = _config;
-		};
-
-		this.getInput = function() {
-			return input;
-		};
-	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.show(id, config);
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.hide(id, config);
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.destroy(id, config);
+		this.setName = function(_name) {
+			name = _name;
+		}
 	};
 
 	/**
@@ -2817,57 +2581,6 @@ core.html.element.viewer.Input = (function() {
 	Constructor.prototype.find = function() {
 
 		return [];
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.exist(id, config);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		return input.convertHtml(id, config);
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取输入框
-		var input = this.getInput();
-		// ID
-		var id = this.getId();
-		// 配置项
-		var config = this.getConfig();
-
-		input.dealHtml(id, config);
 	};
 
 	return Constructor;
@@ -3888,103 +3601,108 @@ core.html.element.viewer.Tr = (function() {
 /**
  * Button
  * 
- * 基础Button按钮
+ * 基础按钮
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.button.Button = (function() {
 
-	// 按钮
-	var button;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id) {
 
-		var $button = $("#" + id);
-		return ($button.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.button.Button.superClass.constructor.call(this, id);
+
+		// text
+		var text = "";
+
+		this.getText = function() {
+			return text;
+		};
+
+		this.setText = function(_text) {
+			text = _text;
+		};
+	};
+	// 继承按钮抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $button = $("#" + this.getId());
+		return ($button.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 按钮描述
-		var text = config.text || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<button id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("'>");
-		html.push(text);
+		html.push(this.getText());
 		html.push("</button>");
 
 		return html.join("");
@@ -3993,129 +3711,118 @@ core.html.element.viewer.button.Button = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
 	};
 
-	return {
-
-		/**
-		 * 获取按钮 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Button}
-		 */
-		getButton : function() {
-
-			// 不存在,则创建
-			if (!button) {
-				button = new Constructor();
-			}
-
-			return button;
-		}
-	};
+	return Constructor;
 })();
+
 /**
  * Linkbutton
  * 
  * EasyUI Linkbutton按钮
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.button.easyui.Linkbutton = (function() {
 
-	// 按钮
-	var button;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id) {
 
-		var $button = $("#" + id);
-		return ($button.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.button.easyui.Linkbutton.superClass.constructor.call(this, id);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承按钮抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $button = $("#" + id);
+		var $button = $("#" + this.getId());
 		$button.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $button = $("#" + this.getId());
+		return ($button.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<a id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' />");
 
 		return html.join("");
@@ -4124,140 +3831,112 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            按钮的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $button = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$button.linkbutton(easyui);
+		var $button = $("#" + this.getId());
+		$button.linkbutton(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取按钮 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Button}
-		 */
-		getButton : function() {
-
-			// 不存在,则创建
-			if (!button) {
-				button = new Constructor();
-			}
-
-			return button;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Text
  * 
- * 基础Text输入框
+ * 基础输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.Text = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.Text.superClass.constructor.call(this, id, name);
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -4266,134 +3945,121 @@ core.html.element.viewer.input.Text = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Combobox
  * 
  * EasyUI Combobox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Combobox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Combobox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -4402,140 +4068,123 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.combobox(easyui);
+		var $input = $("#" + this.getId());
+		$input.combobox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Datebox
  * 
  * EasyUI Datebox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Datebox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Datebox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -4544,140 +4193,123 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.datebox(easyui);
+		var $input = $("#" + this.getId());
+		$input.datebox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Datetimebox
  * 
  * EasyUI Datetimebox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Datetimebox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Datetimebox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -4686,140 +4318,123 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.datetimebox(easyui);
+		var $input = $("#" + this.getId());
+		$input.datetimebox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Filebox
  * 
  * EasyUI Filebox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Filebox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Filebox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -4828,140 +4443,123 @@ core.html.element.viewer.input.easyui.Filebox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.filebox(easyui);
+		var $input = $("#" + this.getId());
+		$input.filebox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Numberbox
  * 
  * EasyUI Numberbox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Numberbox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Numberbox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -4970,140 +4568,123 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.numberbox(easyui);
+		var $input = $("#" + this.getId());
+		$input.numberbox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Numberspinner
  * 
  * EasyUI Numberspinner输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Numberspinner = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Numberspinner.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -5112,140 +4693,123 @@ core.html.element.viewer.input.easyui.Numberspinner = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.numberspinner(easyui);
+		var $input = $("#" + this.getId());
+		$input.numberspinner(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Searchbox
  * 
  * EasyUI Searchbox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Searchbox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Searchbox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -5254,140 +4818,123 @@ core.html.element.viewer.input.easyui.Searchbox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.searchbox(easyui);
+		var $input = $("#" + this.getId());
+		$input.searchbox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Slider
  * 
  * EasyUI Slider输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Slider = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Slider.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -5396,140 +4943,123 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.slider(easyui);
+		var $input = $("#" + this.getId());
+		$input.slider(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Textbox
  * 
  * EasyUI Textbox输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Textbox = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -5538,140 +5068,123 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.textbox(easyui);
+		var $input = $("#" + this.getId());
+		$input.textbox(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Timespinner
  * 
  * EasyUI Timespinner输入框
  * 
- * 对象
+ * 类
  */
 
 core.html.element.viewer.input.easyui.Timespinner = (function() {
 
-	// 输入框
-	var input;
-
 	/**
 	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 元素是否存在
 	 * 
 	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
-	 * @returns {Boolean}
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
 	 */
-	Constructor.prototype.exist = function(id, config) {
+	var Constructor = function(id, name) {
 
-		var $input = $("#" + id);
-		return ($input.length !== 0);
+		// 调用父类构造
+		core.html.element.viewer.input.easyui.Timespinner.superClass.constructor.call(this, id, name);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.show = function(id, config) {
+	Constructor.prototype.show = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.show();
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.hide = function(id, config) {
+	Constructor.prototype.hide = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.hide();
 	};
 
 	/**
 	 * 销毁元素
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.destroy = function(id, config) {
+	Constructor.prototype.destroy = function() {
 
-		var $input = $("#" + id);
+		var $input = $("#" + this.getId());
 		$input.remove();
+	};
+
+	/**
+	 * 元素是否存在
+	 * 
+	 * @returns {Boolean}
+	 */
+	Constructor.prototype.exist = function() {
+
+		var $input = $("#" + this.getId());
+		return ($input.length !== 0);
 	};
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns {String}
 	 */
-	Constructor.prototype.convertHtml = function(id, config) {
-
-		// 输入框名称
-		var name = config.name || "";
+	Constructor.prototype.convertHtml = function() {
 
 		// HTML元素
 		var html = [];
 		html.push("<input id='");
-		html.push(id);
+		html.push(this.getId());
 		html.push("' name='");
-		html.push(name);
+		html.push(this.getName());
 		html.push("' />");
 
 		return html.join("");
@@ -5680,39 +5193,15 @@ core.html.element.viewer.input.easyui.Timespinner = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @param id
-	 *            输入框的ID
-	 * @param config
-	 *            配置项
 	 * @returns
 	 */
-	Constructor.prototype.dealHtml = function(id, config) {
+	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + id);
-
-		// 获取EasyUI配置
-		var easyui = config.easyui;
-
-		$input.timespinner(easyui);
+		var $input = $("#" + this.getId());
+		$input.timespinner(this.getEasyui());
 	};
 
-	return {
-
-		/**
-		 * 获取输入框 懒加载,且仅创建一个
-		 * 
-		 * @returns {core.html.element.model.Input}
-		 */
-		getInput : function() {
-
-			// 不存在,则创建
-			if (!input) {
-				input = new Constructor();
-			}
-
-			return input;
-		}
-	};
+	return Constructor;
 })();
 /**
  * Keydown
@@ -5834,7 +5323,7 @@ core.html.util.Cookie = (function() {
 		/**
 		 * 获取cookie操作者 懒加载,且仅创建一个
 		 * 
-		 * @returns {core.html.util.Cookie}
+		 * @returns {core.html.util.Cookie.Constructor}
 		 */
 		getCookie : function() {
 

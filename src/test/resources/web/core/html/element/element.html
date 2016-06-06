@@ -68,35 +68,39 @@
 <script type="text/javascript">
 	$(function() {
 		var button1 = new core.html.element.viewer.button.Button();
-		button1.setText("111")
-		var button2 = new core.html.element.viewer.button.Button("button2");
+		button1.setText("Test Button")
+		var button2 = new core.html.element.viewer.button.easyui.Linkbutton();
+		button2.setEasyui({
+			text : "test2",
+			onClick : function() {
+				alert(123)
+			}
+		});
 
 		var buttonDiv = new core.html.element.viewer.Div();
 		buttonDiv.add(button1, button2);
 		var label1 = new core.html.element.viewer.Label("label1", "标签1");
-		var input1 = new core.html.element.viewer.Input("input1", core.html.element.model.InputType.easyui.combobox);
+		var input1 = new core.html.element.viewer.input.easyui.Combobox("input1", "INPUT1");
 		var label2 = new core.html.element.viewer.Label("label2", "标签2");
-		var input2 = new core.html.element.viewer.Input("input2", core.html.element.model.InputType.easyui.datebox);
+		var input2 = new core.html.element.viewer.input.easyui.Datebox("input2", "INPUT2");
 		var label3 = new core.html.element.viewer.Label("label3", "标签3");
-		var input3 = new core.html.element.viewer.Input("input3", core.html.element.model.InputType.easyui.datetimebox);
+		var input3 = new core.html.element.viewer.input.easyui.Datetimebox("input3", "INPUT3");
 		var label4 = new core.html.element.viewer.Label("label4", "标签4");
-		var input4 = new core.html.element.viewer.Input("input4", core.html.element.model.InputType.easyui.filebox);
+		var input4 = new core.html.element.viewer.input.easyui.Filebox("input4", "INPUT4");
 		var label5 = new core.html.element.viewer.Label("label5", "标签5");
-		var input5 = new core.html.element.viewer.Input("input5", core.html.element.model.InputType.easyui.numberbox);
+		var input5 = new core.html.element.viewer.input.easyui.Numberbox("input5", "INPUT5");
 		var tr1 = new core.html.element.viewer.Tr();
 		tr1.add(label1, input1, label2, input2, label3, input3, label4, input4, label5, input5);
 		var label6 = new core.html.element.viewer.Label("label6", "标签6");
-		var input6 = new core.html.element.viewer.Input("input6",
-				core.html.element.model.InputType.easyui.numberspinner);
+		var input6 = new core.html.element.viewer.input.easyui.Numberspinner("input6", "INPUT6");
 		var label7 = new core.html.element.viewer.Label("label7", "标签7");
-		var input7 = new core.html.element.viewer.Input("input7", core.html.element.model.InputType.easyui.searchbox);
+		var input7 = new core.html.element.viewer.input.easyui.Searchbox("input7", "INPUT7");
 		var label8 = new core.html.element.viewer.Label("label8", "标签8");
-		var input8 = new core.html.element.viewer.Input("input8", core.html.element.model.InputType.easyui.slider);
+		var input8 = new core.html.element.viewer.input.easyui.Slider("input8", "INPUT8");
 		var label9 = new core.html.element.viewer.Label("label9", "标签9");
-		var input9 = new core.html.element.viewer.Input("input9", core.html.element.model.InputType.easyui.textbox);
+		var input9 = new core.html.element.viewer.input.easyui.Textbox("input9", "INPUT9");
 		var label10 = new core.html.element.viewer.Label("label10", "标签10");
-		var input10 = new core.html.element.viewer.Input("input10",
-				core.html.element.model.InputType.easyui.timespinner);
+		var input10 = new core.html.element.viewer.input.easyui.Timespinner("input10", "INPUT10");
 		var tr2 = new core.html.element.viewer.Tr();
 		tr2.add(label6, input6, label7, input7, label8, input8, label9, input9, label10, input10);
 		var table = new core.html.element.viewer.Table();

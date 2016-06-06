@@ -17,7 +17,7 @@ core.html.element.viewer.Button = (function() {
 	 * @param id
 	 *            元素ID
 	 */
-	var Constructor = function(_id, _type) {
+	var Constructor = function(_id) {
 
 		// 对象个数+1
 		count++;
