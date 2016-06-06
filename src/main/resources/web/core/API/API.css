@@ -1,40 +1,34 @@
 .left {
 	float: left;
 	margin: 3px;
-	width: 19%;
+	width: 29%;
 }
 
 .center {
 	float: left;
 	margin: 3px;
-	width: 79%;
+	width: 69%;
 }
 
 .package {
 	margin: 2px;
-	
 	border: 1px solid;
 	overflow: auto;
 	resize: vertical;
-	
 	padding: 5px;
 }
 
 .class {
 	margin: 2px;
-	
 	border: 1px solid;
 	overflow: auto;
 	resize: vertical;
-	
 	padding: 5px;
 }
 
 .desc {
 	margin: 2px;
-	
 	border: 1px solid;
 	overflow: auto;
-	
 	padding: 5px;
 }
