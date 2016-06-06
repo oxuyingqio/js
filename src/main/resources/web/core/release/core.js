@@ -1083,10 +1083,11 @@ core.html.constant.KeyCode = {
  * @method destroy 销毁元素
  * @method add 添加子元素
  * @method remove 移除子元素
+ * @method getChildren 获取子元素集合
  * @method find 检索子元素集合,包含子元素的子元素
  */
 core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "appendTo", "show", "hide",
-		"destroy", "add", "remove", "find" ]);
+		"destroy", "add", "remove", "getChildren", "find" ]);
 /**
  * ButtonCreator
  * 
@@ -1252,10 +1253,9 @@ core.html.element.model.ButtonType = {
  * @method exist 元素是否存在
  * @method convertHtml 转为HTML
  * @method dealHtml 处理HTML
- * @method getChildren 获取子元素集合
  */
 core.html.element.model.ElementProcess = new core.lang.Interface("core.html.element.model.ElementProcess", [ "getId",
-		"convertHtml", "dealHtml", "getChildren" ]);
+		"convertHtml", "dealHtml" ]);
 /**
  * Input
  * 
@@ -1454,6 +1454,16 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return [];
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @returns {Array}
@@ -1512,16 +1522,6 @@ core.html.element.viewer.Button = (function() {
 		var config = this.getConfig();
 
 		button.dealHtml(id, config);
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
 	};
 
 	return Constructor;
@@ -1683,6 +1683,16 @@ core.html.element.viewer.Div = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -1775,16 +1785,6 @@ core.html.element.viewer.Div = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
@@ -1958,6 +1958,16 @@ core.html.element.viewer.Fieldset = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -2053,16 +2063,6 @@ core.html.element.viewer.Fieldset = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
@@ -2242,6 +2242,16 @@ core.html.element.viewer.Form = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -2338,16 +2348,6 @@ core.html.element.viewer.Form = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
@@ -2529,6 +2529,16 @@ core.html.element.viewer.Frameset = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -2625,16 +2635,6 @@ core.html.element.viewer.Frameset = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
@@ -2788,6 +2788,16 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return [];
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @returns {Array}
@@ -2846,16 +2856,6 @@ core.html.element.viewer.Input = (function() {
 		var config = this.getConfig();
 
 		input.dealHtml(id, config);
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
 	};
 
 	return Constructor;
@@ -3000,6 +3000,16 @@ core.html.element.viewer.Label = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return [];
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @returns {Array}
@@ -3048,16 +3058,6 @@ core.html.element.viewer.Label = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
 	};
 
 	return Constructor;
@@ -3226,6 +3226,16 @@ core.html.element.viewer.Table = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -3316,16 +3326,6 @@ core.html.element.viewer.Table = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
@@ -3497,6 +3497,16 @@ core.html.element.viewer.Td = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -3591,16 +3601,6 @@ core.html.element.viewer.Td = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
@@ -3769,6 +3769,16 @@ core.html.element.viewer.Tr = (function() {
 	};
 
 	/**
+	 * 获取子元素集合
+	 * 
+	 * @returns {Array}
+	 */
+	Constructor.prototype.getChildren = function() {
+
+		return this.getElements();
+	};
+
+	/**
 	 * 检索子元素集合
 	 * 
 	 * @param data
@@ -3859,16 +3869,6 @@ core.html.element.viewer.Tr = (function() {
 		for (var i = 0, length = children.length; i < length; i++) {
 			children[i].dealHtml();
 		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
 	};
 
 	return Constructor;
