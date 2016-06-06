@@ -9,8 +9,6 @@
 
 	// 核心包
 	core = {
-		// 示例包
-		example : {},
 
 		// HTML 包
 		html : {
