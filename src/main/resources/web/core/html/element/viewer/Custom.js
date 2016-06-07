@@ -25,6 +25,16 @@ core.html.element.viewer.Custom = (function() {
 	};
 
 	/**
+	 * 获取元素Id
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.getId = function() {
+
+		return undefined;
+	};
+
+	/**
 	 * 获取元素jQuery对象
 	 * 
 	 * @returns
