@@ -26,8 +26,7 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Slider.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiSlider" + count, name || "coreHtmlElementViewerInputEasyuiSlider"
-				+ count);
+				|| "coreHtmlElementViewerInputEasyuiSlider" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);

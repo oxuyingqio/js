@@ -26,7 +26,7 @@ core.html.element.viewer.input.Easyui = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.Easyui.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyui" + count, name || "coreHtmlElementViewerInputEasyui" + count);
+				|| "coreHtmlElementViewerInputEasyui" + count, name);
 
 		// easyui 配置
 		var easyui = {};

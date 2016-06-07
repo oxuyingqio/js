@@ -28,7 +28,7 @@ core.html.element.viewer.Label = (function() {
 		core.html.element.viewer.Label.superClass.constructor.call(this, id || "coreHtmlElementViewerLabel" + count);
 
 		// 文本
-		var text = _text;
+		var text = _text || "";
 		// for
 		var forr;
 		// form

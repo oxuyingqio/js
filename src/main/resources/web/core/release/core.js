@@ -1768,7 +1768,7 @@ core.html.element.viewer.Label = (function() {
 		core.html.element.viewer.Label.superClass.constructor.call(this, id || "coreHtmlElementViewerLabel" + count);
 
 		// 文本
-		var text = _text;
+		var text = _text || "";
 		// for
 		var forr;
 		// form
@@ -2289,7 +2289,7 @@ core.html.element.viewer.input.Easyui = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.Easyui.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyui" + count, name || "coreHtmlElementViewerInputEasyui" + count);
+				|| "coreHtmlElementViewerInputEasyui" + count, name);
 
 		// easyui 配置
 		var easyui = {};
@@ -2344,7 +2344,7 @@ core.html.element.viewer.input.Text = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.Text.superClass.constructor.call(this, id || "coreHtmlElementViewerInputText"
-				+ count, name || "coreHtmlElementViewerInputText" + count);
+				+ count, name);
 	};
 	// 继承输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
@@ -2388,8 +2388,7 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Combobox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiCombobox" + count, name
-				|| "coreHtmlElementViewerInputEasyuiCombobox" + count);
+				|| "coreHtmlElementViewerInputEasyuiCombobox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2435,8 +2434,7 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Datebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiDatebox" + count, name || "coreHtmlElementViewerInputEasyuiDatebox"
-				+ count);
+				|| "coreHtmlElementViewerInputEasyuiDatebox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2482,8 +2480,7 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Datetimebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiDatetimebox" + count, name
-				|| "coreHtmlElementViewerInputEasyuiDatetimebox" + count);
+				|| "coreHtmlElementViewerInputEasyuiDatetimebox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2529,8 +2526,7 @@ core.html.element.viewer.input.easyui.Filebox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Filebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiFilebox" + count, name || "coreHtmlElementViewerInputEasyuiFilebox"
-				+ count);
+				|| "coreHtmlElementViewerInputEasyuiFilebox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2576,8 +2572,7 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Numberbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count, name
-				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count);
+				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2623,8 +2618,7 @@ core.html.element.viewer.input.easyui.Numberspinner = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Numberspinner.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiNumberspinner" + count, name
-				|| "coreHtmlElementViewerInputEasyuiNumberspinner" + count);
+				|| "coreHtmlElementViewerInputEasyuiNumberspinner" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2670,8 +2664,7 @@ core.html.element.viewer.input.easyui.Searchbox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Searchbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiSearchbox" + count, name
-				|| "coreHtmlElementViewerInputEasyuiSearchbox" + count);
+				|| "coreHtmlElementViewerInputEasyuiSearchbox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2717,8 +2710,7 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Slider.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiSlider" + count, name || "coreHtmlElementViewerInputEasyuiSlider"
-				+ count);
+				|| "coreHtmlElementViewerInputEasyuiSlider" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2764,8 +2756,7 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiTextbox" + count, name || "coreHtmlElementViewerInputEasyuiTextbox"
-				+ count);
+				|| "coreHtmlElementViewerInputEasyuiTextbox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
@@ -2811,8 +2802,7 @@ core.html.element.viewer.input.easyui.Timespinner = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Timespinner.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiTimespinner" + count, name
-				|| "coreHtmlElementViewerInputEasyuiTimespinner" + count);
+				|| "coreHtmlElementViewerInputEasyuiTimespinner" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);

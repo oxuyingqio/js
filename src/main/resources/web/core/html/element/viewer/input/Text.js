@@ -26,7 +26,7 @@ core.html.element.viewer.input.Text = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.Text.superClass.constructor.call(this, id || "coreHtmlElementViewerInputText"
-				+ count, name || "coreHtmlElementViewerInputText" + count);
+				+ count, name);
 	};
 	// 继承输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);

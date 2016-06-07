@@ -26,8 +26,7 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Datebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiDatebox" + count, name || "coreHtmlElementViewerInputEasyuiDatebox"
-				+ count);
+				|| "coreHtmlElementViewerInputEasyuiDatebox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);

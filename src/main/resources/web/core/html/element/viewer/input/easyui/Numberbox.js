@@ -26,8 +26,7 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.input.easyui.Numberbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count, name
-				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count);
+				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count, name);
 	};
 	// 继承Easyui输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
