@@ -1140,25 +1140,31 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 展示元素
 	 * 
-	 * @returns
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.show = function() {
 
 		// 元素的jQuery对象
 		var $element = this.getjQuery();
 		$element.show();
+
+		// 返回本身,以便链式调用
+		return this;
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.hide = function() {
 
 		// 元素的jQuery对象
 		var $element = this.getjQuery();
 		$element.hide();
+
+		// 返回本身,以便链式调用
+		return this;
 	};
 
 	/**
@@ -1185,12 +1191,15 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param id
 	 *            添加到的位置
-	 * @returns
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.appendTo = function(id) {
 
 		$(id === "body" ? id : "#" + id).append(this.convertHtml());
 		this.dealHtml();
+
+		// 返回本身,以便链式调用
+		return this;
 	};
 
 	/**
@@ -1198,7 +1207,7 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.add = function(children) {
 
@@ -1215,6 +1224,9 @@ core.html.element.model.Element = (function() {
 			// 若元素存在,则直接展示添加的子元素
 			this.exist() && child.appendTo(this.getId());
 		}
+
+		// 返回本身,以便链式调用
+		return this;
 	};
 
 	/**
@@ -1222,7 +1234,7 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param removeChild{core.html.element.Element}
 	 *            待移除的子元素
-	 * @returns
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.remove = function(removeChild) {
 
@@ -1243,6 +1255,9 @@ core.html.element.model.Element = (function() {
 				child.remove(removeChild);
 			}
 		}
+
+		// 返回本身,以便链式调用
+		return this;
 	};
 
 	/**
