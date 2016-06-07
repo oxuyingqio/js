@@ -42,10 +42,6 @@ core.html.element.viewer.Label = (function() {
 			return id;
 		};
 
-		this.setId = function(_id) {
-			id = _id;
-		};
-
 		this.getText = function() {
 			return text;
 		};
@@ -72,16 +68,13 @@ core.html.element.viewer.Label = (function() {
 	};
 
 	/**
-	 * 添加元素到
+	 * 获取元素jQuery对象
 	 * 
-	 * @param id
-	 *            添加到的位置
 	 * @returns
 	 */
-	Constructor.prototype.appendTo = function(id) {
+	Constructor.prototype.getjQuery = function() {
 
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
+		return $("#" + this.getId());
 	};
 
 	/**
@@ -92,7 +85,7 @@ core.html.element.viewer.Label = (function() {
 	Constructor.prototype.show = function() {
 
 		// 元素的jQuery对象
-		var $label = $("#" + this.getId());
+		var $label = this.getjQuery();
 		$label.show();
 	};
 
@@ -104,7 +97,7 @@ core.html.element.viewer.Label = (function() {
 	Constructor.prototype.hide = function() {
 
 		// 元素的jQuery对象
-		var $label = $("#" + this.getId());
+		var $label = this.getjQuery();
 		$label.hide();
 	};
 
@@ -116,8 +109,21 @@ core.html.element.viewer.Label = (function() {
 	Constructor.prototype.destroy = function() {
 
 		// 元素的jQuery对象
-		var $label = $("#" + this.getId());
+		var $label = this.getjQuery();
 		$label.remove();
+	};
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**

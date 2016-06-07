@@ -8,20 +8,26 @@
 
 core.html.element.viewer.Form = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
 	 * @param id
 	 *            元素ID
 	 * @param method
-	 *            method
+	 *            表单的提交方式
 	 * @param action
-	 *            action
+	 *            表单的提交地址
 	 */
 	var Constructor = function(_id, _method, _action) {
 
+		// 对象个数+1
+		count++;
+
 		// ID
-		var id = _id;
+		var id = _id || "coreHtmlElementViewerForm" + count;
 		// method
 		var method = _method || "post";
 		// action
@@ -37,10 +43,6 @@ core.html.element.viewer.Form = (function() {
 		 */
 		this.getId = function() {
 			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
 		};
 
 		this.getMethod = function() {
@@ -65,16 +67,13 @@ core.html.element.viewer.Form = (function() {
 	};
 
 	/**
-	 * 添加元素到
+	 * 获取元素jQuery对象
 	 * 
-	 * @param id
-	 *            添加到的位置
 	 * @returns
 	 */
-	Constructor.prototype.appendTo = function(id) {
+	Constructor.prototype.getjQuery = function() {
 
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
+		return $("#" + this.getId());
 	};
 
 	/**
@@ -85,7 +84,7 @@ core.html.element.viewer.Form = (function() {
 	Constructor.prototype.show = function() {
 
 		// 元素的jQuery对象
-		var $form = $("#" + this.getId());
+		var $form = this.getjQuery();
 		$form.show();
 	};
 
@@ -97,7 +96,7 @@ core.html.element.viewer.Form = (function() {
 	Constructor.prototype.hide = function() {
 
 		// 元素的jQuery对象
-		var $form = $("#" + this.getId());
+		var $form = this.getjQuery();
 		$form.hide();
 	};
 
@@ -116,14 +115,27 @@ core.html.element.viewer.Form = (function() {
 		}
 
 		// 销毁元素
-		var $form = $("#" + this.getId());
+		var $form = this.getjQuery();
 		$form.remove();
+	};
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param children
+	 * @param children{core.html.element.Element}
 	 *            形参,子元素
 	 * @returns
 	 */
@@ -147,7 +159,7 @@ core.html.element.viewer.Form = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param removeChild
+	 * @param removeChild{core.html.element.Element}
 	 *            待移除的子元素
 	 * @returns
 	 */
@@ -175,7 +187,7 @@ core.html.element.viewer.Form = (function() {
 	/**
 	 * 获取子元素集合
 	 * 
-	 * @returns {Array}
+	 * @returns {Array<core.html.element.Element>}
 	 */
 	Constructor.prototype.getChildren = function() {
 
@@ -187,7 +199,7 @@ core.html.element.viewer.Form = (function() {
 	 * 
 	 * @param data
 	 *            查找数据
-	 * @returns {Array}
+	 * @returns {Array<core.html.element.Element>}
 	 */
 	Constructor.prototype.find = function(data) {
 

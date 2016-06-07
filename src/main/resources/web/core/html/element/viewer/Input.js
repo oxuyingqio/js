@@ -32,10 +32,6 @@ core.html.element.viewer.Input = (function() {
 			return id;
 		};
 
-		this.setId = function(_id) {
-			id = _id;
-		};
-
 		this.getName = function() {
 			return name;
 		};
@@ -43,6 +39,16 @@ core.html.element.viewer.Input = (function() {
 		this.setName = function(_name) {
 			name = _name;
 		}
+	};
+
+	/**
+	 * 获取元素jQuery对象
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.getjQuery = function() {
+
+		return $("#" + this.getId());
 	};
 
 	/**

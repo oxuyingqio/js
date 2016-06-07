@@ -37,26 +37,19 @@ core.html.element.viewer.Table = (function() {
 			return id;
 		};
 
-		this.setId = function(_id) {
-			id = _id;
-		};
-
 		this.getElements = function() {
 			return elements;
 		};
 	};
 
 	/**
-	 * 添加元素到
+	 * 获取元素jQuery对象
 	 * 
-	 * @param id
-	 *            添加到的位置
 	 * @returns
 	 */
-	Constructor.prototype.appendTo = function(id) {
+	Constructor.prototype.getjQuery = function() {
 
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
+		return $("#" + this.getId());
 	};
 
 	/**
@@ -67,7 +60,7 @@ core.html.element.viewer.Table = (function() {
 	Constructor.prototype.show = function() {
 
 		// 元素的jQuery对象
-		var $table = $("#" + this.getId());
+		var $table = this.getjQuery();
 		$table.show();
 	};
 
@@ -79,7 +72,7 @@ core.html.element.viewer.Table = (function() {
 	Constructor.prototype.hide = function() {
 
 		// 元素的jQuery对象
-		var $table = $("#" + this.getId());
+		var $table = this.getjQuery();
 		$table.hide();
 	};
 
@@ -98,14 +91,27 @@ core.html.element.viewer.Table = (function() {
 		}
 
 		// 销毁元素
-		var $table = $("#" + this.getId());
+		var $table = this.getjQuery();
 		$table.remove();
+	};
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param children
+	 * @param children{core.html.element.Element}
 	 *            形参,子元素
 	 * @returns
 	 */
@@ -136,7 +142,7 @@ core.html.element.viewer.Table = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param removeChild
+	 * @param removeChild{core.html.element.Element}
 	 *            待移除的子元素
 	 * @returns
 	 */
@@ -164,7 +170,7 @@ core.html.element.viewer.Table = (function() {
 	/**
 	 * 获取子元素集合
 	 * 
-	 * @returns {Array}
+	 * @returns {Array<core.html.element.Element>}
 	 */
 	Constructor.prototype.getChildren = function() {
 
@@ -176,7 +182,7 @@ core.html.element.viewer.Table = (function() {
 	 * 
 	 * @param data
 	 *            查找数据
-	 * @returns {Array}
+	 * @returns {Array<core.html.element.Element>}
 	 */
 	Constructor.prototype.find = function(data) {
 

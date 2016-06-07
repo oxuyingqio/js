@@ -33,10 +33,16 @@ core.html.element.viewer.Button = (function() {
 		this.getId = function() {
 			return id;
 		};
+	};
 
-		this.setId = function(_id) {
-			id = _id;
-		};
+	/**
+	 * 获取元素jQuery对象
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.getjQuery = function() {
+
+		return $("#" + this.getId());
 	};
 
 	/**
