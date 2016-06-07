@@ -266,5 +266,4 @@ core.html.element.model.Element = (function() {
 	};
 
 	return Constructor;
-
 })();
