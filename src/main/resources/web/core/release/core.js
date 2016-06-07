@@ -1442,7 +1442,7 @@ core.html.element.viewer.Custom = (function() {
 	 * @param custom
 	 *            自定义HTML
 	 */
-	var Constructor = function(custom) {
+	var Constructor = function(_custom) {
 
 		// 自定义HTML
 		var custom = _custom || "";
