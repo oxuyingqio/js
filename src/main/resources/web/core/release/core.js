@@ -1070,42 +1070,28 @@ core.html.constant.KeyCode = {
  */
 
 /**
- * @method appendTo 添加元素到
+ * @method getId 获取元素ID
+ * @method getjQuery 获取元素jQuery对象
  * @method show 展示元素
  * @method hide 隐藏元素
  * @method destroy 销毁元素
+ * @method appendTo 添加元素到
  * @method add 添加子元素
  * @method remove 移除子元素
  * @method getChildren 获取子元素集合
  * @method find 检索子元素集合,包含子元素的子元素
  */
-core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "appendTo", "show", "hide",
-		"destroy", "add", "remove", "getChildren", "find" ]);
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "getId", "getjQuery", "show",
+		"hide", "destroy", "appendTo", "add", "remove", "getChildren", "find" ]);
 /**
- * ElementProcess
+ * Element
  * 
- * 元素处理
- * 
- * 接口
- */
-
-/**
- * @method getId 获取元素ID
- * @method exist 元素是否存在
- * @method convertHtml 转为HTML
- * @method dealHtml 处理HTML
- */
-core.html.element.model.ElementProcess = new core.lang.Interface("core.html.element.model.ElementProcess", [ "getId",
-		"convertHtml", "dealHtml" ]);
-/**
- * Button
- * 
- * 按钮
+ * 元素,实现部分core.html.element.Element通用属性及方法
  * 
  * 抽象类
  */
 
-core.html.element.viewer.Button = (function() {
+core.html.element.model.Element = (function() {
 
 	// 对象个数
 	var count = 0;
@@ -1121,90 +1107,8 @@ core.html.element.viewer.Button = (function() {
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerButton" + count;
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
-	};
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Button.add:方法异常.按钮不允许继续添加子元素";
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.remove = function() {
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function() {
-
-		return [];
-	};
-
-	return Constructor;
-})();
-/**
- * Div
- * 
- * 区域
- * 
- * 类
- */
-
-core.html.element.viewer.Div = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 */
-	var Constructor = function(_id) {
-
-		// 对象个数+1
-		count++;
-
-		// ID
-		var id = _id || "coreHtmlElementViewerDiv" + count;
-		// class
-		var clazz = "";
+		// 元素ID
+		var id = _id || "coreHtmlElementModelElement" + count;
 
 		// 子元素
 		var elements = [];
@@ -1218,34 +1122,19 @@ core.html.element.viewer.Div = (function() {
 			return id;
 		};
 
-		this.setId = function(_id) {
-			id = _id;
-		};
-
-		this.getClass = function() {
-			return clazz;
-		};
-
-		this.setClass = function(_clazz) {
-			clazz = _clazz;
-		};
-
 		this.getElements = function() {
 			return elements;
 		};
 	};
 
 	/**
-	 * 添加元素到
+	 * 获取元素jQuery对象
 	 * 
-	 * @param id
-	 *            添加到的位置
 	 * @returns
 	 */
-	Constructor.prototype.appendTo = function(id) {
+	Constructor.prototype.getjQuery = function() {
 
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
+		return $("#" + this.getId());
 	};
 
 	/**
@@ -1256,8 +1145,8 @@ core.html.element.viewer.Div = (function() {
 	Constructor.prototype.show = function() {
 
 		// 元素的jQuery对象
-		var $div = $("#" + this.getId());
-		$div.show();
+		var $element = this.getjQuery();
+		$element.show();
 	};
 
 	/**
@@ -1268,8 +1157,8 @@ core.html.element.viewer.Div = (function() {
 	Constructor.prototype.hide = function() {
 
 		// 元素的jQuery对象
-		var $div = $("#" + this.getId());
-		$div.hide();
+		var $element = this.getjQuery();
+		$element.hide();
 	};
 
 	/**
@@ -1286,15 +1175,28 @@ core.html.element.viewer.Div = (function() {
 			this.remove(children[i]);
 		}
 
-		// 销毁元素
-		var $div = $("#" + this.getId());
-		$div.remove();
+		// 元素的jQuery对象
+		var $element = this.getjQuery();
+		$element.remove();
+	};
+
+	/**
+	 * 添加元素到
+	 * 
+	 * @param id
+	 *            添加到的位置
+	 * @returns
+	 */
+	Constructor.prototype.appendTo = function(id) {
+
+		$(id === "body" ? id : "#" + id).append(this.convertHtml());
+		this.dealHtml();
 	};
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param children
+	 * @param children{core.html.element.Element}
 	 *            形参,子元素
 	 * @returns
 	 */
@@ -1318,7 +1220,7 @@ core.html.element.viewer.Div = (function() {
 	/**
 	 * 移除子元素
 	 * 
-	 * @param removeChild
+	 * @param removeChild{core.html.element.Element}
 	 *            待移除的子元素
 	 * @returns
 	 */
@@ -1346,7 +1248,7 @@ core.html.element.viewer.Div = (function() {
 	/**
 	 * 获取子元素集合
 	 * 
-	 * @returns {Array}
+	 * @returns {Array<core.html.element.Element>}
 	 */
 	Constructor.prototype.getChildren = function() {
 
@@ -1358,7 +1260,7 @@ core.html.element.viewer.Div = (function() {
 	 * 
 	 * @param data
 	 *            查找数据
-	 * @returns {Array}
+	 * @returns {Array<core.html.element.Element>}
 	 */
 	Constructor.prototype.find = function(data) {
 
@@ -1404,9 +1306,152 @@ core.html.element.viewer.Div = (function() {
 	 */
 	Constructor.prototype.exist = function() {
 
-		var $div = $("#" + this.getId());
-		return ($div.length !== 0);
+		// 元素的jQuery对象
+		var $element = this.getjQuery();
+		return ($element.length !== 0);
 	};
+
+	/**
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+		// 抽象方法
+	};
+
+	/**
+	 * 处理HTML
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.dealHtml = function() {
+
+		// 获取子元素集合
+		var children = this.getChildren();
+		// 遍历子元素集合,同时处理HTML
+		for (var i = 0, length = children.length; i < length; i++) {
+			children[i].dealHtml();
+		}
+	};
+
+	return Constructor;
+
+})();
+/**
+ * ElementProcess
+ * 
+ * 元素处理
+ * 
+ * 接口
+ */
+
+/**
+ * @method exist 元素是否存在
+ * @method convertHtml 转为HTML
+ * @method dealHtml 处理HTML
+ */
+core.html.element.model.ElementProcess = new core.lang.Interface("core.html.element.model.ElementProcess", [ "exist",
+		"convertHtml", "dealHtml" ]);
+/**
+ * Button
+ * 
+ * 按钮
+ * 
+ * 抽象类
+ */
+
+core.html.element.viewer.Button = (function() {
+
+	// 对象个数
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id
+	 *            元素ID
+	 */
+	var Constructor = function(id) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Button.superClass.constructor.call(this, id || "coreHtmlElementViewerButton" + count);
+	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
+
+	/**
+	 * 添加子元素
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.add = function() {
+		throw "core.html.element.viewer.Button.add:方法异常.按钮不允许继续添加子元素";
+	};
+
+	/**
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+		// 抽象方法
+	};
+
+	/**
+	 * 处理HTML
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.dealHtml = function() {
+		// 抽象方法
+	};
+
+	return Constructor;
+})();
+/**
+ * Div
+ * 
+ * 区域
+ * 
+ * 类
+ */
+
+core.html.element.viewer.Div = (function() {
+
+	// 对象个数
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id
+	 *            元素ID
+	 */
+	var Constructor = function(id) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Div.superClass.constructor.call(this, id || "coreHtmlElementViewerDiv" + count);
+
+		// class
+		var clazz = "";
+
+		this.getClass = function() {
+			return clazz;
+		};
+
+		this.setClass = function(_clazz) {
+			clazz = _clazz;
+		};
+	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 转为HTML
@@ -1435,21 +1480,6 @@ core.html.element.viewer.Div = (function() {
 		return html.join("");
 	};
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
 	return Constructor;
 })();
 /**
@@ -1473,31 +1503,17 @@ core.html.element.viewer.Fieldset = (function() {
 	 * @param legend
 	 *            legend
 	 */
-	var Constructor = function(_id, _legend) {
+	var Constructor = function(id, _legend) {
 
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerFieldset" + count;
+		// 调用父类构造
+		core.html.element.viewer.Fieldset.superClass.constructor.call(this, id || "coreHtmlElementViewerFieldset"
+				+ count);
+
 		// legend
 		var legend = _legend || "";
-
-		// 子元素
-		var elements = [];
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
 
 		this.getLegend = function() {
 			return legend;
@@ -1506,184 +1522,9 @@ core.html.element.viewer.Fieldset = (function() {
 		this.setLegend = function(_legend) {
 			legend = _legend;
 		};
-
-		this.getElements = function() {
-			return elements;
-		};
 	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $fieldset = $("#" + this.getId());
-		$fieldset.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $fieldset = $("#" + this.getId());
-		$fieldset.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-			this.remove(children[i]);
-		}
-
-		// 销毁元素
-		var $fieldset = $("#" + this.getId());
-		$fieldset.remove();
-	};
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @param children
-	 *            形参,子元素
-	 * @returns
-	 */
-	Constructor.prototype.add = function(children) {
-
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
-
-			// 添加子元素
-			this.getElements().push(child);
-			// 若元素存在,则直接展示添加的子元素
-			this.exist() && child.appendTo(this.getId());
-		}
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild
-	 *            待移除的子元素
-	 * @returns
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
-			} else {
-				child.remove(removeChild);
-			}
-		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		// 查找的结果
-		var result = [];
-
-		// 查找的类型
-		var type = typeof (data);
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
-			}
-		}
-
-		return result;
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $fieldset = $("#" + this.getId());
-		return ($fieldset.length !== 0);
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 转换为HTML
@@ -1713,21 +1554,6 @@ core.html.element.viewer.Fieldset = (function() {
 		return html.join("");
 	};
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
 	return Constructor;
 })();
 /**
@@ -1740,40 +1566,31 @@ core.html.element.viewer.Fieldset = (function() {
 
 core.html.element.viewer.Form = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
 	 * @param id
 	 *            元素ID
 	 * @param method
-	 *            method
+	 *            表单的提交方式
 	 * @param action
-	 *            action
+	 *            表单的提交地址
 	 */
-	var Constructor = function(_id, _method, _action) {
+	var Constructor = function(id, _method, _action) {
 
-		// ID
-		var id = _id;
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Form.superClass.constructor.call(this, id || "coreHtmlElementViewerForm" + count);
+
 		// method
 		var method = _method || "post";
 		// action
 		var action = _action || "";
-
-		// 子元素
-		var elements = [];
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
 
 		this.getMethod = function() {
 			return method;
@@ -1790,184 +1607,9 @@ core.html.element.viewer.Form = (function() {
 		this.setAction = function(_action) {
 			action = _action;
 		};
-
-		this.getElements = function() {
-			return elements;
-		};
 	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $form = $("#" + this.getId());
-		$form.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $form = $("#" + this.getId());
-		$form.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-			this.remove(children[i]);
-		}
-
-		// 销毁元素
-		var $form = $("#" + this.getId());
-		$form.remove();
-	};
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @param children
-	 *            形参,子元素
-	 * @returns
-	 */
-	Constructor.prototype.add = function(children) {
-
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
-
-			// 添加子元素
-			this.getElements().push(child);
-			// 若元素存在,则直接展示添加的子元素
-			this.exist() && child.appendTo(this.getId());
-		}
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild
-	 *            待移除的子元素
-	 * @returns
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
-			} else {
-				child.remove(removeChild);
-			}
-		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		// 查找的结果
-		var result = [];
-
-		// 查找的类型
-		var type = typeof (data);
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
-			}
-		}
-
-		return result;
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $form = $("#" + this.getId());
-		return ($form.length !== 0);
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 转换为HTML
@@ -1998,308 +1640,6 @@ core.html.element.viewer.Form = (function() {
 		return html.join("");
 	};
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Frameset
- * 
- * 框架集
- * 
- * 类
- */
-
-core.html.element.viewer.Frameset = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 */
-	var Constructor = function(_id) {
-
-		// 对象个数+1
-		count++;
-
-		// ID
-		var id = _id || "coreHtmlElementViewerFrameset" + count;
-		// cols
-		var cols = "";
-		// rows
-		var rows = "";
-
-		// 子元素
-		var elements = [];
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
-
-		this.getCols = function() {
-			return cols;
-		};
-
-		this.setCols = function(_cols) {
-			cols = _cols;
-		};
-
-		this.getRows = function() {
-			return rows;
-		};
-
-		this.setRows = function(_rows) {
-			rows = _rows;
-		};
-
-		this.getElements = function() {
-			return elements;
-		};
-	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $frameset = $("#" + this.getId());
-		$frameset.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $frameset = $("#" + this.getId());
-		$frameset.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-			this.remove(children[i]);
-		}
-
-		// 销毁元素
-		var $frameset = $("#" + this.getId());
-		$frameset.remove();
-	};
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @param children
-	 *            形参,子元素
-	 * @returns
-	 */
-	Constructor.prototype.add = function(children) {
-
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
-
-			// 添加子元素
-			this.getElements().push(child);
-			// 若元素存在,则直接展示添加的子元素
-			this.exist() && child.appendTo(this.getId());
-		}
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild
-	 *            待移除的子元素
-	 * @returns
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
-			} else {
-				child.remove(removeChild);
-			}
-		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		// 查找的结果
-		var result = [];
-
-		// 查找的类型
-		var type = typeof (data);
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
-			}
-		}
-
-		return result;
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $frameset = $("#" + this.getId());
-		return ($frameset.length !== 0);
-	};
-
-	/**
-	 * 转换为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<frameset  id='");
-		html.push(this.getId());
-		html.push("' cols='");
-		html.push(this.getCols());
-		html.push("' rows='");
-		html.push(this.getRows());
-		html.push("'>");
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			html.push(children[i].convertHtml());
-		}
-
-		html.push("</frameset >");
-
-		return html.join("");
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
 	return Constructor;
 })();
 /**
@@ -2312,6 +1652,9 @@ core.html.element.viewer.Frameset = (function() {
 
 core.html.element.viewer.Input = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -2320,25 +1663,16 @@ core.html.element.viewer.Input = (function() {
 	 * @param name
 	 *            输入框名称
 	 */
-	var Constructor = function(_id, _name) {
+	var Constructor = function(id, _name) {
 
-		// ID
-		var id = _id;
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Input.superClass.constructor.call(this, id || "coreHtmlElementViewerInput" + count);
+
 		// name
-		var name = _name || id;
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
+		var name = _name || id || "coreHtmlElementViewerInput" + count;
 
 		this.getName = function() {
 			return name;
@@ -2348,6 +1682,8 @@ core.html.element.viewer.Input = (function() {
 			name = _name;
 		}
 	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 添加子元素
@@ -2359,31 +1695,30 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
-	 * 移除子元素
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+
+		// HTML元素
+		var html = [];
+		html.push("<input id='");
+		html.push(this.getId());
+		html.push("' name='");
+		html.push(this.getName());
+		html.push("' />");
+
+		return html.join("");
+	};
+
+	/**
+	 * 处理HTML
 	 * 
 	 * @returns
 	 */
-	Constructor.prototype.remove = function() {
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function() {
-
-		return [];
+	Constructor.prototype.dealHtml = function() {
+		// 抽象方法
 	};
 
 	return Constructor;
@@ -2409,32 +1744,20 @@ core.html.element.viewer.Label = (function() {
 	 * @param text
 	 *            标签的文本信息
 	 */
-	var Constructor = function(_id, _text) {
+	var Constructor = function(id, _text) {
 
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerLabel" + count;
+		// 调用父类构造
+		core.html.element.viewer.Label.superClass.constructor.call(this, id || "coreHtmlElementViewerLabel" + count);
+
 		// 文本
 		var text = _text;
 		// for
 		var forr;
 		// form
 		var form;
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
 
 		this.getText = function() {
 			return text;
@@ -2460,55 +1783,8 @@ core.html.element.viewer.Label = (function() {
 			form = _form;
 		};
 	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $label = $("#" + this.getId());
-		$label.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $label = $("#" + this.getId());
-		$label.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 元素的jQuery对象
-		var $label = $("#" + this.getId());
-		$label.remove();
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 添加子元素
@@ -2517,45 +1793,6 @@ core.html.element.viewer.Label = (function() {
 	 */
 	Constructor.prototype.add = function() {
 		throw "core.html.element.viewer.Label.add:方法异常.标签不允许继续添加子元素";
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.remove = function() {
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function() {
-
-		return [];
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $label = $("#" + this.getId());
-		return ($label.length !== 0);
 	};
 
 	/**
@@ -2580,14 +1817,6 @@ core.html.element.viewer.Label = (function() {
 		return html.join("");
 	};
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-	};
-
 	return Constructor;
 })();
 /**
@@ -2609,95 +1838,21 @@ core.html.element.viewer.Table = (function() {
 	 * @param id
 	 *            元素ID
 	 */
-	var Constructor = function(_id) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerTable" + count;
-
-		// 子元素
-		var elements = [];
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
-
-		this.getElements = function() {
-			return elements;
-		};
+		// 调用父类构造
+		core.html.element.viewer.Table.superClass.constructor.call(this, id || "coreHtmlElementViewerTable" + count);
 	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $table = $("#" + this.getId());
-		$table.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $table = $("#" + this.getId());
-		$table.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-			this.remove(children[i]);
-		}
-
-		// 销毁元素
-		var $table = $("#" + this.getId());
-		$table.remove();
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param children
+	 * @param children{core.html.element.Element}
 	 *            形参,子元素
 	 * @returns
 	 */
@@ -2726,99 +1881,6 @@ core.html.element.viewer.Table = (function() {
 	};
 
 	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild
-	 *            待移除的子元素
-	 * @returns
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
-			} else {
-				child.remove(removeChild);
-			}
-		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		// 查找的结果
-		var result = [];
-
-		// 查找的类型
-		var type = typeof (data);
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
-			}
-		}
-
-		return result;
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $table = $("#" + this.getId());
-		return ($table.length !== 0);
-	};
-
-	/**
 	 * 转为HTML
 	 * 
 	 * @returns {String}
@@ -2839,21 +1901,6 @@ core.html.element.viewer.Table = (function() {
 		html.push("</table>");
 
 		return html.join("");
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
 	};
 
 	return Constructor;
@@ -2877,31 +1924,16 @@ core.html.element.viewer.Td = (function() {
 	 * @param id
 	 *            元素ID
 	 */
-	var Constructor = function(_id) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerTd" + count;
+		// 调用父类构造
+		core.html.element.viewer.Td.superClass.constructor.call(this, id || "coreHtmlElementViewerTd" + count);
+
 		// 列数
 		var colspan = 1;
-
-		// 子元素
-		var elements = [];
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
 
 		this.getColspan = function() {
 			return colspan;
@@ -2910,184 +1942,9 @@ core.html.element.viewer.Td = (function() {
 		this.setColspan = function(_colspan) {
 			colspan = _colspan;
 		};
-
-		this.getElements = function() {
-			return elements;
-		};
 	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $td = $("#" + this.getId());
-		$td.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $td = $("#" + this.getId());
-		$td.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-			this.remove(children[i]);
-		}
-
-		// 销毁元素
-		var $td = $("#" + this.getId());
-		$td.remove();
-	};
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @param children
-	 *            形参,子元素
-	 * @returns
-	 */
-	Constructor.prototype.add = function(children) {
-
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
-
-			// 添加子元素
-			this.getElements().push(child);
-			// 若元素存在,则直接展示添加的子元素
-			this.exist() && child.appendTo(this.getId());
-		}
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild
-	 *            待移除的子元素
-	 * @returns
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
-			} else {
-				child.remove(removeChild);
-			}
-		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		// 查找的结果
-		var result = [];
-
-		// 查找的类型
-		var type = typeof (data);
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
-			}
-		}
-
-		return result;
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $td = $("#" + this.getId());
-		return ($td.length !== 0);
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 转为HTML
@@ -3116,21 +1973,6 @@ core.html.element.viewer.Td = (function() {
 		return html.join("");
 	};
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
 	return Constructor;
 })();
 /**
@@ -3152,95 +1994,21 @@ core.html.element.viewer.Tr = (function() {
 	 * @param id
 	 *            元素ID
 	 */
-	var Constructor = function(_id) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerTr" + count;
-
-		// 子元素
-		var elements = [];
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
-
-		this.setId = function(_id) {
-			id = _id;
-		};
-
-		this.getElements = function() {
-			return elements;
-		};
+		// 调用父类构造
+		core.html.element.viewer.Tr.superClass.constructor.call(this, id || "coreHtmlElementViewerTr" + count);
 	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		// 元素的jQuery对象
-		var $tr = $("#" + this.getId());
-		$tr.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		// 元素的jQuery对象
-		var $tr = $("#" + this.getId());
-		$tr.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-			this.remove(children[i]);
-		}
-
-		// 销毁元素
-		var $tr = $("#" + this.getId());
-		$tr.remove();
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param children
+	 * @param children{core.html.element.Element}
 	 *            形参,子元素
 	 * @returns
 	 */
@@ -3269,99 +2037,6 @@ core.html.element.viewer.Tr = (function() {
 	};
 
 	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild
-	 *            待移除的子元素
-	 * @returns
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
-			} else {
-				child.remove(removeChild);
-			}
-		}
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return this.getElements();
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		// 查找的结果
-		var result = [];
-
-		// 查找的类型
-		var type = typeof (data);
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
-			}
-		}
-
-		return result;
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $tr = $("#" + this.getId());
-		return ($tr.length !== 0);
-	};
-
-	/**
 	 * 转为HTML
 	 * 
 	 * @returns {String}
@@ -3384,21 +2059,6 @@ core.html.element.viewer.Tr = (function() {
 		return html.join("");
 	};
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
 	return Constructor;
 })();
 /**
@@ -3411,6 +2071,9 @@ core.html.element.viewer.Tr = (function() {
 
 core.html.element.viewer.button.Button = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -3419,8 +2082,12 @@ core.html.element.viewer.button.Button = (function() {
 	 */
 	var Constructor = function(id) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.button.Button.superClass.constructor.call(this, id);
+		core.html.element.viewer.button.Button.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerButtonButton" + count);
 
 		// text
 		var text = "";
@@ -3435,63 +2102,6 @@ core.html.element.viewer.button.Button = (function() {
 	};
 	// 继承按钮抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $button = $("#" + this.getId());
-		$button.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $button = $("#" + this.getId());
-		$button.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $button = $("#" + this.getId());
-		$button.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $button = $("#" + this.getId());
-		return ($button.length !== 0);
-	};
 
 	/**
 	 * 转为HTML
@@ -3524,14 +2134,17 @@ core.html.element.viewer.button.Button = (function() {
 })();
 
 /**
- * Linkbutton
+ * Easyui
  * 
- * EasyUI Linkbutton按钮
+ * EasyUI 按钮
  * 
- * 类
+ * 抽象类
  */
 
-core.html.element.viewer.button.easyui.Linkbutton = (function() {
+core.html.element.viewer.button.Easyui = (function() {
+
+	// 对象个数
+	var count = 0;
 
 	/**
 	 * 构造函数
@@ -3541,8 +2154,12 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 */
 	var Constructor = function(id) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.button.easyui.Linkbutton.superClass.constructor.call(this, id);
+		core.html.element.viewer.button.Easyui.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerButtonEasyui" + count);
 
 		// easyui 配置
 		var easyui = {};
@@ -3557,63 +2174,6 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	};
 	// 继承按钮抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $button = $("#" + this.getId());
-		$button.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $button = $("#" + this.getId());
-		$button.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $button = $("#" + this.getId());
-		$button.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $button = $("#" + this.getId());
-		return ($button.length !== 0);
-	};
 
 	/**
 	 * 转为HTML
@@ -3637,9 +2197,106 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
+		// 抽象方法
+	};
 
-		var $button = $("#" + this.getId());
+	return Constructor;
+})();
+/**
+ * Linkbutton
+ * 
+ * EasyUI Linkbutton按钮
+ * 
+ * 类
+ */
+
+core.html.element.viewer.button.easyui.Linkbutton = (function() {
+
+	// 对象个数
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id
+	 *            元素ID
+	 */
+	var Constructor = function(id) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.button.easyui.Linkbutton.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerButtonEasyuiLinkbutton" + count);
+	};
+	// 继承Easyui按钮抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.button.Easyui);
+
+	/**
+	 * 处理HTML
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.dealHtml = function() {
+
+		var $button = this.getjQuery();
 		$button.linkbutton(this.getEasyui());
+	};
+
+	return Constructor;
+})();
+/**
+ * Easyui
+ * 
+ * EasyUI 输入框
+ * 
+ * 抽象类
+ */
+
+core.html.element.viewer.input.Easyui = (function() {
+
+	// 对象个数
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id
+	 *            元素ID
+	 * @param name
+	 *            输入框名称
+	 */
+	var Constructor = function(id, name) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.input.Easyui.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyui" + count, name || "coreHtmlElementViewerInputEasyui" + count);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
+	};
+	// 继承输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
+
+	/**
+	 * 处理HTML
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.dealHtml = function() {
+		// 抽象方法
 	};
 
 	return Constructor;
@@ -3654,6 +2311,9 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 
 core.html.element.viewer.input.Text = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -3664,86 +2324,15 @@ core.html.element.viewer.input.Text = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.Text.superClass.constructor.call(this, id, name);
+		core.html.element.viewer.input.Text.superClass.constructor.call(this, id || "coreHtmlElementViewerInputText"
+				+ count, name || "coreHtmlElementViewerInputText" + count);
 	};
 	// 继承输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
 
 	/**
 	 * 处理HTML
@@ -3766,6 +2355,9 @@ core.html.element.viewer.input.Text = (function() {
 
 core.html.element.viewer.input.easyui.Combobox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -3776,97 +2368,16 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Combobox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Combobox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiCombobox" + count, name
+				|| "coreHtmlElementViewerInputEasyuiCombobox" + count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -3875,7 +2386,7 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.combobox(this.getEasyui());
 	};
 
@@ -3891,6 +2402,9 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 
 core.html.element.viewer.input.easyui.Datebox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -3901,97 +2415,16 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Datebox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Datebox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiDatebox" + count, name || "coreHtmlElementViewerInputEasyuiDatebox"
+				+ count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4000,7 +2433,7 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.datebox(this.getEasyui());
 	};
 
@@ -4016,6 +2449,9 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 
 core.html.element.viewer.input.easyui.Datetimebox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4026,97 +2462,16 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Datetimebox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Datetimebox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiDatetimebox" + count, name
+				|| "coreHtmlElementViewerInputEasyuiDatetimebox" + count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4125,7 +2480,7 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.datetimebox(this.getEasyui());
 	};
 
@@ -4141,6 +2496,9 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 
 core.html.element.viewer.input.easyui.Filebox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4151,97 +2509,16 @@ core.html.element.viewer.input.easyui.Filebox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Filebox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Filebox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiFilebox" + count, name || "coreHtmlElementViewerInputEasyuiFilebox"
+				+ count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4250,7 +2527,7 @@ core.html.element.viewer.input.easyui.Filebox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.filebox(this.getEasyui());
 	};
 
@@ -4266,6 +2543,9 @@ core.html.element.viewer.input.easyui.Filebox = (function() {
 
 core.html.element.viewer.input.easyui.Numberbox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4276,97 +2556,16 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Numberbox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Numberbox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count, name
+				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4375,7 +2574,7 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.numberbox(this.getEasyui());
 	};
 
@@ -4391,6 +2590,9 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 
 core.html.element.viewer.input.easyui.Numberspinner = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4401,97 +2603,16 @@ core.html.element.viewer.input.easyui.Numberspinner = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Numberspinner.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Numberspinner.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiNumberspinner" + count, name
+				|| "coreHtmlElementViewerInputEasyuiNumberspinner" + count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4500,7 +2621,7 @@ core.html.element.viewer.input.easyui.Numberspinner = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.numberspinner(this.getEasyui());
 	};
 
@@ -4516,6 +2637,9 @@ core.html.element.viewer.input.easyui.Numberspinner = (function() {
 
 core.html.element.viewer.input.easyui.Searchbox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4526,97 +2650,16 @@ core.html.element.viewer.input.easyui.Searchbox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Searchbox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Searchbox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiSearchbox" + count, name
+				|| "coreHtmlElementViewerInputEasyuiSearchbox" + count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4625,7 +2668,7 @@ core.html.element.viewer.input.easyui.Searchbox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.searchbox(this.getEasyui());
 	};
 
@@ -4641,6 +2684,9 @@ core.html.element.viewer.input.easyui.Searchbox = (function() {
 
 core.html.element.viewer.input.easyui.Slider = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4651,97 +2697,16 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Slider.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Slider.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiSlider" + count, name || "coreHtmlElementViewerInputEasyuiSlider"
+				+ count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4750,7 +2715,7 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.slider(this.getEasyui());
 	};
 
@@ -4766,6 +2731,9 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 
 core.html.element.viewer.input.easyui.Textbox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4776,97 +2744,16 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiTextbox" + count, name || "coreHtmlElementViewerInputEasyuiTextbox"
+				+ count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -4875,7 +2762,7 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.textbox(this.getEasyui());
 	};
 
@@ -4891,6 +2778,9 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 
 core.html.element.viewer.input.easyui.Timespinner = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -4901,97 +2791,16 @@ core.html.element.viewer.input.easyui.Timespinner = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Timespinner.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Timespinner.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiTimespinner" + count, name
+				|| "coreHtmlElementViewerInputEasyuiTimespinner" + count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -5000,7 +2809,7 @@ core.html.element.viewer.input.easyui.Timespinner = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.timespinner(this.getEasyui());
 	};
 
