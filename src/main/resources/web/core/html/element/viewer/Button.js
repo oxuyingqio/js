@@ -17,33 +17,16 @@ core.html.element.viewer.Button = (function() {
 	 * @param id
 	 *            元素ID
 	 */
-	var Constructor = function(_id) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
-		// ID
-		var id = _id || "coreHtmlElementViewerButton" + count;
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
+		// 调用父类构造
+		core.html.element.viewer.Button.superClass.constructor.call(this, id || "coreHtmlElementViewerButton" + count);
 	};
-
-	/**
-	 * 获取元素jQuery对象
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.getjQuery = function() {
-
-		return $("#" + this.getId());
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 添加子元素
@@ -55,31 +38,21 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
-	 * 移除子元素
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+		// 抽象方法
+	};
+
+	/**
+	 * 处理HTML
 	 * 
 	 * @returns
 	 */
-	Constructor.prototype.remove = function() {
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function() {
-
-		return [];
+	Constructor.prototype.dealHtml = function() {
+		// 抽象方法
 	};
 
 	return Constructor;

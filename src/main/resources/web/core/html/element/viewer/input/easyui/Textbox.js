@@ -8,6 +8,9 @@
 
 core.html.element.viewer.input.easyui.Textbox = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -18,97 +21,16 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 	 */
 	var Constructor = function(id, name) {
 
+		// 对象个数+1
+		count++;
+
 		// 调用父类构造
-		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
+		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyuiTextbox" + count, name || "coreHtmlElementViewerInputEasyuiTextbox"
+				+ count);
 	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-
-		var $input = $("#" + this.getId());
-		$input.show();
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-
-		var $input = $("#" + this.getId());
-		$input.hide();
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		var $input = $("#" + this.getId());
-		$input.remove();
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		var $input = $("#" + this.getId());
-		return ($input.length !== 0);
-	};
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
-
-		return html.join("");
-	};
+	// 继承Easyui输入框抽象类
+	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
 
 	/**
 	 * 处理HTML
@@ -117,7 +39,7 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		var $input = $("#" + this.getId());
+		var $input = this.getjQuery();
 		$input.textbox(this.getEasyui());
 	};
 

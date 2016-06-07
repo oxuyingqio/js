@@ -1,12 +1,12 @@
 /**
- * Text
+ * Easyui
  * 
- * 基础输入框
+ * EasyUI 输入框
  * 
- * 类
+ * 抽象类
  */
 
-core.html.element.viewer.input.Text = (function() {
+core.html.element.viewer.input.Easyui = (function() {
 
 	// 对象个数
 	var count = 0;
@@ -25,8 +25,19 @@ core.html.element.viewer.input.Text = (function() {
 		count++;
 
 		// 调用父类构造
-		core.html.element.viewer.input.Text.superClass.constructor.call(this, id || "coreHtmlElementViewerInputText"
-				+ count, name || "coreHtmlElementViewerInputText" + count);
+		core.html.element.viewer.input.Easyui.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerInputEasyui" + count, name || "coreHtmlElementViewerInputEasyui" + count);
+
+		// easyui 配置
+		var easyui = {};
+
+		this.getEasyui = function() {
+			return easyui;
+		};
+
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
+		};
 	};
 	// 继承输入框抽象类
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
@@ -37,7 +48,7 @@ core.html.element.viewer.input.Text = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-
+		// 抽象方法
 	};
 
 	return Constructor;

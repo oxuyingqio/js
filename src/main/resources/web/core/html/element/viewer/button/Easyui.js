@@ -1,12 +1,12 @@
 /**
- * Button
+ * Easyui
  * 
- * 基础按钮
+ * EasyUI 按钮
  * 
- * 类
+ * 抽象类
  */
 
-core.html.element.viewer.button.Button = (function() {
+core.html.element.viewer.button.Easyui = (function() {
 
 	// 对象个数
 	var count = 0;
@@ -23,18 +23,18 @@ core.html.element.viewer.button.Button = (function() {
 		count++;
 
 		// 调用父类构造
-		core.html.element.viewer.button.Button.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerButtonButton" + count);
+		core.html.element.viewer.button.Easyui.superClass.constructor.call(this, id
+				|| "coreHtmlElementViewerButtonEasyui" + count);
 
-		// text
-		var text = "";
+		// easyui 配置
+		var easyui = {};
 
-		this.getText = function() {
-			return text;
+		this.getEasyui = function() {
+			return easyui;
 		};
 
-		this.setText = function(_text) {
-			text = _text;
+		this.setEasyui = function(_easyui) {
+			easyui = _easyui;
 		};
 	};
 	// 继承按钮抽象类
@@ -49,11 +49,9 @@ core.html.element.viewer.button.Button = (function() {
 
 		// HTML元素
 		var html = [];
-		html.push("<button id='");
+		html.push("<a id='");
 		html.push(this.getId());
-		html.push("'>");
-		html.push(this.getText());
-		html.push("</button>");
+		html.push("' />");
 
 		return html.join("");
 	};
@@ -64,7 +62,7 @@ core.html.element.viewer.button.Button = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-
+		// 抽象方法
 	};
 
 	return Constructor;

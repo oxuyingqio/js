@@ -8,6 +8,9 @@
 
 core.html.element.viewer.Input = (function() {
 
+	// 对象个数
+	var count = 0;
+
 	/**
 	 * 构造函数
 	 * 
@@ -16,21 +19,16 @@ core.html.element.viewer.Input = (function() {
 	 * @param name
 	 *            输入框名称
 	 */
-	var Constructor = function(_id, _name) {
+	var Constructor = function(id, _name) {
 
-		// ID
-		var id = _id;
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Input.superClass.constructor.call(this, id || "coreHtmlElementViewerInput" + count);
+
 		// name
-		var name = _name || id;
-
-		/**
-		 * 获取元素ID
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-			return id;
-		};
+		var name = _name || id || "coreHtmlElementViewerInput" + count;
 
 		this.getName = function() {
 			return name;
@@ -40,16 +38,8 @@ core.html.element.viewer.Input = (function() {
 			name = _name;
 		}
 	};
-
-	/**
-	 * 获取元素jQuery对象
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.getjQuery = function() {
-
-		return $("#" + this.getId());
-	};
+	// 继承元素抽象类
+	core.lang.Class.extend(Constructor, core.html.element.model.Element);
 
 	/**
 	 * 添加子元素
@@ -61,31 +51,30 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
-	 * 移除子元素
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+
+		// HTML元素
+		var html = [];
+		html.push("<input id='");
+		html.push(this.getId());
+		html.push("' name='");
+		html.push(this.getName());
+		html.push("' />");
+
+		return html.join("");
+	};
+
+	/**
+	 * 处理HTML
 	 * 
 	 * @returns
 	 */
-	Constructor.prototype.remove = function() {
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function() {
-
-		return [];
+	Constructor.prototype.dealHtml = function() {
+		// 抽象方法
 	};
 
 	return Constructor;
