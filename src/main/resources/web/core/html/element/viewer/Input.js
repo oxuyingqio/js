@@ -77,5 +77,23 @@ core.html.element.viewer.Input = (function() {
 		// 抽象方法
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+		// 抽象方法
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function() {
+		// 抽象方法
+	};
+
 	return Constructor;
 })();

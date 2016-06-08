@@ -1901,6 +1901,24 @@ core.html.element.viewer.Input = (function() {
 		// 抽象方法
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+		// 抽象方法
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function() {
+		// 抽象方法
+	};
+
 	return Constructor;
 })();
 /**
@@ -2479,6 +2497,24 @@ core.html.element.viewer.input.Easyui = (function() {
 		// 抽象方法
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+		// 抽象方法
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function() {
+		// 抽象方法
+	};
+
 	return Constructor;
 })();
 /**
@@ -2523,6 +2559,32 @@ core.html.element.viewer.input.Text = (function() {
 
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.val();
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.val(value);
+	};
+
 	return Constructor;
 })();
 /**
@@ -2565,8 +2627,41 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
+		// 获取jQuery对象
 		var $input = this.getjQuery();
 		$input.combobox(this.getEasyui());
+	};
+
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.combobox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.combobox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
 	};
 
 	return Constructor;
@@ -2615,6 +2710,38 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 		$input.datebox(this.getEasyui());
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.datebox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.datebox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
+	};
+
 	return Constructor;
 })();
 /**
@@ -2659,6 +2786,38 @@ core.html.element.viewer.input.easyui.Datetimebox = (function() {
 
 		var $input = this.getjQuery();
 		$input.datetimebox(this.getEasyui());
+	};
+
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.datetimebox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.datetimebox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
 	};
 
 	return Constructor;
@@ -2707,6 +2866,38 @@ core.html.element.viewer.input.easyui.Filebox = (function() {
 		$input.filebox(this.getEasyui());
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.filebox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.filebox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
+	};
+
 	return Constructor;
 })();
 /**
@@ -2751,6 +2942,38 @@ core.html.element.viewer.input.easyui.Numberbox = (function() {
 
 		var $input = this.getjQuery();
 		$input.numberbox(this.getEasyui());
+	};
+
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.numberbox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.numberbox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
 	};
 
 	return Constructor;
@@ -2799,6 +3022,38 @@ core.html.element.viewer.input.easyui.Numberspinner = (function() {
 		$input.numberspinner(this.getEasyui());
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.numberspinner("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.numberspinner("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
+	};
+
 	return Constructor;
 })();
 /**
@@ -2843,6 +3098,38 @@ core.html.element.viewer.input.easyui.Searchbox = (function() {
 
 		var $input = this.getjQuery();
 		$input.searchbox(this.getEasyui());
+	};
+
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.searchbox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.searchbox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
 	};
 
 	return Constructor;
@@ -2891,6 +3178,38 @@ core.html.element.viewer.input.easyui.Slider = (function() {
 		$input.slider(this.getEasyui());
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.slider("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.slider("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
+	};
+
 	return Constructor;
 })();
 /**
@@ -2937,6 +3256,38 @@ core.html.element.viewer.input.easyui.Textbox = (function() {
 		$input.textbox(this.getEasyui());
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.textbox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.textbox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
+	};
+
 	return Constructor;
 })();
 /**
@@ -2981,6 +3332,38 @@ core.html.element.viewer.input.easyui.Timespinner = (function() {
 
 		var $input = this.getjQuery();
 		$input.timespinner(this.getEasyui());
+	};
+
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.timespinner("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.timespinner("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
 	};
 
 	return Constructor;

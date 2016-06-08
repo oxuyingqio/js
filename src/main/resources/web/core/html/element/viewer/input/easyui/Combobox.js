@@ -38,8 +38,41 @@ core.html.element.viewer.input.easyui.Combobox = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
+		// 获取jQuery对象
 		var $input = this.getjQuery();
 		$input.combobox(this.getEasyui());
+	};
+
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.combobox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.combobox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
 	};
 
 	return Constructor;

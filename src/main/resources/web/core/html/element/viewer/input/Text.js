@@ -40,5 +40,31 @@ core.html.element.viewer.input.Text = (function() {
 
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.val();
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.val(value);
+	};
+
 	return Constructor;
 })();

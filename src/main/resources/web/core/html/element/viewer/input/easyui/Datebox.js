@@ -42,5 +42,37 @@ core.html.element.viewer.input.easyui.Datebox = (function() {
 		$input.datebox(this.getEasyui());
 	};
 
+	/**
+	 * 获取输入框的值
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.getValue = function() {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		return $input.datebox("getValue");
+	};
+
+	/**
+	 * 设置输入框的值
+	 * 
+	 * @param value
+	 *            值
+	 * @param hiddenValue
+	 *            隐藏值
+	 * @returns
+	 */
+	Constructor.prototype.setValue = function(value, hiddenValue) {
+
+		// 获取jQuery对象
+		var $input = this.getjQuery();
+		$input.datebox("setValue", value);
+
+		if (hiddenValue) {
+			$("input[name='" + this.getName() + "']").val(hiddenValue);
+		}
+	};
+
 	return Constructor;
 })();
