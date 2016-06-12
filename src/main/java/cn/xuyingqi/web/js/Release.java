@@ -1,4 +1,4 @@
-package cn.xuyingqi.web.js.core;
+package cn.xuyingqi.web.js;
 
 import java.io.File;
 
