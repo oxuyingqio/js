@@ -20,7 +20,7 @@ public class Release {
 	private static Logger logger = Logger.getLogger(Release.class);
 
 	/**
-	 * 发布JS文件
+	 * 生成JS发布文件
 	 */
 	public static void releaseJs() {
 
