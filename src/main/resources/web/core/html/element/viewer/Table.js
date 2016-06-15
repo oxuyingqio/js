@@ -14,7 +14,7 @@ core.html.element.viewer.Table = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -33,30 +33,34 @@ core.html.element.viewer.Table = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns
+	 * @returns {core.html.element.viewer.Table}
 	 */
 	Constructor.prototype.add = function(children) {
 
 		// 遍历参数
 		for (var i = 0, length = arguments.length; i < length; i++) {
+
 			// 待添加的子元素
 			var child = arguments[i];
 			// 判断是否实现元素接口
 			core.lang.Interface.ensureImplements(child, core.html.element.Element,
 					core.html.element.model.ElementProcess);
 
-			// 若为Tr,则直接添加.否则创建一个Tr,放入Tr再添加
+			// 若为Tr,则直接添加.
 			if (child.constructor === core.html.element.viewer.Tr) {
 				// 添加子元素
 				this.getElements().push(child);
 				// 若元素存在,则直接展示添加的子元素
 				this.exist() && child.appendTo(this.getId());
 			} else {
+				// 待添加的子元素不为Tr,则创建一个Tr,放入Tr再添加
 				var tr = new core.html.element.viewer.Tr();
 				tr.add(child);
 				this.add(tr);
 			}
 		}
+
+		return this;
 	};
 
 	/**

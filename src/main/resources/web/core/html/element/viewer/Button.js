@@ -14,7 +14,7 @@ core.html.element.viewer.Button = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -38,21 +38,21 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
-	 * 转为HTML
+	 * 转为HTML-抽象方法
 	 * 
-	 * @returns {String}
+	 * @returns
 	 */
 	Constructor.prototype.convertHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Button.convertHtml:方法未实现."
 	};
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Button.dealHtml:方法未实现."
 	};
 
 	return Constructor;

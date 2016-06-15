@@ -14,7 +14,7 @@ core.html.element.viewer.button.Button = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -29,12 +29,25 @@ core.html.element.viewer.button.Button = (function() {
 		// text
 		var text = "";
 
+		/**
+		 * 获取按钮文本
+		 * 
+		 * @returns {String}
+		 */
 		this.getText = function() {
 			return text;
 		};
 
+		/**
+		 * 设置按钮文本
+		 * 
+		 * @param text{String}
+		 *            按钮文本
+		 * @returns {core.html.element.viewer.button.Button}
+		 */
 		this.setText = function(_text) {
 			text = _text;
+			return this;
 		};
 	};
 	// 继承按钮抽象类
@@ -61,10 +74,11 @@ core.html.element.viewer.button.Button = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @returns
+	 * @returns {core.html.element.viewer.button.Button}
 	 */
 	Constructor.prototype.dealHtml = function() {
 
+		return this;
 	};
 
 	return Constructor;

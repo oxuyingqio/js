@@ -11,8 +11,8 @@ core.log.controller.OutputorCreator = {
 	/**
 	 * 获取输出者
 	 * 
-	 * @param mode
-	 *            模式
+	 * @param mode{core.log.model.Mode}
+	 *            输出模式
 	 * @returns {core.log.model.Outputor}
 	 */
 	getOutputor : function(mode) {
@@ -23,12 +23,14 @@ core.log.controller.OutputorCreator = {
 		switch (mode) {
 		case core.log.model.Mode.console:
 			// 获取控制台输出者实例
-			outputor = new core.log.controller.outputor.Console.getOutputor();
+			outputor = new core.log.controller.outputor.Console.getInstance();
 			break;
 		case core.log.model.Mode.popup:
 			// 获取弹出框输出者实例
-			outputor = new core.log.controller.outputor.Popup.getOutputor();
+			outputor = new core.log.controller.outputor.Popup.getInstance();
 			break;
+		default:
+			throw "core.log.controller.OutputorCreator.getOutputor:参数异常.模式(" + mode + ")不支持";
 		}
 
 		// 判断是否实现接口方法

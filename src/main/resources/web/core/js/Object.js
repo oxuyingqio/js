@@ -3,19 +3,19 @@
  * 
  * 超类
  * 
- * 对象扩展
- * 
- * 扩展Object.prototype,引入jQuery会产生未知错误
- * 因此仅扩展Object静态方法
+ * 类扩展
  */
 
 /**
- * 静态方法-克隆对象
+ * 注:
+ * 		1.若扩展Object.prototype,则引入jQuery时会产生未知错误.
+ */
+
+/**
+ * 克隆对象(原型式继承)-静态方法
  * 
- * 使用原型式继承,进行克隆的实现
- * 
- * @param object
- *            待复制的对象
+ * @param object{Object}
+ *            待克隆的对象
  * @returns {Object}
  */
 Object.clone = function(object) {

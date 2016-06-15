@@ -3,7 +3,7 @@
  * 
  * 格式化转换器
  * 
- * 对象
+ * 类
  */
 
 core.log.controller.FormatConvertor = (function() {
@@ -22,7 +22,7 @@ core.log.controller.FormatConvertor = (function() {
 	 * 格式转换
 	 * 
 	 * @param msg
-	 *            信息
+	 *            输出信息
 	 * @param level
 	 *            级别信息
 	 * @param format
@@ -46,11 +46,11 @@ core.log.controller.FormatConvertor = (function() {
 	return {
 
 		/**
-		 * 获取转换器 懒加载,且仅创建一个
+		 * 获取转换器
 		 * 
-		 * @returns {core.log.controller.FormatConvertor.Constructor}
+		 * @returns {core.log.controller.FormatConvertor}
 		 */
-		getConvertor : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!convertor) {

@@ -9,16 +9,16 @@
 /**
  * 构造函数
  * 
- * @param name
+ * @param name{String}
  *            名称
- * @param methods
- *            方法组
+ * @param methods{Array
+ *            <String>} 方法组
  */
 core.lang.Interface = function(name, methods) {
 
-	// 判断构造参数个数
+	// 判断参数个数
 	if (arguments.length !== 2) {
-		throw "core.lang.Interface:构造参数异常.参数个数必须为2个,得到" + arguments.length + "个";
+		throw "core.lang.Interface:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
 	}
 
 	// 接口名称
@@ -29,27 +29,27 @@ core.lang.Interface = function(name, methods) {
 	for (var i = 0, length = methods.length; i < length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
-			throw "core.lang.Interface:构造参数异常.接口方法名必须为字符串";
+			throw "core.lang.Interface:参数异常.接口方法名必须为字符串";
+		} else {
+			this.methods.push(methods[i]);
 		}
-
-		this.methods.push(methods[i]);
 	}
 };
 
 /**
- * 静态方法-接口方法检查
+ * 接口方法检查-静态方法
  * 
- * 检查实现接口的对象是否已实现对应接口的方法
+ * 检查对象是否实现对应接口的方法
  * 
- * @param object
- *            实现接口的对象
+ * @param object{Object}
+ *            对象
  * @returns
  */
 core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		throw "core.lang.Interface.ensureImplements:参数异常.参数个数至少大于等于2.首参数为实现接口的对象,后续参数为实现的接口对象";
+		throw "core.lang.Interface.ensureImplements:参数异常.参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象";
 	}
 
 	// 遍历实现的接口对象
@@ -58,10 +58,11 @@ core.lang.Interface.ensureImplements = function(object) {
 		// 获取实现的接口对象
 		var _interface = arguments[i];
 
+		// 接口对象是否存在
 		if (_interface) {
-			// 检查接口对象是否继承Interface对象
+			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
-				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
+				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须是core.lang.Interface类";
 			}
 		} else {
 			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象不存在";

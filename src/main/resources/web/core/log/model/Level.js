@@ -9,11 +9,11 @@
 core.log.model.Level = {
 
 	// 错误
-	error : 4,
+	error : 3,
 	// 警告
-	warn : 3,
+	warn : 2,
 	// 信息
-	info : 2,
+	info : 1,
 	// 调试
-	debug : 1
+	debug : 0
 };

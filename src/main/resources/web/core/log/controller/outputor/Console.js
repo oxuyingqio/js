@@ -3,7 +3,7 @@
  * 
  * 控制台输出者
  * 
- * 对象
+ * 类
  */
 
 core.log.controller.outputor.Console = (function() {
@@ -21,8 +21,8 @@ core.log.controller.outputor.Console = (function() {
 	/**
 	 * 输出消息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.output = function(msg) {
@@ -33,11 +33,11 @@ core.log.controller.outputor.Console = (function() {
 	return {
 
 		/**
-		 * 获取输出者 懒加载,且仅创建一个
+		 * 获取输出者
 		 * 
-		 * @returns {core.log.model.Outputor.Constructor}
+		 * @returns {core.log.controller.outputor.Console}
 		 */
-		getOutputor : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!outputor) {

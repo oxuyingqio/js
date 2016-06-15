@@ -14,9 +14,9 @@ core.html.element.viewer.Fieldset = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
-	 * @param legend
+	 * @param legend{String}
 	 *            legend
 	 */
 	var Constructor = function(id, _legend) {
@@ -31,12 +31,25 @@ core.html.element.viewer.Fieldset = (function() {
 		// legend
 		var legend = _legend || "";
 
+		/**
+		 * 获取legend属性值
+		 * 
+		 * @returns {String}
+		 */
 		this.getLegend = function() {
 			return legend;
 		};
 
+		/**
+		 * 设置legend属性值
+		 * 
+		 * @param legend{String}
+		 *            legend属性值
+		 * @returns {core.html.element.viewer.Fieldset}
+		 */
 		this.setLegend = function(_legend) {
 			legend = _legend;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -62,6 +75,7 @@ core.html.element.viewer.Fieldset = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 

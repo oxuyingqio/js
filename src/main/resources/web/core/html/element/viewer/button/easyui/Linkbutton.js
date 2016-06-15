@@ -14,7 +14,7 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -32,12 +32,14 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @returns
+	 * @returns {core.html.element.viewer.button.easyui.Linkbutton}
 	 */
 	Constructor.prototype.dealHtml = function() {
 
 		var $button = this.getjQuery();
 		$button.linkbutton(this.getEasyui());
+
+		return this;
 	};
 
 	return Constructor;

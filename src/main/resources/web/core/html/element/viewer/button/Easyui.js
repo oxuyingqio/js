@@ -14,7 +14,7 @@ core.html.element.viewer.button.Easyui = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -29,12 +29,25 @@ core.html.element.viewer.button.Easyui = (function() {
 		// easyui 配置
 		var easyui = {};
 
+		/**
+		 * 获取EasyUI配置
+		 * 
+		 * @returns {Object}
+		 */
 		this.getEasyui = function() {
 			return easyui;
 		};
 
+		/**
+		 * 设置EasyUI配置
+		 * 
+		 * @param easyui{Object}
+		 *            EasyUI配置
+		 * @returns {core.html.element.viewer.button.Easyui}
+		 */
 		this.setEasyui = function(_easyui) {
 			easyui = _easyui;
+			return this;
 		};
 	};
 	// 继承按钮抽象类
@@ -57,12 +70,12 @@ core.html.element.viewer.button.Easyui = (function() {
 	};
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.button.Easyui.dealHtml:方法未实现."
 	};
 
 	return Constructor;

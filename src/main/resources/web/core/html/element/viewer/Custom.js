@@ -1,7 +1,7 @@
 /**
  * Custom
  * 
- * 自定义元素,直接传入自定义HTML.自定义不允许增加子元素
+ * 自定义元素,直接传入自定义HTML.
  * 
  * 类
  */
@@ -11,7 +11,7 @@ core.html.element.viewer.Custom = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param custom
+	 * @param custom{String}
 	 *            自定义HTML
 	 */
 	var Constructor = function(_custom) {
@@ -19,6 +19,11 @@ core.html.element.viewer.Custom = (function() {
 		// 自定义HTML
 		var custom = _custom || "";
 
+		/**
+		 * 获取自定义HTML
+		 * 
+		 * @returns {String}
+		 */
 		this.getCustom = function() {
 			return custom;
 		};
@@ -30,8 +35,7 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.getId = function() {
-
-		return undefined;
+		throw "core.html.element.viewer.Custom.getId:方法异常.自定义元素无getId()方法实现";
 	};
 
 	/**
@@ -40,30 +44,25 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.getjQuery = function() {
-
-		return undefined;
+		throw "core.html.element.viewer.Custom.getjQuery:方法异常.自定义元素无getjQuery()方法实现";
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns
 	 */
 	Constructor.prototype.show = function() {
-
-		// 返回本身,以便链式调用
-		return this;
+		throw "core.html.element.viewer.Custom.show:方法异常.自定义元素无show()方法实现";
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns
 	 */
 	Constructor.prototype.hide = function() {
-
-		// 返回本身,以便链式调用
-		return this;
+		throw "core.html.element.viewer.Custom.hide:方法异常.自定义元素无hide()方法实现";
 	};
 
 	/**
@@ -72,22 +71,21 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.destroy = function() {
-
+		throw "core.html.element.viewer.Custom.destroy:方法异常.自定义元素无destroy()方法实现";
 	};
 
 	/**
 	 * 添加元素到
 	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns {core.html.element.Element}
+	 * @param id{String}
+	 *            添加到的Div ID
+	 * @returns {core.html.element.viewer.Custom}
 	 */
 	Constructor.prototype.appendTo = function(id) {
 
 		$(id === "body" ? id : "#" + id).append(this.convertHtml());
 		this.dealHtml();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -97,18 +95,16 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Custom.add:方法异常.自定义HTML不允许继续添加子元素";
+		throw "core.html.element.viewer.Custom.add:方法异常.自定义元素不允许继续添加子元素";
 	};
 
 	/**
 	 * 移除子元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns
 	 */
 	Constructor.prototype.remove = function() {
-
-		// 返回本身,以便链式调用
-		return this;
+		throw "core.html.element.viewer.Custom.remove:方法异常.自定义元素无remove()方法实现";
 	};
 
 	/**
@@ -124,7 +120,7 @@ core.html.element.viewer.Custom = (function() {
 	/**
 	 * 检索子元素集合
 	 * 
-	 * @param data
+	 * @param data{Object}
 	 *            查找数据
 	 * @returns {Array}
 	 */
@@ -140,7 +136,7 @@ core.html.element.viewer.Custom = (function() {
 	 */
 	Constructor.prototype.exist = function() {
 
-		return undefined;
+		throw "core.html.element.viewer.Custom.exist:方法异常.自定义元素无exist()方法实现";
 	};
 
 	/**
@@ -159,7 +155,7 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-
+		throw "core.html.element.viewer.Custom.dealHtml:方法异常.自定义元素无dealHtml()方法实现";
 	};
 
 	return Constructor;

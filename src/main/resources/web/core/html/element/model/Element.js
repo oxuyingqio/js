@@ -14,7 +14,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(_id) {
@@ -37,6 +37,11 @@ core.html.element.model.Element = (function() {
 			return id;
 		};
 
+		/**
+		 * 获取子元素集合
+		 * 
+		 * @returns {Array<core.html.element.Element>}
+		 */
 		this.getElements = function() {
 			return elements;
 		};
@@ -45,7 +50,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 获取元素jQuery对象
 	 * 
-	 * @returns
+	 * @returns {Object}
 	 */
 	Constructor.prototype.getjQuery = function() {
 
@@ -55,7 +60,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 展示元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.show = function() {
 
@@ -63,14 +68,13 @@ core.html.element.model.Element = (function() {
 		var $element = this.getjQuery();
 		$element.show();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.hide = function() {
 
@@ -78,7 +82,6 @@ core.html.element.model.Element = (function() {
 		var $element = this.getjQuery();
 		$element.hide();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -93,6 +96,7 @@ core.html.element.model.Element = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时移除子元素
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			this.remove(children[i]);
 		}
 
@@ -104,16 +108,15 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 添加元素到
 	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns {core.html.element.Element}
+	 * @param id{String}
+	 *            添加到的Div ID
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.appendTo = function(id) {
 
 		$(id === "body" ? id : "#" + id).append(this.convertHtml());
 		this.dealHtml();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -122,12 +125,13 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.add = function(children) {
 
 		// 遍历参数
 		for (var i = 0, length = arguments.length; i < length; i++) {
+
 			// 待添加的子元素
 			var child = arguments[i];
 			// 判断是否实现元素接口
@@ -140,7 +144,6 @@ core.html.element.model.Element = (function() {
 			this.exist() && child.appendTo(this.getId());
 		}
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -149,7 +152,7 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param removeChild{core.html.element.Element}
 	 *            待移除的子元素
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.remove = function(removeChild) {
 
@@ -157,6 +160,7 @@ core.html.element.model.Element = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			// 子元素
 			var child = children[i];
 
@@ -171,7 +175,6 @@ core.html.element.model.Element = (function() {
 			}
 		}
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -188,7 +191,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 检索子元素集合
 	 * 
-	 * @param data
+	 * @param data{Object}
 	 *            查找数据
 	 * @returns {Array<core.html.element.Element>}
 	 */
@@ -204,6 +207,7 @@ core.html.element.model.Element = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			// 子元素
 			var child = children[i];
 
@@ -242,12 +246,12 @@ core.html.element.model.Element = (function() {
 	};
 
 	/**
-	 * 转为HTML
+	 * 转为HTML-抽象方法
 	 * 
 	 * @returns {String}
 	 */
 	Constructor.prototype.convertHtml = function() {
-		// 抽象方法
+		throw "core.html.element.model.Element.convertHtml:方法未实现."
 	};
 
 	/**

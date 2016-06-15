@@ -1,14 +1,14 @@
 /**
  * Logger
  * 
- * 日志管理者
+ * 日志记录者
  * 
- * 对象
+ * 类
  */
 
 core.log.Logger = (function() {
 
-	// 日志管理者
+	// 日志记录者
 	var logger;
 
 	/**
@@ -27,14 +27,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Error级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.error = function(msg) {
 
+		// 级别是否低于Error级别
 		if (this.level <= core.log.model.Level.error) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "ERROR", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -42,14 +46,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Warn级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.warn = function(msg) {
 
+		// 级别是否低于Warn级别
 		if (this.level <= core.log.model.Level.warn) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "WARN", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -57,14 +65,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Info级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.info = function(msg) {
 
+		// 级别是否低于Info级别
 		if (this.level <= core.log.model.Level.info) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "INFO", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -72,14 +84,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Debug级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.debug = function(msg) {
 
+		// 级别是否低于Info级别
 		if (this.level <= core.log.model.Level.debug) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "DEBUG", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -87,11 +103,11 @@ core.log.Logger = (function() {
 	return {
 
 		/**
-		 * 获取日志管理者 懒加载,且仅创建一个
+		 * 获取日志记录者
 		 * 
-		 * @returns {core.log.Logger.Constructor}
+		 * @returns {core.log.Logger}
 		 */
-		getLogger : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!logger) {

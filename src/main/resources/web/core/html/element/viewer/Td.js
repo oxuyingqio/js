@@ -14,7 +14,7 @@ core.html.element.viewer.Td = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -28,12 +28,25 @@ core.html.element.viewer.Td = (function() {
 		// 列数
 		var colspan = 1;
 
+		/**
+		 * 获取列数
+		 * 
+		 * @returns {Number}
+		 */
 		this.getColspan = function() {
 			return colspan;
 		};
 
+		/**
+		 * 设置列数
+		 * 
+		 * @param colspan{Number}
+		 *            列数
+		 * @returns {core.html.element.viewer.Td}
+		 */
 		this.setColspan = function(_colspan) {
 			colspan = _colspan;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -58,6 +71,7 @@ core.html.element.viewer.Td = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 

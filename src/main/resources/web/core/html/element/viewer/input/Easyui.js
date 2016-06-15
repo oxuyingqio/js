@@ -43,30 +43,30 @@ core.html.element.viewer.input.Easyui = (function() {
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.input.Easyui.dealHtml:方法未实现."
 	};
 
 	/**
-	 * 获取输入框的值
+	 * 获取输入框的值-抽象方法
 	 * 
 	 * @returns {String}
 	 */
 	Constructor.prototype.getValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.input.Easyui.getValue:方法未实现."
 	};
 
 	/**
-	 * 设置输入框的值
+	 * 设置输入框的值-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.setValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.input.Easyui.setValue:方法未实现."
 	};
 
 	return Constructor;

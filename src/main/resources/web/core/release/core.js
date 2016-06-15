@@ -3,7 +3,7 @@
  * 
  * 数组
  * 
- * 对象扩展
+ * 类扩展
  */
 
 /**
@@ -13,38 +13,39 @@
  */
 Array.prototype.clear = function() {
 
+	// 长度>0,则清空
 	this.length > 0 && this.splice(0, this.length);
 };
 
 /**
- * 判断是否存在指定对象
+ * 是否存在指定对象
  * 
- * @param obj
+ * @param object{Object}
  *            对象
  * @returns {Boolean}
  */
-Array.prototype.contains = function(obj) {
+Array.prototype.contains = function(object) {
 
-	var index = this.indexOf(obj);
+	// 获取对象下标值
+	var index = this.indexOf(object);
+	// 依据下标值判断是否存在该对象
 	return (index >= 0);
 };
 
 /**
  * 获取指定对象下标值
  * 
- * @param obj
+ * @param object{Object}
  *            对象
  * @returns {Number}
  */
-Array.prototype.indexOf = function(obj) {
+Array.prototype.indexOf = function(object) {
 
-	var length = this.length;
-	if (length != 0) {
-		for (var index = 0; index < length; index++) {
+	// 遍历数组
+	for (var index = 0, length = this.length; index < length; index++) {
 
-			if (this[index] === obj) {
-				return index;
-			}
+		if (this[index] === obj) {
+			return index;
 		}
 	}
 
@@ -52,36 +53,38 @@ Array.prototype.indexOf = function(obj) {
 };
 
 /**
- * 指定下标值插入对象
+ * 在指定下标位置插入对象
  * 
- * @param index
- *            下标索引
- * @param obj
+ * @param index{Number}
+ *            下标值
+ * @param object{Object}
  *            对象
  * @returns
  */
-Array.prototype.insert = function(index, obj) {
+Array.prototype.insert = function(index, object) {
 
-	this.splice(index, 0, obj);
+	this.splice(index, 0, object);
 };
 
 /**
  * 删除指定对象
  * 
- * @param obj
+ * @param object{Object}
  *            对象
  * @returns
  */
-Array.prototype.remove = function(obj) {
+Array.prototype.remove = function(object) {
 
-	var index = this.indexOf(obj);
+	// 获取对应下标值
+	var index = this.indexOf(object);
+	// 存在则删除
 	index >= 0 && this.splice(index, 1);
 };
 
 /**
  * 删除指定下标位置的对象
  * 
- * @param index
+ * @param index{Number}
  *            下标索引
  * @returns
  */
@@ -89,33 +92,33 @@ Array.prototype.removeAt = function(index) {
 
 	this.splice(index, 1);
 };
-
 /**
  * Date
  * 
  * 日期
  * 
- * 对象扩展
+ * 类扩展
  */
 
 /**
  * 格式化日期
  * 
- * @param fmt
- *            格式 yyyy-MM-dd HH:mm:ss
+ * @param format{String}
+ *            格式化参数
  * @returns {String}
  */
-Date.prototype.format = function(fmt) {
+Date.prototype.format = function(format) {
 
-	var obj = {
+	// 日期数据
+	var data = {
 
 		// 月份
 		"M+" : this.getMonth() + 1,
 		// 日
 		"d+" : this.getDate(),
-		// 小时
+		// 小时,12进制
 		"h+" : this.getHours() % 12 === 0 ? 12 : this.getHours() % 12,
-		// 小时
+		// 小时,24进制
 		"H+" : this.getHours(),
 		// 分
 		"m+" : this.getMinutes(),
@@ -125,19 +128,21 @@ Date.prototype.format = function(fmt) {
 		"S" : this.getMilliseconds()
 	};
 
-	if (/(y+)/.test(fmt)) {
-		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	// 处理年份
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
 	}
 
-	for ( var el in obj) {
+	// 处理月 日 时 分 秒 毫秒
+	for ( var el in data) {
 
-		if (new RegExp("(" + el + ")").test(fmt)) {
-			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (obj[el]) : (("00" + obj[el])
-					.substr(("" + obj[el]).length)));
+		if (new RegExp("(" + el + ")").test(format)) {
+			format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (data[el]) : (("00" + data[el])
+					.substr(("" + data[el]).length)));
 		}
 	}
 
-	return fmt;
+	return format;
 };
 /**
  * Math
@@ -148,19 +153,21 @@ Date.prototype.format = function(fmt) {
  */
 
 /**
- * 静态方法-减法
+ * 减法-静态方法
  * 
- * @param subtrahend
+ * @param subtrahend{Number}
  *            减数
- * @param minuend
+ * @param minuend{Number}
  *            被减数
- * @param precision
+ * @param precision{Number}
  *            结果精度
  * @returns {Number}
  */
 Math.subtract = function(subtrahend, minuend, precision) {
 
+	// 减数
 	var a = parseFloat(subtrahend);
+	// 被减数
 	var b = parseFloat(minuend);
 
 	return (a - b).toFixed(precision);
@@ -170,19 +177,19 @@ Math.subtract = function(subtrahend, minuend, precision) {
  * 
  * 超类
  * 
- * 对象扩展
- * 
- * 扩展Object.prototype,引入jQuery会产生未知错误
- * 因此仅扩展Object静态方法
+ * 类扩展
  */
 
 /**
- * 静态方法-克隆对象
+ * 注:
+ * 		1.若扩展Object.prototype,则引入jQuery时会产生未知错误.
+ */
+
+/**
+ * 克隆对象(原型式继承)-静态方法
  * 
- * 使用原型式继承,进行克隆的实现
- * 
- * @param object
- *            待复制的对象
+ * @param object{Object}
+ *            待克隆的对象
  * @returns {Object}
  */
 Object.clone = function(object) {
@@ -201,16 +208,16 @@ Object.clone = function(object) {
  * 
  * 字符串
  * 
- * 对象扩展
+ * 类扩展
  */
 
 /**
  * 替换所有字符串
  * 
- * @param target
- *            目标字符
- * @param result
- *            替换字符
+ * @param target{String}
+ *            目标字符串
+ * @param result{String}
+ *            待替换的字符串
  * @returns {String}
  */
 String.prototype.replaceAll = function(target, result) {
@@ -219,7 +226,7 @@ String.prototype.replaceAll = function(target, result) {
 };
 
 /**
- * 字符串转2进制
+ * 转为2进制字符串
  * 
  * @returns {String}
  */
@@ -228,12 +235,12 @@ String.prototype.toBinaryString = function() {
 	// 返回的字符串
 	var rtnStr = [];
 
-	// 遍历每一个字符
+	// 遍历字符串所有字符
 	for (var i = 0, length = this.length; i < length; i++) {
 
-		// 获取对应字符的2进制
+		// 获取对应字符的2进制字符串
 		var bs = this.charCodeAt(i).toString(2);
-		// 不足8位的补0
+		// 不足8位,则在前面补0
 		for (var j = bs.length; j < 8; j++) {
 
 			rtnStr.push(0);
@@ -247,7 +254,7 @@ String.prototype.toBinaryString = function() {
 };
 
 /**
- * 字符串转16进制
+ * 转为16进制字符串
  * 
  * @returns {String}
  */
@@ -256,12 +263,12 @@ String.prototype.toHexString = function() {
 	// 返回的字符串
 	var rtnStr = [];
 
-	// 遍历每一个字符
+	// 遍历字符串所有字符
 	for (var i = 0, length = this.length; i < length; i++) {
 
-		// 获取对应字符的16进制
+		// 获取对应字符的16进制字符串
 		var hs = this.charCodeAt(i).toString(16);
-		// 不足2位的补0
+		// 不足2位,则在前面补0
 		for (var j = hs.length; j < 2; j++) {
 
 			rtnStr.push(0);
@@ -280,66 +287,78 @@ String.prototype.toHexString = function() {
 (function() {
 	if (typeof (core) !== "undefined") {
 		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
-	}
+	} else {
 
-	// 核心包
-	core = {
+		// 核心包
+		core = {
 
-		// HTML 包
-		html : {
-			// 常量包
-			constant : {},
+			// HTML 包
+			html : {
 
-			// 元素包
-			element : {
-				// 模型包
-				model : {},
-				// 展示包
-				viewer : {
-					// 按钮实现包
-					button : {
-						// EasyUI按钮实现包
-						easyui : {}
-					},
-					// 输入框实现包
-					input : {
-						// EasyUI输入框实现包
-						easyui : {}
+				// 常量包
+				constant : {},
+
+				// 元素包
+				element : {
+
+					// 模型包
+					model : {},
+
+					// 展示包
+					viewer : {
+
+						// 按钮实现包
+						button : {
+
+							// EasyUI按钮实现包
+							easyui : {}
+						},
+
+						// 输入框实现包
+						input : {
+
+							// EasyUI输入框实现包
+							easyui : {}
+						}
 					}
-				}
+				},
+
+				// 事件包
+				event : {
+
+					// document事件包
+					document : {},
+
+					// window事件包
+					window : {}
+				},
+
+				// 工具包
+				util : {}
 			},
 
-			// 事件包
-			event : {
-				// document事件包
-				document : {},
-				// window事件包
-				window : {}
+			// 基础包
+			lang : {},
+
+			// 日志包
+			log : {
+
+				// 控制包
+				controller : {
+
+					// 输出者实现包
+					outputor : {}
+				},
+
+				// 模型包
+				model : {}
 			},
 
 			// 工具包
 			util : {}
-		},
-
-		// 基础包
-		lang : {},
-
-		// 日志包
-		log : {
-			// 控制包
-			controller : {
-				// 输出者实现包
-				outputor : {}
-			},
-			// 模型包
-			model : {}
-		},
-
-		// 工具包
-		util : {}
-	};
+		};
+	}
 })();
-
 /**
  * Class
  * 
@@ -356,11 +375,11 @@ core.lang.Class = function() {
 };
 
 /**
- * 静态方法-类继承
+ * 类继承-静态方法
  * 
- * @param SubClass
+ * @param SubClass{function}
  *            子类
- * @param SuperClass
+ * @param SuperClass{function}
  *            父类
  * @returns
  */
@@ -368,21 +387,21 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		throw "core.lang.Class:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
+		throw "core.lang.Class.extend:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
 	}
 
 	// 中间函数
 	var Middleware = function() {
 
 	};
-	// 中间函数指向父类
+	// 中间函数原型指向父类
 	Middleware.prototype = SuperClass.prototype;
-	// 子类指向中间函数
+	// 子类原型指向中间函数
 	SubClass.prototype = new Middleware();
 
-	// 子类构造不变
+	// 保持子类构造不变
 	SubClass.prototype.constructor = SubClass;
-	// 子类添加superClass静态属性
+	// 子类添加superClass属性,指向父类原型
 	SubClass.superClass = SuperClass.prototype;
 	if (SuperClass.prototype.constructor === Object.prototype.constructor) {
 		SuperClass.prototype.constructor = SuperClass;
@@ -399,16 +418,16 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 /**
  * 构造函数
  * 
- * @param name
+ * @param name{String}
  *            名称
- * @param methods
- *            方法组
+ * @param methods{Array
+ *            <String>} 方法组
  */
 core.lang.Interface = function(name, methods) {
 
-	// 判断构造参数个数
+	// 判断参数个数
 	if (arguments.length !== 2) {
-		throw "core.lang.Interface:构造参数异常.参数个数必须为2个,得到" + arguments.length + "个";
+		throw "core.lang.Interface:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
 	}
 
 	// 接口名称
@@ -419,27 +438,27 @@ core.lang.Interface = function(name, methods) {
 	for (var i = 0, length = methods.length; i < length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
-			throw "core.lang.Interface:构造参数异常.接口方法名必须为字符串";
+			throw "core.lang.Interface:参数异常.接口方法名必须为字符串";
+		} else {
+			this.methods.push(methods[i]);
 		}
-
-		this.methods.push(methods[i]);
 	}
 };
 
 /**
- * 静态方法-接口方法检查
+ * 接口方法检查-静态方法
  * 
- * 检查实现接口的对象是否已实现对应接口的方法
+ * 检查对象是否实现对应接口的方法
  * 
- * @param object
- *            实现接口的对象
+ * @param object{Object}
+ *            对象
  * @returns
  */
 core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		throw "core.lang.Interface.ensureImplements:参数异常.参数个数至少大于等于2.首参数为实现接口的对象,后续参数为实现的接口对象";
+		throw "core.lang.Interface.ensureImplements:参数异常.参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象";
 	}
 
 	// 遍历实现的接口对象
@@ -448,10 +467,11 @@ core.lang.Interface.ensureImplements = function(object) {
 		// 获取实现的接口对象
 		var _interface = arguments[i];
 
+		// 接口对象是否存在
 		if (_interface) {
-			// 检查接口对象是否继承Interface对象
+			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
-				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须继承Interface";
+				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须是core.lang.Interface类";
 			}
 		} else {
 			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象不存在";
@@ -473,7 +493,7 @@ core.lang.Interface.ensureImplements = function(object) {
 /**
  * Map
  * 
- * 集合
+ * 映射
  * 
  * 类
  */
@@ -482,11 +502,11 @@ core.util.Map = function() {
 
 	// 元素
 	var elements = {};
-	// 元素数
+	// 元素个数
 	var length = 0;
 
 	/**
-	 * 返回此映射中的键-值映射关系数
+	 * 返回映射个数
 	 * 
 	 * @returns {Number}
 	 */
@@ -496,7 +516,7 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 如果此映射未包含键-值映射关系，则返回 true。
+	 * 映射是否包含键-值映射关系,未包含则返回 true。
 	 * 
 	 * @returns {Boolean}
 	 */
@@ -506,9 +526,9 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 如果此映射包含指定键的映射关系，则返回 true。
+	 * 映射是否包含指定键的映射关系,包含则返回 true。
 	 * 
-	 * @param key
+	 * @param key{Object}
 	 *            键
 	 * @returns {Boolean}
 	 */
@@ -518,9 +538,9 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 如果此映射将一个或多个键映射到指定值，则返回 true。
+	 * 映射是否包含指定值的映射关系,包含则返回 true。
 	 * 
-	 * @param value
+	 * @param value{Object}
 	 *            值
 	 * @returns {Boolean}
 	 */
@@ -537,9 +557,9 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 返回指定键所映射的值；如果此映射不包含该键的映射关系，则返回 null。
+	 * 返回指定键所映射的值;如果映射中不包含该键的映射关系,则返回 undefined.
 	 * 
-	 * @param key
+	 * @param key{Object}
 	 *            键
 	 * @returns {Object}
 	 */
@@ -549,11 +569,11 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 将指定的值与此映射中的指定键关联（可选操作）。
+	 * 将指定键-值映射保存;若存在键,则更新对应映射的值.
 	 * 
-	 * @param key
+	 * @param key{Object}
 	 *            键
-	 * @param value
+	 * @param value{Object}
 	 *            值
 	 * @returns
 	 */
@@ -564,9 +584,9 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 如果存在一个键的映射关系，则将其从此映射中移除（可选操作）。
+	 * 若存在指定键的映射关系,则将其删除.
 	 * 
-	 * @param key
+	 * @param key{Object}
 	 *            键
 	 * @returns
 	 */
@@ -577,7 +597,7 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 从此映射中移除所有映射关系
+	 * 清除映射中所有映射关系
 	 * 
 	 * @returns
 	 */
@@ -589,14 +609,14 @@ core.util.Map = function() {
 /**
  * Logger
  * 
- * 日志管理者
+ * 日志记录者
  * 
- * 对象
+ * 类
  */
 
 core.log.Logger = (function() {
 
-	// 日志管理者
+	// 日志记录者
 	var logger;
 
 	/**
@@ -615,14 +635,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Error级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.error = function(msg) {
 
+		// 级别是否低于Error级别
 		if (this.level <= core.log.model.Level.error) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "ERROR", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "ERROR", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -630,14 +654,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Warn级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.warn = function(msg) {
 
+		// 级别是否低于Warn级别
 		if (this.level <= core.log.model.Level.warn) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "WARN", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "WARN", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -645,14 +673,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Info级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.info = function(msg) {
 
+		// 级别是否低于Info级别
 		if (this.level <= core.log.model.Level.info) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "INFO", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "INFO", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -660,14 +692,18 @@ core.log.Logger = (function() {
 	/**
 	 * 输出Debug级别日志信息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.debug = function(msg) {
 
+		// 级别是否低于Info级别
 		if (this.level <= core.log.model.Level.debug) {
-			msg = core.log.controller.FormatConvertor.getConvertor().convert(msg, "DEBUG", this.format);
+
+			// 格式化输出信息
+			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "DEBUG", this.format);
+			// 输出信息
 			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
 		}
 	};
@@ -675,11 +711,11 @@ core.log.Logger = (function() {
 	return {
 
 		/**
-		 * 获取日志管理者 懒加载,且仅创建一个
+		 * 获取日志记录者
 		 * 
-		 * @returns {core.log.Logger.Constructor}
+		 * @returns {core.log.Logger}
 		 */
-		getLogger : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!logger) {
@@ -695,7 +731,7 @@ core.log.Logger = (function() {
  * 
  * 格式化转换器
  * 
- * 对象
+ * 类
  */
 
 core.log.controller.FormatConvertor = (function() {
@@ -714,7 +750,7 @@ core.log.controller.FormatConvertor = (function() {
 	 * 格式转换
 	 * 
 	 * @param msg
-	 *            信息
+	 *            输出信息
 	 * @param level
 	 *            级别信息
 	 * @param format
@@ -738,11 +774,11 @@ core.log.controller.FormatConvertor = (function() {
 	return {
 
 		/**
-		 * 获取转换器 懒加载,且仅创建一个
+		 * 获取转换器
 		 * 
-		 * @returns {core.log.controller.FormatConvertor.Constructor}
+		 * @returns {core.log.controller.FormatConvertor}
 		 */
-		getConvertor : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!convertor) {
@@ -766,8 +802,8 @@ core.log.controller.OutputorCreator = {
 	/**
 	 * 获取输出者
 	 * 
-	 * @param mode
-	 *            模式
+	 * @param mode{core.log.model.Mode}
+	 *            输出模式
 	 * @returns {core.log.model.Outputor}
 	 */
 	getOutputor : function(mode) {
@@ -778,12 +814,14 @@ core.log.controller.OutputorCreator = {
 		switch (mode) {
 		case core.log.model.Mode.console:
 			// 获取控制台输出者实例
-			outputor = new core.log.controller.outputor.Console.getOutputor();
+			outputor = new core.log.controller.outputor.Console.getInstance();
 			break;
 		case core.log.model.Mode.popup:
 			// 获取弹出框输出者实例
-			outputor = new core.log.controller.outputor.Popup.getOutputor();
+			outputor = new core.log.controller.outputor.Popup.getInstance();
 			break;
+		default:
+			throw "core.log.controller.OutputorCreator.getOutputor:参数异常.模式(" + mode + ")不支持";
 		}
 
 		// 判断是否实现接口方法
@@ -797,7 +835,7 @@ core.log.controller.OutputorCreator = {
  * 
  * 控制台输出者
  * 
- * 对象
+ * 类
  */
 
 core.log.controller.outputor.Console = (function() {
@@ -815,8 +853,8 @@ core.log.controller.outputor.Console = (function() {
 	/**
 	 * 输出消息
 	 * 
-	 * @param msg
-	 *            信息
+	 * @param msg{Object}
+	 *            输出信息
 	 * @returns
 	 */
 	Constructor.prototype.output = function(msg) {
@@ -827,11 +865,11 @@ core.log.controller.outputor.Console = (function() {
 	return {
 
 		/**
-		 * 获取输出者 懒加载,且仅创建一个
+		 * 获取输出者
 		 * 
-		 * @returns {core.log.model.Outputor.Constructor}
+		 * @returns {core.log.controller.outputor.Console}
 		 */
-		getOutputor : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!outputor) {
@@ -847,7 +885,7 @@ core.log.controller.outputor.Console = (function() {
  * 
  * 弹出框输出者
  * 
- * 对象
+ * 类
  */
 
 core.log.controller.outputor.Popup = (function() {
@@ -865,7 +903,7 @@ core.log.controller.outputor.Popup = (function() {
 	/**
 	 * 输出消息
 	 * 
-	 * @param msg
+	 * @param msg{Object}
 	 *            信息
 	 * @returns
 	 */
@@ -877,11 +915,11 @@ core.log.controller.outputor.Popup = (function() {
 	return {
 
 		/**
-		 * 获取输出者 懒加载,且仅创建一个
+		 * 获取输出者
 		 * 
-		 * @returns {core.log.model.Outputor.Constructor}
+		 * @returns {core.log.controller.outputor.Popup}
 		 */
-		getOutputor : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!outputor) {
@@ -924,13 +962,13 @@ core.log.model.Format = {
 core.log.model.Level = {
 
 	// 错误
-	error : 4,
+	error : 3,
 	// 警告
-	warn : 3,
+	warn : 2,
 	// 信息
-	info : 2,
+	info : 1,
 	// 调试
-	debug : 1
+	debug : 0
 };
 /**
  * Mode
@@ -1099,7 +1137,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(_id) {
@@ -1122,6 +1160,11 @@ core.html.element.model.Element = (function() {
 			return id;
 		};
 
+		/**
+		 * 获取子元素集合
+		 * 
+		 * @returns {Array<core.html.element.Element>}
+		 */
 		this.getElements = function() {
 			return elements;
 		};
@@ -1130,7 +1173,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 获取元素jQuery对象
 	 * 
-	 * @returns
+	 * @returns {Object}
 	 */
 	Constructor.prototype.getjQuery = function() {
 
@@ -1140,7 +1183,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 展示元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.show = function() {
 
@@ -1148,14 +1191,13 @@ core.html.element.model.Element = (function() {
 		var $element = this.getjQuery();
 		$element.show();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.hide = function() {
 
@@ -1163,7 +1205,6 @@ core.html.element.model.Element = (function() {
 		var $element = this.getjQuery();
 		$element.hide();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -1178,6 +1219,7 @@ core.html.element.model.Element = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时移除子元素
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			this.remove(children[i]);
 		}
 
@@ -1189,16 +1231,15 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 添加元素到
 	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns {core.html.element.Element}
+	 * @param id{String}
+	 *            添加到的Div ID
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.appendTo = function(id) {
 
 		$(id === "body" ? id : "#" + id).append(this.convertHtml());
 		this.dealHtml();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -1207,12 +1248,13 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.add = function(children) {
 
 		// 遍历参数
 		for (var i = 0, length = arguments.length; i < length; i++) {
+
 			// 待添加的子元素
 			var child = arguments[i];
 			// 判断是否实现元素接口
@@ -1225,7 +1267,6 @@ core.html.element.model.Element = (function() {
 			this.exist() && child.appendTo(this.getId());
 		}
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -1234,7 +1275,7 @@ core.html.element.model.Element = (function() {
 	 * 
 	 * @param removeChild{core.html.element.Element}
 	 *            待移除的子元素
-	 * @returns {core.html.element.Element}
+	 * @returns {core.html.element.model.Element}
 	 */
 	Constructor.prototype.remove = function(removeChild) {
 
@@ -1242,6 +1283,7 @@ core.html.element.model.Element = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			// 子元素
 			var child = children[i];
 
@@ -1256,7 +1298,6 @@ core.html.element.model.Element = (function() {
 			}
 		}
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -1273,7 +1314,7 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 检索子元素集合
 	 * 
-	 * @param data
+	 * @param data{Object}
 	 *            查找数据
 	 * @returns {Array<core.html.element.Element>}
 	 */
@@ -1289,6 +1330,7 @@ core.html.element.model.Element = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			// 子元素
 			var child = children[i];
 
@@ -1327,12 +1369,12 @@ core.html.element.model.Element = (function() {
 	};
 
 	/**
-	 * 转为HTML
+	 * 转为HTML-抽象方法
 	 * 
 	 * @returns {String}
 	 */
 	Constructor.prototype.convertHtml = function() {
-		// 抽象方法
+		throw "core.html.element.model.Element.convertHtml:方法未实现."
 	};
 
 	/**
@@ -1383,7 +1425,7 @@ core.html.element.viewer.Button = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -1407,21 +1449,21 @@ core.html.element.viewer.Button = (function() {
 	};
 
 	/**
-	 * 转为HTML
+	 * 转为HTML-抽象方法
 	 * 
-	 * @returns {String}
+	 * @returns
 	 */
 	Constructor.prototype.convertHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Button.convertHtml:方法未实现."
 	};
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Button.dealHtml:方法未实现."
 	};
 
 	return Constructor;
@@ -1429,7 +1471,7 @@ core.html.element.viewer.Button = (function() {
 /**
  * Custom
  * 
- * 自定义元素,直接传入自定义HTML.自定义不允许增加子元素
+ * 自定义元素,直接传入自定义HTML.
  * 
  * 类
  */
@@ -1439,7 +1481,7 @@ core.html.element.viewer.Custom = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param custom
+	 * @param custom{String}
 	 *            自定义HTML
 	 */
 	var Constructor = function(_custom) {
@@ -1447,6 +1489,11 @@ core.html.element.viewer.Custom = (function() {
 		// 自定义HTML
 		var custom = _custom || "";
 
+		/**
+		 * 获取自定义HTML
+		 * 
+		 * @returns {String}
+		 */
 		this.getCustom = function() {
 			return custom;
 		};
@@ -1458,8 +1505,7 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.getId = function() {
-
-		return undefined;
+		throw "core.html.element.viewer.Custom.getId:方法异常.自定义元素无getId()方法实现";
 	};
 
 	/**
@@ -1468,30 +1514,25 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.getjQuery = function() {
-
-		return undefined;
+		throw "core.html.element.viewer.Custom.getjQuery:方法异常.自定义元素无getjQuery()方法实现";
 	};
 
 	/**
 	 * 展示元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns
 	 */
 	Constructor.prototype.show = function() {
-
-		// 返回本身,以便链式调用
-		return this;
+		throw "core.html.element.viewer.Custom.show:方法异常.自定义元素无show()方法实现";
 	};
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns
 	 */
 	Constructor.prototype.hide = function() {
-
-		// 返回本身,以便链式调用
-		return this;
+		throw "core.html.element.viewer.Custom.hide:方法异常.自定义元素无hide()方法实现";
 	};
 
 	/**
@@ -1500,22 +1541,21 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.destroy = function() {
-
+		throw "core.html.element.viewer.Custom.destroy:方法异常.自定义元素无destroy()方法实现";
 	};
 
 	/**
 	 * 添加元素到
 	 * 
-	 * @param id
-	 *            添加到的位置
-	 * @returns {core.html.element.Element}
+	 * @param id{String}
+	 *            添加到的Div ID
+	 * @returns {core.html.element.viewer.Custom}
 	 */
 	Constructor.prototype.appendTo = function(id) {
 
 		$(id === "body" ? id : "#" + id).append(this.convertHtml());
 		this.dealHtml();
 
-		// 返回本身,以便链式调用
 		return this;
 	};
 
@@ -1525,18 +1565,16 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Custom.add:方法异常.自定义HTML不允许继续添加子元素";
+		throw "core.html.element.viewer.Custom.add:方法异常.自定义元素不允许继续添加子元素";
 	};
 
 	/**
 	 * 移除子元素
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns
 	 */
 	Constructor.prototype.remove = function() {
-
-		// 返回本身,以便链式调用
-		return this;
+		throw "core.html.element.viewer.Custom.remove:方法异常.自定义元素无remove()方法实现";
 	};
 
 	/**
@@ -1552,7 +1590,7 @@ core.html.element.viewer.Custom = (function() {
 	/**
 	 * 检索子元素集合
 	 * 
-	 * @param data
+	 * @param data{Object}
 	 *            查找数据
 	 * @returns {Array}
 	 */
@@ -1568,7 +1606,7 @@ core.html.element.viewer.Custom = (function() {
 	 */
 	Constructor.prototype.exist = function() {
 
-		return undefined;
+		throw "core.html.element.viewer.Custom.exist:方法异常.自定义元素无exist()方法实现";
 	};
 
 	/**
@@ -1587,7 +1625,7 @@ core.html.element.viewer.Custom = (function() {
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-
+		throw "core.html.element.viewer.Custom.dealHtml:方法异常.自定义元素无dealHtml()方法实现";
 	};
 
 	return Constructor;
@@ -1608,7 +1646,7 @@ core.html.element.viewer.Div = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -1622,12 +1660,25 @@ core.html.element.viewer.Div = (function() {
 		// class
 		var clazz = "";
 
+		/**
+		 * 获取Class样式
+		 * 
+		 * @returns {String}
+		 */
 		this.getClass = function() {
 			return clazz;
 		};
 
+		/**
+		 * 设置Class样式
+		 * 
+		 * @param class
+		 *            class样式
+		 * @returns {core.html.element.viewer.Div}
+		 */
 		this.setClass = function(_clazz) {
 			clazz = _clazz;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -1652,6 +1703,7 @@ core.html.element.viewer.Div = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 
@@ -1678,9 +1730,9 @@ core.html.element.viewer.Fieldset = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
-	 * @param legend
+	 * @param legend{String}
 	 *            legend
 	 */
 	var Constructor = function(id, _legend) {
@@ -1695,12 +1747,25 @@ core.html.element.viewer.Fieldset = (function() {
 		// legend
 		var legend = _legend || "";
 
+		/**
+		 * 获取legend属性值
+		 * 
+		 * @returns {String}
+		 */
 		this.getLegend = function() {
 			return legend;
 		};
 
+		/**
+		 * 设置legend属性值
+		 * 
+		 * @param legend{String}
+		 *            legend属性值
+		 * @returns {core.html.element.viewer.Fieldset}
+		 */
 		this.setLegend = function(_legend) {
 			legend = _legend;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -1726,6 +1791,7 @@ core.html.element.viewer.Fieldset = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 
@@ -1752,11 +1818,11 @@ core.html.element.viewer.Form = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
-	 * @param method
+	 * @param method{String}
 	 *            表单的提交方式
-	 * @param action
+	 * @param action{String}
 	 *            表单的提交地址
 	 */
 	var Constructor = function(id, _method, _action) {
@@ -1772,20 +1838,46 @@ core.html.element.viewer.Form = (function() {
 		// action
 		var action = _action || "";
 
+		/**
+		 * 获取表单的提交方式
+		 * 
+		 * @returns {String}
+		 */
 		this.getMethod = function() {
 			return method;
 		};
 
+		/**
+		 * 设置表单的提交方式
+		 * 
+		 * @param method{String}
+		 *            表单的提交方式
+		 * @returns {core.html.element.viewer.Form}
+		 */
 		this.setMethod = function(_method) {
 			method = _method;
+			return this;
 		};
 
+		/**
+		 * 获取表单的提交地址
+		 * 
+		 * @returns {String}
+		 */
 		this.getAction = function() {
 			return action;
 		};
 
+		/**
+		 * 设置表单的提交地址
+		 * 
+		 * @param action{String}
+		 *            表单的提交地址
+		 * @returns {core.html.element.viewer.Form}
+		 */
 		this.setAction = function(_action) {
 			action = _action;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -1812,6 +1904,7 @@ core.html.element.viewer.Form = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 
@@ -1838,9 +1931,9 @@ core.html.element.viewer.Input = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            输入框ID
-	 * @param name
+	 * @param name{String}
 	 *            输入框名称
 	 */
 	var Constructor = function(id, _name) {
@@ -1854,12 +1947,25 @@ core.html.element.viewer.Input = (function() {
 		// name
 		var name = _name || id || "coreHtmlElementViewerInput" + count;
 
+		/**
+		 * 获取输入框名称
+		 * 
+		 * @returns {String}
+		 */
 		this.getName = function() {
 			return name;
 		};
 
+		/**
+		 * 设置输入框名称
+		 * 
+		 * @param name{String}
+		 *            输入框名称
+		 * @returns {core.html.element.viewer.Input}
+		 */
 		this.setName = function(_name) {
 			name = _name;
+			return this;
 		}
 	};
 	// 继承元素抽象类
@@ -1893,30 +1999,30 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Input.dealHtml:方法未实现."
 	};
 
 	/**
-	 * 获取输入框的值
+	 * 获取输入框的值-抽象方法
 	 * 
-	 * @returns {String}
+	 * @returns
 	 */
 	Constructor.prototype.getValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Input.getValue:方法未实现."
 	};
 
 	/**
-	 * 设置输入框的值
+	 * 设置输入框的值-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.setValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Input.setValue:方法未实现."
 	};
 
 	return Constructor;
@@ -1937,9 +2043,9 @@ core.html.element.viewer.Label = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
-	 * @param text
+	 * @param text{String}
 	 *            标签的文本信息
 	 */
 	var Constructor = function(id, _text) {
@@ -1957,28 +2063,67 @@ core.html.element.viewer.Label = (function() {
 		// form
 		var form;
 
+		/**
+		 * 获取文本信息
+		 * 
+		 * @returns {String}
+		 */
 		this.getText = function() {
 			return text;
 		};
 
+		/**
+		 * 设置文本信息
+		 * 
+		 * @param text{String}
+		 *            文本信息
+		 * @returns {core.html.element.viewer.Label}
+		 */
 		this.setText = function(_text) {
 			text = _text;
+			return this;
 		};
 
+		/**
+		 * 获取For属性值
+		 * 
+		 * @returns {String}
+		 */
 		this.getFor = function() {
 			return forr;
 		};
 
+		/**
+		 * 设置For属性值
+		 * 
+		 * @param for{String}
+		 *            for属性值
+		 * @returns {core.html.element.viewer.Label}
+		 */
 		this.setFor = function(_forr) {
 			forr = _forr
+			return this;
 		};
 
+		/**
+		 * 获取form属性值
+		 * 
+		 * @returns {String}
+		 */
 		this.getForm = function() {
 			return form;
 		};
 
+		/**
+		 * 设置form属性值
+		 * 
+		 * @param form{String}
+		 *            form属性值
+		 * @returns {core.html.element.viewer.Label}
+		 */
 		this.setForm = function(_form) {
 			form = _form;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -2033,7 +2178,7 @@ core.html.element.viewer.Table = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -2052,30 +2197,34 @@ core.html.element.viewer.Table = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns
+	 * @returns {core.html.element.viewer.Table}
 	 */
 	Constructor.prototype.add = function(children) {
 
 		// 遍历参数
 		for (var i = 0, length = arguments.length; i < length; i++) {
+
 			// 待添加的子元素
 			var child = arguments[i];
 			// 判断是否实现元素接口
 			core.lang.Interface.ensureImplements(child, core.html.element.Element,
 					core.html.element.model.ElementProcess);
 
-			// 若为Tr,则直接添加.否则创建一个Tr,放入Tr再添加
+			// 若为Tr,则直接添加.
 			if (child.constructor === core.html.element.viewer.Tr) {
 				// 添加子元素
 				this.getElements().push(child);
 				// 若元素存在,则直接展示添加的子元素
 				this.exist() && child.appendTo(this.getId());
 			} else {
+				// 待添加的子元素不为Tr,则创建一个Tr,放入Tr再添加
 				var tr = new core.html.element.viewer.Tr();
 				tr.add(child);
 				this.add(tr);
 			}
 		}
+
+		return this;
 	};
 
 	/**
@@ -2119,7 +2268,7 @@ core.html.element.viewer.Td = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -2133,12 +2282,25 @@ core.html.element.viewer.Td = (function() {
 		// 列数
 		var colspan = 1;
 
+		/**
+		 * 获取列数
+		 * 
+		 * @returns {Number}
+		 */
 		this.getColspan = function() {
 			return colspan;
 		};
 
+		/**
+		 * 设置列数
+		 * 
+		 * @param colspan{Number}
+		 *            列数
+		 * @returns {core.html.element.viewer.Td}
+		 */
 		this.setColspan = function(_colspan) {
 			colspan = _colspan;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -2163,6 +2325,7 @@ core.html.element.viewer.Td = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 
@@ -2189,7 +2352,7 @@ core.html.element.viewer.Tr = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -2208,12 +2371,13 @@ core.html.element.viewer.Tr = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns
+	 * @returns {core.html.element.viewer.Tr}
 	 */
 	Constructor.prototype.add = function(children) {
 
 		// 遍历参数
 		for (var i = 0, length = arguments.length; i < length; i++) {
+
 			// 待添加的子元素
 			var child = arguments[i];
 			// 判断是否实现元素接口
@@ -2232,6 +2396,8 @@ core.html.element.viewer.Tr = (function() {
 				this.add(td);
 			}
 		}
+
+		return this;
 	};
 
 	/**
@@ -2249,6 +2415,7 @@ core.html.element.viewer.Tr = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 
@@ -2275,7 +2442,7 @@ core.html.element.viewer.button.Button = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -2290,12 +2457,25 @@ core.html.element.viewer.button.Button = (function() {
 		// text
 		var text = "";
 
+		/**
+		 * 获取按钮文本
+		 * 
+		 * @returns {String}
+		 */
 		this.getText = function() {
 			return text;
 		};
 
+		/**
+		 * 设置按钮文本
+		 * 
+		 * @param text{String}
+		 *            按钮文本
+		 * @returns {core.html.element.viewer.button.Button}
+		 */
 		this.setText = function(_text) {
 			text = _text;
+			return this;
 		};
 	};
 	// 继承按钮抽象类
@@ -2322,10 +2502,11 @@ core.html.element.viewer.button.Button = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @returns
+	 * @returns {core.html.element.viewer.button.Button}
 	 */
 	Constructor.prototype.dealHtml = function() {
 
+		return this;
 	};
 
 	return Constructor;
@@ -2347,7 +2528,7 @@ core.html.element.viewer.button.Easyui = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -2362,12 +2543,25 @@ core.html.element.viewer.button.Easyui = (function() {
 		// easyui 配置
 		var easyui = {};
 
+		/**
+		 * 获取EasyUI配置
+		 * 
+		 * @returns {Object}
+		 */
 		this.getEasyui = function() {
 			return easyui;
 		};
 
+		/**
+		 * 设置EasyUI配置
+		 * 
+		 * @param easyui{Object}
+		 *            EasyUI配置
+		 * @returns {core.html.element.viewer.button.Easyui}
+		 */
 		this.setEasyui = function(_easyui) {
 			easyui = _easyui;
+			return this;
 		};
 	};
 	// 继承按钮抽象类
@@ -2390,12 +2584,12 @@ core.html.element.viewer.button.Easyui = (function() {
 	};
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.button.Easyui.dealHtml:方法未实现."
 	};
 
 	return Constructor;
@@ -2416,7 +2610,7 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -2434,12 +2628,14 @@ core.html.element.viewer.button.easyui.Linkbutton = (function() {
 	/**
 	 * 处理HTML
 	 * 
-	 * @returns
+	 * @returns {core.html.element.viewer.button.easyui.Linkbutton}
 	 */
 	Constructor.prototype.dealHtml = function() {
 
 		var $button = this.getjQuery();
 		$button.linkbutton(this.getEasyui());
+
+		return this;
 	};
 
 	return Constructor;
@@ -2489,30 +2685,30 @@ core.html.element.viewer.input.Easyui = (function() {
 	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.input.Easyui.dealHtml:方法未实现."
 	};
 
 	/**
-	 * 获取输入框的值
+	 * 获取输入框的值-抽象方法
 	 * 
 	 * @returns {String}
 	 */
 	Constructor.prototype.getValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.input.Easyui.getValue:方法未实现."
 	};
 
 	/**
-	 * 设置输入框的值
+	 * 设置输入框的值-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.setValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.input.Easyui.setValue:方法未实现."
 	};
 
 	return Constructor;
@@ -3404,13 +3600,12 @@ window.onresize = function() {
 		typeof (resize) === "function" && resize();
 	}
 };
-
 /**
  * Cookie
  * 
- * Cookie操作
+ * Cookie操作者
  * 
- * 对象
+ * 类
  */
 
 core.html.util.Cookie = (function() {
@@ -3428,7 +3623,7 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 获取cookie
 	 * 
-	 * @param name
+	 * @param name{String}
 	 *            cookie名称
 	 * @returns {Object}
 	 */
@@ -3446,11 +3641,11 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 设置cookie
 	 * 
-	 * @param name
-	 *            名称
-	 * @param value
-	 *            值
-	 * @param expiredays
+	 * @param name{String}
+	 *            cookie名称
+	 * @param value{String}
+	 *            cookie值
+	 * @param expiredays{Number}
 	 *            过期天数
 	 * @returns
 	 */
@@ -3469,8 +3664,8 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 删除cookie
 	 * 
-	 * @param name
-	 *            名称
+	 * @param name{String}
+	 *            cookie名称
 	 * @returns
 	 */
 	Constructor.prototype.del = function(name) {
@@ -3486,11 +3681,11 @@ core.html.util.Cookie = (function() {
 	return {
 
 		/**
-		 * 获取cookie操作者 懒加载,且仅创建一个
+		 * 获取cookie操作者
 		 * 
-		 * @returns {core.html.util.Cookie.Constructor}
+		 * @returns {core.html.util.Cookie}
 		 */
-		getCookie : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!cookie) {

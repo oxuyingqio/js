@@ -14,7 +14,7 @@ core.html.element.viewer.Tr = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
 	 */
 	var Constructor = function(id) {
@@ -33,12 +33,13 @@ core.html.element.viewer.Tr = (function() {
 	 * 
 	 * @param children{core.html.element.Element}
 	 *            形参,子元素
-	 * @returns
+	 * @returns {core.html.element.viewer.Tr}
 	 */
 	Constructor.prototype.add = function(children) {
 
 		// 遍历参数
 		for (var i = 0, length = arguments.length; i < length; i++) {
+
 			// 待添加的子元素
 			var child = arguments[i];
 			// 判断是否实现元素接口
@@ -57,6 +58,8 @@ core.html.element.viewer.Tr = (function() {
 				this.add(td);
 			}
 		}
+
+		return this;
 	};
 
 	/**
@@ -74,6 +77,7 @@ core.html.element.viewer.Tr = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 

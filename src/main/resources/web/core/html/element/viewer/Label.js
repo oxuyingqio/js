@@ -14,9 +14,9 @@ core.html.element.viewer.Label = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
-	 * @param text
+	 * @param text{String}
 	 *            标签的文本信息
 	 */
 	var Constructor = function(id, _text) {
@@ -34,28 +34,67 @@ core.html.element.viewer.Label = (function() {
 		// form
 		var form;
 
+		/**
+		 * 获取文本信息
+		 * 
+		 * @returns {String}
+		 */
 		this.getText = function() {
 			return text;
 		};
 
+		/**
+		 * 设置文本信息
+		 * 
+		 * @param text{String}
+		 *            文本信息
+		 * @returns {core.html.element.viewer.Label}
+		 */
 		this.setText = function(_text) {
 			text = _text;
+			return this;
 		};
 
+		/**
+		 * 获取For属性值
+		 * 
+		 * @returns {String}
+		 */
 		this.getFor = function() {
 			return forr;
 		};
 
+		/**
+		 * 设置For属性值
+		 * 
+		 * @param for{String}
+		 *            for属性值
+		 * @returns {core.html.element.viewer.Label}
+		 */
 		this.setFor = function(_forr) {
 			forr = _forr
+			return this;
 		};
 
+		/**
+		 * 获取form属性值
+		 * 
+		 * @returns {String}
+		 */
 		this.getForm = function() {
 			return form;
 		};
 
+		/**
+		 * 设置form属性值
+		 * 
+		 * @param form{String}
+		 *            form属性值
+		 * @returns {core.html.element.viewer.Label}
+		 */
 		this.setForm = function(_form) {
 			form = _form;
+			return this;
 		};
 	};
 	// 继承元素抽象类

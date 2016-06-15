@@ -7,19 +7,21 @@
  */
 
 /**
- * 静态方法-减法
+ * 减法-静态方法
  * 
- * @param subtrahend
+ * @param subtrahend{Number}
  *            减数
- * @param minuend
+ * @param minuend{Number}
  *            被减数
- * @param precision
+ * @param precision{Number}
  *            结果精度
  * @returns {Number}
  */
 Math.subtract = function(subtrahend, minuend, precision) {
 
+	// 减数
 	var a = parseFloat(subtrahend);
+	// 被减数
 	var b = parseFloat(minuend);
 
 	return (a - b).toFixed(precision);

@@ -14,9 +14,9 @@ core.html.element.viewer.Input = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            输入框ID
-	 * @param name
+	 * @param name{String}
 	 *            输入框名称
 	 */
 	var Constructor = function(id, _name) {
@@ -30,12 +30,25 @@ core.html.element.viewer.Input = (function() {
 		// name
 		var name = _name || id || "coreHtmlElementViewerInput" + count;
 
+		/**
+		 * 获取输入框名称
+		 * 
+		 * @returns {String}
+		 */
 		this.getName = function() {
 			return name;
 		};
 
+		/**
+		 * 设置输入框名称
+		 * 
+		 * @param name{String}
+		 *            输入框名称
+		 * @returns {core.html.element.viewer.Input}
+		 */
 		this.setName = function(_name) {
 			name = _name;
+			return this;
 		}
 	};
 	// 继承元素抽象类
@@ -69,30 +82,30 @@ core.html.element.viewer.Input = (function() {
 	};
 
 	/**
-	 * 处理HTML
+	 * 处理HTML-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.dealHtml = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Input.dealHtml:方法未实现."
 	};
 
 	/**
-	 * 获取输入框的值
+	 * 获取输入框的值-抽象方法
 	 * 
-	 * @returns {String}
+	 * @returns
 	 */
 	Constructor.prototype.getValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Input.getValue:方法未实现."
 	};
 
 	/**
-	 * 设置输入框的值
+	 * 设置输入框的值-抽象方法
 	 * 
 	 * @returns
 	 */
 	Constructor.prototype.setValue = function() {
-		// 抽象方法
+		throw "core.html.element.viewer.Input.setValue:方法未实现."
 	};
 
 	return Constructor;

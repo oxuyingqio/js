@@ -3,7 +3,7 @@
  * 
  * 弹出框输出者
  * 
- * 对象
+ * 类
  */
 
 core.log.controller.outputor.Popup = (function() {
@@ -21,7 +21,7 @@ core.log.controller.outputor.Popup = (function() {
 	/**
 	 * 输出消息
 	 * 
-	 * @param msg
+	 * @param msg{Object}
 	 *            信息
 	 * @returns
 	 */
@@ -33,11 +33,11 @@ core.log.controller.outputor.Popup = (function() {
 	return {
 
 		/**
-		 * 获取输出者 懒加载,且仅创建一个
+		 * 获取输出者
 		 * 
-		 * @returns {core.log.model.Outputor.Constructor}
+		 * @returns {core.log.controller.outputor.Popup}
 		 */
-		getOutputor : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!outputor) {

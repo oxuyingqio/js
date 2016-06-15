@@ -1,9 +1,9 @@
 /**
  * Cookie
  * 
- * Cookie操作
+ * Cookie操作者
  * 
- * 对象
+ * 类
  */
 
 core.html.util.Cookie = (function() {
@@ -21,7 +21,7 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 获取cookie
 	 * 
-	 * @param name
+	 * @param name{String}
 	 *            cookie名称
 	 * @returns {Object}
 	 */
@@ -39,11 +39,11 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 设置cookie
 	 * 
-	 * @param name
-	 *            名称
-	 * @param value
-	 *            值
-	 * @param expiredays
+	 * @param name{String}
+	 *            cookie名称
+	 * @param value{String}
+	 *            cookie值
+	 * @param expiredays{Number}
 	 *            过期天数
 	 * @returns
 	 */
@@ -62,8 +62,8 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 删除cookie
 	 * 
-	 * @param name
-	 *            名称
+	 * @param name{String}
+	 *            cookie名称
 	 * @returns
 	 */
 	Constructor.prototype.del = function(name) {
@@ -79,11 +79,11 @@ core.html.util.Cookie = (function() {
 	return {
 
 		/**
-		 * 获取cookie操作者 懒加载,且仅创建一个
+		 * 获取cookie操作者
 		 * 
-		 * @returns {core.html.util.Cookie.Constructor}
+		 * @returns {core.html.util.Cookie}
 		 */
-		getCookie : function() {
+		getInstance : function() {
 
 			// 不存在,则创建
 			if (!cookie) {

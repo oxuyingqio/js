@@ -14,11 +14,11 @@ core.html.element.viewer.Form = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id
+	 * @param id{String}
 	 *            元素ID
-	 * @param method
+	 * @param method{String}
 	 *            表单的提交方式
-	 * @param action
+	 * @param action{String}
 	 *            表单的提交地址
 	 */
 	var Constructor = function(id, _method, _action) {
@@ -34,20 +34,46 @@ core.html.element.viewer.Form = (function() {
 		// action
 		var action = _action || "";
 
+		/**
+		 * 获取表单的提交方式
+		 * 
+		 * @returns {String}
+		 */
 		this.getMethod = function() {
 			return method;
 		};
 
+		/**
+		 * 设置表单的提交方式
+		 * 
+		 * @param method{String}
+		 *            表单的提交方式
+		 * @returns {core.html.element.viewer.Form}
+		 */
 		this.setMethod = function(_method) {
 			method = _method;
+			return this;
 		};
 
+		/**
+		 * 获取表单的提交地址
+		 * 
+		 * @returns {String}
+		 */
 		this.getAction = function() {
 			return action;
 		};
 
+		/**
+		 * 设置表单的提交地址
+		 * 
+		 * @param action{String}
+		 *            表单的提交地址
+		 * @returns {core.html.element.viewer.Form}
+		 */
 		this.setAction = function(_action) {
 			action = _action;
+			return this;
 		};
 	};
 	// 继承元素抽象类
@@ -74,6 +100,7 @@ core.html.element.viewer.Form = (function() {
 		var children = this.getChildren();
 		// 遍历子元素集合,同时转为HTML
 		for (var i = 0, length = children.length; i < length; i++) {
+
 			html.push(children[i].convertHtml());
 		}
 

@@ -3,27 +3,28 @@
  * 
  * 日期
  * 
- * 对象扩展
+ * 类扩展
  */
 
 /**
  * 格式化日期
  * 
- * @param fmt
- *            格式 yyyy-MM-dd HH:mm:ss
+ * @param format{String}
+ *            格式化参数
  * @returns {String}
  */
-Date.prototype.format = function(fmt) {
+Date.prototype.format = function(format) {
 
-	var obj = {
+	// 日期数据
+	var data = {
 
 		// 月份
 		"M+" : this.getMonth() + 1,
 		// 日
 		"d+" : this.getDate(),
-		// 小时
+		// 小时,12进制
 		"h+" : this.getHours() % 12 === 0 ? 12 : this.getHours() % 12,
-		// 小时
+		// 小时,24进制
 		"H+" : this.getHours(),
 		// 分
 		"m+" : this.getMinutes(),
@@ -33,17 +34,19 @@ Date.prototype.format = function(fmt) {
 		"S" : this.getMilliseconds()
 	};
 
-	if (/(y+)/.test(fmt)) {
-		fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+	// 处理年份
+	if (/(y+)/.test(format)) {
+		format = format.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
 	}
 
-	for ( var el in obj) {
+	// 处理月 日 时 分 秒 毫秒
+	for ( var el in data) {
 
-		if (new RegExp("(" + el + ")").test(fmt)) {
-			fmt = fmt.replace(RegExp.$1, (RegExp.$1.length === 1) ? (obj[el]) : (("00" + obj[el])
-					.substr(("" + obj[el]).length)));
+		if (new RegExp("(" + el + ")").test(format)) {
+			format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (data[el]) : (("00" + data[el])
+					.substr(("" + data[el]).length)));
 		}
 	}
 
-	return fmt;
+	return format;
 };
