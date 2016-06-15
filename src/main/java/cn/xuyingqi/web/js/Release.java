@@ -33,7 +33,7 @@ public class Release {
 
 		// 操作的文件类型
 		String fileType = ".js";
-		// 生成文件位置
+		// 生成文件的位置
 		File coreFile = new File("D:/Users/XuYQ/Desktop/core.js");
 		// File coreFile = new File("D:/用户目录/我的桌面/core.js");
 
