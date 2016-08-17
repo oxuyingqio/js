@@ -16,30 +16,30 @@
 				// 常量包
 				constant : {},
 
-				// 元素包
-				element : {
-
-					// 模型包
-					model : {},
-
-					// 展示包
-					viewer : {
-
-						// 按钮实现包
-						button : {
-
-							// EasyUI按钮实现包
-							easyui : {}
-						},
-
-						// 输入框实现包
-						input : {
-
-							// EasyUI输入框实现包
-							easyui : {}
-						}
-					}
-				},
+//				// 元素包
+//				element : {
+//
+//					// 模型包
+//					model : {},
+//
+//					// 展示包
+//					viewer : {
+//
+//						// 按钮实现包
+//						button : {
+//
+//							// EasyUI按钮实现包
+//							easyui : {}
+//						},
+//
+//						// 输入框实现包
+//						input : {
+//
+//							// EasyUI输入框实现包
+//							easyui : {}
+//						}
+//					}
+//				},
 
 				// 事件包
 				event : {
