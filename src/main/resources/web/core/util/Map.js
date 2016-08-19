@@ -1,16 +1,20 @@
 /**
- * Map
+ * @name Map
+ * @package core.util
+ * @desc 映射
+ * @type 类
  * 
- * 映射
- * 
- * 类
+ * @date 2016年8月19日 16:09:46
  */
-
 core.util.Map = function() {
 
-	// 元素
+	/**
+	 * 元素
+	 */
 	var elements = {};
-	// 元素个数
+	/**
+	 * 元素个数
+	 */
 	var length = 0;
 
 	/**
@@ -111,6 +115,7 @@ core.util.Map = function() {
 	 */
 	this.clear = function() {
 
+		length = 0;
 		elements = {};
 	};
 };

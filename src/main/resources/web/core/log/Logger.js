@@ -5,10 +5,11 @@
  * 
  * 类
  */
-
 core.log.Logger = (function() {
 
-	// 日志记录者
+	/**
+	 * 日志记录者
+	 */
 	var logger;
 
 	/**

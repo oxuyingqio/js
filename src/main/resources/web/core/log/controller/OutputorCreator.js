@@ -1,11 +1,11 @@
 /**
- * OutputorCreator
+ * @name OutputorCreator
+ * @package core.log.controller
+ * @desc 输出者创建者
+ * @type 对象
  * 
- * 输出者创建者
- * 
- * 对象
+ * @date 2016年8月19日 16:18:28
  */
-
 core.log.controller.OutputorCreator = {
 
 	/**

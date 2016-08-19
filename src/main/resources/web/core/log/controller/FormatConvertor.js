@@ -1,15 +1,17 @@
 /**
- * FormatConvertor
+ * @name FormatConvertor
+ * @package core.log.controller
+ * @desc 格式化转换器
+ * @type 类
  * 
- * 格式化转换器
- * 
- * 类
+ * @date 2016年8月19日 16:14:53
  */
-
 core.log.controller.FormatConvertor = (function() {
 
-	// 转换器
-	var convertor;
+	/**
+	 * 格式化转换器实例
+	 */
+	var instance;
 
 	/**
 	 * 构造函数
@@ -53,8 +55,8 @@ core.log.controller.FormatConvertor = (function() {
 		getInstance : function() {
 
 			// 不存在,则创建
-			if (!convertor) {
-				convertor = new Constructor();
+			if (!instance) {
+				instance = new Constructor();
 			}
 
 			return convertor;
