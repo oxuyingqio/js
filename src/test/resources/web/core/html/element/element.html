@@ -35,81 +35,35 @@
 <script type="text/javascript" src="/~/core/log/controller/outputor/Popup.js"></script>
 
 <script type="text/javascript" src="/~/core/html/element/Element.js"></script>
-<script type="text/javascript" src="/~/core/html/element/model/Element.js"></script>
-<script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Button.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Fieldset.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Form.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Input.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Label.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Table.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Td.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/Tr.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/button/Button.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/button/Easyui.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/button/easyui/Linkbutton.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/Text.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/Easyui.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Combobox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datebox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datetimebox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Filebox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Numberbox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Numberspinner.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Searchbox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Slider.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Textbox.js"></script>
-<script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Timespinner.js"></script>
+<!-- <script type="text/javascript" src="/~/core/html/element/model/Element.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Button.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Fieldset.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Form.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Input.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Label.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Table.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Td.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Tr.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/button/Button.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/button/Easyui.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/button/easyui/Linkbutton.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/Text.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/Easyui.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Combobox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datebox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Datetimebox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Filebox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Numberbox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Numberspinner.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Searchbox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Slider.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Textbox.js"></script> -->
+<!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Timespinner.js"></script> -->
 <script type="text/javascript">
 	$(function() {
-		var button1 = new core.html.element.viewer.button.Button();
-		button1.setText("Test Button")
-		var button2 = new core.html.element.viewer.button.easyui.Linkbutton();
-		button2.setEasyui({
-			text : "test2",
-			onClick : function() {
-				alert(123)
-			}
-		});
-
-		var buttonDiv = new core.html.element.viewer.Div();
-		buttonDiv.add(button1, button2);
-		var label1 = new core.html.element.viewer.Label("label1", "标签1");
-		var input1 = new core.html.element.viewer.input.easyui.Combobox("input1", "INPUT1");
-		var label2 = new core.html.element.viewer.Label("label2", "标签2");
-		var input2 = new core.html.element.viewer.input.easyui.Datebox("input2", "INPUT2");
-		var label3 = new core.html.element.viewer.Label("label3", "标签3");
-		var input3 = new core.html.element.viewer.input.easyui.Datetimebox("input3", "INPUT3");
-		var label4 = new core.html.element.viewer.Label("label4", "标签4");
-		var input4 = new core.html.element.viewer.input.easyui.Filebox("input4", "INPUT4");
-		var label5 = new core.html.element.viewer.Label("label5", "标签5");
-		var input5 = new core.html.element.viewer.input.easyui.Numberbox("input5", "INPUT5");
-		var tr1 = new core.html.element.viewer.Tr();
-		tr1.add(label1, input1, label2, input2, label3, input3, label4, input4, label5, input5);
-		var label6 = new core.html.element.viewer.Label("label6", "标签6");
-		var input6 = new core.html.element.viewer.input.easyui.Numberspinner("input6", "INPUT6");
-		var label7 = new core.html.element.viewer.Label("label7", "标签7");
-		var input7 = new core.html.element.viewer.input.easyui.Searchbox("input7", "INPUT7");
-		var label8 = new core.html.element.viewer.Label("label8", "标签8");
-		var input8 = new core.html.element.viewer.input.easyui.Slider("input8", "INPUT8");
-		var label9 = new core.html.element.viewer.Label("label9", "标签9");
-		var input9 = new core.html.element.viewer.input.easyui.Textbox("input9", "INPUT9");
-		var label10 = new core.html.element.viewer.Label("label10", "标签10");
-		var input10 = new core.html.element.viewer.input.easyui.Timespinner("input10", "INPUT10");
-		var tr2 = new core.html.element.viewer.Tr();
-		tr2.add(label6, input6, label7, input7, label8, input8, label9, input9, label10, input10);
-		var table = new core.html.element.viewer.Table();
-		table.add(tr1);
-		table.add(tr2);
-		var fieldset = new core.html.element.viewer.Fieldset("fieldset", "框");
-		fieldset.add(table);
-		var div = new core.html.element.viewer.Div();
-		div.add(buttonDiv, fieldset);
-
-		var form = new core.html.element.viewer.Form("form");
-		form.add(div);
-		form.appendTo("body");
+		
 	});
 </script>
 
