@@ -1,10 +1,14 @@
 /**
- * @name String
- * @package core.js
- * @desc 字符串
- * @type 类扩展
+ * @name	String
+ * @package	core.js
+ * @desc	字符串
+ * @type	类扩展
  * 
- * @date 2016年8月20日 09:13:22
+ * @method	String	replaceAll(String target, String result)	替换所有字符串
+ * 			String	toBinaryString()							转为2进制字符串
+ * 			String	toHexString()								转为16进制字符串
+ * 
+ * @date	2016年8月20日 09:38:33
  */
 
 /**

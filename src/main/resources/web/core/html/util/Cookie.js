@@ -1,14 +1,23 @@
 /**
- * Cookie
+ * @name	Cookie
+ * @package	core.html.util
+ * @desc	Cookie操作
+ * @type	类
  * 
- * Cookie操作者
+ * @method	static core.html.util.Cookie	getInstance()										获取cookie操作
+ * 			Object							get(String name)									获取cookie
+ * 			void							set(String name, String value)						设置cookie
+ * 			void							set(String name, String value, Number expiredays)	设置cookie
+ * 			void							del(String name)									删除cookie
  * 
- * 类
+ * @date	2016年8月20日 09:53:30
  */
 
 core.html.util.Cookie = (function() {
 
-	// cookie操作者
+	/**
+	 * cookie操作
+	 */
 	var cookie;
 
 	/**
@@ -79,7 +88,7 @@ core.html.util.Cookie = (function() {
 	return {
 
 		/**
-		 * 获取cookie操作者
+		 * 获取cookie操作
 		 * 
 		 * @returns {core.html.util.Cookie}
 		 */

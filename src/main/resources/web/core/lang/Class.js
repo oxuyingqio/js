@@ -1,10 +1,14 @@
 /**
- * @name Class
- * @package core.lang
- * @desc 类
- * @type 类
+ * @name	Class
+ * @package	core.lang
+ * @desc	类
+ * @type	类
  * 
- * @date 2016年8月20日 09:09:27
+ * @constructor	core.lang.Class()
+ * 
+ * @method	static void	extend(function SubClass, function SuperClass)	类继承-静态方法
+ * 
+ * @date	2016年8月20日 09:32:06
  */
 
 core.lang.Class = function() {

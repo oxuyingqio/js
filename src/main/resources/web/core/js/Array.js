@@ -1,9 +1,17 @@
 /**
- * Array
+ * @name	Array
+ * @package	core.js
+ * @desc	数组
+ * @type	类扩展
  * 
- * 数组
+ * @method	void	clear()								清空数组
+ * 			Boolean	contains(Object object)				是否存在指定对象
+ * 			Number	indexOf(Object object)				获取指定对象下标值
+ * 			void	insert(Number index, Object object)	在指定下标位置插入对象
+ * 			void	remove(Object object)				删除指定对象
+ * 			void	removeAt(Number index)				删除指定下标位置的对象
  * 
- * 类扩展
+ * @date	2016年8月20日 09:45:15
  */
 
 /**

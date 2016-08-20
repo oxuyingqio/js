@@ -1,8 +1,12 @@
 /**
- * @name Math
- * @package core.js
- * @desc 数学计算
- * @type 对象扩展
+ * @name	Math
+ * @package	core.js
+ * @desc	数学计算
+ * @type	对象扩展
+ * 
+ * @method	static Number	subtract(Number subtrahend, Number minuend, Number precision)	减法
+ * 
+ * @date	2016年8月20日 09:41:02
  */
 
 /**

@@ -1,9 +1,12 @@
 /**
- * Date
+ * @name	Date
+ * @package	core.js
+ * @desc	日期
+ * @type	类扩展
  * 
- * 日期
+ * @method	String	format(String format)	格式化日期
  * 
- * 类扩展
+ * @date	2016年8月20日 09:41:57
  */
 
 /**

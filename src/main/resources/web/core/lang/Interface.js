@@ -1,10 +1,14 @@
 /**
- * @name Interface
- * @package core.lang
- * @desc 接口
- * @type 类
+ * @name	Interface
+ * @package	core.lang
+ * @desc	接口
+ * @type	类
  * 
- * @date 2016年8月20日 09:10:06
+ * @constructor	core.lang.Interface(String name, Array<String> methods)
+ * 
+ * @method	static void	ensureImplements(Object object, core.lang.Interface interface...)	检查对象是否实现对应接口的方法
+ * 
+ * @date	2016年8月20日 09:35:10
  */
 
 /**
