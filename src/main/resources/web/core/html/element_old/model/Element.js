@@ -251,7 +251,7 @@ core.html.element.model.Element = (function() {
 	 * @returns {String}
 	 */
 	Constructor.prototype.convertHtml = function() {
-		throw "core.html.element.model.Element.convertHtml:方法未实现."
+		window.console.error("core.html.element.model.Element.convertHtml:方法未实现.");
 	};
 
 	/**

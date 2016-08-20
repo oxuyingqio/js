@@ -4,17 +4,13 @@
 <meta charset="UTF-8">
 <title>core.html.element</title>
 
-<link rel="stylesheet" type="text/css" href="/~/core/resource/jquery-easyui-1.4.5/themes/default/easyui.css">
-<link rel="stylesheet" type="text/css" href="/~/core/resource/jquery-easyui-1.4.5/themes/icon.css">
-
 </head>
 <body>
+	
+	<div id="test"></div>
 </body>
 
-<script type="text/javascript" src="/~/core/resource/jquery-1.12.4/jquery-1.12.4.js"></script>
-
-<script type="text/javascript" src="/~/core/resource/jquery-easyui-1.4.5/jquery.easyui.min.js"></script>
-<script type="text/javascript" src="/~/core/resource/jquery-easyui-1.4.5/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="/~/core/resource/jquery-3.0.0/jquery-3.0.0.js"></script>
 
 <script type="text/javascript" src="/~/core/js/Date.js"></script>
 <script type="text/javascript" src="/~/core/js/String.js"></script>
@@ -22,23 +18,16 @@
 <script type="text/javascript" src="/~/core/package.js"></script>
 
 <script type="text/javascript" src="/~/core/lang/Class.js"></script>
+<script type="text/javascript" src="/~/core/lang/Exception.js"></script>
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 
-<script type="text/javascript" src="/~/core/log/Logger.js"></script>
-<script type="text/javascript" src="/~/core/log/model/Level.js"></script>
-<script type="text/javascript" src="/~/core/log/model/Mode.js"></script>
-<script type="text/javascript" src="/~/core/log/model/Format.js"></script>
-<script type="text/javascript" src="/~/core/log/model/Outputor.js"></script>
-<script type="text/javascript" src="/~/core/log/controller/FormatConvertor.js"></script>
-<script type="text/javascript" src="/~/core/log/controller/OutputorCreator.js"></script>
-<script type="text/javascript" src="/~/core/log/controller/outputor/Console.js"></script>
-<script type="text/javascript" src="/~/core/log/controller/outputor/Popup.js"></script>
-
 <script type="text/javascript" src="/~/core/html/element/Element.js"></script>
-<!-- <script type="text/javascript" src="/~/core/html/element/model/Element.js"></script> -->
+<script type="text/javascript" src="/~/core/html/element/AbstractElement.js"></script>
+<script type="text/javascript" src="/~/core/html/element/ElementProcess.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script>
+<script type="text/javascript" src="/~/core/html/element/model/Style.js"></script>
 <!-- <script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script> -->
 <!-- <script type="text/javascript" src="/~/core/html/element/viewer/Button.js"></script> -->
-<!-- <script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script> -->
 <!-- <script type="text/javascript" src="/~/core/html/element/viewer/Fieldset.js"></script> -->
 <!-- <script type="text/javascript" src="/~/core/html/element/viewer/Form.js"></script> -->
 <!-- <script type="text/javascript" src="/~/core/html/element/viewer/Input.js"></script> -->
@@ -63,7 +52,10 @@
 <!-- <script type="text/javascript" src="/~/core/html/element/viewer/input/easyui/Timespinner.js"></script> -->
 <script type="text/javascript">
 	$(function() {
-		
+
+		var div = new core.html.element.viewer.Div();
+		div.appendTo("body");
+		div.appendTo("#test");
 	});
 </script>
 
