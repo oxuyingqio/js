@@ -1,9 +1,8 @@
 /**
- * Math
- * 
- * 数学计算
- * 
- * 对象扩展
+ * @name Math
+ * @package core.js
+ * @desc 数学计算
+ * @type 对象扩展
  */
 
 /**

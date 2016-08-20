@@ -1,18 +1,19 @@
 /**
- * Interface
+ * @name Interface
+ * @package core.lang
+ * @desc 接口
+ * @type 类
  * 
- * 接口
- * 
- * 类
+ * @date 2016年8月20日 09:10:06
  */
 
 /**
  * 构造函数
  * 
  * @param name{String}
- *            名称
+ *            接口名称
  * @param methods{Array
- *            <String>} 方法组
+ *            <String>} 接口方法集合
  */
 core.lang.Interface = function(name, methods) {
 

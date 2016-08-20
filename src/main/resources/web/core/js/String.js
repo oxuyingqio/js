@@ -1,9 +1,10 @@
 /**
- * String
+ * @name String
+ * @package core.js
+ * @desc 字符串
+ * @type 类扩展
  * 
- * 字符串
- * 
- * 类扩展
+ * @date 2016年8月20日 09:13:22
  */
 
 /**

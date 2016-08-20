@@ -1,14 +1,12 @@
 /**
- * Class
+ * @name Class
+ * @package core.lang
+ * @desc 类
+ * @type 类
  * 
- * 类
- * 
- * 类
+ * @date 2016年8月20日 09:09:27
  */
 
-/**
- * 构造函数
- */
 core.lang.Class = function() {
 
 };
