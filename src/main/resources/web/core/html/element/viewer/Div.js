@@ -40,7 +40,10 @@ core.html.element.viewer.Div = (function() {
 
 		var html = [];
 
-		html.push("<div id='" + this.getId() + "'></div>");
+		html.push("<div ");
+		html.push("id='" + this.getId() + "' ");
+		html.push("class='" + this.getClass() + "' ");
+		html.push("></div>");
 
 		return html.join("");
 	}

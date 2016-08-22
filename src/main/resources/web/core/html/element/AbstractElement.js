@@ -18,7 +18,7 @@ core.html.element.AbstractElement = (function() {
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            ID
+	 *            id
 	 */
 	var Constructor = function(_id) {
 
@@ -31,12 +31,20 @@ core.html.element.AbstractElement = (function() {
 		this.exist = false;
 
 		/**
-		 * ID
+		 * id
 		 */
 		var id = _id || "coreHtmlElementAbstractElement" + count;
+		/**
+		 * class
+		 */
+		var clazz = null;
+		/**
+		 * style
+		 */
+		var style = null;
 
 		/**
-		 * 获取ID
+		 * 获取id
 		 * 
 		 * @returns {String}
 		 */
@@ -46,7 +54,7 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 设置ID
+		 * 设置id
 		 * 
 		 * @param id{String}
 		 * @returns {core.html.element.AbstractElement}
@@ -56,40 +64,65 @@ core.html.element.AbstractElement = (function() {
 			id = _id;
 
 			return this;
-		}
+		};
+
+		/**
+		 * 获取class
+		 * 
+		 * @returns {String}
+		 */
+		this.getClass = function() {
+
+			return clazz;
+		};
+
+		/**
+		 * 设置class
+		 * 
+		 * @param clazz{String}
+		 * @returns {core.html.element.AbstractElement}
+		 */
+		this.setClass = function(_clazz) {
+
+			clazz = _clazz;
+
+			return this;
+		};
+
 	};
 
 	/**
 	 * 显示元素
 	 * 
-	 * @returns
+	 * @returns {core.html.element.AbstractElement}
 	 */
 	Constructor.prototype.show = function(target) {
 
+		// 获取元素是否在HTML中存在
 		if (this.exist) {
 
+			// 存在则直接调用jQuery显示
 			$("#" + this.getId()).show();
 		} else {
 
-			this.exist = true;
-			$("body").append(this.convertHtml());
+			// 不存在则调用添加至body
+			this.appendTo("body");
 		}
+
+		return this;
 	}
 
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns
+	 * @returns {core.html.element.AbstractElement}
 	 */
 	Constructor.prototype.hide = function(target) {
 
-		if (!this.exist) {
+		// 获取元素是否在HTML中存在,存在则隐藏
+		this.exist && $("#" + this.getId()).hide();
 
-			this.exist = true;
-			$("body").append(this.convertHtml());
-		}
-
-		$("#" + this.getId()).hide();
+		return this;
 	}
 
 	/**
@@ -97,16 +130,18 @@ core.html.element.AbstractElement = (function() {
 	 * 
 	 * @param target{String}
 	 *            目标位置
-	 * @returns
+	 * @returns {core.html.element.AbstractElement}
 	 */
 	Constructor.prototype.appendTo = function(target) {
 
-		// 判断是否存在
+		// 获取元素是否在HTML中存在
 		if (this.exist) {
 
+			// 存在则调用jQuery插入
 			$("#" + this.getId()).appendTo(target);
 		} else {
 
+			// 不存在则修改存在状态,且调用jQuery添加至方法
 			this.exist = true;
 			$(target).append(this.convertHtml());
 		}
