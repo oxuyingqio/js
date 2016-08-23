@@ -12,5 +12,5 @@
  * @date	2016年8月20日 11:31:48
  */
 
-core.html.element.Element = new core.lang.Interface("core.html.element.Element",
-		[ "getId", "show", "hide", "appendTo" ]);
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "getId", "show", "hide", "destroy",
+		"appendTo" ]);

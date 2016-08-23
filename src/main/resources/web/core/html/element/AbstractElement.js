@@ -26,11 +26,6 @@ core.html.element.AbstractElement = (function() {
 		count++;
 
 		/**
-		 * 元素是否在HTML中存在
-		 */
-		this.exist = false;
-
-		/**
 		 * id
 		 */
 		var id = _id || "coreHtmlElementAbstractElement" + count;
@@ -42,6 +37,11 @@ core.html.element.AbstractElement = (function() {
 		 * style
 		 */
 		var style = null;
+
+		/**
+		 * jQuery对象
+		 */
+		var jQuery = null;
 
 		/**
 		 * 获取id
@@ -89,6 +89,52 @@ core.html.element.AbstractElement = (function() {
 			return this;
 		};
 
+		/**
+		 * 获取style
+		 * 
+		 * @returns {core.html.element.model.Style/String}
+		 */
+		this.getStyle = function() {
+
+			return style;
+		};
+
+		/**
+		 * 设置style
+		 * 
+		 * @param style
+		 *            {core.html.element.model.Style/String}
+		 * @returns {core.html.element.AbstractElement}
+		 */
+		this.setStyle = function(_style) {
+
+			style = _style;
+
+			return this;
+		};
+
+		/**
+		 * 获取jQuery对象
+		 * 
+		 * @returns {jQuery}
+		 */
+		this.getJQuery = function() {
+
+			return jQuery;
+		};
+
+		/**
+		 * 设置jQuery对象
+		 * 
+		 * @param jQuery{jQuery}
+		 * @returns {core.html.element.AbstractElement}
+		 */
+		this.setJQuery = function(_jQuery) {
+
+			jQuery = _jQuery;
+
+			return this;
+		};
 	};
 
 	/**
@@ -98,19 +144,22 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.show = function(target) {
 
-		// 获取元素是否在HTML中存在
-		if (this.exist) {
+		// 获取jQuery对象
+		var $jQuery = this.getJQuery();
 
-			// 存在则直接调用jQuery显示
-			$("#" + this.getId()).show();
-		} else {
+		// 判断元素是否存在
+		if ($jQuery == null) {
 
 			// 不存在则调用添加至body
 			this.appendTo("body");
+		} else {
+
+			// 存在则直接调用jQuery显示
+			$jQuery.show();
 		}
 
 		return this;
-	}
+	};
 
 	/**
 	 * 隐藏元素
@@ -119,11 +168,28 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.hide = function(target) {
 
-		// 获取元素是否在HTML中存在,存在则隐藏
-		this.exist && $("#" + this.getId()).hide();
+		// 获取jQuery对象
+		var $jQuery = this.getJQuery();
+
+		// 判断元素是否存在,存在则隐藏
+		$jQuery == null || $jQuery.hide();
 
 		return this;
-	}
+	};
+
+	/**
+	 * 销毁元素
+	 * 
+	 * @returns
+	 */
+	Constructor.prototype.destroy = function() {
+
+		// 获取jQuery对象
+		var $jQuery = this.getJQuery();
+
+		// 判断元素是否存在,存在则隐藏
+		$jQuery == null || $jQuery.remove();
+	};
 
 	/**
 	 * 添加至
@@ -134,20 +200,22 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.appendTo = function(target) {
 
-		// 获取元素是否在HTML中存在
-		if (this.exist) {
+		// 获取jQuery对象
+		var $jQuery = this.getJQuery();
 
-			// 存在则调用jQuery插入
-			$("#" + this.getId()).appendTo(target);
-		} else {
+		// 判断元素是否存在
+		if ($jQuery == null) {
 
-			// 不存在则修改存在状态,且调用jQuery添加至方法
-			this.exist = true;
+			// 不存在则添加元素,且设置jQuery对象
 			$(target).append(this.convertHtml());
+			this.setJQuery($("#" + this.getId()));
+		} else {
+			// 存在则调用jQuery插入
+			$jQuery.appendTo(target);
 		}
 
 		return this;
-	}
+	};
 
 	// 返回构造函数
 	return Constructor;

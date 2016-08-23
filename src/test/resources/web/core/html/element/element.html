@@ -6,7 +6,7 @@
 
 </head>
 <body>
-	
+
 	<div id="test"></div>
 </body>
 
@@ -54,8 +54,15 @@
 	$(function() {
 
 		var div = new core.html.element.viewer.Div();
+		var style = new core.html.element.model.Style();
+		// 		style.setWidth("100px");
+		// 		style.setHeight("100px");
+		// 		style.setBackground("red");
+		// 		div.setStyle(style);
+		div.setStyle("width:200px;height:200px;background:blue;");
 		div.appendTo("body");
 		div.appendTo("#test");
+		div.destroy();
 	});
 </script>
 

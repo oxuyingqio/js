@@ -20,13 +20,13 @@ core.html.element.model.Style = (function() {
 	var Constructor = function() {
 
 		// 宽度
-		var width;
+		var width = null;
 		// 高度
-		var height;
+		var height = null;
 		// 颜色
-		var color;
+		var color = null;
 		// 背景
-		var background;
+		var background = null;
 
 		/**
 		 * 获取宽度
@@ -121,6 +121,30 @@ core.html.element.model.Style = (function() {
 		};
 	};
 
+	/**
+	 * 转为字符串
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.toString = function() {
+
+		var str = [];
+		// 宽度
+		var width = this.getWidth();
+		width == null || str.push("width:" + width + ";");
+		// 高度
+		var height = this.getHeight();
+		height == null || str.push("height:" + height + ";");
+		// 颜色
+		var color = this.getColor();
+		color == null || str.push("color:" + color + ";");
+		// 背景
+		var background = this.getBackground();
+		background == null || str.push("background:" + background + ";");
+
+		return str.join("");
+	};
+
 	// 返回构造函数
-	return Construtor;
+	return Constructor;
 })();

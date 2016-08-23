@@ -43,6 +43,7 @@ core.html.element.viewer.Div = (function() {
 		html.push("<div ");
 		html.push("id='" + this.getId() + "' ");
 		html.push("class='" + this.getClass() + "' ");
+		html.push("style='" + this.getStyle().toString() + "' ");
 		html.push("></div>");
 
 		return html.join("");
