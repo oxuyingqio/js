@@ -1,13 +1,13 @@
 /**
- * @name	Div
+ * @name	A
  * @package	core.html.element.viewer
- * @desc	文档中的节
+ * @desc	锚
  * @type	类
  * 
- * @date	2016年8月20日 11:56:33
+ * @date	2016年8月24日 10:51:28
  */
 
-core.html.element.viewer.Div = (function() {
+core.html.element.viewer.A = (function() {
 
 	/**
 	 * 对象个数
@@ -26,7 +26,7 @@ core.html.element.viewer.Div = (function() {
 		count++;
 
 		// 调用父类构造
-		core.html.element.viewer.Div.superClass.constructor.call(this, id || "coreHtmlElementViewerDiv" + count);
+		core.html.element.viewer.A.superClass.constructor.call(this, id || "coreHtmlElementViewerA" + count);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -41,8 +41,8 @@ core.html.element.viewer.Div = (function() {
 		// HTML
 		var html = [];
 
-		// DIV HTML
-		html.push("<div ");
+		// A HTML
+		html.push("<a ");
 		html.push("id='" + this.getId() + "' ");
 		// class
 		var clazz = this.getClass();
@@ -72,7 +72,7 @@ core.html.element.viewer.Div = (function() {
 			}
 		}
 
-		html.push("</div>");
+		html.push("</a>");
 
 		return html.join("");
 	}

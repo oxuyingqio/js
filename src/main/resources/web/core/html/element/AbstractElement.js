@@ -44,9 +44,9 @@ core.html.element.AbstractElement = (function() {
 		var children = [];
 
 		/**
-		 * jQuery对象
+		 * 属性
 		 */
-		var jQuery = null;
+		var attributes = new core.util.Map();
 
 		/**
 		 * 获取id
@@ -62,7 +62,7 @@ core.html.element.AbstractElement = (function() {
 		 * 设置id
 		 * 
 		 * @param id{String}
-		 * @returns {core.html.element.AbstractElement}
+		 * @returns {core.html.element.Element}
 		 */
 		this.setId = function(_id) {
 
@@ -85,7 +85,7 @@ core.html.element.AbstractElement = (function() {
 		 * 设置class
 		 * 
 		 * @param clazz{String}
-		 * @returns {core.html.element.AbstractElement}
+		 * @returns {core.html.element.Element}
 		 */
 		this.setClass = function(_clazz) {
 
@@ -109,7 +109,7 @@ core.html.element.AbstractElement = (function() {
 		 * 
 		 * @param style
 		 *            {core.html.element.model.Style/String}
-		 * @returns {core.html.element.AbstractElement}
+		 * @returns {core.html.element.Element}
 		 */
 		this.setStyle = function(_style) {
 
@@ -120,66 +120,101 @@ core.html.element.AbstractElement = (function() {
 
 		/**
 		 * 添加子元素
+		 * 
+		 * @param child
+		 * @returns {core.html.element.Element}
 		 */
 		this.addChild = function(child) {
 
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
-
 			children.push(child);
+
+			return this;
 		};
 
 		/**
 		 * 移除子元素
+		 * 
+		 * @param child
+		 * @returns {core.html.element.Element}
 		 */
 		this.removeChild = function(child) {
 
 			children.remove(child);
+
+			return this;
 		};
 
 		/**
-		 * 获取jQuery对象
+		 * 获取子元素集合
 		 * 
-		 * @returns {jQuery}
+		 * @returns {Array}
 		 */
-		this.getJQuery = function() {
+		this.getChildren = function() {
 
-			return jQuery;
+			return children;
 		};
 
 		/**
-		 * 设置jQuery对象
+		 * 获取属性
 		 * 
-		 * @param jQuery{jQuery}
-		 * @returns {core.html.element.AbstractElement}
+		 * @param key{String}
+		 * @returns {Object}
 		 */
-		this.setJQuery = function(_jQuery) {
+		this.getAttribute = function(key) {
 
-			jQuery = _jQuery;
+			return attributes.get(key);
+		};
+
+		/**
+		 * 设置属性
+		 * 
+		 * @param key{String}
+		 * @param value{Object}
+		 * @returns {core.html.element.Element}
+		 */
+		this.setAttribute = function(key, value) {
+
+			attributes.put(key, value);
 
 			return this;
 		};
 	};
 
 	/**
-	 * 显示元素
+	 * 元素是否在HTML中存在
 	 * 
-	 * @returns {core.html.element.AbstractElement}
+	 * @returns {Boolean}
 	 */
-	Constructor.prototype.show = function(target) {
+	Constructor.prototype.exist = function() {
 
 		// 获取jQuery对象
-		var $jQuery = this.getJQuery();
+		var $jQuery = $("#" + this.getId());
+		// 通过获取jQuery对象是否存在,来判断元素是否存在
+		if ($jQuery.length === 0) {
 
-		// 判断元素是否存在
-		if ($jQuery == null) {
+			return false;
+		} else {
+
+			return true;
+		}
+	};
+
+	/**
+	 * 显示元素
+	 * 
+	 * @returns {core.html.element.Element}
+	 */
+	Constructor.prototype.show = function() {
+
+		// 判断元素是否在HTML中存在
+		if (this.exist()) {
+
+			// 存在则直接调用jQuery显示
+			$("#" + this.getId()).show();
+		} else {
 
 			// 不存在则调用添加至body
 			this.appendTo("body");
-		} else {
-
-			// 存在则直接调用jQuery显示
-			$jQuery.show();
 		}
 
 		return this;
@@ -188,15 +223,12 @@ core.html.element.AbstractElement = (function() {
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns {core.html.element.AbstractElement}
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.hide = function(target) {
 
-		// 获取jQuery对象
-		var $jQuery = this.getJQuery();
-
-		// 判断元素是否存在,存在则隐藏
-		$jQuery == null || $jQuery.hide();
+		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
+		this.exist() && $("#" + this.getId()).hide();
 
 		return this;
 	};
@@ -208,11 +240,54 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.destroy = function() {
 
-		// 获取jQuery对象
-		var $jQuery = this.getJQuery();
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = chidlren.length; i < length; i++) {
 
-		// 判断元素是否存在,存在则隐藏
-		$jQuery == null || $jQuery.remove();
+			// 获取子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				child.destroy();
+			}
+		}
+
+		// 判断元素是否在HTML中存在,存在则调用jQuery移除
+		this.exist() && $("#" + this.getId()).remove();
+	};
+
+	/**
+	 * 添加子元素
+	 * 
+	 * @param element{core.html.element.Element}
+	 */
+	Constructor.prototype.append = function(element) {
+
+		// 添加子元素
+		this.addChild(element);
+
+		// 判断元素是否在HTML中存在,若存在则调用jQuery添加
+		if (this.exist()) {
+
+			// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
+			if (element instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface.ensureImplements(element, core.html.element.Element,
+						core.html.element.ElementProcess);
+				$("#" + this.getId()).append(element.convertHtml());
+			} else {
+
+				$("#" + this.getId()).append(element);
+			}
+		}
+
+		return this;
 	};
 
 	/**
@@ -220,22 +295,28 @@ core.html.element.AbstractElement = (function() {
 	 * 
 	 * @param target{String}
 	 *            目标位置
-	 * @returns {core.html.element.AbstractElement}
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.appendTo = function(target) {
 
-		// 获取jQuery对象
-		var $jQuery = this.getJQuery();
+		// 判断目标类型.若为元素则调用添加方法,若为字符串则调用jQuery添加方法
+		if (target instanceof core.html.element.AbstractElement) {
 
-		// 判断元素是否存在
-		if ($jQuery == null) {
+			// 判断是否实现元素接口
+			core.lang.Interface.ensureImplements(target, core.html.element.Element, core.html.element.ElementProcess);
+			target.append(this);
+		} else if (target.constructor === String) {
 
-			// 不存在则添加元素,且设置jQuery对象
-			$(target).append(this.convertHtml());
-			this.setJQuery($("#" + this.getId()));
-		} else {
-			// 存在则调用jQuery插入
-			$jQuery.appendTo(target);
+			// 判断元素是否在HTML中存在
+			if (this.exist()) {
+
+				// 存在则调用jQuery插入
+				$("#" + this.getId()).appendTo(target);
+			} else {
+
+				// 不存在则调用jQuery添加元素
+				$(target).append(this.convertHtml());
+			}
 		}
 
 		return this;

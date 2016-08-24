@@ -21,9 +21,13 @@
 <script type="text/javascript" src="/~/core/lang/Exception.js"></script>
 <script type="text/javascript" src="/~/core/lang/Interface.js"></script>
 
+<script type="text/javascript" src="/~/core/util/Map.js"></script>
+
 <script type="text/javascript" src="/~/core/html/element/Element.js"></script>
 <script type="text/javascript" src="/~/core/html/element/AbstractElement.js"></script>
 <script type="text/javascript" src="/~/core/html/element/ElementProcess.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/A.js"></script>
+<script type="text/javascript" src="/~/core/html/element/viewer/Button.js"></script>
 <script type="text/javascript" src="/~/core/html/element/viewer/Div.js"></script>
 <script type="text/javascript" src="/~/core/html/element/model/Style.js"></script>
 <!-- <script type="text/javascript" src="/~/core/html/element/model/ElementProcess.js"></script> -->
@@ -54,18 +58,20 @@
 	$(function() {
 
 		var div = new core.html.element.viewer.Div();
+		div.setStyle("width:200px;height:200px;background:blue;");
 		var style = new core.html.element.model.Style();
 		// 				style.setWidth("100px");
 		// 				style.setHeight("100px");
 		// 				style.setBackground("red");
 		// 				div.setStyle(style);
-		div.setStyle("width:200px;height:200px;background:blue;");
-		div.appendTo("body");
+
+		var button = new core.html.element.viewer.Button();
+		var a = new core.html.element.viewer.A();
+		a.append("123");
+		button.append(a);
+
+		div.append(button);
 		div.appendTo("#test");
-		
-		
-		var div2 = new core.html.element.viewer.Div();
-		div.addChild(div2);
 	});
 </script>
 
