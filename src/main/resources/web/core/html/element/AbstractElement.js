@@ -39,6 +39,11 @@ core.html.element.AbstractElement = (function() {
 		var style = null;
 
 		/**
+		 * 子元素
+		 */
+		var children = [];
+
+		/**
 		 * jQuery对象
 		 */
 		var jQuery = null;
@@ -111,6 +116,25 @@ core.html.element.AbstractElement = (function() {
 			style = _style;
 
 			return this;
+		};
+
+		/**
+		 * 添加子元素
+		 */
+		this.addChild = function(child) {
+
+			// 判断是否实现元素接口
+			core.lang.Interface.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+
+			children.push(child);
+		};
+
+		/**
+		 * 移除子元素
+		 */
+		this.removeChild = function(child) {
+
+			children.remove(child);
 		};
 
 		/**
