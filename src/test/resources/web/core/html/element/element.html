@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>core.html.element</title>
+<title>core.html.element.Element</title>
 
 </head>
 <body>
@@ -10,7 +10,7 @@
 	<div id="test"></div>
 </body>
 
-<script type="text/javascript" src="/~/core/resource/jquery-3.0.0/jquery-3.0.0.js"></script>
+<script type="text/javascript" src="/~/core/resource/jquery-3.1.0/jquery-3.1.0.js"></script>
 
 <script type="text/javascript" src="/~/core/js/Date.js"></script>
 <script type="text/javascript" src="/~/core/js/String.js"></script>
@@ -58,28 +58,28 @@
 	$(function() {
 
 		var div = new core.html.element.viewer.Div();
-		div.setStyle("width:200px;height:200px;background:blue;");
+		div.style("width:200px;height:200px;background:blue;");
 		var style = new core.html.element.model.Style();
-		// 				style.setWidth("100px");
-		// 				style.setHeight("100px");
-		// 				style.setBackground("red");
-		// 				div.setStyle(style);
+		// 				style.width("100px");
+		// 				style.height("100px");
+		// 				style.background("red");
+		// 				div.style(style);
 
 		var button = new core.html.element.viewer.Button();
 		button.append("button");
-		button.setClick(function() {
+		button.click(function() {
 			alert("button click")
 		});
 
 		var button1 = new core.html.element.viewer.Button();
 		button1.append("button1");
-		button1.setClick(function() {
+		button1.click(function() {
 			alert("button1 click")
 		});
 
 		div.append(button);
 		div.append(button1);
-		div.setClick(function() {
+		div.click(function() {
 			alert("div click")
 		});
 		div.appendTo("#test");
