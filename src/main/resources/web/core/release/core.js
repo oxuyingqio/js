@@ -1,9 +1,17 @@
 /**
- * Array
+ * @name	Array
+ * @package	core.js
+ * @desc	数组
+ * @type	类扩展
  * 
- * 数组
+ * @method	void	clear()								清空数组
+ * 			Boolean	contains(Object object)				是否存在指定对象
+ * 			Number	indexOf(Object object)				获取指定对象下标值
+ * 			void	insert(Number index, Object object)	在指定下标位置插入对象
+ * 			void	remove(Object object)				删除指定对象
+ * 			void	removeAt(Number index)				删除指定下标位置的对象
  * 
- * 类扩展
+ * @date	2016年8月20日 09:45:15
  */
 
 /**
@@ -93,11 +101,14 @@ Array.prototype.removeAt = function(index) {
 	this.splice(index, 1);
 };
 /**
- * Date
+ * @name	Date
+ * @package	core.js
+ * @desc	日期
+ * @type	类扩展
  * 
- * 日期
+ * @method	String	format(String format)	格式化日期
  * 
- * 类扩展
+ * @date	2016年8月20日 09:41:57
  */
 
 /**
@@ -145,11 +156,14 @@ Date.prototype.format = function(format) {
 	return format;
 };
 /**
- * Math
+ * @name	Math
+ * @package	core.js
+ * @desc	数学计算
+ * @type	对象扩展
  * 
- * 数学计算
+ * @method	static Number	subtract(Number subtrahend, Number minuend, Number precision)	减法
  * 
- * 对象扩展
+ * @date	2016年8月20日 09:41:02
  */
 
 /**
@@ -173,16 +187,16 @@ Math.subtract = function(subtrahend, minuend, precision) {
 	return (a - b).toFixed(precision);
 };
 /**
- * Object
+ * @name	Object
+ * @package	core.js
+ * @desc	超类
+ * @type	类扩展
  * 
- * 超类
+ * @method	static Object	clone(Object object)	克隆对象(原型式继承)
  * 
- * 类扩展
- */
-
-/**
- * 注:
- * 		1.若扩展Object.prototype,则引入jQuery时会产生未知错误.
+ * @attention	1.若扩展Object.prototype,引入jQuery时会产生未知错误.
+ * 
+ * @date	2016年8月20日 09:15:16
  */
 
 /**
@@ -204,11 +218,16 @@ Object.clone = function(object) {
 	return new Clone();
 };
 /**
- * String
+ * @name	String
+ * @package	core.js
+ * @desc	字符串
+ * @type	类扩展
  * 
- * 字符串
+ * @method	String	replaceAll(String target, String result)	替换所有字符串
+ * 			String	toBinaryString()							转为2进制字符串
+ * 			String	toHexString()								转为16进制字符串
  * 
- * 类扩展
+ * @date	2016年8月20日 09:38:33
  */
 
 /**
@@ -283,8 +302,8 @@ String.prototype.toHexString = function() {
 /**
  * 包
  */
-
 (function() {
+
 	if (typeof (core) !== "undefined") {
 		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
 	} else {
@@ -301,26 +320,18 @@ String.prototype.toHexString = function() {
 				// 元素包
 				element : {
 
+					// HTML5 包
+					html5 : {
+
+						// 展示包
+						viewer : {}
+					},
+
 					// 模型包
 					model : {},
 
 					// 展示包
-					viewer : {
-
-						// 按钮实现包
-						button : {
-
-							// EasyUI按钮实现包
-							easyui : {}
-						},
-
-						// 输入框实现包
-						input : {
-
-							// EasyUI输入框实现包
-							easyui : {}
-						}
-					}
+					viewer : {}
 				},
 
 				// 事件包
@@ -340,19 +351,19 @@ String.prototype.toHexString = function() {
 			// 基础包
 			lang : {},
 
-			// 日志包
-			log : {
-
-				// 控制包
-				controller : {
-
-					// 输出者实现包
-					outputor : {}
-				},
-
-				// 模型包
-				model : {}
-			},
+			// // 日志包
+			// log : {
+			//
+			// // 控制包
+			// controller : {
+			//
+			// // 输出者实现包
+			// outputor : {}
+			// },
+			//
+			// // 模型包
+			// model : {}
+			// },
 
 			// 工具包
 			util : {}
@@ -360,16 +371,18 @@ String.prototype.toHexString = function() {
 	}
 })();
 /**
- * Class
+ * @name	Class
+ * @package	core.lang
+ * @desc	类
+ * @type	类
  * 
- * 类
+ * @constructor	core.lang.Class()
  * 
- * 类
+ * @method	static void	extend(function SubClass, function SuperClass)	类继承-静态方法
+ * 
+ * @date	2016年8月20日 09:32:06
  */
 
-/**
- * 构造函数
- */
 core.lang.Class = function() {
 
 };
@@ -387,7 +400,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		throw "core.lang.Class.extend:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
+		new core.lang.Exception("core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 中间函数
@@ -408,26 +421,61 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 	}
 };
 /**
- * Interface
+ * @name	Exception
+ * @package	core.lang
+ * @desc	异常
+ * @type	类
  * 
- * 接口
+ * @constructor core.lang.Exception(Object _this, String msg)
  * 
- * 类
+ * @date	2016年8月20日 09:32:06
+ */
+
+/**
+ * 构造函数
+ * 
+ * @param _this{Object}
+ */
+core.lang.Exception = function(_this) {
+
+	// 异常信息
+	var msg = [];
+	// 遍历参数
+	for (var i = 1, length = arguments.length; i < length; i++) {
+		msg.push(arguments[i]);
+		msg.push(" ");
+	}
+
+	if (window.console && window.console.error) {
+		window.console.error(msg.join(""));
+	}
+};
+/**
+ * @name	Interface
+ * @package	core.lang
+ * @desc	接口
+ * @type	类
+ * 
+ * @constructor	core.lang.Interface(String name, Array<String> methods)
+ * 
+ * @method	static void	ensureImplements(Object object, core.lang.Interface interface...)	检查对象是否实现对应接口的方法
+ * 
+ * @date	2016年8月20日 09:35:10
  */
 
 /**
  * 构造函数
  * 
  * @param name{String}
- *            名称
+ *            接口名称
  * @param methods{Array
- *            <String>} 方法组
+ *            <String>} 接口方法集合
  */
 core.lang.Interface = function(name, methods) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		throw "core.lang.Interface:参数异常.参数个数必须为2个,得到" + arguments.length + "个";
+		new core.lang.Exception("core.lang.Interface", "构造参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 接口名称
@@ -438,7 +486,7 @@ core.lang.Interface = function(name, methods) {
 	for (var i = 0, length = methods.length; i < length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
-			throw "core.lang.Interface:参数异常.接口方法名必须为字符串";
+			new core.lang.Exception("core.lang.Interface", "构造参数异常", "接口方法名必须为字符串");
 		} else {
 			this.methods.push(methods[i]);
 		}
@@ -458,7 +506,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		throw "core.lang.Interface.ensureImplements:参数异常.参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象";
+		new core.lang.Exception("core.lang.Interface", "ensureImplements方法参数异常", "参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象");
 	}
 
 	// 遍历实现的接口对象
@@ -471,10 +519,11 @@ core.lang.Interface.ensureImplements = function(object) {
 		if (_interface) {
 			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
-				throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象必须是core.lang.Interface类";
+				new core.lang.Exception("core.lang.Interface", "ensureImplements方法参数异常",
+						"传入的接口对象必须是core.lang.Interface类");
 			}
 		} else {
-			throw "core.lang.Interface.ensureImplements:参数异常.传入的接口对象不存在";
+			new core.lang.Exception("core.lang.Interface", "ensureImplements方法参数异常", "传入的接口对象不存在");
 		}
 
 		// 遍历接口方法
@@ -485,24 +534,41 @@ core.lang.Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
-				throw "core.lang.Interface.ensureImplements:对象异常.接口" + _interface.name + "(" + method + ")方法未实现";
+				new core.lang.Exception("core.lang.Interface", "ensureImplements接口实现异常", "接口" + _interface.name + "("
+						+ method + ")方法未实现");
 			}
 		}
 	}
 };
 /**
- * Map
+ * @name	Map
+ * @package	core.util
+ * @desc	映射
+ * @type	类
  * 
- * 映射
+ * @constructor	core.util.Map()
  * 
- * 类
+ * @method	Number 	size() 							返回映射个数
+ * 			Boolean	isEmpty()						映射是否包含键-值映射关系,未包含则返回 true.
+ * 			Boolean	containsKey(Object key)			映射是否包含指定键的映射关系,包含则返回 true.
+ * 			Boolean	containsValue(Object value)		映射是否包含指定值的映射关系,包含则返回 true.
+ * 			Object	get(Object key)					返回指定键所映射的值;如果映射中不包含该键的映射关系,则返回 undefined.
+ * 			void	put(Object key, Object value)	将指定键-值映射保存;若存在键,则更新对应映射的值.
+ * 			void	remove(Object key)				若存在指定键的映射关系,则将其删除.
+ * 			void	clear()							清除映射中所有映射关系
+ * 
+ * @date	2016年8月20日 09:29:54
  */
 
 core.util.Map = function() {
 
-	// 元素
+	/**
+	 * 元素
+	 */
 	var elements = {};
-	// 元素个数
+	/**
+	 * 元素个数
+	 */
 	var length = 0;
 
 	/**
@@ -516,7 +582,7 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 映射是否包含键-值映射关系,未包含则返回 true。
+	 * 映射是否包含键-值映射关系,未包含则返回 true.
 	 * 
 	 * @returns {Boolean}
 	 */
@@ -526,7 +592,7 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 映射是否包含指定键的映射关系,包含则返回 true。
+	 * 映射是否包含指定键的映射关系,包含则返回 true.
 	 * 
 	 * @param key{Object}
 	 *            键
@@ -538,7 +604,7 @@ core.util.Map = function() {
 	};
 
 	/**
-	 * 映射是否包含指定值的映射关系,包含则返回 true。
+	 * 映射是否包含指定值的映射关系,包含则返回 true.
 	 * 
 	 * @param value{Object}
 	 *            值
@@ -603,406 +669,17 @@ core.util.Map = function() {
 	 */
 	this.clear = function() {
 
+		length = 0;
 		elements = {};
 	};
 };
 /**
- * Logger
+ * @name	KeyCode
+ * @package	core.html.constant
+ * @desc	键盘Code值
+ * @type	枚举
  * 
- * 日志记录者
- * 
- * 类
- */
-
-core.log.Logger = (function() {
-
-	// 日志记录者
-	var logger;
-
-	/**
-	 * 构造函数
-	 */
-	var Constructor = function() {
-
-		// 输出级别
-		this.level = core.log.model.Level.debug;
-		// 输出模式
-		this.mode = core.log.model.Mode.console;
-		// 输出格式化参数
-		this.format = "[" + core.log.model.Format.level + "] " + core.log.model.Format.msg;
-	};
-
-	/**
-	 * 输出Error级别日志信息
-	 * 
-	 * @param msg{Object}
-	 *            输出信息
-	 * @returns
-	 */
-	Constructor.prototype.error = function(msg) {
-
-		// 级别是否低于Error级别
-		if (this.level <= core.log.model.Level.error) {
-
-			// 格式化输出信息
-			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "ERROR", this.format);
-			// 输出信息
-			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
-		}
-	};
-
-	/**
-	 * 输出Warn级别日志信息
-	 * 
-	 * @param msg{Object}
-	 *            输出信息
-	 * @returns
-	 */
-	Constructor.prototype.warn = function(msg) {
-
-		// 级别是否低于Warn级别
-		if (this.level <= core.log.model.Level.warn) {
-
-			// 格式化输出信息
-			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "WARN", this.format);
-			// 输出信息
-			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
-		}
-	};
-
-	/**
-	 * 输出Info级别日志信息
-	 * 
-	 * @param msg{Object}
-	 *            输出信息
-	 * @returns
-	 */
-	Constructor.prototype.info = function(msg) {
-
-		// 级别是否低于Info级别
-		if (this.level <= core.log.model.Level.info) {
-
-			// 格式化输出信息
-			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "INFO", this.format);
-			// 输出信息
-			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
-		}
-	};
-
-	/**
-	 * 输出Debug级别日志信息
-	 * 
-	 * @param msg{Object}
-	 *            输出信息
-	 * @returns
-	 */
-	Constructor.prototype.debug = function(msg) {
-
-		// 级别是否低于Info级别
-		if (this.level <= core.log.model.Level.debug) {
-
-			// 格式化输出信息
-			msg = core.log.controller.FormatConvertor.getInstance().convert(msg, "DEBUG", this.format);
-			// 输出信息
-			core.log.controller.OutputorCreator.getOutputor(this.mode).output(msg);
-		}
-	};
-
-	return {
-
-		/**
-		 * 获取日志记录者
-		 * 
-		 * @returns {core.log.Logger}
-		 */
-		getInstance : function() {
-
-			// 不存在,则创建
-			if (!logger) {
-				logger = new Constructor();
-			}
-
-			return logger;
-		}
-	};
-})();
-/**
- * FormatConvertor
- * 
- * 格式化转换器
- * 
- * 类
- */
-
-core.log.controller.FormatConvertor = (function() {
-
-	// 转换器
-	var convertor;
-
-	/**
-	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 格式转换
-	 * 
-	 * @param msg
-	 *            输出信息
-	 * @param level
-	 *            级别信息
-	 * @param format
-	 *            格式化信息
-	 * @returns {String}
-	 */
-	Constructor.prototype.convert = function(msg, level, format) {
-
-		// 替换消息
-		format = format.replaceAll(core.log.model.Format.msg, msg);
-		// 替换输出级别
-		format = format.replaceAll(core.log.model.Format.level, level);
-		// 替换日期??如何支持自定义format
-		format = format.replaceAll(core.log.model.Format.date, (new Date()).format("yyyy-MM-dd HH:mm:ss"));
-		// 替换换行
-		format = format.replaceAll(core.log.model.Format.enter, "\n");
-
-		return format;
-	};
-
-	return {
-
-		/**
-		 * 获取转换器
-		 * 
-		 * @returns {core.log.controller.FormatConvertor}
-		 */
-		getInstance : function() {
-
-			// 不存在,则创建
-			if (!convertor) {
-				convertor = new Constructor();
-			}
-
-			return convertor;
-		}
-	};
-})();
-/**
- * OutputorCreator
- * 
- * 输出者创建者
- * 
- * 对象
- */
-
-core.log.controller.OutputorCreator = {
-
-	/**
-	 * 获取输出者
-	 * 
-	 * @param mode{core.log.model.Mode}
-	 *            输出模式
-	 * @returns {core.log.model.Outputor}
-	 */
-	getOutputor : function(mode) {
-
-		// 输出者
-		var outputor;
-
-		switch (mode) {
-		case core.log.model.Mode.console:
-			// 获取控制台输出者实例
-			outputor = new core.log.controller.outputor.Console.getInstance();
-			break;
-		case core.log.model.Mode.popup:
-			// 获取弹出框输出者实例
-			outputor = new core.log.controller.outputor.Popup.getInstance();
-			break;
-		default:
-			throw "core.log.controller.OutputorCreator.getOutputor:参数异常.模式(" + mode + ")不支持";
-		}
-
-		// 判断是否实现接口方法
-		core.lang.Interface.ensureImplements(outputor, core.log.model.Outputor);
-		// 返回实例
-		return outputor;
-	}
-};
-/**
- * Console
- * 
- * 控制台输出者
- * 
- * 类
- */
-
-core.log.controller.outputor.Console = (function() {
-
-	// 输出者
-	var outputor;
-
-	/**
-	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 输出消息
-	 * 
-	 * @param msg{Object}
-	 *            输出信息
-	 * @returns
-	 */
-	Constructor.prototype.output = function(msg) {
-
-		console.log(msg);
-	};
-
-	return {
-
-		/**
-		 * 获取输出者
-		 * 
-		 * @returns {core.log.controller.outputor.Console}
-		 */
-		getInstance : function() {
-
-			// 不存在,则创建
-			if (!outputor) {
-				outputor = new Constructor();
-			}
-
-			return outputor;
-		}
-	};
-})();
-/**
- * Pop-up
- * 
- * 弹出框输出者
- * 
- * 类
- */
-
-core.log.controller.outputor.Popup = (function() {
-
-	// 输出者
-	var outputor;
-
-	/**
-	 * 构造函数
-	 */
-	var Constructor = function() {
-
-	};
-
-	/**
-	 * 输出消息
-	 * 
-	 * @param msg{Object}
-	 *            信息
-	 * @returns
-	 */
-	Constructor.prototype.output = function(msg) {
-
-		alert(msg);
-	};
-
-	return {
-
-		/**
-		 * 获取输出者
-		 * 
-		 * @returns {core.log.controller.outputor.Popup}
-		 */
-		getInstance : function() {
-
-			// 不存在,则创建
-			if (!outputor) {
-				outputor = new Constructor();
-			}
-
-			return outputor;
-		}
-	};
-})();
-/**
- * Format
- * 
- * 格式化参数
- * 
- * 枚举
- */
-
-core.log.model.Format = {
-
-	// 信息
-	msg : "%m",
-	// 级别
-	level : "%p",
-	// 位置
-	location : "%l",
-	// 日期
-	date : "%d",
-	// 换行
-	enter : "%n"
-};
-/**
- * Level
- * 
- * 输出级别
- * 
- * 枚举
- */
-
-core.log.model.Level = {
-
-	// 错误
-	error : 3,
-	// 警告
-	warn : 2,
-	// 信息
-	info : 1,
-	// 调试
-	debug : 0
-};
-/**
- * Mode
- * 
- * 输出模式
- * 
- * 枚举
- */
-
-core.log.model.Mode = {
-
-	// 控制台
-	console : "console",
-	// 弹出框
-	popup : "popup"
-};
-/**
- * Outputor
- * 
- * 输出者
- * 
- * 接口
- */
-
-/**
- * @method output 输出信息
- */
-core.log.model.Outputor = new core.lang.Interface("core.log.model.Outputor", [ "output" ]);
-/**
- * KeyCode
- * 
- * 键盘Code值
- * 
- * 枚举
+ * @date	2016年8月20日 10:20:27
  */
 
 core.html.constant.KeyCode = {
@@ -1100,96 +777,287 @@ core.html.constant.KeyCode = {
 	Down : "40"
 };
 /**
- * Element
+ * @name	AbstractElement
+ * @package	core.html.element
+ * @desc	HTML元素公共抽象实现
+ * @type	抽象类
  * 
- * 元素
- * 
- * 接口
+ * @date	2016年8月20日 11:34:27
  */
 
-/**
- * @method getId 获取元素ID
- * @method getjQuery 获取元素jQuery对象
- * @method show 展示元素
- * @method hide 隐藏元素
- * @method destroy 销毁元素
- * @method appendTo 添加元素到
- * @method add 添加子元素
- * @method remove 移除子元素
- * @method getChildren 获取子元素集合
- * @method find 检索子元素集合,包含子元素的子元素
- */
-core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "getId", "getjQuery", "show",
-		"hide", "destroy", "appendTo", "add", "remove", "getChildren", "find" ]);
-/**
- * Element
- * 
- * 元素,实现部分core.html.element.Element通用属性及方法
- * 
- * 抽象类
- */
+core.html.element.AbstractElement = (function() {
 
-core.html.element.model.Element = (function() {
-
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
+	 *            id
 	 */
 	var Constructor = function(_id) {
 
 		// 对象个数+1
 		count++;
 
-		// 元素ID
-		var id = _id || "coreHtmlElementModelElement" + count;
-
-		// 子元素
-		var elements = [];
+		/**
+		 * id
+		 */
+		var id = _id || "coreHtmlElementAbstractElement" + count;
+		/**
+		 * class
+		 */
+		var clazz = null;
+		/**
+		 * style
+		 */
+		var style = null;
 
 		/**
-		 * 获取元素ID
+		 * 单击事件
+		 */
+		var click = null;
+
+		/**
+		 * 子元素
+		 */
+		var children = [];
+
+		/**
+		 * 自定义属性
+		 */
+		var attributes = new core.util.Map();
+
+		/**
+		 * 获取id
 		 * 
 		 * @returns {String}
 		 */
 		this.getId = function() {
+
 			return id;
+		};
+
+		/**
+		 * 设置id
+		 * 
+		 * @param id{String}
+		 * @returns {core.html.element.Element}
+		 */
+		this.setId = function(_id) {
+
+			id = _id;
+
+			return this;
+		};
+
+		/**
+		 * 获取class
+		 * 
+		 * @returns {String}
+		 */
+		this.getClass = function() {
+
+			return clazz;
+		};
+
+		/**
+		 * 设置class
+		 * 
+		 * @param clazz{String}
+		 * @returns {core.html.element.Element}
+		 */
+		this.setClass = function(_clazz) {
+
+			clazz = _clazz;
+
+			return this;
+		};
+
+		/**
+		 * 获取style
+		 * 
+		 * @returns {core.html.element.model.Style/String}
+		 */
+		this.getStyle = function() {
+
+			return style;
+		};
+
+		/**
+		 * 设置style
+		 * 
+		 * @param style
+		 *            {core.html.element.model.Style/String}
+		 * @returns {core.html.element.Element}
+		 */
+		this.setStyle = function(_style) {
+
+			style = _style;
+
+			return this;
+		};
+
+		/**
+		 * 设置点击事件
+		 * 
+		 * @param click
+		 *            点击事件
+		 * @returns {core.html.element.Element}
+		 */
+		this.setClick = function(_click) {
+
+			click = _click;
+
+			return this;
+		};
+
+		/**
+		 * 添加事件
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.addEvent = function() {
+
+			// 若元素在HTML中存在
+			if (this.exist()) {
+
+				// 单击事件
+				click === null || $("#" + id).click(click);
+			}
+
+			return this;
+		};
+
+		/**
+		 * 添加子元素
+		 * 
+		 * @param child
+		 * @returns {core.html.element.Element}
+		 */
+		this.addChild = function(child) {
+
+			children.push(child);
+
+			return this;
+		};
+
+		/**
+		 * 移除子元素
+		 * 
+		 * @param child
+		 * @returns {core.html.element.Element}
+		 */
+		this.removeChild = function(child) {
+
+			children.remove(child);
+
+			return this;
 		};
 
 		/**
 		 * 获取子元素集合
 		 * 
-		 * @returns {Array<core.html.element.Element>}
+		 * @returns {Array}
 		 */
-		this.getElements = function() {
-			return elements;
+		this.getChildren = function() {
+
+			return children;
+		};
+
+		/**
+		 * 获取属性
+		 * 
+		 * @param key{String}
+		 * @returns {Object}
+		 */
+		this.getAttribute = function(key) {
+
+			return attributes.get(key);
+		};
+
+		/**
+		 * 设置属性
+		 * 
+		 * @param key{String}
+		 * @param value{Object}
+		 * @returns {core.html.element.Element}
+		 */
+		this.setAttribute = function(key, value) {
+
+			attributes.put(key, value);
+
+			return this;
 		};
 	};
 
 	/**
-	 * 获取元素jQuery对象
+	 * 元素是否在HTML中存在
 	 * 
-	 * @returns {Object}
+	 * @returns {Boolean}
 	 */
-	Constructor.prototype.getjQuery = function() {
+	Constructor.prototype.exist = function() {
 
-		return $("#" + this.getId());
+		// 获取jQuery对象
+		var $jQuery = $("#" + this.getId());
+		// 通过获取jQuery对象是否存在,来判断元素是否存在
+		if ($jQuery.length === 0) {
+
+			return false;
+		} else {
+
+			return true;
+		}
 	};
 
 	/**
-	 * 展示元素
+	 * 添加HTML后的处理
 	 * 
-	 * @returns {core.html.element.model.Element}
+	 * @returns {core.html.element.Element}
+	 */
+	Constructor.prototype.dealHtml = function() {
+
+		// 添加事件
+		this.addEvent();
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				child.dealHtml();
+			}
+		}
+	};
+
+	/**
+	 * 显示元素
+	 * 
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.show = function() {
 
-		// 元素的jQuery对象
-		var $element = this.getjQuery();
-		$element.show();
+		// 判断元素是否在HTML中存在
+		if (this.exist()) {
+
+			// 存在则直接调用jQuery显示
+			$("#" + this.getId()).show();
+		} else {
+
+			// 不存在则调用添加至body
+			this.appendTo("body");
+		}
 
 		return this;
 	};
@@ -1197,13 +1065,12 @@ core.html.element.model.Element = (function() {
 	/**
 	 * 隐藏元素
 	 * 
-	 * @returns {core.html.element.model.Element}
+	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.hide = function() {
+	Constructor.prototype.hide = function(target) {
 
-		// 元素的jQuery对象
-		var $element = this.getjQuery();
-		$element.hide();
+		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
+		this.exist() && $("#" + this.getId()).hide();
 
 		return this;
 	};
@@ -1215,86 +1082,53 @@ core.html.element.model.Element = (function() {
 	 */
 	Constructor.prototype.destroy = function() {
 
-		// 获取子元素集合
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时移除子元素
-		for (var i = 0, length = children.length; i < length; i++) {
+		// 遍历子元素
+		for (var i = 0, length = chidlren.length; i < length; i++) {
 
-			this.remove(children[i]);
+			// 获取子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				child.destroy();
+			}
 		}
 
-		// 元素的jQuery对象
-		var $element = this.getjQuery();
-		$element.remove();
-	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id{String}
-	 *            添加到的Div ID
-	 * @returns {core.html.element.model.Element}
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-
-		return this;
+		// 判断元素是否在HTML中存在,存在则调用jQuery移除
+		this.exist() && $("#" + this.getId()).remove();
 	};
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param children{core.html.element.Element}
-	 *            形参,子元素
-	 * @returns {core.html.element.model.Element}
+	 * @param element{core.html.element.Element}
 	 */
-	Constructor.prototype.add = function(children) {
+	Constructor.prototype.append = function(element) {
 
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
+		// 添加子元素
+		this.addChild(element);
 
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
+		// 判断元素是否在HTML中存在,若存在则调用jQuery添加
+		if (this.exist()) {
 
-			// 添加子元素
-			this.getElements().push(child);
-			// 若元素存在,则直接展示添加的子元素
-			this.exist() && child.appendTo(this.getId());
-		}
+			// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
+			if (element instanceof core.html.element.AbstractElement) {
 
-		return this;
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @param removeChild{core.html.element.Element}
-	 *            待移除的子元素
-	 * @returns {core.html.element.model.Element}
-	 */
-	Constructor.prototype.remove = function(removeChild) {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 子元素
-			var child = children[i];
-
-			// 若为该子元素,则移除并销毁.否则继续查找子元素的子元素
-			if (child === removeChild) {
-				// 删除子元素
-				this.getElements().remove(child);
-				// 调用子元素销毁方法
-				child.destroy();
+				// 判断是否实现元素接口
+				core.lang.Interface.ensureImplements(element, core.html.element.Element,
+						core.html.element.ElementProcess);
+				// 添加HTML内容
+				$("#" + this.getId()).append(element.convertHtml());
+				// 添加HTML后处理HTML
+				element.dealHtml();
 			} else {
-				child.remove(removeChild);
+
+				$("#" + this.getId()).append(element);
 			}
 		}
 
@@ -1302,131 +1136,330 @@ core.html.element.model.Element = (function() {
 	};
 
 	/**
-	 * 获取子元素集合
+	 * 添加至
 	 * 
-	 * @returns {Array<core.html.element.Element>}
+	 * @param target{String}
+	 *            目标位置
+	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.getChildren = function() {
+	Constructor.prototype.appendTo = function(target) {
 
-		return this.getElements();
-	};
+		// 判断目标类型.若为元素则调用添加方法,若为字符串则调用jQuery添加方法
+		if (target instanceof core.html.element.AbstractElement) {
 
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data{Object}
-	 *            查找数据
-	 * @returns {Array<core.html.element.Element>}
-	 */
-	Constructor.prototype.find = function(data) {
+			// 判断是否实现元素接口
+			core.lang.Interface.ensureImplements(target, core.html.element.Element, core.html.element.ElementProcess);
+			target.append(this);
+		} else if (target.constructor === String) {
 
-		// 查找的结果
-		var result = [];
+			// 判断元素是否在HTML中存在
+			if (this.exist()) {
 
-		// 查找的类型
-		var type = typeof (data);
+				// 存在则调用jQuery插入
+				$("#" + this.getId()).appendTo(target);
+			} else {
 
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 子元素
-			var child = children[i];
-
-			switch (type) {
-			case "function":
-				child.constructor === data && result.push(child);
-				break;
-			case "object":
-				child === data && result.push(child);
-				break;
-			case "string":
-				child.getId() === data && result.push(child);
-				break;
-			}
-
-			// 继续查找子元素的子元素
-			var childChildren = child.find(data);
-			if (childChildren.length > 0) {
-				result = result.concat(childChildren);
+				// 不存在则调用jQuery添加元素
+				$(target).append(this.convertHtml());
+				// 添加HTML后处理HTML
+				this.dealHtml();
 			}
 		}
 
-		return result;
+		return this;
 	};
 
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		// 元素的jQuery对象
-		var $element = this.getjQuery();
-		return ($element.length !== 0);
-	};
-
-	/**
-	 * 转为HTML-抽象方法
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-		throw "core.html.element.model.Element.convertHtml:方法未实现."
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取子元素集合
-		var children = this.getChildren();
-		// 遍历子元素集合,同时处理HTML
-		for (var i = 0, length = children.length; i < length; i++) {
-			children[i].dealHtml();
-		}
-	};
-
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * ElementProcess
+ * @name	Element
+ * @package	core.html.element
+ * @desc	HTML元素
+ * @type	接口
  * 
- * 元素处理
+ * @method	String						getId()										获取ID
+ * 			core.html.element.Element	show()										显示元素
+ * 			core.html.element.Element	hide()										隐藏元素
+ * 			void						destroy()									销毁元素
+ * 			core.html.element.Element	append(Object child)						添加子元素
+ * 			core.html.element.Element	appendTo(String target)						添加至
+ * 			Object						getAttribute(String key)					获取属性
+ * 			core.html.element.Element	setAttribute(String key, Object value)		设置属性
  * 
- * 接口
+ * @date	2016年8月20日 11:31:48
  */
 
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "getId", "show", "hide", "destroy",
+		"append", "appendTo", "getAttribute", "setAttribute" ]);
 /**
- * @method exist 元素是否存在
- * @method convertHtml 转为HTML
- * @method dealHtml 处理HTML
+ * @name	ElementProcess
+ * @package	core.html.element
+ * @desc	HTML元素处理
+ * @type	接口
+ * 
+ * @method	Boolean 							exist()			元素是否在HTML中存在
+ * 			String								convertHtml()	转为HTML
+ * 			core.html.element.ElementProcess	dealHtml()		处理HTML
+ * 
+ * @date	2016年8月20日 11:43:53
  */
-core.html.element.model.ElementProcess = new core.lang.Interface("core.html.element.model.ElementProcess", [ "exist",
+
+core.html.element.ElementProcess = new core.lang.Interface("core.html.element.ElementProcess", [ "exist",
 		"convertHtml", "dealHtml" ]);
 /**
- * Button
+ * @name	Style
+ * @package	core.html.element.model
+ * @desc	样式
+ * @type	类
  * 
- * 按钮
- * 
- * 抽象类
+ * @date 2016年8月22日 21:04:37
  */
 
-core.html.element.viewer.Button = (function() {
+core.html.element.model.Style = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 */
+	var Constructor = function() {
+
+		// 宽度
+		var width = null;
+		// 高度
+		var height = null;
+		// 颜色
+		var color = null;
+		// 背景
+		var background = null;
+
+		/**
+		 * 获取宽度
+		 * 
+		 * @returns
+		 */
+		this.getWidth = function() {
+
+			return width;
+		};
+
+		/**
+		 * 设置宽度
+		 * 
+		 * @param width
+		 * @returns {core.html.element.model.Style}
+		 */
+		this.setWidth = function(_width) {
+
+			width = _width;
+
+			return this;
+		};
+
+		/**
+		 * 获取高度
+		 * 
+		 * @returns
+		 */
+		this.getHeight = function() {
+
+			return height;
+		};
+
+		/**
+		 * 设置高度
+		 * 
+		 * @param height
+		 * @returns {core.html.element.model.Style}
+		 */
+		this.setHeight = function(_height) {
+
+			height = _height;
+
+			return this;
+		};
+
+		/**
+		 * 获取颜色
+		 * 
+		 * @returns
+		 */
+		this.getColor = function() {
+
+			return color;
+		};
+
+		/**
+		 * 设置颜色
+		 * 
+		 * @param color
+		 * @returns {core.html.element.model.Style}
+		 */
+		this.setColor = function(_color) {
+
+			color = _color;
+
+			return this;
+		};
+
+		/**
+		 * 获取背景
+		 * 
+		 * @returns
+		 */
+		this.getBackground = function() {
+
+			return background;
+		};
+
+		/**
+		 * 设置背景
+		 * 
+		 * @param background
+		 * @returns {core.html.element.model.Style}
+		 */
+		this.setBackground = function(_background) {
+
+			background = _background;
+
+			return this;
+		};
+	};
+
+	/**
+	 * 转为字符串
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.toString = function() {
+
+		var str = [];
+		// 宽度
+		var width = this.getWidth();
+		width == null || str.push("width:" + width + ";");
+		// 高度
+		var height = this.getHeight();
+		height == null || str.push("height:" + height + ";");
+		// 颜色
+		var color = this.getColor();
+		color == null || str.push("color:" + color + ";");
+		// 背景
+		var background = this.getBackground();
+		background == null || str.push("background:" + background + ";");
+
+		return str.join("");
+	};
+
+	// 返回构造函数
+	return Constructor;
+})();
+/**
+ * @name	A
+ * @package	core.html.element.viewer
+ * @desc	锚
+ * @type	类
+ * 
+ * @date	2016年8月24日 10:51:28
+ */
+
+core.html.element.viewer.A = (function() {
+
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
+	 *            ID
+	 */
+	var Constructor = function(id) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.A.superClass.constructor.call(this, id || "coreHtmlElementViewerA" + count);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
+
+	/**
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+
+		// HTML
+		var html = [];
+
+		// A HTML
+		html.push("<a ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
+		}
+
+		html.push("</a>");
+
+		return html.join("");
+	}
+
+	// 返回构造函数
+	return Constructor;
+})();
+/**
+ * @name	Button
+ * @package core.html.element.viewer
+ * @desc	按钮
+ * @type	类
+ * 
+ * @date	2016年8月20日 11:56:33
+ */
+
+core.html.element.viewer.Button = (function() {
+
+	/**
+	 * 对象个数
+	 */
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id{String}
+	 *            ID
 	 */
 	var Constructor = function(id) {
 
@@ -1435,179 +1468,9 @@ core.html.element.viewer.Button = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Button.superClass.constructor.call(this, id || "coreHtmlElementViewerButton" + count);
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Button.add:方法异常.按钮不允许继续添加子元素";
-	};
-
-	/**
-	 * 转为HTML-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.convertHtml = function() {
-		throw "core.html.element.viewer.Button.convertHtml:方法未实现."
-	};
-
-	/**
-	 * 处理HTML-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-		throw "core.html.element.viewer.Button.dealHtml:方法未实现."
-	};
-
-	return Constructor;
-})();
-/**
- * Custom
- * 
- * 自定义元素,直接传入自定义HTML.
- * 
- * 类
- */
-
-core.html.element.viewer.Custom = (function() {
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param custom{String}
-	 *            自定义HTML
-	 */
-	var Constructor = function(_custom) {
-
-		// 自定义HTML
-		var custom = _custom || "";
-
-		/**
-		 * 获取自定义HTML
-		 * 
-		 * @returns {String}
-		 */
-		this.getCustom = function() {
-			return custom;
-		};
-	};
-
-	/**
-	 * 获取元素Id
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.getId = function() {
-		throw "core.html.element.viewer.Custom.getId:方法异常.自定义元素无getId()方法实现";
-	};
-
-	/**
-	 * 获取元素jQuery对象
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.getjQuery = function() {
-		throw "core.html.element.viewer.Custom.getjQuery:方法异常.自定义元素无getjQuery()方法实现";
-	};
-
-	/**
-	 * 展示元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.show = function() {
-		throw "core.html.element.viewer.Custom.show:方法异常.自定义元素无show()方法实现";
-	};
-
-	/**
-	 * 隐藏元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.hide = function() {
-		throw "core.html.element.viewer.Custom.hide:方法异常.自定义元素无hide()方法实现";
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-		throw "core.html.element.viewer.Custom.destroy:方法异常.自定义元素无destroy()方法实现";
-	};
-
-	/**
-	 * 添加元素到
-	 * 
-	 * @param id{String}
-	 *            添加到的Div ID
-	 * @returns {core.html.element.viewer.Custom}
-	 */
-	Constructor.prototype.appendTo = function(id) {
-
-		$(id === "body" ? id : "#" + id).append(this.convertHtml());
-		this.dealHtml();
-
-		return this;
-	};
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Custom.add:方法异常.自定义元素不允许继续添加子元素";
-	};
-
-	/**
-	 * 移除子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.remove = function() {
-		throw "core.html.element.viewer.Custom.remove:方法异常.自定义元素无remove()方法实现";
-	};
-
-	/**
-	 * 获取子元素集合
-	 * 
-	 * @returns {Array}
-	 */
-	Constructor.prototype.getChildren = function() {
-
-		return [];
-	};
-
-	/**
-	 * 检索子元素集合
-	 * 
-	 * @param data{Object}
-	 *            查找数据
-	 * @returns {Array}
-	 */
-	Constructor.prototype.find = function(data) {
-
-		return [];
-	};
-
-	/**
-	 * 元素是否存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		throw "core.html.element.viewer.Custom.exist:方法异常.自定义元素无exist()方法实现";
-	};
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -1616,38 +1479,69 @@ core.html.element.viewer.Custom = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		return this.getCustom();
-	};
+		// HTML
+		var html = [];
 
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-		throw "core.html.element.viewer.Custom.dealHtml:方法异常.自定义元素无dealHtml()方法实现";
-	};
+		// Button HTML
+		html.push("<button ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
 
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
+		}
+
+		html.push("</button>");
+
+		return html.join("");
+	}
+
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Div
+ * @name	Div
+ * @package	core.html.element.viewer
+ * @desc	文档中的节
+ * @type	类
  * 
- * 区域
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Div = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
+	 *            ID
 	 */
 	var Constructor = function(id) {
 
@@ -1656,33 +1550,9 @@ core.html.element.viewer.Div = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Div.superClass.constructor.call(this, id || "coreHtmlElementViewerDiv" + count);
-
-		// class
-		var clazz = "";
-
-		/**
-		 * 获取Class样式
-		 * 
-		 * @returns {String}
-		 */
-		this.getClass = function() {
-			return clazz;
-		};
-
-		/**
-		 * 设置Class样式
-		 * 
-		 * @param class
-		 *            class样式
-		 * @returns {core.html.element.viewer.Div}
-		 */
-		this.setClass = function(_clazz) {
-			clazz = _clazz;
-			return this;
-		};
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -1691,51 +1561,71 @@ core.html.element.viewer.Div = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<div id='");
-		html.push(this.getId());
-		html.push("' class='");
-		html.push(this.getClass());
-		html.push("'>");
 
-		// 获取子元素集合
+		// DIV HTML
+		html.push("<div ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
+		// 遍历子元素
 		for (var i = 0, length = children.length; i < length; i++) {
 
-			html.push(children[i].convertHtml());
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
 		}
 
 		html.push("</div>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Fieldset
+ * @name	Fieldset
+ * @package	core.html.element.viewer
+ * @desc	围绕表单中元素的边框
+ * @type	类
  * 
- * 控件组
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Fieldset = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
-	 * @param legend{String}
-	 *            legend
+	 *            ID
 	 */
-	var Constructor = function(id, _legend) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
@@ -1743,242 +1633,173 @@ core.html.element.viewer.Fieldset = (function() {
 		// 调用父类构造
 		core.html.element.viewer.Fieldset.superClass.constructor.call(this, id || "coreHtmlElementViewerFieldset"
 				+ count);
-
-		// legend
-		var legend = _legend || "";
-
-		/**
-		 * 获取legend属性值
-		 * 
-		 * @returns {String}
-		 */
-		this.getLegend = function() {
-			return legend;
-		};
-
-		/**
-		 * 设置legend属性值
-		 * 
-		 * @param legend{String}
-		 *            legend属性值
-		 * @returns {core.html.element.viewer.Fieldset}
-		 */
-		this.setLegend = function(_legend) {
-			legend = _legend;
-			return this;
-		};
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
-	 * 转换为HTML
+	 * 转为HTML
 	 * 
 	 * @returns {String}
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<fieldset id='");
-		html.push(this.getId());
-		html.push("'>");
-		html.push("<legend>");
-		html.push(this.getLegend());
-		html.push("</legend>");
 
-		// 获取子元素集合
+		// Fieldset HTML
+		html.push("<fieldset ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
+		// 遍历子元素
 		for (var i = 0, length = children.length; i < length; i++) {
 
-			html.push(children[i].convertHtml());
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
 		}
 
 		html.push("</fieldset>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Form
+ * @name	Form
+ * @package	core.html.element.viewer
+ * @desc	供用户输入的 HTML 表单
+ * @type	类
  * 
- * 表单
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Form = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
-	 * @param method{String}
-	 *            表单的提交方式
-	 * @param action{String}
-	 *            表单的提交地址
+	 *            ID
 	 */
-	var Constructor = function(id, _method, _action) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
 		// 调用父类构造
 		core.html.element.viewer.Form.superClass.constructor.call(this, id || "coreHtmlElementViewerForm" + count);
-
-		// method
-		var method = _method || "post";
-		// action
-		var action = _action || "";
-
-		/**
-		 * 获取表单的提交方式
-		 * 
-		 * @returns {String}
-		 */
-		this.getMethod = function() {
-			return method;
-		};
-
-		/**
-		 * 设置表单的提交方式
-		 * 
-		 * @param method{String}
-		 *            表单的提交方式
-		 * @returns {core.html.element.viewer.Form}
-		 */
-		this.setMethod = function(_method) {
-			method = _method;
-			return this;
-		};
-
-		/**
-		 * 获取表单的提交地址
-		 * 
-		 * @returns {String}
-		 */
-		this.getAction = function() {
-			return action;
-		};
-
-		/**
-		 * 设置表单的提交地址
-		 * 
-		 * @param action{String}
-		 *            表单的提交地址
-		 * @returns {core.html.element.viewer.Form}
-		 */
-		this.setAction = function(_action) {
-			action = _action;
-			return this;
-		};
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
-	 * 转换为HTML
+	 * 转为HTML
 	 * 
 	 * @returns {String}
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<form id='");
-		html.push(this.getId());
-		html.push("' method='");
-		html.push(this.getMethod());
-		html.push("' action='");
-		html.push(this.getAction());
-		html.push("' enctype='multipart/form-data'>");
 
-		// 获取子元素集合
+		// Form HTML
+		html.push("<form ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
+		// 遍历子元素
 		for (var i = 0, length = children.length; i < length; i++) {
 
-			html.push(children[i].convertHtml());
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
 		}
 
 		html.push("</form>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Input
+ * @name	Input
+ * @package	core.html.element.viewer
+ * @desc	输入控件
+ * @type	类
  * 
- * 输入框
- * 
- * 抽象类
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Input = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            输入框ID
-	 * @param name{String}
-	 *            输入框名称
+	 *            ID
 	 */
-	var Constructor = function(id, _name) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
 		// 调用父类构造
 		core.html.element.viewer.Input.superClass.constructor.call(this, id || "coreHtmlElementViewerInput" + count);
-
-		// name
-		var name = _name || id || "coreHtmlElementViewerInput" + count;
-
-		/**
-		 * 获取输入框名称
-		 * 
-		 * @returns {String}
-		 */
-		this.getName = function() {
-			return name;
-		};
-
-		/**
-		 * 设置输入框名称
-		 * 
-		 * @param name{String}
-		 *            输入框名称
-		 * @returns {core.html.element.viewer.Input}
-		 */
-		this.setName = function(_name) {
-			name = _name;
-			return this;
-		}
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Input.add:方法异常.输入框不允许继续添加子元素";
-	};
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -1987,156 +1808,58 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<input id='");
-		html.push(this.getId());
-		html.push("' name='");
-		html.push(this.getName());
-		html.push("' />");
+
+		// Input HTML
+		html.push("<input ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push("/>");
 
 		return html.join("");
-	};
+	}
 
-	/**
-	 * 处理HTML-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-		throw "core.html.element.viewer.Input.dealHtml:方法未实现."
-	};
-
-	/**
-	 * 获取输入框的值-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.getValue = function() {
-		throw "core.html.element.viewer.Input.getValue:方法未实现."
-	};
-
-	/**
-	 * 设置输入框的值-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function() {
-		throw "core.html.element.viewer.Input.setValue:方法未实现."
-	};
-
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Label
+ * @name	Label
+ * @package	core.html.element.viewer
+ * @desc	input 元素的标注
+ * @type	类
  * 
- * 标签
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Label = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
-	 * @param text{String}
-	 *            标签的文本信息
+	 *            ID
 	 */
-	var Constructor = function(id, _text) {
+	var Constructor = function(id) {
 
 		// 对象个数+1
 		count++;
 
 		// 调用父类构造
 		core.html.element.viewer.Label.superClass.constructor.call(this, id || "coreHtmlElementViewerLabel" + count);
-
-		// 文本
-		var text = _text || "";
-		// for
-		var forr;
-		// form
-		var form;
-
-		/**
-		 * 获取文本信息
-		 * 
-		 * @returns {String}
-		 */
-		this.getText = function() {
-			return text;
-		};
-
-		/**
-		 * 设置文本信息
-		 * 
-		 * @param text{String}
-		 *            文本信息
-		 * @returns {core.html.element.viewer.Label}
-		 */
-		this.setText = function(_text) {
-			text = _text;
-			return this;
-		};
-
-		/**
-		 * 获取For属性值
-		 * 
-		 * @returns {String}
-		 */
-		this.getFor = function() {
-			return forr;
-		};
-
-		/**
-		 * 设置For属性值
-		 * 
-		 * @param for{String}
-		 *            for属性值
-		 * @returns {core.html.element.viewer.Label}
-		 */
-		this.setFor = function(_forr) {
-			forr = _forr
-			return this;
-		};
-
-		/**
-		 * 获取form属性值
-		 * 
-		 * @returns {String}
-		 */
-		this.getForm = function() {
-			return form;
-		};
-
-		/**
-		 * 设置form属性值
-		 * 
-		 * @param form{String}
-		 *            form属性值
-		 * @returns {core.html.element.viewer.Label}
-		 */
-		this.setForm = function(_form) {
-			form = _form;
-			return this;
-		};
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.add = function() {
-		throw "core.html.element.viewer.Label.add:方法异常.标签不允许继续添加子元素";
-	};
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -2145,41 +1868,151 @@ core.html.element.viewer.Label = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<label id='");
-		html.push(this.getId());
-		html.push("' for='");
-		html.push(this.getFor());
-		html.push("' form='");
-		html.push(this.getForm());
-		html.push("'>");
-		html.push(this.getText());
+
+		// Label HTML
+		html.push("<label ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
+		}
+
 		html.push("</label>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Table
+ * @name	Legend
+ * @package	core.html.element.viewer
+ * @desc	fieldset 元素的标题
+ * @type	类
  * 
- * 表格
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
-core.html.element.viewer.Table = (function() {
+core.html.element.viewer.Legend = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
+	 *            ID
+	 */
+	var Constructor = function(id) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Legend.superClass.constructor.call(this, id || "coreHtmlElementViewerLegend" + count);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
+
+	/**
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+
+		// HTML
+		var html = [];
+
+		// Legend HTML
+		html.push("<legend ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
+		}
+
+		html.push("</legend>");
+
+		return html.join("");
+	}
+
+	// 返回构造函数
+	return Constructor;
+})();
+/**
+ * @name	Table
+ * @package	core.html.element.viewer
+ * @desc	表格
+ * @type	类
+ * 
+ * @date	2016年8月20日 11:56:33
+ */
+
+core.html.element.viewer.Table = (function() {
+
+	/**
+	 * 对象个数
+	 */
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id{String}
+	 *            ID
 	 */
 	var Constructor = function(id) {
 
@@ -2188,44 +2021,9 @@ core.html.element.viewer.Table = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Table.superClass.constructor.call(this, id || "coreHtmlElementViewerTable" + count);
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @param children{core.html.element.Element}
-	 *            形参,子元素
-	 * @returns {core.html.element.viewer.Table}
-	 */
-	Constructor.prototype.add = function(children) {
-
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
-
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
-
-			// 若为Tr,则直接添加.
-			if (child.constructor === core.html.element.viewer.Tr) {
-				// 添加子元素
-				this.getElements().push(child);
-				// 若元素存在,则直接展示添加的子元素
-				this.exist() && child.appendTo(this.getId());
-			} else {
-				// 待添加的子元素不为Tr,则创建一个Tr,放入Tr再添加
-				var tr = new core.html.element.viewer.Tr();
-				tr.add(child);
-				this.add(tr);
-			}
-		}
-
-		return this;
-	};
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -2234,42 +2032,69 @@ core.html.element.viewer.Table = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<table>");
 
-		// 获取子元素集合
+		// Table HTML
+		html.push("<table ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
+		// 遍历子元素
 		for (var i = 0, length = children.length; i < length; i++) {
-			html.push(children[i].convertHtml());
+
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
 		}
 
 		html.push("</table>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Td
+ * @name	Td
+ * @package	core.html.element.viewer
+ * @desc	表格中的单元
+ * @type	类
  * 
- * 表格列
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Td = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
+	 *            ID
 	 */
 	var Constructor = function(id) {
 
@@ -2278,33 +2103,9 @@ core.html.element.viewer.Td = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Td.superClass.constructor.call(this, id || "coreHtmlElementViewerTd" + count);
-
-		// 列数
-		var colspan = 1;
-
-		/**
-		 * 获取列数
-		 * 
-		 * @returns {Number}
-		 */
-		this.getColspan = function() {
-			return colspan;
-		};
-
-		/**
-		 * 设置列数
-		 * 
-		 * @param colspan{Number}
-		 *            列数
-		 * @returns {core.html.element.viewer.Td}
-		 */
-		this.setColspan = function(_colspan) {
-			colspan = _colspan;
-			return this;
-		};
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -2313,47 +2114,151 @@ core.html.element.viewer.Td = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<td id='");
-		html.push(this.getId());
-		html.push("' colspan='");
-		html.push(this.getColspan());
-		html.push("'>");
 
-		// 获取子元素集合
+		// Td HTML
+		html.push("<td ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
+		// 遍历子元素
 		for (var i = 0, length = children.length; i < length; i++) {
 
-			html.push(children[i].convertHtml());
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
 		}
 
 		html.push("</td>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Tr
+ * @name	Textarea
+ * @package	core.html.element.viewer
+ * @desc	多行的文本输入控件
+ * @type	类
  * 
- * 表格行
- * 
- * 类
+ * @date	2016年8月20日 11:56:33
  */
 
-core.html.element.viewer.Tr = (function() {
+core.html.element.viewer.Textarea = (function() {
 
-	// 对象个数
+	/**
+	 * 对象个数
+	 */
 	var count = 0;
 
 	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
-	 *            元素ID
+	 *            ID
+	 */
+	var Constructor = function(id) {
+
+		// 对象个数+1
+		count++;
+
+		// 调用父类构造
+		core.html.element.viewer.Textarea.superClass.constructor.call(this, id || "coreHtmlElementViewerTextarea" + count);
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
+
+	/**
+	 * 转为HTML
+	 * 
+	 * @returns {String}
+	 */
+	Constructor.prototype.convertHtml = function() {
+
+		// HTML
+		var html = [];
+
+		// Textarea HTML
+		html.push("<textarea ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
+		}
+
+		html.push("</textarea>");
+
+		return html.join("");
+	}
+
+	// 返回构造函数
+	return Constructor;
+})();
+/**
+ * @name	Tr
+ * @package	core.html.element.viewer
+ * @desc	表格中的行
+ * @type	类
+ * 
+ * @date	2016年8月20日 11:56:33
+ */
+
+core.html.element.viewer.Tr = (function() {
+
+	/**
+	 * 对象个数
+	 */
+	var count = 0;
+
+	/**
+	 * 构造函数
+	 * 
+	 * @param id{String}
+	 *            ID
 	 */
 	var Constructor = function(id) {
 
@@ -2362,43 +2267,9 @@ core.html.element.viewer.Tr = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Tr.superClass.constructor.call(this, id || "coreHtmlElementViewerTr" + count);
-	};
-	// 继承元素抽象类
-	core.lang.Class.extend(Constructor, core.html.element.model.Element);
-
-	/**
-	 * 添加子元素
-	 * 
-	 * @param children{core.html.element.Element}
-	 *            形参,子元素
-	 * @returns {core.html.element.viewer.Tr}
-	 */
-	Constructor.prototype.add = function(children) {
-
-		// 遍历参数
-		for (var i = 0, length = arguments.length; i < length; i++) {
-
-			// 待添加的子元素
-			var child = arguments[i];
-			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(child, core.html.element.Element,
-					core.html.element.model.ElementProcess);
-
-			// 若为Td,则直接添加.否则创建一个Td,放入Td再添加
-			if (child.constructor === core.html.element.viewer.Td) {
-				// 添加子元素
-				this.getElements().push(child);
-				// 若元素存在,则直接展示添加的子元素
-				this.exist() && child.appendTo(this.getId());
-			} else {
-				var td = new core.html.element.viewer.Td();
-				td.add(child);
-				this.add(td);
-			}
-		}
-
-		return this;
-	};
+	}
+	// 继承HTML元素公共抽象实现
+	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
@@ -2407,1210 +2278,110 @@ core.html.element.viewer.Tr = (function() {
 	 */
 	Constructor.prototype.convertHtml = function() {
 
-		// HTML元素
+		// HTML
 		var html = [];
-		html.push("<tr>");
 
-		// 获取子元素集合
+		// Tr HTML
+		html.push("<tr ");
+		html.push("id='" + this.getId() + "' ");
+		// class
+		var clazz = this.getClass();
+		clazz === null || html.push("class='" + clazz + "' ");
+		// style
+		var style = this.getStyle();
+		style === null || html.push("style='" + style.toString() + "' ");
+		html.push(">");
+
+		// 获取子元素
 		var children = this.getChildren();
-		// 遍历子元素集合,同时转为HTML
+		// 遍历子元素
 		for (var i = 0, length = children.length; i < length; i++) {
 
-			html.push(children[i].convertHtml());
+			// 子元素
+			var child = children[i];
+			// 判断子元素类型.若为元素,则调用其转为HTML方法.其他则直接添加
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				html.push(child.convertHtml());
+			} else {
+
+				html.push(child);
+			}
 		}
 
 		html.push("</tr>");
 
 		return html.join("");
-	};
+	}
 
+	// 返回构造函数
 	return Constructor;
 })();
 /**
- * Button
+ * @name	Keydown
+ * @package	core.html.event.document
+ * @desc	键盘事件
+ * @type	数组<函数>
  * 
- * 基础按钮
- * 
- * 类
- */
-
-core.html.element.viewer.button.Button = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id{String}
-	 *            元素ID
-	 */
-	var Constructor = function(id) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.button.Button.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerButtonButton" + count);
-
-		// text
-		var text = "";
-
-		/**
-		 * 获取按钮文本
-		 * 
-		 * @returns {String}
-		 */
-		this.getText = function() {
-			return text;
-		};
-
-		/**
-		 * 设置按钮文本
-		 * 
-		 * @param text{String}
-		 *            按钮文本
-		 * @returns {core.html.element.viewer.button.Button}
-		 */
-		this.setText = function(_text) {
-			text = _text;
-			return this;
-		};
-	};
-	// 继承按钮抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<button id='");
-		html.push(this.getId());
-		html.push("'>");
-		html.push(this.getText());
-		html.push("</button>");
-
-		return html.join("");
-	};
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns {core.html.element.viewer.button.Button}
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		return this;
-	};
-
-	return Constructor;
-})();
-
-/**
- * Easyui
- * 
- * EasyUI 按钮
- * 
- * 抽象类
- */
-
-core.html.element.viewer.button.Easyui = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id{String}
-	 *            元素ID
-	 */
-	var Constructor = function(id) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.button.Easyui.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerButtonEasyui" + count);
-
-		// easyui 配置
-		var easyui = {};
-
-		/**
-		 * 获取EasyUI配置
-		 * 
-		 * @returns {Object}
-		 */
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		/**
-		 * 设置EasyUI配置
-		 * 
-		 * @param easyui{Object}
-		 *            EasyUI配置
-		 * @returns {core.html.element.viewer.button.Easyui}
-		 */
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-			return this;
-		};
-	};
-	// 继承按钮抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Button);
-
-	/**
-	 * 转为HTML
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.convertHtml = function() {
-
-		// HTML元素
-		var html = [];
-		html.push("<a id='");
-		html.push(this.getId());
-		html.push("' />");
-
-		return html.join("");
-	};
-
-	/**
-	 * 处理HTML-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-		throw "core.html.element.viewer.button.Easyui.dealHtml:方法未实现."
-	};
-
-	return Constructor;
-})();
-/**
- * Linkbutton
- * 
- * EasyUI Linkbutton按钮
- * 
- * 类
- */
-
-core.html.element.viewer.button.easyui.Linkbutton = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id{String}
-	 *            元素ID
-	 */
-	var Constructor = function(id) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.button.easyui.Linkbutton.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerButtonEasyuiLinkbutton" + count);
-	};
-	// 继承Easyui按钮抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.button.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns {core.html.element.viewer.button.easyui.Linkbutton}
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $button = this.getjQuery();
-		$button.linkbutton(this.getEasyui());
-
-		return this;
-	};
-
-	return Constructor;
-})();
-/**
- * Easyui
- * 
- * EasyUI 输入框
- * 
- * 抽象类
- */
-
-core.html.element.viewer.input.Easyui = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.Easyui.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyui" + count, name);
-
-		// easyui 配置
-		var easyui = {};
-
-		this.getEasyui = function() {
-			return easyui;
-		};
-
-		this.setEasyui = function(_easyui) {
-			easyui = _easyui;
-		};
-	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 处理HTML-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-		throw "core.html.element.viewer.input.Easyui.dealHtml:方法未实现."
-	};
-
-	/**
-	 * 获取输入框的值-抽象方法
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-		throw "core.html.element.viewer.input.Easyui.getValue:方法未实现."
-	};
-
-	/**
-	 * 设置输入框的值-抽象方法
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function() {
-		throw "core.html.element.viewer.input.Easyui.setValue:方法未实现."
-	};
-
-	return Constructor;
-})();
-/**
- * Text
- * 
- * 基础输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.Text = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.Text.superClass.constructor.call(this, id || "coreHtmlElementViewerInputText"
-				+ count, name);
-	};
-	// 继承输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.Input);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.val();
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.val(value);
-	};
-
-	return Constructor;
-})();
-/**
- * Combobox
- * 
- * EasyUI Combobox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Combobox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Combobox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiCombobox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.combobox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.combobox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.combobox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Datebox
- * 
- * EasyUI Datebox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Datebox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Datebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiDatebox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.datebox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.datebox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.datebox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Datetimebox
- * 
- * EasyUI Datetimebox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Datetimebox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Datetimebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiDatetimebox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.datetimebox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.datetimebox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.datetimebox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Filebox
- * 
- * EasyUI Filebox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Filebox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Filebox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiFilebox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.filebox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.filebox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.filebox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Numberbox
- * 
- * EasyUI Numberbox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Numberbox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Numberbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiNumberbox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.numberbox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.numberbox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.numberbox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Numberspinner
- * 
- * EasyUI Numberspinner输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Numberspinner = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Numberspinner.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiNumberspinner" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.numberspinner(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.numberspinner("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.numberspinner("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Searchbox
- * 
- * EasyUI Searchbox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Searchbox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Searchbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiSearchbox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.searchbox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.searchbox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.searchbox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Slider
- * 
- * EasyUI Slider输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Slider = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Slider.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiSlider" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.slider(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.slider("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.slider("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Textbox
- * 
- * EasyUI Textbox输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Textbox = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Textbox.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiTextbox" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.textbox(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.textbox("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.textbox("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Timespinner
- * 
- * EasyUI Timespinner输入框
- * 
- * 类
- */
-
-core.html.element.viewer.input.easyui.Timespinner = (function() {
-
-	// 对象个数
-	var count = 0;
-
-	/**
-	 * 构造函数
-	 * 
-	 * @param id
-	 *            元素ID
-	 * @param name
-	 *            输入框名称
-	 */
-	var Constructor = function(id, name) {
-
-		// 对象个数+1
-		count++;
-
-		// 调用父类构造
-		core.html.element.viewer.input.easyui.Timespinner.superClass.constructor.call(this, id
-				|| "coreHtmlElementViewerInputEasyuiTimespinner" + count, name);
-	};
-	// 继承Easyui输入框抽象类
-	core.lang.Class.extend(Constructor, core.html.element.viewer.input.Easyui);
-
-	/**
-	 * 处理HTML
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		var $input = this.getjQuery();
-		$input.timespinner(this.getEasyui());
-	};
-
-	/**
-	 * 获取输入框的值
-	 * 
-	 * @returns {String}
-	 */
-	Constructor.prototype.getValue = function() {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		return $input.timespinner("getValue");
-	};
-
-	/**
-	 * 设置输入框的值
-	 * 
-	 * @param value
-	 *            值
-	 * @param hiddenValue
-	 *            隐藏值
-	 * @returns
-	 */
-	Constructor.prototype.setValue = function(value, hiddenValue) {
-
-		// 获取jQuery对象
-		var $input = this.getjQuery();
-		$input.timespinner("setValue", value);
-
-		if (hiddenValue) {
-			$("input[name='" + this.getName() + "']").val(hiddenValue);
-		}
-	};
-
-	return Constructor;
-})();
-/**
- * Keydown
- * 
- * 键盘事件
- * 
- * 数组<函数>
+ * @date	2016年8月20日 10:12:28
  */
 
 core.html.event.document.Keydown = [];
 
 document.onkeydown = function(event) {
 
+	// 遍历键盘事件
 	for (var i = 0, length = core.html.event.document.Keydown.length; i < length; i++) {
 
+		// 获取键盘事件,且判断是否为函数
 		var keydown = core.html.event.document.Keydown[i];
 		typeof (keydown) === "function" && keydown(event);
 	}
 };
 /**
- * Resize
+ * @name	Resize
+ * @package	core.html.event.window
+ * @desc	窗口改变事件
+ * @type	数组<函数>
  * 
- * 窗口改变事件
- * 
- * 数组<函数>
+ * @date	2016年8月20日 10:19:16
  */
 
 core.html.event.window.Resize = [];
 
 window.onresize = function() {
 
+	// 遍历窗口改变事件
 	for (var i = 0, length = core.html.event.window.Resize.length; i < length; i++) {
 
+		// 获取窗口改变事件,且判断是否为函数
 		var resize = core.html.event.window.Resize[i];
 		typeof (resize) === "function" && resize();
 	}
 };
 /**
- * Cookie
+ * @name	Cookie
+ * @package	core.html.util
+ * @desc	Cookie操作
+ * @type	类
  * 
- * Cookie操作者
+ * @method	static core.html.util.Cookie	getInstance()										获取cookie操作
+ * 			Object							get(String name)									获取cookie
+ * 			void							set(String name, String value)						设置cookie
+ * 			void							set(String name, String value, Number expiredays)	设置cookie
+ * 			void							del(String name)									删除cookie
  * 
- * 类
+ * @date	2016年8月20日 09:53:30
  */
 
 core.html.util.Cookie = (function() {
 
-	// cookie操作者
+	/**
+	 * cookie操作
+	 */
 	var cookie;
 
 	/**
@@ -3681,7 +2452,7 @@ core.html.util.Cookie = (function() {
 	return {
 
 		/**
-		 * 获取cookie操作者
+		 * 获取cookie操作
 		 * 
 		 * @returns {core.html.util.Cookie}
 		 */
