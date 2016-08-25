@@ -19,13 +19,18 @@
 				// 元素包
 				element : {
 
+					// HTML5 包
+					html5 : {
+
+						// 展示包
+						viewer : {}
+					},
+
 					// 模型包
 					model : {},
 
 					// 展示包
-					viewer : {
-
-					}
+					viewer : {}
 				},
 
 				// 事件包
