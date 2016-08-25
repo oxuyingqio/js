@@ -43,12 +43,12 @@ core.html.element.viewer.Div = (function() {
 
 		// DIV HTML
 		html.push("<div ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 

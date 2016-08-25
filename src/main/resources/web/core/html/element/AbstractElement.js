@@ -4,7 +4,7 @@
  * @desc	HTML元素公共抽象实现
  * @type	抽象类
  * 
- * @date	2016年8月20日 11:34:27
+ * @date 2016年8月20日 11:34:27
  */
 
 core.html.element.AbstractElement = (function() {
@@ -54,95 +54,79 @@ core.html.element.AbstractElement = (function() {
 		var attributes = new core.util.Map();
 
 		/**
-		 * 获取id
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-
-			return id;
-		};
-
-		/**
-		 * 设置id
+		 * 获取/设置 id
 		 * 
 		 * @param id{String}
-		 * @returns {core.html.element.Element}
+		 * @returns {String}/{core.html.element.Element}
 		 */
-		this.setId = function(_id) {
+		this.id = function() {
 
-			id = _id;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return id;
+			default:
+				id = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 获取class
+		 * 获取/设置 class
 		 * 
-		 * @returns {String}
+		 * @param class{String}
+		 * @returns {String}/{core.html.element.Element}
 		 */
-		this.getClass = function() {
+		this.clazz = function() {
 
-			return clazz;
+			switch (arguments.length) {
+			case 0:
+				return clazz;
+			default:
+				clazz = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置class
+		 * 获取/设置 style
 		 * 
-		 * @param clazz{String}
-		 * @returns {core.html.element.Element}
+		 * @param style{Object}
+		 * @returns {Object}/{core.html.element.Element}
 		 */
-		this.setClass = function(_clazz) {
+		this.style = function() {
 
-			clazz = _clazz;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return style;
+			default:
+				style = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 获取style
+		 * 获取/设置 click
 		 * 
-		 * @returns {core.html.element.model.Style/String}
+		 * @param click{function}
+		 * @returns {function}/{core.html.element.Element}
 		 */
-		this.getStyle = function() {
+		this.click = function() {
 
-			return style;
+			switch (arguments.length) {
+			case 0:
+				return click;
+			default:
+				click = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置style
-		 * 
-		 * @param style
-		 *            {core.html.element.model.Style/String}
-		 * @returns {core.html.element.Element}
-		 */
-		this.setStyle = function(_style) {
-
-			style = _style;
-
-			return this;
-		};
-
-		/**
-		 * 设置点击事件
-		 * 
-		 * @param click
-		 *            点击事件
-		 * @returns {core.html.element.Element}
-		 */
-		this.setClick = function(_click) {
-
-			click = _click;
-
-			return this;
-		};
-
-		/**
-		 * 添加事件
+		 * 装载事件
 		 * 
 		 * @returns {core.html.element.Element}
 		 */
-		this.addEvent = function() {
+		this.loadEvent = function() {
 
 			// 若元素在HTML中存在
 			if (this.exist()) {
@@ -224,7 +208,7 @@ core.html.element.AbstractElement = (function() {
 	Constructor.prototype.exist = function() {
 
 		// 获取jQuery对象
-		var $jQuery = $("#" + this.getId());
+		var $jQuery = $("#" + this.id());
 		// 通过获取jQuery对象是否存在,来判断元素是否存在
 		if ($jQuery.length === 0) {
 
@@ -242,8 +226,8 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		// 添加事件
-		this.addEvent();
+		// 装载事件
+		this.loadEvent();
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -274,7 +258,7 @@ core.html.element.AbstractElement = (function() {
 		if (this.exist()) {
 
 			// 存在则直接调用jQuery显示
-			$("#" + this.getId()).show();
+			$("#" + this.id()).show();
 		} else {
 
 			// 不存在则调用添加至body
@@ -292,7 +276,7 @@ core.html.element.AbstractElement = (function() {
 	Constructor.prototype.hide = function(target) {
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
-		this.exist() && $("#" + this.getId()).hide();
+		this.exist() && $("#" + this.id()).hide();
 
 		return this;
 	};
@@ -322,7 +306,7 @@ core.html.element.AbstractElement = (function() {
 		}
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery移除
-		this.exist() && $("#" + this.getId()).remove();
+		this.exist() && $("#" + this.id()).remove();
 	};
 
 	/**
@@ -345,12 +329,12 @@ core.html.element.AbstractElement = (function() {
 				core.lang.Interface.ensureImplements(element, core.html.element.Element,
 						core.html.element.ElementProcess);
 				// 添加HTML内容
-				$("#" + this.getId()).append(element.convertHtml());
+				$("#" + this.id()).append(element.convertHtml());
 				// 添加HTML后处理HTML
 				element.dealHtml();
 			} else {
 
-				$("#" + this.getId()).append(element);
+				$("#" + this.id()).append(element);
 			}
 		}
 
@@ -378,7 +362,7 @@ core.html.element.AbstractElement = (function() {
 			if (this.exist()) {
 
 				// 存在则调用jQuery插入
-				$("#" + this.getId()).appendTo(target);
+				$("#" + this.id()).appendTo(target);
 			} else {
 
 				// 不存在则调用jQuery添加元素

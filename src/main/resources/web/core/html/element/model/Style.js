@@ -4,7 +4,7 @@
  * @desc	样式
  * @type	类
  * 
- * @date 2016年8月22日 21:04:37
+ * @date	2016年8月22日 21:04:37
  */
 
 core.html.element.model.Style = (function() {
@@ -29,95 +29,71 @@ core.html.element.model.Style = (function() {
 		var background = null;
 
 		/**
-		 * 获取宽度
+		 * 获取/设置 width
 		 * 
-		 * @returns
+		 * @param width{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.getWidth = function() {
+		this.width = function() {
 
-			return width;
+			switch (arguments.length) {
+			case 0:
+				return width;
+			default:
+				width = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置宽度
+		 * 获取/设置 height
 		 * 
-		 * @param width
-		 * @returns {core.html.element.model.Style}
+		 * @param height{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.setWidth = function(_width) {
+		this.height = function() {
 
-			width = _width;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return height;
+			default:
+				height = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 获取高度
+		 * 获取/设置 color
 		 * 
-		 * @returns
+		 * @param color{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.getHeight = function() {
+		this.color = function() {
 
-			return height;
+			switch (arguments.length) {
+			case 0:
+				return color;
+			default:
+				color = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置高度
+		 * 获取/设置 background
 		 * 
-		 * @param height
-		 * @returns {core.html.element.model.Style}
+		 * @param background{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.setHeight = function(_height) {
+		this.background = function() {
 
-			height = _height;
-
-			return this;
-		};
-
-		/**
-		 * 获取颜色
-		 * 
-		 * @returns
-		 */
-		this.getColor = function() {
-
-			return color;
-		};
-
-		/**
-		 * 设置颜色
-		 * 
-		 * @param color
-		 * @returns {core.html.element.model.Style}
-		 */
-		this.setColor = function(_color) {
-
-			color = _color;
-
-			return this;
-		};
-
-		/**
-		 * 获取背景
-		 * 
-		 * @returns
-		 */
-		this.getBackground = function() {
-
-			return background;
-		};
-
-		/**
-		 * 设置背景
-		 * 
-		 * @param background
-		 * @returns {core.html.element.model.Style}
-		 */
-		this.setBackground = function(_background) {
-
-			background = _background;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return background;
+			default:
+				background = arguments[0];
+				return this;
+			}
 		};
 	};
 
@@ -130,16 +106,16 @@ core.html.element.model.Style = (function() {
 
 		var str = [];
 		// 宽度
-		var width = this.getWidth();
+		var width = this.width();
 		width == null || str.push("width:" + width + ";");
 		// 高度
-		var height = this.getHeight();
+		var height = this.height();
 		height == null || str.push("height:" + height + ";");
 		// 颜色
-		var color = this.getColor();
+		var color = this.color();
 		color == null || str.push("color:" + color + ";");
 		// 背景
-		var background = this.getBackground();
+		var background = this.background();
 		background == null || str.push("background:" + background + ";");
 
 		return str.join("");
