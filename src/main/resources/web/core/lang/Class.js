@@ -28,7 +28,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception("core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(this, "core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 中间函数
