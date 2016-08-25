@@ -66,11 +66,22 @@
 		// 				div.setStyle(style);
 
 		var button = new core.html.element.viewer.Button();
-		var a = new core.html.element.viewer.A();
-		a.append("123");
-		button.append(a);
+		button.append("button");
+		button.setClick(function() {
+			alert("button click")
+		});
+
+		var button1 = new core.html.element.viewer.Button();
+		button1.append("button1");
+		button1.setClick(function() {
+			alert("button1 click")
+		});
 
 		div.append(button);
+		div.append(button1);
+		div.setClick(function() {
+			alert("div click")
+		});
 		div.appendTo("#test");
 	});
 </script>

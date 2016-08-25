@@ -7,7 +7,8 @@
  * @method	String						getId()										获取ID
  * 			core.html.element.Element	show()										显示元素
  * 			core.html.element.Element	hide()										隐藏元素
- * 			core.html.element.Element	append(core.html.element.Element element)	添加子元素
+ * 			void						destroy()									销毁元素
+ * 			core.html.element.Element	append(Object child)						添加子元素
  * 			core.html.element.Element	appendTo(String target)						添加至
  * 			Object						getAttribute(String key)					获取属性
  * 			core.html.element.Element	setAttribute(String key, Object value)		设置属性

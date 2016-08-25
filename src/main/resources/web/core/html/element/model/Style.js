@@ -1,8 +1,8 @@
 /**
- * @name Style
- * @package core.html.element.model
- * @desc 样式
- * @type 类
+ * @name	Style
+ * @package	core.html.element.model
+ * @desc	样式
+ * @type	类
  * 
  * @date 2016年8月22日 21:04:37
  */

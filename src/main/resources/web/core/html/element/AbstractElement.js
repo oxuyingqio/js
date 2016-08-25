@@ -1,10 +1,10 @@
 /**
- * @name AbstractElement
- * @package core.html.element
- * @desc HTML元素公共抽象实现
- * @type 抽象类
+ * @name	AbstractElement
+ * @package	core.html.element
+ * @desc	HTML元素公共抽象实现
+ * @type	抽象类
  * 
- * @date 2016年8月20日 11:34:27
+ * @date	2016年8月20日 11:34:27
  */
 
 core.html.element.AbstractElement = (function() {
@@ -39,12 +39,17 @@ core.html.element.AbstractElement = (function() {
 		var style = null;
 
 		/**
+		 * 单击事件
+		 */
+		var click = null;
+
+		/**
 		 * 子元素
 		 */
 		var children = [];
 
 		/**
-		 * 属性
+		 * 自定义属性
 		 */
 		var attributes = new core.util.Map();
 
@@ -114,6 +119,37 @@ core.html.element.AbstractElement = (function() {
 		this.setStyle = function(_style) {
 
 			style = _style;
+
+			return this;
+		};
+
+		/**
+		 * 设置点击事件
+		 * 
+		 * @param click
+		 *            点击事件
+		 * @returns {core.html.element.Element}
+		 */
+		this.setClick = function(_click) {
+
+			click = _click;
+
+			return this;
+		};
+
+		/**
+		 * 添加事件
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.addEvent = function() {
+
+			// 若元素在HTML中存在
+			if (this.exist()) {
+
+				// 单击事件
+				click === null || $("#" + id).click(click);
+			}
 
 			return this;
 		};
@@ -200,6 +236,34 @@ core.html.element.AbstractElement = (function() {
 	};
 
 	/**
+	 * 添加HTML后的处理
+	 * 
+	 * @returns {core.html.element.Element}
+	 */
+	Constructor.prototype.dealHtml = function() {
+
+		// 添加事件
+		this.addEvent();
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				child.dealHtml();
+			}
+		}
+	};
+
+	/**
 	 * 显示元素
 	 * 
 	 * @returns {core.html.element.Element}
@@ -280,7 +344,10 @@ core.html.element.AbstractElement = (function() {
 				// 判断是否实现元素接口
 				core.lang.Interface.ensureImplements(element, core.html.element.Element,
 						core.html.element.ElementProcess);
+				// 添加HTML内容
 				$("#" + this.getId()).append(element.convertHtml());
+				// 添加HTML后处理HTML
+				element.dealHtml();
 			} else {
 
 				$("#" + this.getId()).append(element);
@@ -316,6 +383,8 @@ core.html.element.AbstractElement = (function() {
 
 				// 不存在则调用jQuery添加元素
 				$(target).append(this.convertHtml());
+				// 添加HTML后处理HTML
+				this.dealHtml();
 			}
 		}
 
