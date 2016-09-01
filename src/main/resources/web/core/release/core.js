@@ -400,7 +400,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception("core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(this, "core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 中间函数
@@ -475,7 +475,7 @@ core.lang.Interface = function(name, methods) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception("core.lang.Interface", "构造参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(this, "core.lang.Interface", "构造参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 接口名称
@@ -486,7 +486,7 @@ core.lang.Interface = function(name, methods) {
 	for (var i = 0, length = methods.length; i < length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
-			new core.lang.Exception("core.lang.Interface", "构造参数异常", "接口方法名必须为字符串");
+			new core.lang.Exception(this, "core.lang.Interface", "构造参数异常", "接口方法名必须为字符串");
 		} else {
 			this.methods.push(methods[i]);
 		}
@@ -506,7 +506,8 @@ core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		new core.lang.Exception("core.lang.Interface", "ensureImplements方法参数异常", "参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象");
+		new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常",
+				"参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象");
 	}
 
 	// 遍历实现的接口对象
@@ -519,11 +520,11 @@ core.lang.Interface.ensureImplements = function(object) {
 		if (_interface) {
 			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
-				new core.lang.Exception("core.lang.Interface", "ensureImplements方法参数异常",
+				new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常",
 						"传入的接口对象必须是core.lang.Interface类");
 			}
 		} else {
-			new core.lang.Exception("core.lang.Interface", "ensureImplements方法参数异常", "传入的接口对象不存在");
+			new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常", "传入的接口对象不存在");
 		}
 
 		// 遍历接口方法
@@ -534,8 +535,8 @@ core.lang.Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
-				new core.lang.Exception("core.lang.Interface", "ensureImplements接口实现异常", "接口" + _interface.name + "("
-						+ method + ")方法未实现");
+				new core.lang.Exception(this, "core.lang.Interface", "ensureImplements接口实现异常", "接口" + _interface.name
+						+ "(" + method + ")方法未实现");
 			}
 		}
 	}
@@ -782,7 +783,7 @@ core.html.constant.KeyCode = {
  * @desc	HTML元素公共抽象实现
  * @type	抽象类
  * 
- * @date	2016年8月20日 11:34:27
+ * @date 2016年8月20日 11:34:27
  */
 
 core.html.element.AbstractElement = (function() {
@@ -832,95 +833,79 @@ core.html.element.AbstractElement = (function() {
 		var attributes = new core.util.Map();
 
 		/**
-		 * 获取id
-		 * 
-		 * @returns {String}
-		 */
-		this.getId = function() {
-
-			return id;
-		};
-
-		/**
-		 * 设置id
+		 * 获取/设置 id
 		 * 
 		 * @param id{String}
-		 * @returns {core.html.element.Element}
+		 * @returns {String}/{core.html.element.Element}
 		 */
-		this.setId = function(_id) {
+		this.id = function() {
 
-			id = _id;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return id;
+			default:
+				id = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 获取class
+		 * 获取/设置 class
 		 * 
-		 * @returns {String}
+		 * @param class{String}
+		 * @returns {String}/{core.html.element.Element}
 		 */
-		this.getClass = function() {
+		this.clazz = function() {
 
-			return clazz;
+			switch (arguments.length) {
+			case 0:
+				return clazz;
+			default:
+				clazz = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置class
+		 * 获取/设置 style
 		 * 
-		 * @param clazz{String}
-		 * @returns {core.html.element.Element}
+		 * @param style{Object}
+		 * @returns {Object}/{core.html.element.Element}
 		 */
-		this.setClass = function(_clazz) {
+		this.style = function() {
 
-			clazz = _clazz;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return style;
+			default:
+				style = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 获取style
+		 * 获取/设置 click
 		 * 
-		 * @returns {core.html.element.model.Style/String}
+		 * @param click{function}
+		 * @returns {function}/{core.html.element.Element}
 		 */
-		this.getStyle = function() {
+		this.click = function() {
 
-			return style;
+			switch (arguments.length) {
+			case 0:
+				return click;
+			default:
+				click = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置style
-		 * 
-		 * @param style
-		 *            {core.html.element.model.Style/String}
-		 * @returns {core.html.element.Element}
-		 */
-		this.setStyle = function(_style) {
-
-			style = _style;
-
-			return this;
-		};
-
-		/**
-		 * 设置点击事件
-		 * 
-		 * @param click
-		 *            点击事件
-		 * @returns {core.html.element.Element}
-		 */
-		this.setClick = function(_click) {
-
-			click = _click;
-
-			return this;
-		};
-
-		/**
-		 * 添加事件
+		 * 装载事件
 		 * 
 		 * @returns {core.html.element.Element}
 		 */
-		this.addEvent = function() {
+		this.loadEvent = function() {
 
 			// 若元素在HTML中存在
 			if (this.exist()) {
@@ -1002,7 +987,7 @@ core.html.element.AbstractElement = (function() {
 	Constructor.prototype.exist = function() {
 
 		// 获取jQuery对象
-		var $jQuery = $("#" + this.getId());
+		var $jQuery = $("#" + this.id());
 		// 通过获取jQuery对象是否存在,来判断元素是否存在
 		if ($jQuery.length === 0) {
 
@@ -1020,8 +1005,8 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.dealHtml = function() {
 
-		// 添加事件
-		this.addEvent();
+		// 装载事件
+		this.loadEvent();
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -1052,7 +1037,7 @@ core.html.element.AbstractElement = (function() {
 		if (this.exist()) {
 
 			// 存在则直接调用jQuery显示
-			$("#" + this.getId()).show();
+			$("#" + this.id()).show();
 		} else {
 
 			// 不存在则调用添加至body
@@ -1070,7 +1055,7 @@ core.html.element.AbstractElement = (function() {
 	Constructor.prototype.hide = function(target) {
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
-		this.exist() && $("#" + this.getId()).hide();
+		this.exist() && $("#" + this.id()).hide();
 
 		return this;
 	};
@@ -1100,7 +1085,7 @@ core.html.element.AbstractElement = (function() {
 		}
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery移除
-		this.exist() && $("#" + this.getId()).remove();
+		this.exist() && $("#" + this.id()).remove();
 	};
 
 	/**
@@ -1123,12 +1108,12 @@ core.html.element.AbstractElement = (function() {
 				core.lang.Interface.ensureImplements(element, core.html.element.Element,
 						core.html.element.ElementProcess);
 				// 添加HTML内容
-				$("#" + this.getId()).append(element.convertHtml());
+				$("#" + this.id()).append(element.convertHtml());
 				// 添加HTML后处理HTML
 				element.dealHtml();
 			} else {
 
-				$("#" + this.getId()).append(element);
+				$("#" + this.id()).append(element);
 			}
 		}
 
@@ -1156,7 +1141,7 @@ core.html.element.AbstractElement = (function() {
 			if (this.exist()) {
 
 				// 存在则调用jQuery插入
-				$("#" + this.getId()).appendTo(target);
+				$("#" + this.id()).appendTo(target);
 			} else {
 
 				// 不存在则调用jQuery添加元素
@@ -1213,7 +1198,7 @@ core.html.element.ElementProcess = new core.lang.Interface("core.html.element.El
  * @desc	样式
  * @type	类
  * 
- * @date 2016年8月22日 21:04:37
+ * @date	2016年8月22日 21:04:37
  */
 
 core.html.element.model.Style = (function() {
@@ -1238,95 +1223,71 @@ core.html.element.model.Style = (function() {
 		var background = null;
 
 		/**
-		 * 获取宽度
+		 * 获取/设置 width
 		 * 
-		 * @returns
+		 * @param width{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.getWidth = function() {
+		this.width = function() {
 
-			return width;
+			switch (arguments.length) {
+			case 0:
+				return width;
+			default:
+				width = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置宽度
+		 * 获取/设置 height
 		 * 
-		 * @param width
-		 * @returns {core.html.element.model.Style}
+		 * @param height{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.setWidth = function(_width) {
+		this.height = function() {
 
-			width = _width;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return height;
+			default:
+				height = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 获取高度
+		 * 获取/设置 color
 		 * 
-		 * @returns
+		 * @param color{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.getHeight = function() {
+		this.color = function() {
 
-			return height;
+			switch (arguments.length) {
+			case 0:
+				return color;
+			default:
+				color = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 设置高度
+		 * 获取/设置 background
 		 * 
-		 * @param height
-		 * @returns {core.html.element.model.Style}
+		 * @param background{String}
+		 * @returns {String}/{core.html.element.model.Style}
 		 */
-		this.setHeight = function(_height) {
+		this.background = function() {
 
-			height = _height;
-
-			return this;
-		};
-
-		/**
-		 * 获取颜色
-		 * 
-		 * @returns
-		 */
-		this.getColor = function() {
-
-			return color;
-		};
-
-		/**
-		 * 设置颜色
-		 * 
-		 * @param color
-		 * @returns {core.html.element.model.Style}
-		 */
-		this.setColor = function(_color) {
-
-			color = _color;
-
-			return this;
-		};
-
-		/**
-		 * 获取背景
-		 * 
-		 * @returns
-		 */
-		this.getBackground = function() {
-
-			return background;
-		};
-
-		/**
-		 * 设置背景
-		 * 
-		 * @param background
-		 * @returns {core.html.element.model.Style}
-		 */
-		this.setBackground = function(_background) {
-
-			background = _background;
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return background;
+			default:
+				background = arguments[0];
+				return this;
+			}
 		};
 	};
 
@@ -1339,16 +1300,16 @@ core.html.element.model.Style = (function() {
 
 		var str = [];
 		// 宽度
-		var width = this.getWidth();
+		var width = this.width();
 		width == null || str.push("width:" + width + ";");
 		// 高度
-		var height = this.getHeight();
+		var height = this.height();
 		height == null || str.push("height:" + height + ";");
 		// 颜色
-		var color = this.getColor();
+		var color = this.color();
 		color == null || str.push("color:" + color + ";");
 		// 背景
-		var background = this.getBackground();
+		var background = this.background();
 		background == null || str.push("background:" + background + ";");
 
 		return str.join("");
@@ -1402,12 +1363,12 @@ core.html.element.viewer.A = (function() {
 
 		// A HTML
 		html.push("<a ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -1484,12 +1445,12 @@ core.html.element.viewer.Button = (function() {
 
 		// Button HTML
 		html.push("<button ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -1566,12 +1527,12 @@ core.html.element.viewer.Div = (function() {
 
 		// DIV HTML
 		html.push("<div ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -1649,12 +1610,12 @@ core.html.element.viewer.Fieldset = (function() {
 
 		// Fieldset HTML
 		html.push("<fieldset ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -1731,12 +1692,12 @@ core.html.element.viewer.Form = (function() {
 
 		// Form HTML
 		html.push("<form ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -1813,12 +1774,12 @@ core.html.element.viewer.Input = (function() {
 
 		// Input HTML
 		html.push("<input ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push("/>");
 
@@ -1873,12 +1834,12 @@ core.html.element.viewer.Label = (function() {
 
 		// Label HTML
 		html.push("<label ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -1955,12 +1916,12 @@ core.html.element.viewer.Legend = (function() {
 
 		// Legend HTML
 		html.push("<legend ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -2037,12 +1998,12 @@ core.html.element.viewer.Table = (function() {
 
 		// Table HTML
 		html.push("<table ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -2119,12 +2080,12 @@ core.html.element.viewer.Td = (function() {
 
 		// Td HTML
 		html.push("<td ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -2201,12 +2162,12 @@ core.html.element.viewer.Textarea = (function() {
 
 		// Textarea HTML
 		html.push("<textarea ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
@@ -2283,12 +2244,12 @@ core.html.element.viewer.Tr = (function() {
 
 		// Tr HTML
 		html.push("<tr ");
-		html.push("id='" + this.getId() + "' ");
+		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.getClass();
+		var clazz = this.clazz();
 		clazz === null || html.push("class='" + clazz + "' ");
 		// style
-		var style = this.getStyle();
+		var style = this.style();
 		style === null || html.push("style='" + style.toString() + "' ");
 		html.push(">");
 
