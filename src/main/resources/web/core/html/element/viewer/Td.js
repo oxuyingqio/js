@@ -10,11 +10,6 @@
 core.html.element.viewer.Td = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -22,11 +17,8 @@ core.html.element.viewer.Td = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Td.superClass.constructor.call(this, id || "coreHtmlElementViewerTd" + count);
+		core.html.element.viewer.Td.superClass.constructor.call(this, id);
 
 		/**
 		 * 横跨的列数

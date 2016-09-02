@@ -10,11 +10,6 @@
 core.html.element.model.Style = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 */
 	var Constructor = function() {

@@ -181,6 +181,18 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
+		 * 清空子元素
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.clearChildren = function() {
+
+			children = [];
+
+			return this;
+		}
+
+		/**
 		 * 获取属性
 		 * 
 		 * @param key{Object}
@@ -214,6 +226,18 @@ core.html.element.AbstractElement = (function() {
 		this.removeAttribute = function(key) {
 
 			attributes.remove(key);
+
+			return this;
+		};
+
+		/**
+		 * 清空属性
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.clearAttributes = function() {
+
+			attributes.clear();
 
 			return this;
 		};
@@ -314,7 +338,7 @@ core.html.element.AbstractElement = (function() {
 		// 获取子元素
 		var children = this.getChildren();
 		// 遍历子元素
-		for (var i = 0, length = chidlren.length; i < length; i++) {
+		for (var i = 0, length = children.length; i < length; i++) {
 
 			// 获取子元素
 			var child = children[i];
@@ -324,9 +348,15 @@ core.html.element.AbstractElement = (function() {
 				// 判断是否实现元素接口
 				core.lang.Interface
 						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				// 调用子元素销毁方法
 				child.destroy();
 			}
 		}
+
+		// 清空子元素
+		this.clearChildren();
+		// 清空属性
+		this.clearAttributes();
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery移除
 		this.exist() && $("#" + this.id()).remove();
