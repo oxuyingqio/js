@@ -1,10 +1,10 @@
 /**
- * @name AbstractElement
+ * @name	AbstractElement
  * @package core.html.element
- * @desc HTML元素公共抽象实现
- * @type 抽象类
+ * @desc	HTML元素公共抽象实现
+ * @type	抽象类
  * 
- * @date 2016年8月20日 11:34:27
+ * @date	2016年8月20日 11:34:27
  */
 
 core.html.element.AbstractElement = (function() {
@@ -15,17 +15,33 @@ core.html.element.AbstractElement = (function() {
 	var count = 0;
 
 	/**
-	 * 装载事件
+	 * 装载成功处理
 	 * 
 	 * @param element
 	 */
-	function loadEvent(element) {
+	function loadSucess(element) {
 
-		// 若元素在HTML中存在
-		if (element.exist()) {
+		// 装载单击事件
+		element.click() === null || $("#" + element.id()).click(element.click());
+		// 调用装载事件
+		element.load()();
 
-			// 装载单击事件
-			element.click() === null || $("#" + element.id()).click(element.click());
+		// 获取子元素
+		var children = element.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				// 调用装载成功函数
+				loadSucess(child);
+			}
 		}
 	}
 
@@ -55,24 +71,30 @@ core.html.element.AbstractElement = (function() {
 		 * style
 		 */
 		var style = null;
+		/**
+		 * 子元素
+		 */
+		var children = [];
+		/**
+		 * 自定义属性
+		 */
+		var attributes = new core.util.Map();
 
 		/**
 		 * 事件
 		 */
 		/**
+		 * 加载事件
+		 */
+		var load = function() {
+
+		};
+		/**
 		 * 单击事件
 		 */
-		var click = null;
+		var click = function() {
 
-		/**
-		 * 子元素
-		 */
-		var children = [];
-
-		/**
-		 * 自定义属性
-		 */
-		var attributes = new core.util.Map();
+		};
 
 		/**
 		 * 获取/设置 id
@@ -118,22 +140,6 @@ core.html.element.AbstractElement = (function() {
 				return style;
 			default:
 				style = arguments[0];
-				return this;
-			}
-		};
-
-		/**
-		 * 获取/设置单击事件
-		 * 
-		 * @param click
-		 */
-		this.click = function() {
-
-			switch (arguments.length) {
-			case 0:
-				return click;
-			default:
-				click = arguments[0];
 				return this;
 			}
 		};
@@ -211,6 +217,38 @@ core.html.element.AbstractElement = (function() {
 
 			return this;
 		};
+
+		/**
+		 * 获取/设置加载事件
+		 * 
+		 * @param load
+		 */
+		this.load = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return load;
+			default:
+				load = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置单击事件
+		 * 
+		 * @param click
+		 */
+		this.click = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return click;
+			default:
+				click = arguments[0];
+				return this;
+			}
+		};
 	};
 
 	/**
@@ -229,34 +267,6 @@ core.html.element.AbstractElement = (function() {
 		} else {
 
 			return true;
-		}
-	};
-
-	/**
-	 * 添加HTML后的处理
-	 * 
-	 * @returns {core.html.element.Element}
-	 */
-	Constructor.prototype.dealHtml = function() {
-
-		// 装载事件
-		loadEvent(this);
-
-		// 获取子元素
-		var children = this.getChildren();
-		// 遍历子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 子元素
-			var child = children[i];
-			// 若子元素为元素对象,则调用其销毁方法
-			if (child instanceof core.html.element.AbstractElement) {
-
-				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
-				child.dealHtml();
-			}
 		}
 	};
 
@@ -343,8 +353,8 @@ core.html.element.AbstractElement = (function() {
 						core.html.element.ElementProcess);
 				// 添加HTML内容
 				$("#" + this.id()).append(element.convertHtml());
-				// 添加HTML后处理HTML
-				element.dealHtml();
+				// 调用装载成功函数
+				loadSucess(element);
 			} else {
 
 				$("#" + this.id()).append(element);
@@ -380,8 +390,8 @@ core.html.element.AbstractElement = (function() {
 
 				// 不存在则调用jQuery添加元素
 				$(target).append(this.convertHtml());
-				// 添加HTML后处理HTML
-				this.dealHtml();
+				// 调用装载成功函数
+				loadSucess(this);
 			}
 		}
 
