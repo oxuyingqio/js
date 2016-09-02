@@ -27,5 +27,7 @@ core.lang.Exception = function(_this) {
 	if (window.console && window.console.error) {
 		window.console.error(_this);
 		window.console.error(msg.join(""));
+	} else {
+		alert((msg.join("")));
 	}
 };

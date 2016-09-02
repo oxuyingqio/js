@@ -54,7 +54,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常",
+		new core.lang.Exception(arguments, "core.lang.Interface", "ensureImplements方法参数异常",
 				"参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象");
 	}
 
