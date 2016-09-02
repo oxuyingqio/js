@@ -1,8 +1,8 @@
 /**
- * @name	AbstractElement
- * @package	core.html.element
- * @desc	HTML元素公共抽象实现
- * @type	抽象类
+ * @name AbstractElement
+ * @package core.html.element
+ * @desc HTML元素公共抽象实现
+ * @type 抽象类
  * 
  * @date 2016年8月20日 11:34:27
  */
@@ -13,6 +13,21 @@ core.html.element.AbstractElement = (function() {
 	 * 对象个数
 	 */
 	var count = 0;
+
+	/**
+	 * 装载事件
+	 * 
+	 * @param element
+	 */
+	function loadEvent(element) {
+
+		// 若元素在HTML中存在
+		if (element.exist()) {
+
+			// 装载单击事件
+			element.click() === null || $("#" + element.id()).click(element.click());
+		}
+	}
 
 	/**
 	 * 构造函数
@@ -26,6 +41,9 @@ core.html.element.AbstractElement = (function() {
 		count++;
 
 		/**
+		 * 属性
+		 */
+		/**
 		 * id
 		 */
 		var id = _id || "coreHtmlElementAbstractElement" + count;
@@ -38,6 +56,9 @@ core.html.element.AbstractElement = (function() {
 		 */
 		var style = null;
 
+		/**
+		 * 事件
+		 */
 		/**
 		 * 单击事件
 		 */
@@ -56,8 +77,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取/设置 id
 		 * 
-		 * @param id{String}
-		 * @returns {String}/{core.html.element.Element}
+		 * @param id
 		 */
 		this.id = function() {
 
@@ -73,8 +93,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取/设置 class
 		 * 
-		 * @param class{String}
-		 * @returns {String}/{core.html.element.Element}
+		 * @param class
 		 */
 		this.clazz = function() {
 
@@ -88,10 +107,9 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置 style
+		 * 获取/设置样式
 		 * 
-		 * @param style{Object}
-		 * @returns {Object}/{core.html.element.Element}
+		 * @param style
 		 */
 		this.style = function() {
 
@@ -105,10 +123,9 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置 click
+		 * 获取/设置单击事件
 		 * 
-		 * @param click{function}
-		 * @returns {function}/{core.html.element.Element}
+		 * @param click
 		 */
 		this.click = function() {
 
@@ -119,23 +136,6 @@ core.html.element.AbstractElement = (function() {
 				click = arguments[0];
 				return this;
 			}
-		};
-
-		/**
-		 * 装载事件
-		 * 
-		 * @returns {core.html.element.Element}
-		 */
-		this.loadEvent = function() {
-
-			// 若元素在HTML中存在
-			if (this.exist()) {
-
-				// 单击事件
-				click === null || $("#" + id).click(click);
-			}
-
-			return this;
 		};
 
 		/**
@@ -177,7 +177,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取属性
 		 * 
-		 * @param key{String}
+		 * @param key{Object}
 		 * @returns {Object}
 		 */
 		this.getAttribute = function(key) {
@@ -188,13 +188,26 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 设置属性
 		 * 
-		 * @param key{String}
+		 * @param key{Object}
 		 * @param value{Object}
 		 * @returns {core.html.element.Element}
 		 */
 		this.setAttribute = function(key, value) {
 
 			attributes.put(key, value);
+
+			return this;
+		};
+
+		/**
+		 * 移除属性
+		 * 
+		 * @param key{Object}
+		 * @returns {core.html.element.Element}
+		 */
+		this.removeAttribute = function(key) {
+
+			attributes.remove(key);
 
 			return this;
 		};
@@ -227,7 +240,7 @@ core.html.element.AbstractElement = (function() {
 	Constructor.prototype.dealHtml = function() {
 
 		// 装载事件
-		this.loadEvent();
+		loadEvent(this);
 
 		// 获取子元素
 		var children = this.getChildren();
