@@ -1,10 +1,10 @@
 /**
- * @name	Td
- * @package	core.html.element.viewer
- * @desc	表格中的单元
- * @type	类
+ * @name Td
+ * @package core.html.element.viewer
+ * @desc 表格中的单元
+ * @type 类
  * 
- * @date	2016年8月20日 11:56:33
+ * @date 2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Td = (function() {
@@ -27,6 +27,47 @@ core.html.element.viewer.Td = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Td.superClass.constructor.call(this, id || "coreHtmlElementViewerTd" + count);
+
+		/**
+		 * 横跨的列数
+		 */
+		var colspan = 1;
+		/**
+		 * 纵跨的行数
+		 */
+		var rowspan = 1;
+
+		/**
+		 * 获取/设置横跨的列数
+		 * 
+		 * @param colspan
+		 */
+		this.colspan = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return colspan;
+			default:
+				colspan = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置纵跨的行数
+		 * 
+		 * @param rowspan
+		 */
+		this.rowspan = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return rowspan;
+			default:
+				rowspan = arguments[0];
+				return this;
+			}
+		};
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -45,11 +86,13 @@ core.html.element.viewer.Td = (function() {
 		html.push("<td ");
 		html.push("id='" + this.id() + "' ");
 		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		// 样式
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		// 横跨的列数
+		this.colspan() === null || html.push("colspan='" + this.colspan() + "' ");
+		// 纵跨的列数
+		this.rowspan() === null || html.push("rowspan='" + this.rowspan() + "' ");
 		html.push(">");
 
 		// 获取子元素
