@@ -447,6 +447,7 @@ core.lang.Exception = function(_this) {
 	}
 
 	if (window.console && window.console.error) {
+		window.console.error(_this);
 		window.console.error(msg.join(""));
 	}
 };
@@ -475,7 +476,7 @@ core.lang.Interface = function(name, methods) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception(this, "core.lang.Interface", "构造参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(arguments, "core.lang.Interface", "构造参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 接口名称
@@ -486,7 +487,7 @@ core.lang.Interface = function(name, methods) {
 	for (var i = 0, length = methods.length; i < length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
-			new core.lang.Exception(this, "core.lang.Interface", "构造参数异常", "接口方法名必须为字符串");
+			new core.lang.Exception(methods[i], "core.lang.Interface", "构造参数异常", "接口方法名必须为字符串");
 		} else {
 			this.methods.push(methods[i]);
 		}
@@ -520,11 +521,11 @@ core.lang.Interface.ensureImplements = function(object) {
 		if (_interface) {
 			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
-				new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常",
-						"传入的接口对象必须是core.lang.Interface类");
+				new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface
+						+ "非core.lang.Interface对象");
 			}
 		} else {
-			new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常", "传入的接口对象不存在");
+			new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface + "不存在");
 		}
 
 		// 遍历接口方法
@@ -535,8 +536,8 @@ core.lang.Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
-				new core.lang.Exception(this, "core.lang.Interface", "ensureImplements接口实现异常", "接口" + _interface.name
-						+ "(" + method + ")方法未实现");
+				new core.lang.Exception(object, "core.lang.Interface.ensureImplements", "接口实现异常", object + "未实现接口"
+						+ _interface.name + "(" + method + ")方法");
 			}
 		}
 	}
@@ -1176,7 +1177,7 @@ core.html.element.AbstractElement = (function() {
  * @desc	HTML元素
  * @type	接口
  * 
- * @method	String						getId()										获取ID
+ * @method	String						id()										获取ID
  * 			core.html.element.Element	show()										显示元素
  * 			core.html.element.Element	hide()										隐藏元素
  * 			void						destroy()									销毁元素
@@ -1188,7 +1189,7 @@ core.html.element.AbstractElement = (function() {
  * @date	2016年8月20日 11:31:48
  */
 
-core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "getId", "show", "hide", "destroy",
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "show", "hide", "destroy",
 		"append", "appendTo", "getAttribute", "setAttribute" ]);
 /**
  * @name	ElementProcess
