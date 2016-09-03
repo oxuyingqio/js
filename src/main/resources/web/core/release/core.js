@@ -351,20 +351,6 @@ String.prototype.toHexString = function() {
 			// 基础包
 			lang : {},
 
-			// // 日志包
-			// log : {
-			//
-			// // 控制包
-			// controller : {
-			//
-			// // 输出者实现包
-			// outputor : {}
-			// },
-			//
-			// // 模型包
-			// model : {}
-			// },
-
 			// 工具包
 			util : {}
 		};
@@ -449,6 +435,8 @@ core.lang.Exception = function(_this) {
 	if (window.console && window.console.error) {
 		window.console.error(_this);
 		window.console.error(msg.join(""));
+	} else {
+		alert((msg.join("")));
 	}
 };
 /**
@@ -507,7 +495,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		new core.lang.Exception(this, "core.lang.Interface", "ensureImplements方法参数异常",
+		new core.lang.Exception(arguments, "core.lang.Interface", "ensureImplements方法参数异常",
 				"参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象");
 	}
 
@@ -961,6 +949,18 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
+		 * 清空子元素
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.clearChildren = function() {
+
+			children = [];
+
+			return this;
+		}
+
+		/**
 		 * 获取属性
 		 * 
 		 * @param key{Object}
@@ -994,6 +994,18 @@ core.html.element.AbstractElement = (function() {
 		this.removeAttribute = function(key) {
 
 			attributes.remove(key);
+
+			return this;
+		};
+
+		/**
+		 * 清空属性
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.clearAttributes = function() {
+
+			attributes.clear();
 
 			return this;
 		};
@@ -1094,7 +1106,7 @@ core.html.element.AbstractElement = (function() {
 		// 获取子元素
 		var children = this.getChildren();
 		// 遍历子元素
-		for (var i = 0, length = chidlren.length; i < length; i++) {
+		for (var i = 0, length = children.length; i < length; i++) {
 
 			// 获取子元素
 			var child = children[i];
@@ -1104,9 +1116,15 @@ core.html.element.AbstractElement = (function() {
 				// 判断是否实现元素接口
 				core.lang.Interface
 						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				// 调用子元素销毁方法
 				child.destroy();
 			}
 		}
+
+		// 清空子元素
+		this.clearChildren();
+		// 清空属性
+		this.clearAttributes();
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery移除
 		this.exist() && $("#" + this.id()).remove();
@@ -1225,11 +1243,6 @@ core.html.element.ElementProcess = new core.lang.Interface("core.html.element.El
  */
 
 core.html.element.model.Style = (function() {
-
-	/**
-	 * 对象个数
-	 */
-	var count = 0;
 
 	/**
 	 * 构造函数
@@ -1353,11 +1366,6 @@ core.html.element.model.Style = (function() {
 core.html.element.viewer.A = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1365,11 +1373,8 @@ core.html.element.viewer.A = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.A.superClass.constructor.call(this, id || "coreHtmlElementViewerA" + count);
+		core.html.element.viewer.A.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1435,11 +1440,6 @@ core.html.element.viewer.A = (function() {
 core.html.element.viewer.Button = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1447,11 +1447,8 @@ core.html.element.viewer.Button = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Button.superClass.constructor.call(this, id || "coreHtmlElementViewerButton" + count);
+		core.html.element.viewer.Button.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1517,11 +1514,6 @@ core.html.element.viewer.Button = (function() {
 core.html.element.viewer.Div = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1529,11 +1521,8 @@ core.html.element.viewer.Div = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Div.superClass.constructor.call(this, id || "coreHtmlElementViewerDiv" + count);
+		core.html.element.viewer.Div.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1599,11 +1588,6 @@ core.html.element.viewer.Div = (function() {
 core.html.element.viewer.Fieldset = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1611,12 +1595,8 @@ core.html.element.viewer.Fieldset = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Fieldset.superClass.constructor.call(this, id || "coreHtmlElementViewerFieldset"
-				+ count);
+		core.html.element.viewer.Fieldset.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1682,11 +1662,6 @@ core.html.element.viewer.Fieldset = (function() {
 core.html.element.viewer.Form = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1694,11 +1669,8 @@ core.html.element.viewer.Form = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Form.superClass.constructor.call(this, id || "coreHtmlElementViewerForm" + count);
+		core.html.element.viewer.Form.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1764,11 +1736,6 @@ core.html.element.viewer.Form = (function() {
 core.html.element.viewer.Input = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1776,11 +1743,8 @@ core.html.element.viewer.Input = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Input.superClass.constructor.call(this, id || "coreHtmlElementViewerInput" + count);
+		core.html.element.viewer.Input.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1824,11 +1788,6 @@ core.html.element.viewer.Input = (function() {
 core.html.element.viewer.Label = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1836,11 +1795,8 @@ core.html.element.viewer.Label = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Label.superClass.constructor.call(this, id || "coreHtmlElementViewerLabel" + count);
+		core.html.element.viewer.Label.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1906,11 +1862,6 @@ core.html.element.viewer.Label = (function() {
 core.html.element.viewer.Legend = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -1918,11 +1869,8 @@ core.html.element.viewer.Legend = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Legend.superClass.constructor.call(this, id || "coreHtmlElementViewerLegend" + count);
+		core.html.element.viewer.Legend.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1988,11 +1936,6 @@ core.html.element.viewer.Legend = (function() {
 core.html.element.viewer.Table = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -2000,11 +1943,8 @@ core.html.element.viewer.Table = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Table.superClass.constructor.call(this, id || "coreHtmlElementViewerTable" + count);
+		core.html.element.viewer.Table.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -2070,11 +2010,6 @@ core.html.element.viewer.Table = (function() {
 core.html.element.viewer.Td = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -2082,11 +2017,8 @@ core.html.element.viewer.Td = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Td.superClass.constructor.call(this, id || "coreHtmlElementViewerTd" + count);
+		core.html.element.viewer.Td.superClass.constructor.call(this, id);
 
 		/**
 		 * 横跨的列数
@@ -2195,11 +2127,6 @@ core.html.element.viewer.Td = (function() {
 core.html.element.viewer.Textarea = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -2207,11 +2134,8 @@ core.html.element.viewer.Textarea = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Textarea.superClass.constructor.call(this, id || "coreHtmlElementViewerTextarea" + count);
+		core.html.element.viewer.Textarea.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -2277,11 +2201,6 @@ core.html.element.viewer.Textarea = (function() {
 core.html.element.viewer.Tr = (function() {
 
 	/**
-	 * 对象个数
-	 */
-	var count = 0;
-
-	/**
 	 * 构造函数
 	 * 
 	 * @param id{String}
@@ -2289,11 +2208,8 @@ core.html.element.viewer.Tr = (function() {
 	 */
 	var Constructor = function(id) {
 
-		// 对象个数+1
-		count++;
-
 		// 调用父类构造
-		core.html.element.viewer.Tr.superClass.constructor.call(this, id || "coreHtmlElementViewerTr" + count);
+		core.html.element.viewer.Tr.superClass.constructor.call(this, id);
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
