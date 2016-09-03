@@ -1097,6 +1097,21 @@ core.html.element.AbstractElement = (function() {
 	};
 
 	/**
+	 * 清空内容
+	 * 
+	 * @returns {core.html.element.Element}
+	 */
+	Constructor.prototype.clear = function(target) {
+
+		// 判断元素是否在HTML中存在,存在则调用jQuery清空
+		this.exist() && $("#" + this.id()).empty();
+		// 清空子元素
+		this.clearChildren();
+
+		return this;
+	};
+
+	/**
 	 * 销毁元素
 	 * 
 	 * @returns
@@ -1205,34 +1220,40 @@ core.html.element.AbstractElement = (function() {
  * @desc	HTML元素
  * @type	接口
  * 
- * @method	String						id()										获取ID
- * 			core.html.element.Element	show()										显示元素
- * 			core.html.element.Element	hide()										隐藏元素
- * 			void						destroy()									销毁元素
- * 			core.html.element.Element	append(Object child)						添加子元素
- * 			core.html.element.Element	appendTo(String target)						添加至
- * 			Object						getAttribute(String key)					获取属性
- * 			core.html.element.Element	setAttribute(String key, Object value)		设置属性
+ * @method	String/core.html.element.Element	id()										获取/设置ID
+ * 			String/core.html.element.Element	clazz()										获取/设置class
+ * 			String/core.html.element.Element	style()										获取/设置样式
+ * 			Object								getAttribute(Object key)					获取属性
+ * 			core.html.element.Element			setAttribute(Object key, Object value)		设置属性
+ * 			core.html.element.Element			removeAttribute(Object key)					移除属性
+ * 			core.html.element.Element			clearAttributes()							清空属性
+ * 			function/core.html.element.Element	load()										获取/设置加载事件
+ * 			function/core.html.element.Element	click()										获取/设置点击事件
+ * 			core.html.element.Element			show()										显示元素
+ * 			core.html.element.Element			hide()										隐藏元素
+ * 			core.html.element.Element			clear()										清空元素内容
+ * 			void								destroy()									销毁元素
+ * 			core.html.element.Element			append(Object child)						添加子元素
+ * 			core.html.element.Element			appendTo(String target)						添加至
+ * 			
  * 
  * @date	2016年8月20日 11:31:48
  */
 
-core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "show", "hide", "destroy",
-		"append", "appendTo", "getAttribute", "setAttribute" ]);
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "clazz", "style", "show",
+		"hide", "destroy", "append", "appendTo", "getAttribute", "setAttribute" ]);
 /**
  * @name	ElementProcess
  * @package	core.html.element
  * @desc	HTML元素处理
  * @type	接口
  * 
- * @method	Boolean 							exist()			元素是否在HTML中存在
- * 			String								convertHtml()	转为HTML
+ * @method	String								convertHtml()	转为HTML
  * 
  * @date	2016年8月20日 11:43:53
  */
 
-core.html.element.ElementProcess = new core.lang.Interface("core.html.element.ElementProcess",
-		[ "exist", "convertHtml" ]);
+core.html.element.ElementProcess = new core.lang.Interface("core.html.element.ElementProcess", [ "convertHtml" ]);
 /**
  * @name	Style
  * @package	core.html.element.model

@@ -329,6 +329,21 @@ core.html.element.AbstractElement = (function() {
 	};
 
 	/**
+	 * 清空内容
+	 * 
+	 * @returns {core.html.element.Element}
+	 */
+	Constructor.prototype.clear = function(target) {
+
+		// 判断元素是否在HTML中存在,存在则调用jQuery清空
+		this.exist() && $("#" + this.id()).empty();
+		// 清空子元素
+		this.clearChildren();
+
+		return this;
+	};
+
+	/**
 	 * 销毁元素
 	 * 
 	 * @returns
