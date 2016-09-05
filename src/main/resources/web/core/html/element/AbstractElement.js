@@ -24,7 +24,7 @@ core.html.element.AbstractElement = (function() {
 		// 装载单击事件
 		element.click() === null || $("#" + element.id()).click(element.click());
 		// 调用装载事件
-		element.load()();
+		element.load()(element);
 
 		// 获取子元素
 		var children = element.getChildren();
