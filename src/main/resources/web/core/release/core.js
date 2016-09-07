@@ -4,12 +4,12 @@
  * @desc	数组
  * @type	类扩展
  * 
- * @method	void	clear()								清空数组
+ * @method	Array	clear()								清空数组
  * 			Boolean	contains(Object object)				是否存在指定对象
  * 			Number	indexOf(Object object)				获取指定对象下标值
- * 			void	insert(Number index, Object object)	在指定下标位置插入对象
- * 			void	remove(Object object)				删除指定对象
- * 			void	removeAt(Number index)				删除指定下标位置的对象
+ * 			Array	insert(Number index, Object object)	在指定下标位置插入对象
+ * 			Array	remove(Object object)				删除指定对象
+ * 			Array	removeAt(Number index)				删除指定下标位置的对象
  * 
  * @date	2016年8月20日 09:45:15
  */
@@ -17,12 +17,14 @@
 /**
  * 清空数组
  * 
- * @returns
+ * @returns {Array}
  */
 Array.prototype.clear = function() {
 
 	// 长度>0,则清空
 	this.length > 0 && this.splice(0, this.length);
+
+	return this;
 };
 
 /**
@@ -67,11 +69,13 @@ Array.prototype.indexOf = function(object) {
  *            下标值
  * @param object{Object}
  *            对象
- * @returns
+ * @returns {Array}
  */
 Array.prototype.insert = function(index, object) {
 
 	this.splice(index, 0, object);
+
+	return this;
 };
 
 /**
@@ -79,7 +83,7 @@ Array.prototype.insert = function(index, object) {
  * 
  * @param object{Object}
  *            对象
- * @returns
+ * @returns {Array}
  */
 Array.prototype.remove = function(object) {
 
@@ -87,6 +91,8 @@ Array.prototype.remove = function(object) {
 	var index = this.indexOf(object);
 	// 存在则删除
 	index >= 0 && this.splice(index, 1);
+
+	return this;
 };
 
 /**
@@ -94,11 +100,13 @@ Array.prototype.remove = function(object) {
  * 
  * @param index{Number}
  *            下标索引
- * @returns
+ * @returns {Array}
  */
 Array.prototype.removeAt = function(index) {
 
 	this.splice(index, 1);
+	
+	return this;
 };
 /**
  * @name	Date
@@ -184,6 +192,7 @@ Math.subtract = function(subtrahend, minuend, precision) {
 	// 被减数
 	var b = parseFloat(minuend);
 
+	// 计算结果
 	return (a - b).toFixed(precision);
 };
 /**
@@ -204,7 +213,7 @@ Math.subtract = function(subtrahend, minuend, precision) {
  * 
  * @param object{Object}
  *            待克隆的对象
- * @returns {Object}
+ * @returns {Object} 克隆后的对象
  */
 Object.clone = function(object) {
 
@@ -305,6 +314,7 @@ String.prototype.toHexString = function() {
 (function() {
 
 	if (typeof (core) !== "undefined") {
+		
 		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
 	} else {
 
@@ -369,6 +379,9 @@ String.prototype.toHexString = function() {
  * @date	2016年8月20日 09:32:06
  */
 
+/**
+ * 构造函数
+ */
 core.lang.Class = function() {
 
 };
@@ -386,7 +399,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception(this, "core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(arguments, "core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
 	}
 
 	// 中间函数
@@ -412,7 +425,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
  * @desc	异常
  * @type	类
  * 
- * @constructor core.lang.Exception(Object _this, String msg)
+ * @constructor core.lang.Exception(Object _this, String msg...)
  * 
  * @date	2016年8月20日 09:32:06
  */
@@ -421,6 +434,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
  * 构造函数
  * 
  * @param _this{Object}
+ *            异常对象
  */
 core.lang.Exception = function(_this) {
 
@@ -432,6 +446,7 @@ core.lang.Exception = function(_this) {
 		msg.push(" ");
 	}
 
+	// 打印信息
 	if (window.console && window.console.error) {
 		window.console.error(_this);
 		window.console.error(msg.join(""));
@@ -507,12 +522,14 @@ core.lang.Interface.ensureImplements = function(object) {
 
 		// 接口对象是否存在
 		if (_interface) {
+			
 			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
 				new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface
 						+ "非core.lang.Interface对象");
 			}
 		} else {
+			
 			new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface + "不存在");
 		}
 
@@ -524,6 +541,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
+				
 				new core.lang.Exception(object, "core.lang.Interface.ensureImplements", "接口实现异常", object + "未实现接口"
 						+ _interface.name + "(" + method + ")方法");
 			}
@@ -538,14 +556,14 @@ core.lang.Interface.ensureImplements = function(object) {
  * 
  * @constructor	core.util.Map()
  * 
- * @method	Number 	size() 							返回映射个数
- * 			Boolean	isEmpty()						映射是否包含键-值映射关系,未包含则返回 true.
- * 			Boolean	containsKey(Object key)			映射是否包含指定键的映射关系,包含则返回 true.
- * 			Boolean	containsValue(Object value)		映射是否包含指定值的映射关系,包含则返回 true.
- * 			Object	get(Object key)					返回指定键所映射的值;如果映射中不包含该键的映射关系,则返回 undefined.
- * 			void	put(Object key, Object value)	将指定键-值映射保存;若存在键,则更新对应映射的值.
- * 			void	remove(Object key)				若存在指定键的映射关系,则将其删除.
- * 			void	clear()							清除映射中所有映射关系
+ * @method	Number 			size() 							返回映射个数
+ * 			Boolean			isEmpty()						映射是否包含键-值映射关系,未包含则返回 true.
+ * 			Boolean			containsKey(Object key)			映射是否包含指定键的映射关系,包含则返回 true.
+ * 			Boolean			containsValue(Object value)		映射是否包含指定值的映射关系,包含则返回 true.
+ * 			Object			get(Object key)					返回指定键所映射的值;如果映射中不包含该键的映射关系,则返回 undefined.
+ * 			core.util.Map	put(Object key, Object value)	将指定键-值映射保存;若存在键,则更新对应映射的值.
+ * 			core.util.Map	remove(Object key)				若存在指定键的映射关系,则将其删除.
+ * 			core.util.Map	clear()							清除映射中所有映射关系
  * 
  * @date	2016年8月20日 09:29:54
  */
@@ -631,12 +649,14 @@ core.util.Map = function() {
 	 *            键
 	 * @param value{Object}
 	 *            值
-	 * @returns
+	 * @returns {core.util.Map}
 	 */
 	this.put = function(key, value) {
 
 		!this.containsKey(key) && length++;
 		elements[key] = value;
+		
+		return this;
 	};
 
 	/**
@@ -644,23 +664,27 @@ core.util.Map = function() {
 	 * 
 	 * @param key{Object}
 	 *            键
-	 * @returns
+	 * @returns {core.util.Map}
 	 */
 	this.remove = function(key) {
 
 		this.containsKey(key) && length--;
 		delete elements[key];
+		
+		return this;
 	};
 
 	/**
 	 * 清除映射中所有映射关系
 	 * 
-	 * @returns
+	 * @returns {core.util.Map}
 	 */
 	this.clear = function() {
 
 		length = 0;
 		elements = {};
+		
+		return this;
 	};
 };
 /**
@@ -771,6 +795,8 @@ core.html.constant.KeyCode = {
  * @package core.html.element
  * @desc	HTML元素公共抽象实现
  * @type	抽象类
+ * 
+ * @constructor core.html.element.AbstractElement(String id)
  * 
  * @date	2016年8月20日 11:34:27
  */
@@ -915,7 +941,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 添加子元素
 		 * 
-		 * @param child
+		 * @param child{Object}
+		 *            子元素
 		 * @returns {core.html.element.Element}
 		 */
 		this.addChild = function(child) {
@@ -928,7 +955,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 移除子元素
 		 * 
-		 * @param child
+		 * @param child{Object}
+		 *            子元素
 		 * @returns {core.html.element.Element}
 		 */
 		this.removeChild = function(child) {
@@ -1248,7 +1276,7 @@ core.html.element.Element = new core.lang.Interface("core.html.element.Element",
  * @desc	HTML元素处理
  * @type	接口
  * 
- * @method	String								convertHtml()	转为HTML
+ * @method	String	convertHtml()	转为HTML
  * 
  * @date	2016年8月20日 11:43:53
  */
@@ -1259,6 +1287,8 @@ core.html.element.ElementProcess = new core.lang.Interface("core.html.element.El
  * @package	core.html.element.model
  * @desc	样式
  * @type	类
+ * 
+ * @constructor	core.html.element.model.Style()
  * 
  * @date	2016年8月22日 21:04:37
  */
@@ -2020,12 +2050,12 @@ core.html.element.viewer.Table = (function() {
 	return Constructor;
 })();
 /**
- * @name Td
+ * @name	Td
  * @package core.html.element.viewer
- * @desc 表格中的单元
- * @type 类
+ * @desc	表格中的单元
+ * @type	类
  * 
- * @date 2016年8月20日 11:56:33
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Td = (function() {
@@ -2328,15 +2358,15 @@ window.onresize = function() {
 };
 /**
  * @name	Cookie
- * @package	core.html.util
+ * @package core.html.util
  * @desc	Cookie操作
  * @type	类
  * 
- * @method	static core.html.util.Cookie	getInstance()										获取cookie操作
- * 			Object							get(String name)									获取cookie
- * 			void							set(String name, String value)						设置cookie
- * 			void							set(String name, String value, Number expiredays)	设置cookie
- * 			void							del(String name)									删除cookie
+ * @method	static					core.html.util.Cookie getInstance()					获取cookie操作
+ * 			Object					get(String name)									获取cookie
+ * 			core.html.util.Cookie	set(String name, String value)						设置cookie
+ * 			core.html.util.Cookie	set(String name, String value, Number expiredays)	设置cookie
+ * 			core.html.util.Cookie	del(String name)									删除cookie
  * 
  * @date	2016年8月20日 09:53:30
  */
@@ -2364,8 +2394,10 @@ core.html.util.Cookie = (function() {
 	 */
 	Constructor.prototype.get = function(name) {
 
+		// 正则表达式匹配cookie值
 		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
+		// 返回cookie值
 		if (arr = document.cookie.match(reg)) {
 			return (arr[2]);
 		} else {
@@ -2382,7 +2414,7 @@ core.html.util.Cookie = (function() {
 	 *            cookie值
 	 * @param expiredays{Number}
 	 *            过期天数
-	 * @returns
+	 * @returns {core.html.util.Cookie}
 	 */
 	Constructor.prototype.set = function(name, value, expiredays) {
 
@@ -2391,9 +2423,11 @@ core.html.util.Cookie = (function() {
 		// 当前时间
 		var exp = new Date();
 		// 设置过期时间
-		exp.setDate(exp.getDate() + day * 24 * 60 * 60 * 1000);
+		exp.setDate(exp.getDate() + (day * 24 * 60 * 60 * 1000));
 		// 设置cookie
 		document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+
+		return this;
 	};
 
 	/**
@@ -2401,16 +2435,22 @@ core.html.util.Cookie = (function() {
 	 * 
 	 * @param name{String}
 	 *            cookie名称
-	 * @returns
+	 * @returns {core.html.util.Cookie}
 	 */
 	Constructor.prototype.del = function(name) {
 
+		// 获取当前时间
 		var exp = new Date();
+		// 设置当前时间前一毫秒
 		exp.setTime(exp.getTime() - 1);
-		var cval = getCookie(name);
+		// 获取cookie
+		var cval = this.get(name);
+		// 不为空则设置超时时间
 		if (cval !== null) {
 			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 		}
+
+		return this;
 	};
 
 	return {

@@ -66,12 +66,14 @@ core.lang.Interface.ensureImplements = function(object) {
 
 		// 接口对象是否存在
 		if (_interface) {
+			
 			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
 				new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface
 						+ "非core.lang.Interface对象");
 			}
 		} else {
+			
 			new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface + "不存在");
 		}
 
@@ -83,6 +85,7 @@ core.lang.Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
+				
 				new core.lang.Exception(object, "core.lang.Interface.ensureImplements", "接口实现异常", object + "未实现接口"
 						+ _interface.name + "(" + method + ")方法");
 			}

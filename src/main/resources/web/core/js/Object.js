@@ -16,7 +16,7 @@
  * 
  * @param object{Object}
  *            待克隆的对象
- * @returns {Object}
+ * @returns {Object} 克隆后的对象
  */
 Object.clone = function(object) {
 

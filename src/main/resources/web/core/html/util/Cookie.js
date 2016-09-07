@@ -1,14 +1,14 @@
 /**
  * @name	Cookie
- * @package	core.html.util
+ * @package core.html.util
  * @desc	Cookie操作
  * @type	类
  * 
- * @method	static core.html.util.Cookie	getInstance()										获取cookie操作
- * 			Object							get(String name)									获取cookie
- * 			void							set(String name, String value)						设置cookie
- * 			void							set(String name, String value, Number expiredays)	设置cookie
- * 			void							del(String name)									删除cookie
+ * @method	static					core.html.util.Cookie getInstance()					获取cookie操作
+ * 			Object					get(String name)									获取cookie
+ * 			core.html.util.Cookie	set(String name, String value)						设置cookie
+ * 			core.html.util.Cookie	set(String name, String value, Number expiredays)	设置cookie
+ * 			core.html.util.Cookie	del(String name)									删除cookie
  * 
  * @date	2016年8月20日 09:53:30
  */
@@ -36,8 +36,10 @@ core.html.util.Cookie = (function() {
 	 */
 	Constructor.prototype.get = function(name) {
 
+		// 正则表达式匹配cookie值
 		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
 
+		// 返回cookie值
 		if (arr = document.cookie.match(reg)) {
 			return (arr[2]);
 		} else {
@@ -54,7 +56,7 @@ core.html.util.Cookie = (function() {
 	 *            cookie值
 	 * @param expiredays{Number}
 	 *            过期天数
-	 * @returns
+	 * @returns {core.html.util.Cookie}
 	 */
 	Constructor.prototype.set = function(name, value, expiredays) {
 
@@ -63,9 +65,11 @@ core.html.util.Cookie = (function() {
 		// 当前时间
 		var exp = new Date();
 		// 设置过期时间
-		exp.setDate(exp.getDate() + day * 24 * 60 * 60 * 1000);
+		exp.setDate(exp.getDate() + (day * 24 * 60 * 60 * 1000));
 		// 设置cookie
 		document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
+
+		return this;
 	};
 
 	/**
@@ -73,16 +77,22 @@ core.html.util.Cookie = (function() {
 	 * 
 	 * @param name{String}
 	 *            cookie名称
-	 * @returns
+	 * @returns {core.html.util.Cookie}
 	 */
 	Constructor.prototype.del = function(name) {
 
+		// 获取当前时间
 		var exp = new Date();
+		// 设置当前时间前一毫秒
 		exp.setTime(exp.getTime() - 1);
-		var cval = getCookie(name);
+		// 获取cookie
+		var cval = this.get(name);
+		// 不为空则设置超时时间
 		if (cval !== null) {
 			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
 		}
+
+		return this;
 	};
 
 	return {

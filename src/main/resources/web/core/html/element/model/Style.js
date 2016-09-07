@@ -4,6 +4,8 @@
  * @desc	样式
  * @type	类
  * 
+ * @constructor	core.html.element.model.Style()
+ * 
  * @date	2016年8月22日 21:04:37
  */
 

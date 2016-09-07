@@ -1,10 +1,10 @@
 /**
- * @name Td
+ * @name	Td
  * @package core.html.element.viewer
- * @desc 表格中的单元
- * @type 类
+ * @desc	表格中的单元
+ * @type	类
  * 
- * @date 2016年8月20日 11:56:33
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Td = (function() {

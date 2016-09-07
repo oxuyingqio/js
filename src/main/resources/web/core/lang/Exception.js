@@ -4,7 +4,7 @@
  * @desc	异常
  * @type	类
  * 
- * @constructor core.lang.Exception(Object _this, String msg)
+ * @constructor core.lang.Exception(Object _this, String msg...)
  * 
  * @date	2016年8月20日 09:32:06
  */
@@ -13,6 +13,7 @@
  * 构造函数
  * 
  * @param _this{Object}
+ *            异常对象
  */
 core.lang.Exception = function(_this) {
 
@@ -24,6 +25,7 @@ core.lang.Exception = function(_this) {
 		msg.push(" ");
 	}
 
+	// 打印信息
 	if (window.console && window.console.error) {
 		window.console.error(_this);
 		window.console.error(msg.join(""));

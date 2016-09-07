@@ -27,5 +27,6 @@ Math.subtract = function(subtrahend, minuend, precision) {
 	// 被减数
 	var b = parseFloat(minuend);
 
+	// 计算结果
 	return (a - b).toFixed(precision);
 };

@@ -4,6 +4,8 @@
  * @desc	HTML元素公共抽象实现
  * @type	抽象类
  * 
+ * @constructor core.html.element.AbstractElement(String id)
+ * 
  * @date	2016年8月20日 11:34:27
  */
 
@@ -147,7 +149,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 添加子元素
 		 * 
-		 * @param child
+		 * @param child{Object}
+		 *            子元素
 		 * @returns {core.html.element.Element}
 		 */
 		this.addChild = function(child) {
@@ -160,7 +163,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 移除子元素
 		 * 
-		 * @param child
+		 * @param child{Object}
+		 *            子元素
 		 * @returns {core.html.element.Element}
 		 */
 		this.removeChild = function(child) {
