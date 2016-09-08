@@ -1290,6 +1290,12 @@ core.html.element.ElementProcess = new core.lang.Interface("core.html.element.El
  * 
  * @constructor	core.html.element.model.Style()
  * 
+ * @method	String/core.html.element.model.Style	width()			获取/设置宽度
+ * 			String/core.html.element.model.Style	height()		获取/设置高度
+ * 			String/core.html.element.model.Style	color()			获取/设置颜色
+ * 			String/core.html.element.model.Style	background()	获取/设置背景
+ * 			String									toString()		转为字符串
+ * 
  * @date	2016年8月22日 21:04:37
  */
 
@@ -1310,7 +1316,7 @@ core.html.element.model.Style = (function() {
 		var background = null;
 
 		/**
-		 * 获取/设置 width
+		 * 获取/设置宽度
 		 * 
 		 * @param width{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -1327,7 +1333,7 @@ core.html.element.model.Style = (function() {
 		};
 
 		/**
-		 * 获取/设置 height
+		 * 获取/设置高度
 		 * 
 		 * @param height{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -1344,7 +1350,7 @@ core.html.element.model.Style = (function() {
 		};
 
 		/**
-		 * 获取/设置 color
+		 * 获取/设置颜色
 		 * 
 		 * @param color{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -1361,7 +1367,7 @@ core.html.element.model.Style = (function() {
 		};
 
 		/**
-		 * 获取/设置 background
+		 * 获取/设置背景
 		 * 
 		 * @param background{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -1410,6 +1416,10 @@ core.html.element.model.Style = (function() {
  * @package	core.html.element.viewer
  * @desc	锚
  * @type	类
+ * 
+ * @constructor	core.html.element.viewer.A(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
  * 
  * @date	2016年8月24日 10:51:28
  */
@@ -1485,6 +1495,10 @@ core.html.element.viewer.A = (function() {
  * @desc	按钮
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Button(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 
@@ -1558,6 +1572,10 @@ core.html.element.viewer.Button = (function() {
  * @package	core.html.element.viewer
  * @desc	文档中的节
  * @type	类
+ * 
+ * @constructor	core.html.element.viewer.Div(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1633,6 +1651,10 @@ core.html.element.viewer.Div = (function() {
  * @desc	围绕表单中元素的边框
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Fieldset(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 
@@ -1706,6 +1728,10 @@ core.html.element.viewer.Fieldset = (function() {
  * @package	core.html.element.viewer
  * @desc	供用户输入的 HTML 表单
  * @type	类
+ * 
+ * @constructor	core.html.element.viewer.Form(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1781,6 +1807,10 @@ core.html.element.viewer.Form = (function() {
  * @desc	输入控件
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Input(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 
@@ -1832,6 +1862,10 @@ core.html.element.viewer.Input = (function() {
  * @package	core.html.element.viewer
  * @desc	input 元素的标注
  * @type	类
+ * 
+ * @constructor	core.html.element.viewer.Label(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1907,6 +1941,10 @@ core.html.element.viewer.Label = (function() {
  * @desc	fieldset 元素的标题
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Legend(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 
@@ -1981,6 +2019,10 @@ core.html.element.viewer.Legend = (function() {
  * @desc	表格
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Table(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 
@@ -2054,6 +2096,10 @@ core.html.element.viewer.Table = (function() {
  * @package core.html.element.viewer
  * @desc	表格中的单元
  * @type	类
+ * 
+ * @constructor	core.html.element.viewer.Td(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -2172,6 +2218,10 @@ core.html.element.viewer.Td = (function() {
  * @desc	多行的文本输入控件
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Textarea(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 
@@ -2245,6 +2295,10 @@ core.html.element.viewer.Textarea = (function() {
  * @package	core.html.element.viewer
  * @desc	表格中的行
  * @type	类
+ * 
+ * @constructor	core.html.element.viewer.Tr(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
  * 
  * @date	2016年8月20日 11:56:33
  */

@@ -4,6 +4,10 @@
  * @desc	围绕表单中元素的边框
  * @type	类
  * 
+ * @constructor	core.html.element.viewer.Fieldset(String id)
+ * 
+ * @method	继承core.html.element.AbstractElement所有方法
+ * 
  * @date	2016年8月20日 11:56:33
  */
 

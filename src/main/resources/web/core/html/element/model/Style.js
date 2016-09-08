@@ -6,6 +6,12 @@
  * 
  * @constructor	core.html.element.model.Style()
  * 
+ * @method	String/core.html.element.model.Style	width()			获取/设置宽度
+ * 			String/core.html.element.model.Style	height()		获取/设置高度
+ * 			String/core.html.element.model.Style	color()			获取/设置颜色
+ * 			String/core.html.element.model.Style	background()	获取/设置背景
+ * 			String									toString()		转为字符串
+ * 
  * @date	2016年8月22日 21:04:37
  */
 
@@ -26,7 +32,7 @@ core.html.element.model.Style = (function() {
 		var background = null;
 
 		/**
-		 * 获取/设置 width
+		 * 获取/设置宽度
 		 * 
 		 * @param width{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -43,7 +49,7 @@ core.html.element.model.Style = (function() {
 		};
 
 		/**
-		 * 获取/设置 height
+		 * 获取/设置高度
 		 * 
 		 * @param height{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -60,7 +66,7 @@ core.html.element.model.Style = (function() {
 		};
 
 		/**
-		 * 获取/设置 color
+		 * 获取/设置颜色
 		 * 
 		 * @param color{String}
 		 * @returns {String}/{core.html.element.model.Style}
@@ -77,7 +83,7 @@ core.html.element.model.Style = (function() {
 		};
 
 		/**
-		 * 获取/设置 background
+		 * 获取/设置背景
 		 * 
 		 * @param background{String}
 		 * @returns {String}/{core.html.element.model.Style}
