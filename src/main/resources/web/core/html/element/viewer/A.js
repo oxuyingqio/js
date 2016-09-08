@@ -6,7 +6,7 @@
  * 
  * @constructor	core.html.element.viewer.A(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月24日 10:51:28
  */

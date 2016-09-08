@@ -1452,7 +1452,7 @@ core.html.element.model.Style = (function() {
  * 
  * @constructor	core.html.element.viewer.A(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月24日 10:51:28
  */
@@ -1530,7 +1530,7 @@ core.html.element.viewer.A = (function() {
  * 
  * @constructor	core.html.element.viewer.Button(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1608,7 +1608,7 @@ core.html.element.viewer.Button = (function() {
  * 
  * @constructor	core.html.element.viewer.Div(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1686,7 +1686,7 @@ core.html.element.viewer.Div = (function() {
  * 
  * @constructor	core.html.element.viewer.Fieldset(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1764,7 +1764,7 @@ core.html.element.viewer.Fieldset = (function() {
  * 
  * @constructor	core.html.element.viewer.Form(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1842,7 +1842,7 @@ core.html.element.viewer.Form = (function() {
  * 
  * @constructor	core.html.element.viewer.Input(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1898,7 +1898,7 @@ core.html.element.viewer.Input = (function() {
  * 
  * @constructor	core.html.element.viewer.Label(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -1976,7 +1976,7 @@ core.html.element.viewer.Label = (function() {
  * 
  * @constructor	core.html.element.viewer.Legend(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -2054,7 +2054,7 @@ core.html.element.viewer.Legend = (function() {
  * 
  * @constructor	core.html.element.viewer.Table(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -2132,7 +2132,7 @@ core.html.element.viewer.Table = (function() {
  * 
  * @constructor	core.html.element.viewer.Td(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -2253,7 +2253,7 @@ core.html.element.viewer.Td = (function() {
  * 
  * @constructor	core.html.element.viewer.Textarea(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
@@ -2331,7 +2331,7 @@ core.html.element.viewer.Textarea = (function() {
  * 
  * @constructor	core.html.element.viewer.Tr(String id)
  * 
- * @method	继承core.html.element.AbstractElement所有方法
+ * @extend	core.html.element.AbstractElement
  * 
  * @date	2016年8月20日 11:56:33
  */
