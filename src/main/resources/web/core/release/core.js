@@ -1164,10 +1164,29 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.clear = function(target) {
 
-		// 判断元素是否在HTML中存在,存在则调用jQuery清空
-		this.exist() && $("#" + this.id()).empty();
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 获取子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				// 调用子元素清空内容方法
+				child.clear();
+			}
+		}
+
 		// 清空子元素
 		this.clearChildren();
+
+		// 判断元素是否在HTML中存在,存在则调用jQuery清空
+		this.exist() && $("#" + this.id()).empty();
 
 		return this;
 	};
