@@ -40,12 +40,8 @@ core.html.element.viewer.Tr = (function() {
 		// Tr HTML
 		html.push("<tr ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素

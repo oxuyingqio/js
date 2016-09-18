@@ -1505,12 +1505,8 @@ core.html.element.viewer.A = (function() {
 		// A HTML
 		html.push("<a ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1583,12 +1579,8 @@ core.html.element.viewer.Button = (function() {
 		// Button HTML
 		html.push("<button ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1661,12 +1653,8 @@ core.html.element.viewer.Div = (function() {
 		// DIV HTML
 		html.push("<div ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1739,12 +1727,8 @@ core.html.element.viewer.Fieldset = (function() {
 		// Fieldset HTML
 		html.push("<fieldset ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1817,12 +1801,8 @@ core.html.element.viewer.Form = (function() {
 		// Form HTML
 		html.push("<form ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1854,16 +1834,16 @@ core.html.element.viewer.Form = (function() {
 	return Constructor;
 })();
 /**
- * @name Input
+ * @name	Input
  * @package core.html.element.viewer
- * @desc 输入控件
- * @type 类
+ * @desc	输入控件
+ * @type	类
  * 
  * @constructor core.html.element.viewer.Input(String id)
  * 
- * @extend core.html.element.AbstractElement
+ * @extend	core.html.element.AbstractElement
  * 
- * @date 2016年8月20日 11:56:33
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Input = (function() {
@@ -1880,12 +1860,36 @@ core.html.element.viewer.Input = (function() {
 		core.html.element.viewer.Input.superClass.constructor.call(this, id);
 
 		/**
-		 * name属性
+		 * 类型
 		 */
-		var name;
+		var type = null;
+		/**
+		 * 名称
+		 */
+		var name = null;
+		/**
+		 * 值
+		 */
+		var value = null;
 
 		/**
-		 * 获取/设置name属性
+		 * 获取/设置类型
+		 * 
+		 * @param type
+		 */
+		this.type = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return type;
+			default:
+				type = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置名称
 		 * 
 		 * @param name
 		 */
@@ -1896,6 +1900,22 @@ core.html.element.viewer.Input = (function() {
 				return name;
 			default:
 				name = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置值
+		 * 
+		 * @param value
+		 */
+		this.value = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return value;
+			default:
+				value = arguments[0];
 				return this;
 			}
 		};
@@ -1916,13 +1936,11 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
-		html.push("name='" + this.name() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.type() === null || html.push("type='" + this.type() + "' ");
+		this.name() === null || html.push("name='" + this.name() + "' ");
+		this.value() === null || html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");
@@ -1933,11 +1951,11 @@ core.html.element.viewer.Input = (function() {
 })();
 /**
  * @name	Label
- * @package	core.html.element.viewer
+ * @package core.html.element.viewer
  * @desc	input 元素的标注
  * @type	类
  * 
- * @constructor	core.html.element.viewer.Label(String id)
+ * @constructor core.html.element.viewer.Label(String id)
  * 
  * @extend	core.html.element.AbstractElement
  * 
@@ -1956,6 +1974,27 @@ core.html.element.viewer.Label = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Label.superClass.constructor.call(this, id);
+
+		/**
+		 * 指定标注
+		 */
+		var forAttr = null;
+
+		/**
+		 * 获取/设置指定标注
+		 * 
+		 * @param formId
+		 */
+		this.forAttr = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return forAttr;
+			default:
+				forAttr = arguments[0];
+				return this;
+			}
+		};
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1973,12 +2012,9 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.forAttr() === null || html.push("for='" + this.forAttr() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2051,12 +2087,8 @@ core.html.element.viewer.Legend = (function() {
 		// Legend HTML
 		html.push("<legend ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2129,12 +2161,8 @@ core.html.element.viewer.Table = (function() {
 		// Table HTML
 		html.push("<table ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2248,13 +2276,9 @@ core.html.element.viewer.Td = (function() {
 		// Td HTML
 		html.push("<td ");
 		html.push("id='" + this.id() + "' ");
-		// class
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		// 样式
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		// 横跨的列数
 		this.colspan() === null || html.push("colspan='" + this.colspan() + "' ");
-		// 纵跨的列数
 		this.rowspan() === null || html.push("rowspan='" + this.rowspan() + "' ");
 		html.push(">");
 
@@ -2328,12 +2352,8 @@ core.html.element.viewer.Textarea = (function() {
 		// Textarea HTML
 		html.push("<textarea ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2406,12 +2426,8 @@ core.html.element.viewer.Tr = (function() {
 		// Tr HTML
 		html.push("<tr ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素

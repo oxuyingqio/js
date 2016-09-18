@@ -25,12 +25,46 @@ core.html.element.viewer.Input = (function() {
 		core.html.element.viewer.Input.superClass.constructor.call(this, id);
 
 		/**
-		 * name属性
+		 * 类型
 		 */
-		var name;
+		var type = null;
+		/**
+		 * 名称
+		 */
+		var name = null;
+		/**
+		 * 值
+		 */
+		var value = null;
 
 		/**
-		 * 获取/设置name属性
+		 * 事件
+		 */
+		/**
+		 * 改变事件
+		 */
+		var change = function() {
+
+		};
+
+		/**
+		 * 获取/设置类型
+		 * 
+		 * @param type
+		 */
+		this.type = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return type;
+			default:
+				type = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置名称
 		 * 
 		 * @param name
 		 */
@@ -41,6 +75,38 @@ core.html.element.viewer.Input = (function() {
 				return name;
 			default:
 				name = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置值
+		 * 
+		 * @param value
+		 */
+		this.value = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return value;
+			default:
+				value = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置改变事件
+		 * 
+		 * @param change
+		 */
+		this.change = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return change;
+			default:
+				change = arguments[0];
 				return this;
 			}
 		};
@@ -61,13 +127,11 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
-		html.push("name='" + this.name() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.type() === null || html.push("type='" + this.type() + "' ");
+		this.name() === null || html.push("name='" + this.name() + "' ");
+		this.value() === null || html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");

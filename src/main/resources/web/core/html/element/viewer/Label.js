@@ -1,10 +1,10 @@
 /**
  * @name	Label
- * @package	core.html.element.viewer
+ * @package core.html.element.viewer
  * @desc	input 元素的标注
  * @type	类
  * 
- * @constructor	core.html.element.viewer.Label(String id)
+ * @constructor core.html.element.viewer.Label(String id)
  * 
  * @extend	core.html.element.AbstractElement
  * 
@@ -23,6 +23,27 @@ core.html.element.viewer.Label = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Label.superClass.constructor.call(this, id);
+
+		/**
+		 * 指定标注
+		 */
+		var forAttr = null;
+
+		/**
+		 * 获取/设置指定标注
+		 * 
+		 * @param formId
+		 */
+		this.forAttr = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return forAttr;
+			default:
+				forAttr = arguments[0];
+				return this;
+			}
+		};
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -40,12 +61,9 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
-		// class
-		var clazz = this.clazz();
-		clazz === null || html.push("class='" + clazz + "' ");
-		// style
-		var style = this.style();
-		style === null || html.push("style='" + style.toString() + "' ");
+		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
+		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.forAttr() === null || html.push("for='" + this.forAttr() + "' ");
 		html.push(">");
 
 		// 获取子元素

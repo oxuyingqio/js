@@ -81,13 +81,9 @@ core.html.element.viewer.Td = (function() {
 		// Td HTML
 		html.push("<td ");
 		html.push("id='" + this.id() + "' ");
-		// class
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		// 样式
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		// 横跨的列数
 		this.colspan() === null || html.push("colspan='" + this.colspan() + "' ");
-		// 纵跨的列数
 		this.rowspan() === null || html.push("rowspan='" + this.rowspan() + "' ");
 		html.push(">");
 
