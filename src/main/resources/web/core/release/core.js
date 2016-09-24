@@ -2201,6 +2201,27 @@ core.html.element.viewer.Table = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Table.superClass.constructor.call(this, id);
+
+		/**
+		 * 排列
+		 */
+		var align = null;
+
+		/**
+		 * 获取/设置排列
+		 * 
+		 * @param align
+		 */
+		this.align = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return align;
+			default:
+				align = arguments[0];
+				return this;
+			}
+		};
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -2220,6 +2241,7 @@ core.html.element.viewer.Table = (function() {
 		html.push("id='" + this.id() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.align() === null || html.push("align='" + this.align() + "' ");
 		html.push(">");
 
 		// 获取子元素
