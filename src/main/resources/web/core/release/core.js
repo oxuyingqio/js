@@ -850,6 +850,8 @@ core.html.element.AbstractElement = (function() {
 
 		// 装载单击事件
 		element.click() === null || $("#" + element.id()).click(element.click());
+		// 装载改变事件
+		element.change() === null || $("#" + element.id()).change(element.change());
 		// 调用装载事件
 		element.load()(element);
 
@@ -1834,16 +1836,16 @@ core.html.element.viewer.Form = (function() {
 	return Constructor;
 })();
 /**
- * @name	Input
+ * @name Input
  * @package core.html.element.viewer
- * @desc	输入控件
- * @type	类
+ * @desc 输入控件
+ * @type 类
  * 
  * @constructor core.html.element.viewer.Input(String id)
  * 
- * @extend	core.html.element.AbstractElement
+ * @extend core.html.element.AbstractElement
  * 
- * @date	2016年8月20日 11:56:33
+ * @date 2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Input = (function() {
@@ -1871,6 +1873,16 @@ core.html.element.viewer.Input = (function() {
 		 * 值
 		 */
 		var value = null;
+
+		/**
+		 * 事件
+		 */
+		/**
+		 * 改变事件
+		 */
+		var change = function() {
+
+		};
 
 		/**
 		 * 获取/设置类型
@@ -1916,6 +1928,22 @@ core.html.element.viewer.Input = (function() {
 				return value;
 			default:
 				value = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置改变事件
+		 * 
+		 * @param change
+		 */
+		this.change = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return change;
+			default:
+				change = arguments[0];
 				return this;
 			}
 		};
