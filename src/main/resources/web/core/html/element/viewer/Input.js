@@ -1,14 +1,14 @@
 /**
- * @name Input
- * @package core.html.element.viewer
- * @desc 输入控件
- * @type 类
+ * @name	Input
+ * @package	core.html.element.viewer
+ * @desc	输入控件
+ * @type	类
  * 
  * @constructor core.html.element.viewer.Input(String id)
  * 
- * @extend core.html.element.AbstractElement
+ * @extend	core.html.element.AbstractElement
  * 
- * @date 2016年8月20日 11:56:33
+ * @date	2016年8月20日 11:56:33
  */
 
 core.html.element.viewer.Input = (function() {
@@ -135,6 +135,39 @@ core.html.element.viewer.Input = (function() {
 		html.push("/>");
 
 		return html.join("");
+	}
+
+	/**
+	 * 装载成功
+	 * 
+	 * @returns {core.html.element.Element}
+	 */
+	Constructor.prototype.loadSucess = function() {
+
+		// 装载单击事件
+		this.click() === null || $("#" + this.id()).click(this.click());
+		// 装载改变事件
+		this.change() === null || $("#" + this.id()).change(this.change());
+		// 调用装载事件
+		this.load()(this);
+
+		// 获取子元素
+		var children = this.getChildren();
+		// 遍历子元素
+		for (var i = 0, length = children.length; i < length; i++) {
+
+			// 子元素
+			var child = children[i];
+			// 若子元素为元素对象,则调用其销毁方法
+			if (child instanceof core.html.element.AbstractElement) {
+
+				// 判断是否实现元素接口
+				core.lang.Interface
+						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				// 调用装载成功函数
+				child.loadSucess();
+			}
+		}
 	}
 
 	// 返回构造函数
