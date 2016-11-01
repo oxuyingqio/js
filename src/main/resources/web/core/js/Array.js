@@ -4,12 +4,12 @@
  * @desc	数组
  * @type	类扩展
  * 
- * @method	Array	clear()								清空数组
- * 			Boolean	contains(Object object)				是否存在指定对象
- * 			Number	indexOf(Object object)				获取指定对象下标值
- * 			Array	insert(Number index, Object object)	在指定下标位置插入对象
- * 			Array	remove(Object object)				删除指定对象
- * 			Array	removeAt(Number index)				删除指定下标位置的对象
+ * @method	Array	clear()								清空数组.
+ * 			Boolean	contains(Object object)				是否存在指定对象.
+ * 			Number	indexOf(Object object)				获取指定对象下标值.
+ * 			Array	insert(Number index, Object object)	在指定下标位置插入对象.
+ * 			Array	remove(Object object)				删除指定对象.
+ * 			Array	removeAt(Number index)				删除指定下标位置的对象.
  * 
  * @date	2016年8月20日 09:45:15
  */
@@ -105,6 +105,6 @@ Array.prototype.remove = function(object) {
 Array.prototype.removeAt = function(index) {
 
 	this.splice(index, 1);
-	
+
 	return this;
 };

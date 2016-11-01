@@ -61,6 +61,7 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		this.forAttr() === null || html.push("for='" + this.forAttr() + "' ");

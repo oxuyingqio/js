@@ -4,12 +4,12 @@
  * @desc	数组
  * @type	类扩展
  * 
- * @method	Array	clear()								清空数组
- * 			Boolean	contains(Object object)				是否存在指定对象
- * 			Number	indexOf(Object object)				获取指定对象下标值
- * 			Array	insert(Number index, Object object)	在指定下标位置插入对象
- * 			Array	remove(Object object)				删除指定对象
- * 			Array	removeAt(Number index)				删除指定下标位置的对象
+ * @method	Array	clear()								清空数组.
+ * 			Boolean	contains(Object object)				是否存在指定对象.
+ * 			Number	indexOf(Object object)				获取指定对象下标值.
+ * 			Array	insert(Number index, Object object)	在指定下标位置插入对象.
+ * 			Array	remove(Object object)				删除指定对象.
+ * 			Array	removeAt(Number index)				删除指定下标位置的对象.
  * 
  * @date	2016年8月20日 09:45:15
  */
@@ -105,7 +105,7 @@ Array.prototype.remove = function(object) {
 Array.prototype.removeAt = function(index) {
 
 	this.splice(index, 1);
-	
+
 	return this;
 };
 /**
@@ -314,8 +314,8 @@ String.prototype.toHexString = function() {
 (function() {
 
 	if (typeof (core) !== "undefined") {
-		
-		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
+
+		throw "全局变量'core'被占用.请确保'core'未被占用后,再进行使用.";
 	} else {
 
 		// 核心包
@@ -399,7 +399,8 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception(arguments, "core.lang.Class", "extend方法参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(arguments, "core.lang.Class.extend", "方法参数异常", "参数个数必须为2个,实际得到" + arguments.length
+				+ "个");
 	}
 
 	// 中间函数
@@ -425,7 +426,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
  * @desc	异常
  * @type	类
  * 
- * @constructor core.lang.Exception(Object _this, String msg...)
+ * @constructor core.lang.Exception(Object _this, String... message)
  * 
  * @date	2016年8月20日 09:32:06
  */
@@ -439,19 +440,19 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 core.lang.Exception = function(_this) {
 
 	// 异常信息
-	var msg = [];
+	var message = [];
 	// 遍历参数
 	for (var i = 1, length = arguments.length; i < length; i++) {
-		msg.push(arguments[i]);
-		msg.push(" ");
+		message.push(arguments[i]);
+		message.push(" ");
 	}
 
 	// 打印信息
 	if (window.console && window.console.error) {
+		window.console.error(message.join(""));
 		window.console.error(_this);
-		window.console.error(msg.join(""));
 	} else {
-		alert((msg.join("")));
+		alert((message.join("")));
 	}
 };
 /**
@@ -462,7 +463,7 @@ core.lang.Exception = function(_this) {
  * 
  * @constructor	core.lang.Interface(String name, Array<String> methods)
  * 
- * @method	static void	ensureImplements(Object object, core.lang.Interface interface...)	检查对象是否实现对应接口的方法
+ * @method	static void	ensureImplements(Object object, core.lang.Interface... interface)	检查对象是否实现对应接口的方法
  * 
  * @date	2016年8月20日 09:35:10
  */
@@ -479,7 +480,8 @@ core.lang.Interface = function(name, methods) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
-		new core.lang.Exception(arguments, "core.lang.Interface", "构造参数异常", "参数个数必须为2个,得到" + arguments.length + "个");
+		new core.lang.Exception(arguments, "core.lang.Interface", "构造参数异常", "构造参数个数必须为2个,实际得到" + arguments.length
+				+ "个.");
 	}
 
 	// 接口名称
@@ -490,7 +492,7 @@ core.lang.Interface = function(name, methods) {
 	for (var i = 0, length = methods.length; i < length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
-			new core.lang.Exception(methods[i], "core.lang.Interface", "构造参数异常", "接口方法名必须为字符串");
+			new core.lang.Exception(methods[i], "core.lang.Interface", "构造参数异常", "接口方法名必须为字符串.");
 		} else {
 			this.methods.push(methods[i]);
 		}
@@ -510,8 +512,8 @@ core.lang.Interface.ensureImplements = function(object) {
 
 	// 判断参数个数
 	if (arguments.length < 2) {
-		new core.lang.Exception(arguments, "core.lang.Interface", "ensureImplements方法参数异常",
-				"参数个数>=2.首参数为实现接口的对象,后续参数为实现的接口对象");
+		new core.lang.Exception(arguments, "core.lang.Interface.ensureImplements", "方法参数异常",
+				"参数个数至少为2个.首参数为实现接口的对象,后续参数为实现的接口对象.");
 	}
 
 	// 遍历实现的接口对象
@@ -522,15 +524,15 @@ core.lang.Interface.ensureImplements = function(object) {
 
 		// 接口对象是否存在
 		if (_interface) {
-			
+
 			// 存在,则检查接口对象是否为core.lang.Interface类
 			if (_interface.constructor !== core.lang.Interface) {
-				new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface
-						+ "非core.lang.Interface对象");
+				new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常",
+						"传入对象非core.lang.Interface对象.");
 			}
 		} else {
-			
-			new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", _interface + "不存在");
+
+			new core.lang.Exception(_interface, "core.lang.Interface.ensureImplements", "方法参数异常", "传入接口对象不存在");
 		}
 
 		// 遍历接口方法
@@ -541,9 +543,9 @@ core.lang.Interface.ensureImplements = function(object) {
 
 			// 接口方法不存在,或类型不为方法
 			if (!object[method] || typeof (object[method]) !== "function") {
-				
-				new core.lang.Exception(object, "core.lang.Interface.ensureImplements", "接口实现异常", object + "未实现接口"
-						+ _interface.name + "(" + method + ")方法");
+
+				new core.lang.Exception(object, "core.lang.Interface.ensureImplements", "接口方法未实现异常", "传入对象未实现接口"
+						+ _interface.name + "(" + method + ")方法.");
 			}
 		}
 	}
@@ -554,7 +556,7 @@ core.lang.Interface.ensureImplements = function(object) {
  * @desc	警告
  * @type	类
  * 
- * @constructor core.lang.Warning(Object _this, String msg...)
+ * @constructor core.lang.Warning(Object _this, String... message)
  * 
  * @date	2016年9月8日 10:20:53
  */
@@ -568,17 +570,17 @@ core.lang.Interface.ensureImplements = function(object) {
 core.lang.Warning = function(_this) {
 
 	// 警告信息
-	var msg = [];
+	var message = [];
 	// 遍历参数
 	for (var i = 1, length = arguments.length; i < length; i++) {
-		msg.push(arguments[i]);
-		msg.push(" ");
+		message.push(arguments[i]);
+		message.push(" ");
 	}
 
 	// 打印信息
 	if (window.console && window.console.warn) {
+		window.console.warn(message.join(""));
 		window.console.warn(_this);
-		window.console.warn(msg.join(""));
 	}
 };
 /**
@@ -589,14 +591,14 @@ core.lang.Warning = function(_this) {
  * 
  * @constructor	core.util.Map()
  * 
- * @method	Number 			size() 							返回映射个数
+ * @method	Number 			size() 							返回映射个数.
  * 			Boolean			isEmpty()						映射是否包含键-值映射关系,未包含则返回 true.
  * 			Boolean			containsKey(Object key)			映射是否包含指定键的映射关系,包含则返回 true.
  * 			Boolean			containsValue(Object value)		映射是否包含指定值的映射关系,包含则返回 true.
  * 			Object			get(Object key)					返回指定键所映射的值;如果映射中不包含该键的映射关系,则返回 undefined.
  * 			core.util.Map	put(Object key, Object value)	将指定键-值映射保存;若存在键,则更新对应映射的值.
  * 			core.util.Map	remove(Object key)				若存在指定键的映射关系,则将其删除.
- * 			core.util.Map	clear()							清除映射中所有映射关系
+ * 			core.util.Map	clear()							清除映射中所有映射关系.
  * 
  * @date	2016年8月20日 09:29:54
  */
@@ -613,7 +615,7 @@ core.util.Map = function() {
 	var length = 0;
 
 	/**
-	 * 返回映射个数
+	 * 返回映射个数.
 	 * 
 	 * @returns {Number}
 	 */
@@ -688,7 +690,7 @@ core.util.Map = function() {
 
 		!this.containsKey(key) && length++;
 		elements[key] = value;
-		
+
 		return this;
 	};
 
@@ -703,12 +705,12 @@ core.util.Map = function() {
 
 		this.containsKey(key) && length--;
 		delete elements[key];
-		
+
 		return this;
 	};
 
 	/**
-	 * 清除映射中所有映射关系
+	 * 清除映射中所有映射关系.
 	 * 
 	 * @returns {core.util.Map}
 	 */
@@ -716,7 +718,7 @@ core.util.Map = function() {
 
 		length = 0;
 		elements = {};
-		
+
 		return this;
 	};
 };
@@ -824,14 +826,14 @@ core.html.constant.KeyCode = {
 	Down : "40"
 };
 /**
- * @name	AbstractElement
+ * @name AbstractElement
  * @package core.html.element
- * @desc	HTML元素公共抽象实现
- * @type	抽象类
+ * @desc HTML元素公共抽象实现
+ * @type 抽象类
  * 
  * @constructor core.html.element.AbstractElement(String id)
  * 
- * @date	2016年8月20日 11:34:27
+ * @date 2016年8月20日 11:34:27
  */
 
 core.html.element.AbstractElement = (function() {
@@ -860,21 +862,17 @@ core.html.element.AbstractElement = (function() {
 		 */
 		var id = _id || "coreHtmlElementAbstractElement" + count;
 		/**
-		 * class
+		 * 额外信息
+		 */
+		var title = null;
+		/**
+		 * 样式类名
 		 */
 		var clazz = null;
 		/**
-		 * style
+		 * 样式
 		 */
 		var style = null;
-		/**
-		 * 子元素
-		 */
-		var children = [];
-		/**
-		 * 自定义属性
-		 */
-		var attributes = new core.util.Map();
 
 		/**
 		 * 事件
@@ -893,7 +891,19 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置 id
+		 * 附加属性
+		 */
+		/**
+		 * 自定义属性
+		 */
+		var attributes = new core.util.Map();
+		/**
+		 * 子元素
+		 */
+		var children = [];
+
+		/**
+		 * 获取/设置ID
 		 * 
 		 * @param id
 		 */
@@ -909,7 +919,23 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置 class
+		 * 获取/设置额外信息
+		 * 
+		 * @param title
+		 */
+		this.title = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return title;
+			default:
+				title = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置样式类名
 		 * 
 		 * @param class
 		 */
@@ -941,54 +967,36 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 添加子元素
+		 * 获取/设置加载事件
 		 * 
-		 * @param child{Object}
-		 *            子元素
-		 * @returns {core.html.element.Element}
+		 * @param load
 		 */
-		this.addChild = function(child) {
+		this.load = function() {
 
-			children.push(child);
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return load;
+			default:
+				load = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 移除子元素
+		 * 获取/设置单击事件
 		 * 
-		 * @param child{Object}
-		 *            子元素
-		 * @returns {core.html.element.Element}
+		 * @param click
 		 */
-		this.removeChild = function(child) {
+		this.click = function() {
 
-			children.remove(child);
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return click;
+			default:
+				click = arguments[0];
+				return this;
+			}
 		};
-
-		/**
-		 * 获取子元素集合
-		 * 
-		 * @returns {Array}
-		 */
-		this.getChildren = function() {
-
-			return children;
-		};
-
-		/**
-		 * 清空子元素
-		 * 
-		 * @returns {core.html.element.Element}
-		 */
-		this.clearChildren = function() {
-
-			children = [];
-
-			return this;
-		}
 
 		/**
 		 * 获取属性
@@ -1041,36 +1049,54 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置加载事件
+		 * 添加子元素
 		 * 
-		 * @param load
+		 * @param child{Object}
+		 *            子元素
+		 * @returns {core.html.element.Element}
 		 */
-		this.load = function() {
+		this.addChild = function(child) {
 
-			switch (arguments.length) {
-			case 0:
-				return load;
-			default:
-				load = arguments[0];
-				return this;
-			}
+			children.push(child);
+
+			return this;
 		};
 
 		/**
-		 * 获取/设置单击事件
+		 * 移除子元素
 		 * 
-		 * @param click
+		 * @param child{Object}
+		 *            子元素
+		 * @returns {core.html.element.Element}
 		 */
-		this.click = function() {
+		this.removeChild = function(child) {
 
-			switch (arguments.length) {
-			case 0:
-				return click;
-			default:
-				click = arguments[0];
-				return this;
-			}
+			children.remove(child);
+
+			return this;
 		};
+
+		/**
+		 * 获取子元素集合
+		 * 
+		 * @returns {Array}
+		 */
+		this.getChildren = function() {
+
+			return children;
+		};
+
+		/**
+		 * 清空子元素
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.clearChildren = function() {
+
+			children.clear();
+
+			return this;
+		}
 	};
 
 	/**
@@ -1140,7 +1166,7 @@ core.html.element.AbstractElement = (function() {
 
 			// 获取子元素
 			var child = children[i];
-			// 若子元素为元素对象,则调用其销毁方法
+			// 若子元素为元素对象,则调用其清空内容方法
 			if (child instanceof core.html.element.AbstractElement) {
 
 				// 判断是否实现元素接口
@@ -1185,8 +1211,8 @@ core.html.element.AbstractElement = (function() {
 			}
 		}
 
-		// 清空子元素,清空属性
-		this.clearChildren().clearAttributes();
+		// 清空属性,清空子元素
+		this.clearAttributes().clearChildren();
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery移除
 		this.exist() && $("#" + this.id()).remove();
@@ -1265,10 +1291,10 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.loadSucess = function() {
 
-		// 装载单击事件
-		this.click() === null || $("#" + this.id()).click(this.click());
 		// 调用装载事件
 		this.load()(this);
+		// 装载单击事件
+		this.click() === null || $("#" + this.id()).click(this.click());
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -1299,14 +1325,15 @@ core.html.element.AbstractElement = (function() {
  * @type	接口
  * 
  * @method	String/core.html.element.Element	id()										获取/设置ID
- * 			String/core.html.element.Element	clazz()										获取/设置class
+ * 			String/core.html.element.Element	title()										获取/设置额外信息
+ * 			String/core.html.element.Element	clazz()										获取/设置样式类名
  * 			String/core.html.element.Element	style()										获取/设置样式
+ * 			function/core.html.element.Element	load()										获取/设置加载事件
+ * 			function/core.html.element.Element	click()										获取/设置鼠标点击事件
  * 			Object								getAttribute(Object key)					获取属性
  * 			core.html.element.Element			setAttribute(Object key, Object value)		设置属性
  * 			core.html.element.Element			removeAttribute(Object key)					移除属性
  * 			core.html.element.Element			clearAttributes()							清空属性
- * 			function/core.html.element.Element	load()										获取/设置加载事件
- * 			function/core.html.element.Element	click()										获取/设置点击事件
  * 			core.html.element.Element			show()										显示元素
  * 			core.html.element.Element			hide()										隐藏元素
  * 			core.html.element.Element			clear()										清空元素内容
@@ -1318,20 +1345,23 @@ core.html.element.AbstractElement = (function() {
  * @date	2016年8月20日 11:31:48
  */
 
-core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "clazz", "style", "show",
-		"hide", "destroy", "append", "appendTo", "getAttribute", "setAttribute" ]);
+core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "title", "clazz", "style",
+		"load", "click", "getAttribute", "setAttribute", "removeAttribute", "clearAttributes", "show", "hide", "clear",
+		"destroy", "append", "appendTo" ]);
 /**
  * @name	ElementProcess
  * @package	core.html.element
  * @desc	HTML元素处理
  * @type	接口
  * 
- * @method	String	convertHtml()	转为HTML
+ * @method	Boolean	exist()			元素是否存在
+ * 			String	convertHtml()	转为HTML
  * 
  * @date	2016年8月20日 11:43:53
  */
 
-core.html.element.ElementProcess = new core.lang.Interface("core.html.element.ElementProcess", [ "convertHtml" ]);
+core.html.element.ElementProcess = new core.lang.Interface("core.html.element.ElementProcess",
+		[ "exist", "convertHtml" ]);
 /**
  * @name	Style
  * @package	core.html.element.model
@@ -1443,17 +1473,13 @@ core.html.element.model.Style = (function() {
 
 		var str = [];
 		// 宽度
-		var width = this.width();
-		width == null || str.push("width:" + width + ";");
+		this.width() == null || str.push("width:" + this.width() + ";");
 		// 高度
-		var height = this.height();
-		height == null || str.push("height:" + height + ";");
+		this.height() == null || str.push("height:" + this.height() + ";");
 		// 颜色
-		var color = this.color();
-		color == null || str.push("color:" + color + ";");
+		this.color() == null || str.push("color:" + this.color() + ";");
 		// 背景
-		var background = this.background();
-		background == null || str.push("background:" + background + ";");
+		this.background() == null || str.push("background:" + this.background() + ";");
 
 		return str.join("");
 	};
@@ -1503,6 +1529,7 @@ core.html.element.viewer.A = (function() {
 		// A HTML
 		html.push("<a ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -1577,6 +1604,7 @@ core.html.element.viewer.Button = (function() {
 		// Button HTML
 		html.push("<button ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -1651,6 +1679,7 @@ core.html.element.viewer.Div = (function() {
 		// DIV HTML
 		html.push("<div ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -1725,6 +1754,7 @@ core.html.element.viewer.Fieldset = (function() {
 		// Fieldset HTML
 		html.push("<fieldset ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -1799,6 +1829,7 @@ core.html.element.viewer.Form = (function() {
 		// Form HTML
 		html.push("<form ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -1960,6 +1991,7 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		this.type() === null || html.push("type='" + this.type() + "' ");
@@ -1977,12 +2009,12 @@ core.html.element.viewer.Input = (function() {
 	 */
 	Constructor.prototype.loadSucess = function() {
 
+		// 调用装载事件
+		this.load()(this);
 		// 装载单击事件
 		this.click() === null || $("#" + this.id()).click(this.click());
 		// 装载改变事件
 		this.change() === null || $("#" + this.id()).change(this.change());
-		// 调用装载事件
-		this.load()(this);
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -2069,6 +2101,7 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		this.forAttr() === null || html.push("for='" + this.forAttr() + "' ");
@@ -2144,6 +2177,7 @@ core.html.element.viewer.Legend = (function() {
 		// Legend HTML
 		html.push("<legend ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -2239,6 +2273,7 @@ core.html.element.viewer.Table = (function() {
 		// Table HTML
 		html.push("<table ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		this.align() === null || html.push("align='" + this.align() + "' ");
@@ -2355,6 +2390,7 @@ core.html.element.viewer.Td = (function() {
 		// Td HTML
 		html.push("<td ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		this.colspan() === null || html.push("colspan='" + this.colspan() + "' ");
@@ -2431,6 +2467,7 @@ core.html.element.viewer.Textarea = (function() {
 		// Textarea HTML
 		html.push("<textarea ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -2505,6 +2542,7 @@ core.html.element.viewer.Tr = (function() {
 		// Tr HTML
 		html.push("<tr ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
@@ -2569,14 +2607,14 @@ document.onkeydown = function(event) {
 
 core.html.event.window.Resize = [];
 
-window.onresize = function() {
+window.onresize = function(event) {
 
 	// 遍历窗口改变事件
 	for (var i = 0, length = core.html.event.window.Resize.length; i < length; i++) {
 
 		// 获取窗口改变事件,且判断是否为函数
 		var resize = core.html.event.window.Resize[i];
-		typeof (resize) === "function" && resize();
+		typeof (resize) === "function" && resize(event);
 	}
 };
 /**

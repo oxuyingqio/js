@@ -109,17 +109,13 @@ core.html.element.model.Style = (function() {
 
 		var str = [];
 		// 宽度
-		var width = this.width();
-		width == null || str.push("width:" + width + ";");
+		this.width() == null || str.push("width:" + this.width() + ";");
 		// 高度
-		var height = this.height();
-		height == null || str.push("height:" + height + ";");
+		this.height() == null || str.push("height:" + this.height() + ";");
 		// 颜色
-		var color = this.color();
-		color == null || str.push("color:" + color + ";");
+		this.color() == null || str.push("color:" + this.color() + ";");
 		// 背景
-		var background = this.background();
-		background == null || str.push("background:" + background + ";");
+		this.background() == null || str.push("background:" + this.background() + ";");
 
 		return str.join("");
 	};

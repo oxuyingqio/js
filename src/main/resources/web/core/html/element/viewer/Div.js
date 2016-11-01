@@ -40,6 +40,7 @@ core.html.element.viewer.Div = (function() {
 		// DIV HTML
 		html.push("<div ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");

@@ -1,12 +1,12 @@
 /**
- * @name	AbstractElement
+ * @name AbstractElement
  * @package core.html.element
- * @desc	HTML元素公共抽象实现
- * @type	抽象类
+ * @desc HTML元素公共抽象实现
+ * @type 抽象类
  * 
  * @constructor core.html.element.AbstractElement(String id)
  * 
- * @date	2016年8月20日 11:34:27
+ * @date 2016年8月20日 11:34:27
  */
 
 core.html.element.AbstractElement = (function() {
@@ -35,21 +35,17 @@ core.html.element.AbstractElement = (function() {
 		 */
 		var id = _id || "coreHtmlElementAbstractElement" + count;
 		/**
-		 * class
+		 * 额外信息
+		 */
+		var title = null;
+		/**
+		 * 样式类名
 		 */
 		var clazz = null;
 		/**
-		 * style
+		 * 样式
 		 */
 		var style = null;
-		/**
-		 * 子元素
-		 */
-		var children = [];
-		/**
-		 * 自定义属性
-		 */
-		var attributes = new core.util.Map();
 
 		/**
 		 * 事件
@@ -68,7 +64,19 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置 id
+		 * 附加属性
+		 */
+		/**
+		 * 自定义属性
+		 */
+		var attributes = new core.util.Map();
+		/**
+		 * 子元素
+		 */
+		var children = [];
+
+		/**
+		 * 获取/设置ID
 		 * 
 		 * @param id
 		 */
@@ -84,7 +92,23 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置 class
+		 * 获取/设置额外信息
+		 * 
+		 * @param title
+		 */
+		this.title = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return title;
+			default:
+				title = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置样式类名
 		 * 
 		 * @param class
 		 */
@@ -116,54 +140,36 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 添加子元素
+		 * 获取/设置加载事件
 		 * 
-		 * @param child{Object}
-		 *            子元素
-		 * @returns {core.html.element.Element}
+		 * @param load
 		 */
-		this.addChild = function(child) {
+		this.load = function() {
 
-			children.push(child);
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return load;
+			default:
+				load = arguments[0];
+				return this;
+			}
 		};
 
 		/**
-		 * 移除子元素
+		 * 获取/设置单击事件
 		 * 
-		 * @param child{Object}
-		 *            子元素
-		 * @returns {core.html.element.Element}
+		 * @param click
 		 */
-		this.removeChild = function(child) {
+		this.click = function() {
 
-			children.remove(child);
-
-			return this;
+			switch (arguments.length) {
+			case 0:
+				return click;
+			default:
+				click = arguments[0];
+				return this;
+			}
 		};
-
-		/**
-		 * 获取子元素集合
-		 * 
-		 * @returns {Array}
-		 */
-		this.getChildren = function() {
-
-			return children;
-		};
-
-		/**
-		 * 清空子元素
-		 * 
-		 * @returns {core.html.element.Element}
-		 */
-		this.clearChildren = function() {
-
-			children = [];
-
-			return this;
-		}
 
 		/**
 		 * 获取属性
@@ -216,36 +222,54 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置加载事件
+		 * 添加子元素
 		 * 
-		 * @param load
+		 * @param child{Object}
+		 *            子元素
+		 * @returns {core.html.element.Element}
 		 */
-		this.load = function() {
+		this.addChild = function(child) {
 
-			switch (arguments.length) {
-			case 0:
-				return load;
-			default:
-				load = arguments[0];
-				return this;
-			}
+			children.push(child);
+
+			return this;
 		};
 
 		/**
-		 * 获取/设置单击事件
+		 * 移除子元素
 		 * 
-		 * @param click
+		 * @param child{Object}
+		 *            子元素
+		 * @returns {core.html.element.Element}
 		 */
-		this.click = function() {
+		this.removeChild = function(child) {
 
-			switch (arguments.length) {
-			case 0:
-				return click;
-			default:
-				click = arguments[0];
-				return this;
-			}
+			children.remove(child);
+
+			return this;
 		};
+
+		/**
+		 * 获取子元素集合
+		 * 
+		 * @returns {Array}
+		 */
+		this.getChildren = function() {
+
+			return children;
+		};
+
+		/**
+		 * 清空子元素
+		 * 
+		 * @returns {core.html.element.Element}
+		 */
+		this.clearChildren = function() {
+
+			children.clear();
+
+			return this;
+		}
 	};
 
 	/**
@@ -315,7 +339,7 @@ core.html.element.AbstractElement = (function() {
 
 			// 获取子元素
 			var child = children[i];
-			// 若子元素为元素对象,则调用其销毁方法
+			// 若子元素为元素对象,则调用其清空内容方法
 			if (child instanceof core.html.element.AbstractElement) {
 
 				// 判断是否实现元素接口
@@ -360,8 +384,8 @@ core.html.element.AbstractElement = (function() {
 			}
 		}
 
-		// 清空子元素,清空属性
-		this.clearChildren().clearAttributes();
+		// 清空属性,清空子元素
+		this.clearAttributes().clearChildren();
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery移除
 		this.exist() && $("#" + this.id()).remove();
@@ -440,10 +464,10 @@ core.html.element.AbstractElement = (function() {
 	 */
 	Constructor.prototype.loadSucess = function() {
 
-		// 装载单击事件
-		this.click() === null || $("#" + this.id()).click(this.click());
 		// 调用装载事件
 		this.load()(this);
+		// 装载单击事件
+		this.click() === null || $("#" + this.id()).click(this.click());
 
 		// 获取子元素
 		var children = this.getChildren();

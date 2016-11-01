@@ -4,8 +4,8 @@
 (function() {
 
 	if (typeof (core) !== "undefined") {
-		
-		throw "全局变量'core'被占用,请确保'core'未被占用后再进行使用";
+
+		throw "全局变量'core'被占用.请确保'core'未被占用后,再进行使用.";
 	} else {
 
 		// 核心包

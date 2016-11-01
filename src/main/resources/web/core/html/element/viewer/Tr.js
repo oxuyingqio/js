@@ -40,6 +40,7 @@ core.html.element.viewer.Tr = (function() {
 		// Tr HTML
 		html.push("<tr ");
 		html.push("id='" + this.id() + "' ");
+		this.title() === null || html.push("title='" + this.title() + "' ");
 		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
 		this.style() === null || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
