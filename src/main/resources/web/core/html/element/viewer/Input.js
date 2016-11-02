@@ -127,12 +127,12 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
-		this.type() || html.push("type='" + this.type() + "' ");
-		this.name() || html.push("name='" + this.name() + "' ");
-		this.value() || html.push("value='" + this.value() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.type() && html.push("type='" + this.type() + "' ");
+		this.name() && html.push("name='" + this.name() + "' ");
+		this.value() && html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");

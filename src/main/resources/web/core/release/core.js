@@ -1533,9 +1533,9 @@ core.html.element.viewer.A = (function() {
 		// A HTML
 		html.push("<a ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1608,9 +1608,9 @@ core.html.element.viewer.Button = (function() {
 		// Button HTML
 		html.push("<button ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1683,9 +1683,9 @@ core.html.element.viewer.Div = (function() {
 		// DIV HTML
 		html.push("<div ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1758,9 +1758,9 @@ core.html.element.viewer.Fieldset = (function() {
 		// Fieldset HTML
 		html.push("<fieldset ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1833,9 +1833,9 @@ core.html.element.viewer.Form = (function() {
 		// Form HTML
 		html.push("<form ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1995,12 +1995,12 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
-		this.type() || html.push("type='" + this.type() + "' ");
-		this.name() || html.push("name='" + this.name() + "' ");
-		this.value() || html.push("value='" + this.value() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.type() && html.push("type='" + this.type() + "' ");
+		this.name() && html.push("name='" + this.name() + "' ");
+		this.value() && html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");
@@ -2105,10 +2105,10 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
-		this.forAttr() || html.push("for='" + this.forAttr() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.forAttr() && html.push("for='" + this.forAttr() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2181,9 +2181,9 @@ core.html.element.viewer.Legend = (function() {
 		// Legend HTML
 		html.push("<legend ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2277,10 +2277,10 @@ core.html.element.viewer.Table = (function() {
 		// Table HTML
 		html.push("<table ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
-		this.align() || html.push("align='" + this.align() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.align() && html.push("align='" + this.align() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2394,11 +2394,11 @@ core.html.element.viewer.Td = (function() {
 		// Td HTML
 		html.push("<td ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
-		this.colspan() || html.push("colspan='" + this.colspan() + "' ");
-		this.rowspan() || html.push("rowspan='" + this.rowspan() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.colspan() && html.push("colspan='" + this.colspan() + "' ");
+		this.rowspan() && html.push("rowspan='" + this.rowspan() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2471,9 +2471,9 @@ core.html.element.viewer.Textarea = (function() {
 		// Textarea HTML
 		html.push("<textarea ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2546,9 +2546,9 @@ core.html.element.viewer.Tr = (function() {
 		// Tr HTML
 		html.push("<tr ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素

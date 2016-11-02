@@ -61,10 +61,10 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
-		this.forAttr() || html.push("for='" + this.forAttr() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.forAttr() && html.push("for='" + this.forAttr() + "' ");
 		html.push(">");
 
 		// 获取子元素

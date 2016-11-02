@@ -40,9 +40,9 @@ core.html.element.viewer.Legend = (function() {
 		// Legend HTML
 		html.push("<legend ");
 		html.push("id='" + this.id() + "' ");
-		this.title() || html.push("title='" + this.title() + "' ");
-		this.clazz() || html.push("class='" + this.clazz() + "' ");
-		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.title() && html.push("title='" + this.title() + "' ");
+		this.clazz() && html.push("class='" + this.clazz() + "' ");
+		this.style() && html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
