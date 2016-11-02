@@ -317,7 +317,7 @@ core.html.element.AbstractElement = (function() {
 	 * 
 	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.hide = function(target) {
+	Constructor.prototype.hide = function() {
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
 		this.exist() && $("#" + this.id()).hide();
@@ -330,7 +330,7 @@ core.html.element.AbstractElement = (function() {
 	 * 
 	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.clear = function(target) {
+	Constructor.prototype.clear = function() {
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -397,26 +397,30 @@ core.html.element.AbstractElement = (function() {
 	 * @param element{core.html.element.Element}
 	 */
 	Constructor.prototype.append = function(element) {
+		
+		// 首先判断element是否不为空或undefined
+		if (element) {
 
-		// 添加子元素
-		this.addChild(element);
+			// 添加子元素
+			this.addChild(element);
 
-		// 判断元素是否在HTML中存在,若存在则调用jQuery添加
-		if (this.exist()) {
+			// 判断元素是否在HTML中存在,若存在则调用jQuery添加
+			if (this.exist()) {
 
-			// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
-			if (element instanceof core.html.element.AbstractElement) {
+				// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
+				if (element instanceof core.html.element.AbstractElement) {
 
-				// 判断是否实现元素接口
-				core.lang.Interface.ensureImplements(element, core.html.element.Element,
-						core.html.element.ElementProcess);
-				// 添加HTML内容
-				$("#" + this.id()).append(element.convertHtml());
-				// 调用装载成功函数
-				element.loadSucess();
-			} else {
+					// 判断是否实现元素接口
+					core.lang.Interface.ensureImplements(element, core.html.element.Element,
+							core.html.element.ElementProcess);
+					// 添加HTML内容
+					$("#" + this.id()).append(element.convertHtml());
+					// 调用装载成功函数
+					element.loadSucess();
+				} else {
 
-				$("#" + this.id()).append(element);
+					$("#" + this.id()).append(element);
+				}
 			}
 		}
 

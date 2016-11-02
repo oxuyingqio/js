@@ -127,12 +127,12 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		this.type() === null || html.push("type='" + this.type() + "' ");
-		this.name() === null || html.push("name='" + this.name() + "' ");
-		this.value() === null || html.push("value='" + this.value() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.type() || html.push("type='" + this.type() + "' ");
+		this.name() || html.push("name='" + this.name() + "' ");
+		this.value() || html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");
@@ -148,9 +148,9 @@ core.html.element.viewer.Input = (function() {
 		// 调用装载事件
 		this.load()(this);
 		// 装载单击事件
-		this.click() === null || $("#" + this.id()).click(this.click());
+		this.click() || $("#" + this.id()).click(this.click());
 		// 装载改变事件
-		this.change() === null || $("#" + this.id()).change(this.change());
+		this.change() || $("#" + this.id()).change(this.change());
 
 		// 获取子元素
 		var children = this.getChildren();

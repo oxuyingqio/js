@@ -1144,7 +1144,7 @@ core.html.element.AbstractElement = (function() {
 	 * 
 	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.hide = function(target) {
+	Constructor.prototype.hide = function() {
 
 		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
 		this.exist() && $("#" + this.id()).hide();
@@ -1157,7 +1157,7 @@ core.html.element.AbstractElement = (function() {
 	 * 
 	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.clear = function(target) {
+	Constructor.prototype.clear = function() {
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -1224,26 +1224,30 @@ core.html.element.AbstractElement = (function() {
 	 * @param element{core.html.element.Element}
 	 */
 	Constructor.prototype.append = function(element) {
+		
+		// 首先判断element是否不为空或undefined
+		if (element) {
 
-		// 添加子元素
-		this.addChild(element);
+			// 添加子元素
+			this.addChild(element);
 
-		// 判断元素是否在HTML中存在,若存在则调用jQuery添加
-		if (this.exist()) {
+			// 判断元素是否在HTML中存在,若存在则调用jQuery添加
+			if (this.exist()) {
 
-			// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
-			if (element instanceof core.html.element.AbstractElement) {
+				// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
+				if (element instanceof core.html.element.AbstractElement) {
 
-				// 判断是否实现元素接口
-				core.lang.Interface.ensureImplements(element, core.html.element.Element,
-						core.html.element.ElementProcess);
-				// 添加HTML内容
-				$("#" + this.id()).append(element.convertHtml());
-				// 调用装载成功函数
-				element.loadSucess();
-			} else {
+					// 判断是否实现元素接口
+					core.lang.Interface.ensureImplements(element, core.html.element.Element,
+							core.html.element.ElementProcess);
+					// 添加HTML内容
+					$("#" + this.id()).append(element.convertHtml());
+					// 调用装载成功函数
+					element.loadSucess();
+				} else {
 
-				$("#" + this.id()).append(element);
+					$("#" + this.id()).append(element);
+				}
 			}
 		}
 
@@ -1529,9 +1533,9 @@ core.html.element.viewer.A = (function() {
 		// A HTML
 		html.push("<a ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1604,9 +1608,9 @@ core.html.element.viewer.Button = (function() {
 		// Button HTML
 		html.push("<button ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1679,9 +1683,9 @@ core.html.element.viewer.Div = (function() {
 		// DIV HTML
 		html.push("<div ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1754,9 +1758,9 @@ core.html.element.viewer.Fieldset = (function() {
 		// Fieldset HTML
 		html.push("<fieldset ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1829,9 +1833,9 @@ core.html.element.viewer.Form = (function() {
 		// Form HTML
 		html.push("<form ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -1991,12 +1995,12 @@ core.html.element.viewer.Input = (function() {
 		// Input HTML
 		html.push("<input ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		this.type() === null || html.push("type='" + this.type() + "' ");
-		this.name() === null || html.push("name='" + this.name() + "' ");
-		this.value() === null || html.push("value='" + this.value() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.type() || html.push("type='" + this.type() + "' ");
+		this.name() || html.push("name='" + this.name() + "' ");
+		this.value() || html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");
@@ -2012,9 +2016,9 @@ core.html.element.viewer.Input = (function() {
 		// 调用装载事件
 		this.load()(this);
 		// 装载单击事件
-		this.click() === null || $("#" + this.id()).click(this.click());
+		this.click() || $("#" + this.id()).click(this.click());
 		// 装载改变事件
-		this.change() === null || $("#" + this.id()).change(this.change());
+		this.change() || $("#" + this.id()).change(this.change());
 
 		// 获取子元素
 		var children = this.getChildren();
@@ -2101,10 +2105,10 @@ core.html.element.viewer.Label = (function() {
 		// Label HTML
 		html.push("<label ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		this.forAttr() === null || html.push("for='" + this.forAttr() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.forAttr() || html.push("for='" + this.forAttr() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2177,9 +2181,9 @@ core.html.element.viewer.Legend = (function() {
 		// Legend HTML
 		html.push("<legend ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2273,10 +2277,10 @@ core.html.element.viewer.Table = (function() {
 		// Table HTML
 		html.push("<table ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		this.align() === null || html.push("align='" + this.align() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.align() || html.push("align='" + this.align() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2390,11 +2394,11 @@ core.html.element.viewer.Td = (function() {
 		// Td HTML
 		html.push("<td ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		this.colspan() === null || html.push("colspan='" + this.colspan() + "' ");
-		this.rowspan() === null || html.push("rowspan='" + this.rowspan() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.colspan() || html.push("colspan='" + this.colspan() + "' ");
+		this.rowspan() || html.push("rowspan='" + this.rowspan() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2467,9 +2471,9 @@ core.html.element.viewer.Textarea = (function() {
 		// Textarea HTML
 		html.push("<textarea ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素
@@ -2542,9 +2546,9 @@ core.html.element.viewer.Tr = (function() {
 		// Tr HTML
 		html.push("<tr ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
 		html.push(">");
 
 		// 获取子元素

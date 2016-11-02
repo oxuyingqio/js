@@ -61,10 +61,10 @@ core.html.element.viewer.Table = (function() {
 		// Table HTML
 		html.push("<table ");
 		html.push("id='" + this.id() + "' ");
-		this.title() === null || html.push("title='" + this.title() + "' ");
-		this.clazz() === null || html.push("class='" + this.clazz() + "' ");
-		this.style() === null || html.push("style='" + this.style().toString() + "' ");
-		this.align() === null || html.push("align='" + this.align() + "' ");
+		this.title() || html.push("title='" + this.title() + "' ");
+		this.clazz() || html.push("class='" + this.clazz() + "' ");
+		this.style() || html.push("style='" + this.style().toString() + "' ");
+		this.align() || html.push("align='" + this.align() + "' ");
 		html.push(">");
 
 		// 获取子元素
