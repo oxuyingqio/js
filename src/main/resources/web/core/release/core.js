@@ -354,6 +354,9 @@ String.prototype.toHexString = function() {
 					window : {}
 				},
 
+				// 插件包
+				plugin : {},
+
 				// 工具包
 				util : {}
 			},
