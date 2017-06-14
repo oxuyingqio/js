@@ -23,6 +23,27 @@ core.html.element.viewer.Form = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Form.superClass.constructor.call(this, id);
+
+		/**
+		 * 提交方式
+		 */
+		var method = null;
+
+		/**
+		 * 获取/设置提交方式
+		 * 
+		 * @param method
+		 */
+		this.method = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return method;
+			default:
+				method = arguments[0];
+				return this;
+			}
+		};
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -43,6 +64,7 @@ core.html.element.viewer.Form = (function() {
 		this.title() && html.push("title='" + this.title() + "' ");
 		this.clazz() && html.push("class='" + this.clazz() + "' ");
 		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.method() && html.push("method='" + this.method() + "' ");
 		html.push(">");
 
 		// 获取子元素
