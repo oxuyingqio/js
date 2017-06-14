@@ -52,7 +52,7 @@ core.html.element.viewer.Form = (function() {
 		/**
 		 * 获取/设置编码方式
 		 * 
-		 * @param method
+		 * @param enctype
 		 */
 		this.enctype = function() {
 
