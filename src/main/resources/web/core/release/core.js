@@ -1804,7 +1804,7 @@ core.html.element.viewer.Fieldset = (function() {
  * 
  * @extend	core.html.element.AbstractElement
  * 
- * @date	2016年8月20日 11:56:33
+ * @date	2017年6月14日 15:14:22
  */
 
 core.html.element.viewer.Form = (function() {
@@ -1819,6 +1819,47 @@ core.html.element.viewer.Form = (function() {
 
 		// 调用父类构造
 		core.html.element.viewer.Form.superClass.constructor.call(this, id);
+
+		/**
+		 * 提交方式
+		 */
+		var method = null;
+		/**
+		 * 编码方式
+		 */
+		var enctype = null;
+
+		/**
+		 * 获取/设置提交方式
+		 * 
+		 * @param method
+		 */
+		this.method = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return method;
+			default:
+				method = arguments[0];
+				return this;
+			}
+		};
+
+		/**
+		 * 获取/设置编码方式
+		 * 
+		 * @param method
+		 */
+		this.enctype = function() {
+
+			switch (arguments.length) {
+			case 0:
+				return enctype;
+			default:
+				enctype = arguments[0];
+				return this;
+			}
+		};
 	}
 	// 继承HTML元素公共抽象实现
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
@@ -1839,6 +1880,8 @@ core.html.element.viewer.Form = (function() {
 		this.title() && html.push("title='" + this.title() + "' ");
 		this.clazz() && html.push("class='" + this.clazz() + "' ");
 		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.method() && html.push("method='" + this.method() + "' ");
+		this.enctype() && html.push("enctype='" + this.enctype() + "' ");
 		html.push(">");
 
 		// 获取子元素
