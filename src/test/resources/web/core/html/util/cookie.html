@@ -11,8 +11,8 @@
 <script type="text/javascript" src="/~/core/html/util/Cookie.js"></script>
 <script type="text/javascript">
 	window.onload = function() {
-		core.util.Cookie.getCookie().set("123", "aaaa");
-		alert(core.util.Cookie.getCookie().get("123"));
+		alert(core.html.util.Cookie.getInstance().get("aaa"));
+		core.html.util.Cookie.getInstance().set("aaa", "123", 7, "/");
 	}
 </script>
 
