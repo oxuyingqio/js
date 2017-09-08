@@ -54,7 +54,8 @@ Array.prototype.indexOf = function(object) {
 	// 遍历数组
 	for (var index = 0, length = this.length; index < length; index++) {
 
-		if (this[index] === obj) {
+		if (this[index] === object) {
+			
 			return index;
 		}
 	}
