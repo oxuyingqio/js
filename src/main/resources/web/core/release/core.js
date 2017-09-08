@@ -54,7 +54,8 @@ Array.prototype.indexOf = function(object) {
 	// 遍历数组
 	for (var index = 0, length = this.length; index < length; index++) {
 
-		if (this[index] === obj) {
+		if (this[index] === object) {
+			
 			return index;
 		}
 	}
@@ -2668,18 +2669,17 @@ window.onresize = function(event) {
 	}
 };
 /**
- * @name Cookie
+ * @name	Cookie
  * @package core.html.util
- * @desc Cookie操作
- * @type 类
+ * @desc	Cookie操作
+ * @type	类
  * 
- * @method static core.html.util.Cookie getInstance() 获取cookie操作 Object
- *         get(String name) 获取cookie core.html.util.Cookie set(String name,
- *         String value) 设置cookie core.html.util.Cookie set(String name, String
- *         value, Number expiredays) 设置cookie core.html.util.Cookie del(String
- *         name) 删除cookie
+ * @method	static					core.html.util.Cookie getInstance()								获取cookie操作
+ * 			Object					get(String key)													获取cookie
+ * 			core.html.util.Cookie	set(String key, String value, Number expireDays, String path) 	设置cookie
+ * 			core.html.util.Cookie	del(String key)													删除cookie
  * 
- * @date 2016年8月20日 09:53:30
+ * @date 2017年8月8日 09:20:30
  */
 
 core.html.util.Cookie = (function() {
@@ -2699,19 +2699,21 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 获取cookie
 	 * 
-	 * @param name{String}
-	 *            cookie名称
+	 * @param key{String}
+	 *            cookie键
 	 * @returns {Object}
 	 */
-	Constructor.prototype.get = function(name) {
+	Constructor.prototype.get = function(key) {
 
 		// 正则表达式匹配cookie值
-		var arr, reg = new RegExp("(^| )" + name + "=([^;]*)(;|$)");
+		var arr, reg = new RegExp("(^| )" + key + "=([^;]*)(;|$)");
 
 		// 返回cookie值
 		if (arr = document.cookie.match(reg)) {
+
 			return (arr[2]);
 		} else {
+
 			return null;
 		}
 	};
@@ -2719,51 +2721,44 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 设置cookie
 	 * 
-	 * @param name{String}
-	 *            cookie名称
+	 * @param key{String}
+	 *            cookie键
 	 * @param value{String}
 	 *            cookie值
-	 * @param expiredays{Number}
-	 *            过期天数
-	 * @returns {core.html.util.Cookie}
-	 */
-	Constructor.prototype.set = function(name, value, expiredays) {
-
-		// 过期天数不存在,则默认7天
-		var day = expiredays === undefined ? 7 : expiredays;
-		// 当前时间
-		var exp = new Date();
-		// 设置过期时间
-		exp.setDate(exp.getDate() + (day * 24 * 60 * 60 * 1000));
-		// 设置cookie
-		document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString();
-
-		return this;
-	};
-
-	/**
-	 * 设置cookie
-	 * 
-	 * @param name{String}
-	 *            cookie名称
-	 * @param value{String}
-	 *            cookie值
-	 * @param expiredays{Number}
+	 * @param expireDays{Number}
 	 *            过期天数
 	 * @param path{String}
-	 *            路径
+	 *            权限路径
 	 * @returns {core.html.util.Cookie}
 	 */
-	Constructor.prototype.set = function(name, value, expiredays, path) {
+	Constructor.prototype.set = function(key, value, expireDays, path) {
 
-		// 过期天数不存在,则默认7天
-		var day = expiredays === undefined ? 7 : expiredays;
-		// 当前时间
-		var exp = new Date();
-		// 设置过期时间
-		exp.setDate(exp.getDate() + (day * 24 * 60 * 60 * 1000));
+		// cookie字符串
+		var cookieStr = [];
+
+		// 添加key,value
+		cookieStr.push(key + "=" + value + ";");
+
+		// 判断是否存在过期天数
+		if (expireDays) {
+
+			// 当前时间
+			var exp = new Date();
+			// 设置过期时间
+			exp.setTime(exp.getTime() + (expireDays * 24 * 60 * 60 * 1000));
+			// 添加过期天数
+			cookieStr.push("expires=" + exp.toGMTString() + ";");
+		}
+
+		//判断是否存在权限路径
+		if (path) {
+
+			// 添加权限路径
+			cookieStr.push("path=" + path + ";");
+		}
+
 		// 设置cookie
-		document.cookie = name + "=" + escape(value) + ";expires=" + exp.toGMTString() + ";path=" + path;
+		document.cookie = cookieStr.join(" ");
 
 		return this;
 	};
@@ -2771,21 +2766,24 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 删除cookie
 	 * 
-	 * @param name{String}
-	 *            cookie名称
+	 * @param key{String}
+	 *            cookie键
 	 * @returns {core.html.util.Cookie}
 	 */
-	Constructor.prototype.del = function(name) {
+	Constructor.prototype.del = function(key) {
 
-		// 获取当前时间
-		var exp = new Date();
-		// 设置当前时间前一毫秒
-		exp.setTime(exp.getTime() - 1);
-		// 获取cookie
-		var cval = this.get(name);
+		// 获取cookie值
+		var value = this.get(key);
+
 		// 不为空则设置超时时间
-		if (cval !== null) {
-			document.cookie = name + "=" + cval + ";expires=" + exp.toGMTString();
+		if (value !== null) {
+
+			// 获取当前时间
+			var exp = new Date();
+			// 设置当前时间前一毫秒
+			exp.setTime(exp.getTime() - 1);
+			// 设置cookie
+			document.cookie = key + "=" + value + ";expires=" + exp.toGMTString();
 		}
 
 		return this;
@@ -2802,6 +2800,7 @@ core.html.util.Cookie = (function() {
 
 			// 不存在,则创建
 			if (!cookie) {
+
 				cookie = new Constructor();
 			}
 
