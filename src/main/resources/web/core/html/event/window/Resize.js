@@ -16,6 +16,7 @@ window.onresize = function(event) {
 
 		// 获取窗口改变事件,且判断是否为函数
 		var resize = core.html.event.window.Resize[i];
+		// 执行函数
 		typeof (resize) === "function" && resize(event);
 	}
 };

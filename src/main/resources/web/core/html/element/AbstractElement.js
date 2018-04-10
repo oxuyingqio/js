@@ -397,7 +397,7 @@ core.html.element.AbstractElement = (function() {
 	 * @param element{core.html.element.Element}
 	 */
 	Constructor.prototype.append = function(element) {
-		
+
 		// 首先判断element是否不为空或undefined
 		if (element) {
 

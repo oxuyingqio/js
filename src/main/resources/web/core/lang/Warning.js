@@ -21,13 +21,15 @@ core.lang.Warning = function(_this) {
 	var message = [];
 	// 遍历参数
 	for (var i = 1, length = arguments.length; i < length; i++) {
+
+		// 添加输出信息
 		message.push(arguments[i]);
-		message.push(" ");
 	}
 
 	// 打印信息
 	if (window.console && window.console.warn) {
-		window.console.warn(message.join(""));
+
+		window.console.warn(message.join(" "));
 		window.console.warn(_this);
 	}
 };

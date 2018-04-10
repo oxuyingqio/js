@@ -16,6 +16,7 @@ document.onkeydown = function(event) {
 
 		// 获取键盘事件,且判断是否为函数
 		var keydown = core.html.event.document.Keydown[i];
+		// 执行函数
 		typeof (keydown) === "function" && keydown(event);
 	}
 };

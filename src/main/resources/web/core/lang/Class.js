@@ -31,6 +31,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 
 	// 判断参数个数
 	if (arguments.length !== 2) {
+
 		new core.lang.Exception(arguments, "core.lang.Class.extend", "方法参数异常", "参数个数必须为2个,实际得到" + arguments.length
 				+ "个");
 	}
@@ -49,6 +50,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 	// 子类添加superClass属性,指向父类原型
 	SubClass.superClass = SuperClass.prototype;
 	if (SuperClass.prototype.constructor === Object.prototype.constructor) {
+
 		SuperClass.prototype.constructor = SuperClass;
 	}
 };

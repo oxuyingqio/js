@@ -21,11 +21,12 @@
 Object.clone = function(object) {
 
 	// 一个空函数
-	function Clone() {
+	var Clone = function() {
 
-	}
-	// 函数原型指向本对象
+	};
+	// 空函数原型指向待克隆对象
 	Clone.prototype = object;
+
 	// 返回空函数的一个实例
 	return new Clone();
 };

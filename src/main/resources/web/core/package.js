@@ -20,13 +20,6 @@
 				// 元素包
 				element : {
 
-					// HTML5 包
-					html5 : {
-
-						// 展示包
-						viewer : {}
-					},
-
 					// 模型包
 					model : {},
 
@@ -43,9 +36,6 @@
 					// window事件包
 					window : {}
 				},
-
-				// 插件包
-				plugin : {},
 
 				// 工具包
 				util : {}

@@ -70,9 +70,10 @@ core.util.Map = function() {
 	 */
 	this.containsValue = function(value) {
 
-		for (key in elements) {
+		for ( var key in elements) {
 
 			if (elements[key] === value) {
+
 				return true;
 			}
 		}

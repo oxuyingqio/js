@@ -36,10 +36,8 @@ Array.prototype.clear = function() {
  */
 Array.prototype.contains = function(object) {
 
-	// 获取对象下标值
-	var index = this.indexOf(object);
-	// 依据下标值判断是否存在该对象
-	return (index >= 0);
+	// 获取对象下标值,依据下标值判断是否存在该对象
+	return (this.indexOf(object) >= 0);
 };
 
 /**
@@ -55,7 +53,7 @@ Array.prototype.indexOf = function(object) {
 	for (var index = 0, length = this.length; index < length; index++) {
 
 		if (this[index] === object) {
-			
+
 			return index;
 		}
 	}
@@ -88,7 +86,7 @@ Array.prototype.insert = function(index, object) {
  */
 Array.prototype.remove = function(object) {
 
-	// 获取对应下标值
+	// 获取对象下标值
 	var index = this.indexOf(object);
 	// 存在则删除
 	index >= 0 && this.splice(index, 1);
