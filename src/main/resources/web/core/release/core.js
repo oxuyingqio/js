@@ -879,14 +879,16 @@ core.html.element.AbstractElement = (function() {
 		 * 样式
 		 */
 		var style;
-		
+
 		/**
 		 * 事件
 		 */
 		/**
 		 * 初始化事件
 		 */
-		var onInit;
+		var onInit = function() {
+
+		};
 
 		/**
 		 * 附加属性
@@ -1106,7 +1108,7 @@ core.html.element.AbstractElement = (function() {
 
 		return this;
 	};
-	
+
 	/**
 	 * 获取jQuery对象
 	 * 
