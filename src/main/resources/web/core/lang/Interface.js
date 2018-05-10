@@ -4,9 +4,9 @@
  * @desc	接口
  * @type	类
  * 
- * @constructor	core.lang.Interface(String name, Array<String> methods)
+ * @constructor	core.lang.Interface(string name, array<string> methods)
  * 
- * @method	static void	ensureImplements(Object object, core.lang.Interface... interface)	检查对象是否实现对应接口的方法
+ * @method	static void	ensureImplements(object object, core.lang.Interface... interface)	检查对象是否实现对应接口的方法
  * 
  * @date	2016年8月20日 09:35:10
  */
@@ -14,10 +14,10 @@
 /**
  * 构造函数
  * 
- * @param name{String}
+ * @param name{string}
  *            接口名称
- * @param methods{Array
- *            <String>} 接口方法集合
+ * @param methods{array
+ *            <string>} 接口方法集合
  */
 core.lang.Interface = function(name, methods) {
 
@@ -50,7 +50,7 @@ core.lang.Interface = function(name, methods) {
  * 
  * 检查对象是否实现对应接口的方法
  * 
- * @param object{Object}
+ * @param object{object}
  *            对象
  * @returns
  */

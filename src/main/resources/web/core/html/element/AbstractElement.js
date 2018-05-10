@@ -1,14 +1,13 @@
 /**
- * @name AbstractElement
+ * @name	AbstractElement
  * @package core.html.element
- * @desc HTML元素公共抽象实现
- * @type 抽象类
+ * @desc	HTML元素公共抽象实现
+ * @type	抽象类
  * 
- * @constructor core.html.element.AbstractElement(String id)
+ * @constructor core.html.element.AbstractElement(string id)
  * 
- * @date 2016年8月20日 11:34:27
+ * @date	2018年5月10日 10:43:59
  */
-
 core.html.element.AbstractElement = (function() {
 
 	/**
@@ -19,7 +18,7 @@ core.html.element.AbstractElement = (function() {
 	/**
 	 * 构造函数
 	 * 
-	 * @param id{String}
+	 * @param id{string}
 	 *            id
 	 */
 	var Constructor = function(_id) {
@@ -37,31 +36,23 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 额外信息
 		 */
-		var title = null;
+		var title;
 		/**
 		 * 样式类名
 		 */
-		var clazz = null;
+		var clazz;
 		/**
 		 * 样式
 		 */
-		var style = null;
-
+		var style;
+		
 		/**
 		 * 事件
 		 */
 		/**
-		 * 加载事件
+		 * 初始化事件
 		 */
-		var load = function() {
-
-		};
-		/**
-		 * 单击事件
-		 */
-		var click = function() {
-
-		};
+		var onInit;
 
 		/**
 		 * 附加属性
@@ -78,7 +69,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取/设置ID
 		 * 
-		 * @param id
+		 * @param id{string}
+		 * @returns {string/core.html.element.Element}
 		 */
 		this.id = function() {
 
@@ -94,7 +86,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取/设置额外信息
 		 * 
-		 * @param title
+		 * @param title{string}
+		 * @returns {string/core.html.element.Element}
 		 */
 		this.title = function() {
 
@@ -110,7 +103,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取/设置样式类名
 		 * 
-		 * @param class
+		 * @param class{string}
+		 * @returns {string/core.html.element.Element}
 		 */
 		this.clazz = function() {
 
@@ -126,7 +120,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取/设置样式
 		 * 
-		 * @param style
+		 * @param style{string}
+		 * @returns {string/core.html.element.Element}
 		 */
 		this.style = function() {
 
@@ -140,33 +135,18 @@ core.html.element.AbstractElement = (function() {
 		};
 
 		/**
-		 * 获取/设置加载事件
+		 * 获取/设置初始化事件
 		 * 
-		 * @param load
+		 * @param onInit{function}
+		 * @returns {function/core.html.element.Element}
 		 */
-		this.load = function() {
+		this.onInit = function() {
 
 			switch (arguments.length) {
 			case 0:
-				return load;
+				return onInit;
 			default:
-				load = arguments[0];
-				return this;
-			}
-		};
-
-		/**
-		 * 获取/设置单击事件
-		 * 
-		 * @param click
-		 */
-		this.click = function() {
-
-			switch (arguments.length) {
-			case 0:
-				return click;
-			default:
-				click = arguments[0];
+				onInit = arguments[0];
 				return this;
 			}
 		};
@@ -174,8 +154,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取属性
 		 * 
-		 * @param key{Object}
-		 * @returns {Object}
+		 * @param key{object}
+		 * @returns {object}
 		 */
 		this.getAttribute = function(key) {
 
@@ -185,8 +165,8 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 设置属性
 		 * 
-		 * @param key{Object}
-		 * @param value{Object}
+		 * @param key{object}
+		 * @param value{object}
 		 * @returns {core.html.element.Element}
 		 */
 		this.setAttribute = function(key, value) {
@@ -199,7 +179,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 移除属性
 		 * 
-		 * @param key{Object}
+		 * @param key{object}
 		 * @returns {core.html.element.Element}
 		 */
 		this.removeAttribute = function(key) {
@@ -224,7 +204,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 添加子元素
 		 * 
-		 * @param child{Object}
+		 * @param child{object}
 		 *            子元素
 		 * @returns {core.html.element.Element}
 		 */
@@ -238,7 +218,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 移除子元素
 		 * 
-		 * @param child{Object}
+		 * @param child{object}
 		 *            子元素
 		 * @returns {core.html.element.Element}
 		 */
@@ -252,7 +232,7 @@ core.html.element.AbstractElement = (function() {
 		/**
 		 * 获取子元素集合
 		 * 
-		 * @returns {Array}
+		 * @returns {array}
 		 */
 		this.getChildren = function() {
 
@@ -273,36 +253,17 @@ core.html.element.AbstractElement = (function() {
 	};
 
 	/**
-	 * 元素是否在HTML中存在
-	 * 
-	 * @returns {Boolean}
-	 */
-	Constructor.prototype.exist = function() {
-
-		// 获取jQuery对象
-		var $jQuery = $("#" + this.id());
-		// 通过获取jQuery对象是否存在,来判断元素是否存在
-		if ($jQuery.length === 0) {
-
-			return false;
-		} else {
-
-			return true;
-		}
-	};
-
-	/**
-	 * 显示元素
+	 * 初始化
 	 * 
 	 * @returns {core.html.element.Element}
 	 */
-	Constructor.prototype.show = function() {
+	Constructor.prototype.init = function() {
 
 		// 判断元素是否在HTML中存在
-		if (this.exist()) {
+		if (this.$jQuery().length > 0) {
 
 			// 存在则直接调用jQuery显示
-			$("#" + this.id()).show();
+			this.$jQuery().show();
 		} else {
 
 			// 不存在则调用添加至body
@@ -311,90 +272,22 @@ core.html.element.AbstractElement = (function() {
 
 		return this;
 	};
-
+	
 	/**
-	 * 隐藏元素
+	 * 获取jQuery对象
 	 * 
-	 * @returns {core.html.element.Element}
+	 * @returns {object}
 	 */
-	Constructor.prototype.hide = function() {
+	Constructor.prototype.$jQuery = function() {
 
-		// 判断元素是否在HTML中存在,存在则调用jQuery隐藏
-		this.exist() && $("#" + this.id()).hide();
-
-		return this;
-	};
-
-	/**
-	 * 清空内容
-	 * 
-	 * @returns {core.html.element.Element}
-	 */
-	Constructor.prototype.clear = function() {
-
-		// 获取子元素
-		var children = this.getChildren();
-		// 遍历子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 获取子元素
-			var child = children[i];
-			// 若子元素为元素对象,则调用其清空内容方法
-			if (child instanceof core.html.element.AbstractElement) {
-
-				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
-				// 调用子元素清空内容方法
-				child.clear();
-			}
-		}
-
-		// 清空子元素
-		this.clearChildren();
-
-		// 判断元素是否在HTML中存在,存在则调用jQuery清空
-		this.exist() && $("#" + this.id()).empty();
-
-		return this;
-	};
-
-	/**
-	 * 销毁元素
-	 * 
-	 * @returns
-	 */
-	Constructor.prototype.destroy = function() {
-
-		// 获取子元素
-		var children = this.getChildren();
-		// 遍历子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 获取子元素
-			var child = children[i];
-			// 若子元素为元素对象,则调用其销毁方法
-			if (child instanceof core.html.element.AbstractElement) {
-
-				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
-				// 调用子元素销毁方法
-				child.destroy();
-			}
-		}
-
-		// 清空属性,清空子元素
-		this.clearAttributes().clearChildren();
-
-		// 判断元素是否在HTML中存在,存在则调用jQuery移除
-		this.exist() && $("#" + this.id()).remove();
+		return $("#" + this.id());
 	};
 
 	/**
 	 * 添加子元素
 	 * 
-	 * @param element{core.html.element.Element}
+	 * @param element{core.html.element.Element/string}
+	 * @returns {core.html.element.Element}
 	 */
 	Constructor.prototype.append = function(element) {
 
@@ -404,22 +297,22 @@ core.html.element.AbstractElement = (function() {
 			// 添加子元素
 			this.addChild(element);
 
-			// 判断元素是否在HTML中存在,若存在则调用jQuery添加
-			if (this.exist()) {
+			// 判断元素是否在HTML中存在
+			if (this.$jQuery().length > 0) {
 
 				// 判断子元素类型.若为元素则调用转为convertHtml方法添加,其他则直接添加
 				if (element instanceof core.html.element.AbstractElement) {
 
 					// 判断是否实现元素接口
-					core.lang.Interface.ensureImplements(element, core.html.element.Element,
-							core.html.element.ElementProcess);
+					core.lang.Interface.ensureImplements(element, core.html.element.Element);
 					// 添加HTML内容
-					$("#" + this.id()).append(element.convertHtml());
+					this.$jQuery().append(element.convertHtml());
 					// 调用装载成功函数
-					element.loadSucess();
+					element.onInit()(this);
 				} else {
 
-					$("#" + this.id()).append(element);
+					// 直接添加
+					this.$jQuery().append(element);
 				}
 			}
 		}
@@ -440,57 +333,26 @@ core.html.element.AbstractElement = (function() {
 		if (target instanceof core.html.element.AbstractElement) {
 
 			// 判断是否实现元素接口
-			core.lang.Interface.ensureImplements(target, core.html.element.Element, core.html.element.ElementProcess);
+			core.lang.Interface.ensureImplements(target, core.html.element.Element);
 			target.append(this);
 		} else if (target.constructor === String) {
 
 			// 判断元素是否在HTML中存在
-			if (this.exist()) {
+			if (this.$jQuery().length > 0) {
 
 				// 存在则调用jQuery插入
-				$("#" + this.id()).appendTo(target);
+				this.$jQuery().appendTo(target);
 			} else {
 
 				// 不存在则调用jQuery添加元素
 				$(target).append(this.convertHtml());
 				// 调用装载成功函数
-				this.loadSucess();
+				this.onInit()(this);
 			}
 		}
 
 		return this;
 	};
-
-	/**
-	 * 装载成功
-	 * 
-	 * @returns {core.html.element.Element}
-	 */
-	Constructor.prototype.loadSucess = function() {
-
-		// 调用装载事件
-		this.load()(this);
-		// 装载单击事件
-		this.click() === null || $("#" + this.id()).click(this.click());
-
-		// 获取子元素
-		var children = this.getChildren();
-		// 遍历子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 子元素
-			var child = children[i];
-			// 若子元素为元素对象,则调用其销毁方法
-			if (child instanceof core.html.element.AbstractElement) {
-
-				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
-				// 调用装载成功函数
-				child.loadSucess();
-			}
-		}
-	}
 
 	// 返回构造函数
 	return Constructor;

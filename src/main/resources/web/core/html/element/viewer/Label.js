@@ -4,19 +4,18 @@
  * @desc	input 元素的标注
  * @type	类
  * 
- * @constructor core.html.element.viewer.Label(String id)
+ * @constructor core.html.element.viewer.Label(string id)
  * 
  * @extend	core.html.element.AbstractElement
  * 
- * @date	2016年8月20日 11:56:33
+ * @date	2018年5月10日 11:50:35
  */
-
 core.html.element.viewer.Label = (function() {
 
 	/**
 	 * 构造函数
 	 * 
-	 * @param id{String}
+	 * @param id{string}
 	 *            ID
 	 */
 	var Constructor = function(id) {
@@ -27,12 +26,13 @@ core.html.element.viewer.Label = (function() {
 		/**
 		 * 指定标注
 		 */
-		var forAttr = null;
+		var forAttr;
 
 		/**
 		 * 获取/设置指定标注
 		 * 
-		 * @param formId
+		 * @param forAttr{string}
+		 * @returns {string/core.html.element.viewer}
 		 */
 		this.forAttr = function() {
 
@@ -45,13 +45,13 @@ core.html.element.viewer.Label = (function() {
 			}
 		};
 	}
-	// 继承HTML元素公共抽象实现
+	// 继承父类
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	Constructor.prototype.convertHtml = function() {
 
@@ -63,7 +63,7 @@ core.html.element.viewer.Label = (function() {
 		html.push("id='" + this.id() + "' ");
 		this.title() && html.push("title='" + this.title() + "' ");
 		this.clazz() && html.push("class='" + this.clazz() + "' ");
-		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.style() && html.push("style='" + this.style() + "' ");
 		this.forAttr() && html.push("for='" + this.forAttr() + "' ");
 		html.push(">");
 
@@ -78,8 +78,7 @@ core.html.element.viewer.Label = (function() {
 			if (child instanceof core.html.element.AbstractElement) {
 
 				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				core.lang.Interface.ensureImplements(child, core.html.element.Element);
 				html.push(child.convertHtml());
 			} else {
 

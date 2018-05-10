@@ -4,19 +4,18 @@
  * @desc	供用户输入的 HTML 表单
  * @type	类
  * 
- * @constructor	core.html.element.viewer.Form(String id)
+ * @constructor	core.html.element.viewer.Form(string id)
  * 
  * @extend	core.html.element.AbstractElement
  * 
  * @date	2017年6月14日 15:14:22
  */
-
 core.html.element.viewer.Form = (function() {
 
 	/**
 	 * 构造函数
 	 * 
-	 * @param id{String}
+	 * @param id{string}
 	 *            ID
 	 */
 	var Constructor = function(id) {
@@ -27,16 +26,17 @@ core.html.element.viewer.Form = (function() {
 		/**
 		 * 提交方式
 		 */
-		var method = null;
+		var method;
 		/**
 		 * 编码方式
 		 */
-		var enctype = null;
+		var enctype;
 
 		/**
 		 * 获取/设置提交方式
 		 * 
-		 * @param method
+		 * @param method{string}
+		 * @returns {string/core.html.element.viewer.Form}
 		 */
 		this.method = function() {
 
@@ -52,7 +52,8 @@ core.html.element.viewer.Form = (function() {
 		/**
 		 * 获取/设置编码方式
 		 * 
-		 * @param enctype
+		 * @param enctype{string}
+		 * @returns {string/core.html.element.viewer.Form}
 		 */
 		this.enctype = function() {
 
@@ -65,13 +66,13 @@ core.html.element.viewer.Form = (function() {
 			}
 		};
 	}
-	// 继承HTML元素公共抽象实现
+	// 继承父类
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	Constructor.prototype.convertHtml = function() {
 
@@ -83,7 +84,7 @@ core.html.element.viewer.Form = (function() {
 		html.push("id='" + this.id() + "' ");
 		this.title() && html.push("title='" + this.title() + "' ");
 		this.clazz() && html.push("class='" + this.clazz() + "' ");
-		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.style() && html.push("style='" + this.style() + "' ");
 		this.method() && html.push("method='" + this.method() + "' ");
 		this.enctype() && html.push("enctype='" + this.enctype() + "' ");
 		html.push(">");
@@ -99,8 +100,7 @@ core.html.element.viewer.Form = (function() {
 			if (child instanceof core.html.element.AbstractElement) {
 
 				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
+				core.lang.Interface.ensureImplements(child, core.html.element.Element);
 				html.push(child.convertHtml());
 			} else {
 

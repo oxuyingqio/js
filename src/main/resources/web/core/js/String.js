@@ -4,9 +4,9 @@
  * @desc	字符串
  * @type	类扩展
  * 
- * @method	String	replaceAll(String target, String result)	替换所有字符串
- * 			String	toBinaryString()							转为2进制字符串
- * 			String	toHexString()								转为16进制字符串
+ * @method	string	replaceAll(string target, string result)	替换所有字符串
+ * 			string	toBinaryString()							转为2进制字符串
+ * 			string	toHexString()								转为16进制字符串
  * 
  * @date	2016年8月20日 09:38:33
  */
@@ -14,11 +14,11 @@
 /**
  * 替换所有字符串
  * 
- * @param target{String}
+ * @param target{string}
  *            目标字符串
- * @param result{String}
+ * @param result{string}
  *            待替换的字符串
- * @returns {String}
+ * @returns {string}
  */
 String.prototype.replaceAll = function(target, result) {
 
@@ -28,7 +28,7 @@ String.prototype.replaceAll = function(target, result) {
 /**
  * 转为2进制字符串
  * 
- * @returns {String}
+ * @returns {string}
  */
 String.prototype.toBinaryString = function() {
 
@@ -56,7 +56,7 @@ String.prototype.toBinaryString = function() {
 /**
  * 转为16进制字符串
  * 
- * @returns {String}
+ * @returns {string}
  */
 String.prototype.toHexString = function() {
 

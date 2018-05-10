@@ -5,13 +5,12 @@
  * @type	类
  * 
  * @method	static					core.html.util.Cookie getInstance()								获取cookie操作
- * 			Object					get(String key)													获取cookie
- * 			core.html.util.Cookie	set(String key, String value, Number expireDays, String path) 	设置cookie
- * 			core.html.util.Cookie	del(String key)													删除cookie
+ * 			Object					get(string key)													获取cookie
+ * 			core.html.util.Cookie	set(string key, string value, number expireDays, string path) 	设置cookie
+ * 			core.html.util.Cookie	del(string key)													删除cookie
  * 
  * @date 2017年8月8日 09:20:30
  */
-
 core.html.util.Cookie = (function() {
 
 	/**
@@ -29,9 +28,9 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 获取cookie
 	 * 
-	 * @param key{String}
+	 * @param key{string}
 	 *            cookie键
-	 * @returns {Object}
+	 * @returns {object}
 	 */
 	Constructor.prototype.get = function(key) {
 
@@ -51,13 +50,13 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 设置cookie
 	 * 
-	 * @param key{String}
+	 * @param key{string}
 	 *            cookie键
-	 * @param value{String}
+	 * @param value{string}
 	 *            cookie值
-	 * @param expireDays{Number}
+	 * @param expireDays{number}
 	 *            过期天数
-	 * @param path{String}
+	 * @param path{string}
 	 *            权限路径
 	 * @returns {core.html.util.Cookie}
 	 */
@@ -96,7 +95,7 @@ core.html.util.Cookie = (function() {
 	/**
 	 * 删除cookie
 	 * 
-	 * @param key{String}
+	 * @param key{string}
 	 *            cookie键
 	 * @returns {core.html.util.Cookie}
 	 */

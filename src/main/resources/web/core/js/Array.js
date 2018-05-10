@@ -4,12 +4,12 @@
  * @desc	数组
  * @type	类扩展
  * 
- * @method	Array	clear()								清空数组.
- * 			Boolean	contains(Object object)				是否存在指定对象.
- * 			Number	indexOf(Object object)				获取指定对象下标值.
- * 			Array	insert(Number index, Object object)	在指定下标位置插入对象.
- * 			Array	remove(Object object)				删除指定对象.
- * 			Array	removeAt(Number index)				删除指定下标位置的对象.
+ * @method	array	clear()								清空数组.
+ * 			boolean	contains(object object)				是否存在指定对象.
+ * 			number	indexOf(object object)				获取指定对象下标值.
+ * 			array	insert(number index, object object)	在指定下标位置插入对象.
+ * 			array	remove(object object)				删除指定对象.
+ * 			array	removeAt(number index)				删除指定下标位置的对象.
  * 
  * @date	2016年8月20日 09:45:15
  */
@@ -17,7 +17,7 @@
 /**
  * 清空数组
  * 
- * @returns {Array}
+ * @returns {array}
  */
 Array.prototype.clear = function() {
 
@@ -30,9 +30,9 @@ Array.prototype.clear = function() {
 /**
  * 是否存在指定对象
  * 
- * @param object{Object}
+ * @param object{object}
  *            对象
- * @returns {Boolean}
+ * @returns {boolean}
  */
 Array.prototype.contains = function(object) {
 
@@ -43,9 +43,9 @@ Array.prototype.contains = function(object) {
 /**
  * 获取指定对象下标值
  * 
- * @param object{Object}
+ * @param object{object}
  *            对象
- * @returns {Number}
+ * @returns {number}
  */
 Array.prototype.indexOf = function(object) {
 
@@ -64,11 +64,11 @@ Array.prototype.indexOf = function(object) {
 /**
  * 在指定下标位置插入对象
  * 
- * @param index{Number}
+ * @param index{number}
  *            下标值
- * @param object{Object}
+ * @param object{object}
  *            对象
- * @returns {Array}
+ * @returns {array}
  */
 Array.prototype.insert = function(index, object) {
 
@@ -80,9 +80,9 @@ Array.prototype.insert = function(index, object) {
 /**
  * 删除指定对象
  * 
- * @param object{Object}
+ * @param object{object}
  *            对象
- * @returns {Array}
+ * @returns {array}
  */
 Array.prototype.remove = function(object) {
 
@@ -97,9 +97,9 @@ Array.prototype.remove = function(object) {
 /**
  * 删除指定下标位置的对象
  * 
- * @param index{Number}
+ * @param index{number}
  *            下标索引
- * @returns {Array}
+ * @returns {array}
  */
 Array.prototype.removeAt = function(index) {
 

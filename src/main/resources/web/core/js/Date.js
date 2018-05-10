@@ -4,7 +4,7 @@
  * @desc	日期
  * @type	类扩展
  * 
- * @method	String	format(String format)	格式化日期
+ * @method	string	format(string format)	格式化日期
  * 
  * @date	2016年8月20日 09:41:57
  */
@@ -12,9 +12,9 @@
 /**
  * 格式化日期
  * 
- * @param format{String}
+ * @param format{string}
  *            格式化参数
- * @returns {String}
+ * @returns {string}
  */
 Date.prototype.format = function(format) {
 

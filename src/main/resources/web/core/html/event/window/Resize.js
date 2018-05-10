@@ -6,7 +6,6 @@
  * 
  * @date	2016年8月20日 10:19:16
  */
-
 core.html.event.window.Resize = [];
 
 window.onresize = function(event) {

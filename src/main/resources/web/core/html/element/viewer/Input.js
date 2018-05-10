@@ -4,19 +4,18 @@
  * @desc	输入控件
  * @type	类
  * 
- * @constructor core.html.element.viewer.Input(String id)
+ * @constructor core.html.element.viewer.Input(string id)
  * 
  * @extend	core.html.element.AbstractElement
  * 
- * @date	2016年8月20日 11:56:33
+ * @date	2018年5月10日 14:24:01
  */
-
 core.html.element.viewer.Input = (function() {
 
 	/**
 	 * 构造函数
 	 * 
-	 * @param id{String}
+	 * @param id{string}
 	 *            ID
 	 */
 	var Constructor = function(id) {
@@ -27,30 +26,21 @@ core.html.element.viewer.Input = (function() {
 		/**
 		 * 类型
 		 */
-		var type = null;
+		var type;
 		/**
 		 * 名称
 		 */
-		var name = null;
+		var name;
 		/**
 		 * 值
 		 */
-		var value = null;
-
-		/**
-		 * 事件
-		 */
-		/**
-		 * 改变事件
-		 */
-		var change = function() {
-
-		};
+		var value;
 
 		/**
 		 * 获取/设置类型
 		 * 
-		 * @param type
+		 * @param type{string}
+		 * @returns {string/core.html.element.viewer.Input}
 		 */
 		this.type = function() {
 
@@ -66,7 +56,8 @@ core.html.element.viewer.Input = (function() {
 		/**
 		 * 获取/设置名称
 		 * 
-		 * @param name
+		 * @param name{string}
+		 * @returns {string/core.html.element.viewer.Input}
 		 */
 		this.name = function() {
 
@@ -82,7 +73,8 @@ core.html.element.viewer.Input = (function() {
 		/**
 		 * 获取/设置值
 		 * 
-		 * @param value
+		 * @param value{string}
+		 * @returns {string/core.html.element.viewer.Input}
 		 */
 		this.value = function() {
 
@@ -94,30 +86,14 @@ core.html.element.viewer.Input = (function() {
 				return this;
 			}
 		};
-
-		/**
-		 * 获取/设置改变事件
-		 * 
-		 * @param change
-		 */
-		this.change = function() {
-
-			switch (arguments.length) {
-			case 0:
-				return change;
-			default:
-				change = arguments[0];
-				return this;
-			}
-		};
 	}
-	// 继承HTML元素公共抽象实现
+	// 继承父类
 	core.lang.Class.extend(Constructor, core.html.element.AbstractElement);
 
 	/**
 	 * 转为HTML
 	 * 
-	 * @returns {String}
+	 * @returns {string}
 	 */
 	Constructor.prototype.convertHtml = function() {
 
@@ -129,46 +105,13 @@ core.html.element.viewer.Input = (function() {
 		html.push("id='" + this.id() + "' ");
 		this.title() && html.push("title='" + this.title() + "' ");
 		this.clazz() && html.push("class='" + this.clazz() + "' ");
-		this.style() && html.push("style='" + this.style().toString() + "' ");
+		this.style() && html.push("style='" + this.style() + "' ");
 		this.type() && html.push("type='" + this.type() + "' ");
 		this.name() && html.push("name='" + this.name() + "' ");
 		this.value() && html.push("value='" + this.value() + "' ");
 		html.push("/>");
 
 		return html.join("");
-	}
-
-	/**
-	 * 装载成功
-	 * 
-	 * @returns {core.html.element.Element}
-	 */
-	Constructor.prototype.loadSucess = function() {
-
-		// 调用装载事件
-		this.load()(this);
-		// 装载单击事件
-		this.click() || $("#" + this.id()).click(this.click());
-		// 装载改变事件
-		this.change() || $("#" + this.id()).change(this.change());
-
-		// 获取子元素
-		var children = this.getChildren();
-		// 遍历子元素
-		for (var i = 0, length = children.length; i < length; i++) {
-
-			// 子元素
-			var child = children[i];
-			// 若子元素为元素对象,则调用其销毁方法
-			if (child instanceof core.html.element.AbstractElement) {
-
-				// 判断是否实现元素接口
-				core.lang.Interface
-						.ensureImplements(child, core.html.element.Element, core.html.element.ElementProcess);
-				// 调用装载成功函数
-				child.loadSucess();
-			}
-		}
 	}
 
 	// 返回构造函数

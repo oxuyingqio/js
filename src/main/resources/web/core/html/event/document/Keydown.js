@@ -6,7 +6,6 @@
  * 
  * @date	2016年8月20日 10:12:28
  */
-
 core.html.event.document.Keydown = [];
 
 document.onkeydown = function(event) {

@@ -4,7 +4,7 @@
  * @desc	警告
  * @type	类
  * 
- * @constructor core.lang.Warning(Object _this, String... message)
+ * @constructor core.lang.Warning(object _this, string... message)
  * 
  * @date	2016年9月8日 10:20:53
  */
@@ -12,7 +12,7 @@
 /**
  * 构造函数
  * 
- * @param _this{Object}
+ * @param _this{object}
  *            警告对象
  */
 core.lang.Warning = function(_this) {

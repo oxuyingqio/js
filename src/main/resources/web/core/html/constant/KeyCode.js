@@ -6,7 +6,6 @@
  * 
  * @date	2016年8月20日 10:20:27
  */
-
 core.html.constant.KeyCode = {
 
 	F1 : "112",

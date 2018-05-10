@@ -4,7 +4,7 @@
  * @desc	超类
  * @type	类扩展
  * 
- * @method	static Object	clone(Object object)	克隆对象(原型式继承)
+ * @method	static object	clone(object object)	克隆对象(原型式继承)
  * 
  * @attention	1.若扩展Object.prototype,引入jQuery时会产生未知错误.
  * 
@@ -14,9 +14,9 @@
 /**
  * 克隆对象(原型式继承)-静态方法
  * 
- * @param object{Object}
+ * @param object{object}
  *            待克隆的对象
- * @returns {Object} 克隆后的对象
+ * @returns {object} 克隆后的对象
  */
 Object.clone = function(object) {
 

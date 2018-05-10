@@ -4,7 +4,7 @@
  * @desc	异常
  * @type	类
  * 
- * @constructor core.lang.Exception(Object _this, String... message)
+ * @constructor core.lang.Exception(object _this, string... message)
  * 
  * @date	2016年8月20日 09:32:06
  */
@@ -12,7 +12,7 @@
 /**
  * 构造函数
  * 
- * @param _this{Object}
+ * @param _this{object}
  *            异常对象
  */
 core.lang.Exception = function(_this) {
