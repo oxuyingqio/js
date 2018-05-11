@@ -14,7 +14,6 @@
  * 			core.html.element.Element			removeAttribute(object key)					移除属性
  * 			core.html.element.Element			clearAttributes()							清空属性
  * 			string								convertHtml()								转为HTML
- * 			void								init()										
  * 			object								$jQuery()									获取jQuery对象
  * 			core.html.element.Element			append(object child)						添加子元素
  * 			core.html.element.Element			appendTo(string target)						添加至
@@ -22,5 +21,5 @@
  * @date	2018年5月10日 10:43:50
  */
 core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "title", "clazz", "style",
-		"onInit", "getAttribute", "setAttribute", "removeAttribute", "clearAttributes", "convertHtml", "init",
-		"$jQuery", "append", "appendTo" ]);
+		"onInit", "getAttribute", "setAttribute", "removeAttribute", "clearAttributes", "convertHtml", "$jQuery",
+		"append", "appendTo" ]);

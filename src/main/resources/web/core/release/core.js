@@ -845,6 +845,31 @@ core.html.constant.KeyCode = {
 core.html.element.AbstractElement = (function() {
 
 	/**
+	 * 初始化元素
+	 * 
+	 * @param element{core.html.element.Element}
+	 * @returns
+	 */
+	function init(element) {
+
+		// 判断是否为元素对象
+		if (element instanceof core.html.element.AbstractElement) {
+
+			// 调用初始化事件
+			element.onInit()(element);
+
+			// 获取子集
+			var children = element.getChildren();
+			// 遍历子集
+			for (var i = 0, length = children.length; i < length; i++) {
+
+				// 递归调用初始化子级
+				init(children[i])
+			}
+		}
+	}
+
+	/**
 	 * 对象个数
 	 */
 	var count = 0;
@@ -1089,27 +1114,6 @@ core.html.element.AbstractElement = (function() {
 	};
 
 	/**
-	 * 初始化
-	 * 
-	 * @returns {core.html.element.Element}
-	 */
-	Constructor.prototype.init = function() {
-
-		// 判断元素是否在HTML中存在
-		if (this.$jQuery().length > 0) {
-
-			// 存在则直接调用jQuery显示
-			this.$jQuery().show();
-		} else {
-
-			// 不存在则调用添加至body
-			this.appendTo("body");
-		}
-
-		return this;
-	};
-
-	/**
 	 * 获取jQuery对象
 	 * 
 	 * @returns {object}
@@ -1143,8 +1147,8 @@ core.html.element.AbstractElement = (function() {
 					core.lang.Interface.ensureImplements(element, core.html.element.Element);
 					// 添加HTML内容
 					this.$jQuery().append(element.convertHtml());
-					// 调用装载成功函数
-					element.onInit()(this);
+					// 初始化元素
+					init(element);
 				} else {
 
 					// 直接添加
@@ -1182,8 +1186,8 @@ core.html.element.AbstractElement = (function() {
 
 				// 不存在则调用jQuery添加元素
 				$(target).append(this.convertHtml());
-				// 调用装载成功函数
-				this.onInit()(this);
+				// 初始化元素
+				init(this);
 			}
 		}
 
@@ -1209,7 +1213,6 @@ core.html.element.AbstractElement = (function() {
  * 			core.html.element.Element			removeAttribute(object key)					移除属性
  * 			core.html.element.Element			clearAttributes()							清空属性
  * 			string								convertHtml()								转为HTML
- * 			void								init()										
  * 			object								$jQuery()									获取jQuery对象
  * 			core.html.element.Element			append(object child)						添加子元素
  * 			core.html.element.Element			appendTo(string target)						添加至
@@ -1217,8 +1220,8 @@ core.html.element.AbstractElement = (function() {
  * @date	2018年5月10日 10:43:50
  */
 core.html.element.Element = new core.lang.Interface("core.html.element.Element", [ "id", "title", "clazz", "style",
-		"onInit", "getAttribute", "setAttribute", "removeAttribute", "clearAttributes", "convertHtml", "init",
-		"$jQuery", "append", "appendTo" ]);
+		"onInit", "getAttribute", "setAttribute", "removeAttribute", "clearAttributes", "convertHtml", "$jQuery",
+		"append", "appendTo" ]);
 
 /**
  * @name	A

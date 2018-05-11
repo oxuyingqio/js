@@ -11,6 +11,31 @@
 core.html.element.AbstractElement = (function() {
 
 	/**
+	 * 初始化元素
+	 * 
+	 * @param element{core.html.element.Element}
+	 * @returns
+	 */
+	function init(element) {
+
+		// 判断是否为元素对象
+		if (element instanceof core.html.element.AbstractElement) {
+
+			// 调用初始化事件
+			element.onInit()(element);
+
+			// 获取子集
+			var children = element.getChildren();
+			// 遍历子集
+			for (var i = 0, length = children.length; i < length; i++) {
+
+				// 递归调用初始化子级
+				init(children[i])
+			}
+		}
+	}
+
+	/**
 	 * 对象个数
 	 */
 	var count = 0;
@@ -255,27 +280,6 @@ core.html.element.AbstractElement = (function() {
 	};
 
 	/**
-	 * 初始化
-	 * 
-	 * @returns {core.html.element.Element}
-	 */
-	Constructor.prototype.init = function() {
-
-		// 判断元素是否在HTML中存在
-		if (this.$jQuery().length > 0) {
-
-			// 存在则直接调用jQuery显示
-			this.$jQuery().show();
-		} else {
-
-			// 不存在则调用添加至body
-			this.appendTo("body");
-		}
-
-		return this;
-	};
-
-	/**
 	 * 获取jQuery对象
 	 * 
 	 * @returns {object}
@@ -309,8 +313,8 @@ core.html.element.AbstractElement = (function() {
 					core.lang.Interface.ensureImplements(element, core.html.element.Element);
 					// 添加HTML内容
 					this.$jQuery().append(element.convertHtml());
-					// 调用装载成功函数
-					element.onInit()(this);
+					// 初始化元素
+					init(element);
 				} else {
 
 					// 直接添加
@@ -348,8 +352,8 @@ core.html.element.AbstractElement = (function() {
 
 				// 不存在则调用jQuery添加元素
 				$(target).append(this.convertHtml());
-				// 调用装载成功函数
-				this.onInit()(this);
+				// 初始化元素
+				init(this);
 			}
 		}
 
