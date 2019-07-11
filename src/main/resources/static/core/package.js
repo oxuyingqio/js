@@ -11,21 +11,14 @@
 		// 核心包
 		core = {
 
+			// 常量包
+			constant : {},
+
 			// HTML 包
 			html : {
 
 				// 常量包
 				constant : {},
-
-				// 元素包
-				element : {
-
-					// 模型包
-					model : {},
-
-					// 展示包
-					viewer : {}
-				},
 
 				// 事件包
 				event : {
@@ -43,6 +36,9 @@
 
 			// 基础包
 			lang : {},
+
+			// 项目包
+			project : {},
 
 			// 工具包
 			util : {}
