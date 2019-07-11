@@ -32,7 +32,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>cn.xuyingqi</groupId>
-			<artifactId>web-util</artifactId>
+			<artifactId>util</artifactId>
 			<version>${xuyingqi.version}</version>
 			<classifier>web</classifier>
 		</dependency>

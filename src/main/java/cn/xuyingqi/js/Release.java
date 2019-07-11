@@ -1,12 +1,12 @@
-package cn.xuyingqi.web.js;
+package cn.xuyingqi.js;
 
 import java.io.File;
 
 import org.apache.log4j.Logger;
 
-import cn.xuyingqi.util.FileUtils;
-import cn.xuyingqi.util.tool.operatefile.impl.CopyFileContent2SpecifiedFile;
-import cn.xuyingqi.util.tool.operatefile.impl.HandleSpecifyFormatFile;
+import cn.xuyingqi.utils.FileUtils;
+import cn.xuyingqi.utils.tool.operate.file.impl.CopyFileContent2SpecifiedFile;
+import cn.xuyingqi.utils.tool.operate.file.impl.HandleSpecifyFormatFile;
 
 /**
  * 生成JavaScript核心发布文件
