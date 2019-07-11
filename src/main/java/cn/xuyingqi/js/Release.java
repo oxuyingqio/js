@@ -24,7 +24,7 @@ public class Release {
 		// JavaScript核心包公共路径
 		String jsCommonPath = "/src/main/resources/static/core/";
 		// JavaScript核心包路径集合
-		String[] packagePaths = { "js", "package.js", "constant", "lang", "util", "html", "project" };
+		String[] packagePaths = { "js", "package.js", "lang", "constant", "utils", "html", "plugins" };
 
 		// 操作的文件类型
 		String fileType = ".js";

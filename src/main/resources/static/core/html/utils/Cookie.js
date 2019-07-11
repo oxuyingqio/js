@@ -1,17 +1,17 @@
 /**
- * @name	Cookie
- * @package core.html.util
- * @desc	Cookie操作
- * @type	类
+ * @name Cookie
+ * @package core.html.utils
+ * @desc Cookie操作
+ * @type 类
  * 
- * @method	static					core.html.util.Cookie getInstance()								获取cookie操作
- * 			Object					get(string key)													获取cookie
- * 			core.html.util.Cookie	set(string key, string value, number expireDays, string path) 	设置cookie
- * 			core.html.util.Cookie	del(string key)													删除cookie
+ * @method static core.html.util.Cookie getInstance() 获取cookie操作 Object
+ *         get(string key) 获取cookie core.html.util.Cookie set(string key, string
+ *         value, number expireDays, string path) 设置cookie core.html.util.Cookie
+ *         del(string key) 删除cookie
  * 
  * @date 2017年8月8日 09:20:30
  */
-core.html.util.Cookie = (function() {
+core.html.utils.Cookie = (function() {
 
 	/**
 	 * cookie操作
@@ -58,7 +58,7 @@ core.html.util.Cookie = (function() {
 	 *            过期天数
 	 * @param path{string}
 	 *            权限路径
-	 * @returns {core.html.util.Cookie}
+	 * @returns {core.html.utils.Cookie}
 	 */
 	Constructor.prototype.set = function(key, value, expireDays, path) {
 
@@ -79,7 +79,7 @@ core.html.util.Cookie = (function() {
 			cookieStr.push("expires=" + exp.toGMTString() + ";");
 		}
 
-		//判断是否存在权限路径
+		// 判断是否存在权限路径
 		if (path) {
 
 			// 添加权限路径
@@ -97,7 +97,7 @@ core.html.util.Cookie = (function() {
 	 * 
 	 * @param key{string}
 	 *            cookie键
-	 * @returns {core.html.util.Cookie}
+	 * @returns {core.html.utils.Cookie}
 	 */
 	Constructor.prototype.del = function(key) {
 
@@ -123,7 +123,7 @@ core.html.util.Cookie = (function() {
 		/**
 		 * 获取cookie操作
 		 * 
-		 * @returns {core.html.util.Cookie}
+		 * @returns {core.html.utils.Cookie}
 		 */
 		getInstance : function() {
 
