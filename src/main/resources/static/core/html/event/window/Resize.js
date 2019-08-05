@@ -1,13 +1,16 @@
 /**
- * @name	Resize
- * @package	core.html.event.window
- * @desc	窗口改变事件
- * @type	数组<函数>
+ * @name Resize
+ * @package core.html.event.window
+ * @desc 窗口改变事件
+ * @type 数组<函数>
  * 
- * @date	2016年8月20日 10:19:16
+ * @date 2016年8月20日 10:19:16
  */
 core.html.event.window.Resize = [];
 
+/**
+ * 窗口改变事件
+ */
 window.onresize = function(event) {
 
 	// 遍历窗口改变事件

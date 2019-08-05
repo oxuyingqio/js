@@ -4,13 +4,6 @@
  * @desc	数组
  * @type	类扩展
  * 
- * @method	array	clear()								清空数组.
- * 			boolean	contains(object object)				是否存在指定对象.
- * 			number	indexOf(object object)				获取指定对象下标值.
- * 			array	insert(number index, object object)	在指定下标位置插入对象.
- * 			array	remove(object object)				删除指定对象.
- * 			array	removeAt(number index)				删除指定下标位置的对象.
- * 
  * @date	2016年8月20日 09:45:15
  */
 

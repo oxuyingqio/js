@@ -1,21 +1,12 @@
 /**
- * @name	Map
- * @package	core.utils
- * @desc	映射
- * @type	类
+ * @name Map
+ * @package core.utils
+ * @desc 映射
+ * @type 类
  * 
- * @constructor	core.utils.Map()
+ * @constructor core.utils.Map()
  * 
- * @method	number 			size() 							返回映射个数.
- * 			boolean			isEmpty()						映射是否包含键-值映射关系,未包含则返回 true.
- * 			boolean			containsKey(object key)			映射是否包含指定键的映射关系,包含则返回 true.
- * 			boolean			containsValue(object value)		映射是否包含指定值的映射关系,包含则返回 true.
- * 			object			get(object key)					返回指定键所映射的值;如果映射中不包含该键的映射关系,则返回 undefined.
- * 			core.utils.Map	put(object key, object value)	将指定键-值映射保存;若存在键,则更新对应映射的值.
- * 			core.utils.Map	remove(object key)				若存在指定键的映射关系,则将其删除.
- * 			core.utils.Map	clear()							清除映射中所有映射关系.
- * 
- * @date	2016年8月20日 09:29:54
+ * @date 2016年8月20日 09:29:54
  */
 
 core.utils.Map = function() {

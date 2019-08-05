@@ -4,11 +4,6 @@
  * @desc Cookie操作
  * @type 类
  * 
- * @method static core.html.util.Cookie getInstance() 获取cookie操作 Object
- *         get(string key) 获取cookie core.html.util.Cookie set(string key, string
- *         value, number expireDays, string path) 设置cookie core.html.util.Cookie
- *         del(string key) 删除cookie
- * 
  * @date 2017年8月8日 09:20:30
  */
 core.html.utils.Cookie = (function() {

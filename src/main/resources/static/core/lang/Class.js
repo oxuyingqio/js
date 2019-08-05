@@ -4,10 +4,6 @@
  * @desc	类
  * @type	类
  * 
- * @constructor	core.lang.Class()
- * 
- * @method	static void	extend(function SubClass, function SuperClass)	类继承-静态方法
- * 
  * @date	2016年8月20日 09:32:06
  */
 
@@ -32,8 +28,7 @@ core.lang.Class.extend = function(SubClass, SuperClass) {
 	// 判断参数个数
 	if (arguments.length !== 2) {
 
-		new core.lang.Exception(arguments, "core.lang.Class.extend", "方法参数异常", "参数个数必须为2个,实际得到" + arguments.length
-				+ "个");
+		new core.lang.Exception(arguments, "core.lang.Class.extend", "方法参数异常", "参数个数必须为2个,实际得到" + arguments.length + "个");
 	}
 
 	// 中间函数

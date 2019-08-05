@@ -4,8 +4,6 @@
  * @desc	警告
  * @type	类
  * 
- * @constructor core.lang.Warning(object _this, string... message)
- * 
  * @date	2016年9月8日 10:20:53
  */
 

@@ -1,10 +1,10 @@
 /**
- * @name	KeyCode
- * @package	core.html.constant
- * @desc	键盘Code值
- * @type	枚举
+ * @name KeyCode
+ * @package core.html.constant
+ * @desc 键盘Code值
+ * @type 枚举
  * 
- * @date	2016年8月20日 10:20:27
+ * @date 2016年8月20日 10:20:27
  */
 core.html.constant.KeyCode = {
 

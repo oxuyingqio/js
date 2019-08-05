@@ -4,8 +4,6 @@
  * @desc	数学计算
  * @type	对象扩展
  * 
- * @method	static number	subtract(number subtrahend, number minuend, number precision)	减法
- * 
  * @date	2016年8月20日 09:41:02
  */
 

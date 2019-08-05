@@ -4,8 +4,6 @@
  * @desc	日期
  * @type	类扩展
  * 
- * @method	string	format(string format)	格式化日期
- * 
  * @date	2016年8月20日 09:41:57
  */
 
@@ -48,8 +46,7 @@ Date.prototype.format = function(format) {
 
 		if (new RegExp("(" + el + ")").test(format)) {
 
-			format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (data[el]) : (("00" + data[el])
-					.substr(("" + data[el]).length)));
+			format = format.replace(RegExp.$1, (RegExp.$1.length === 1) ? (data[el]) : (("00" + data[el]).substr(("" + data[el]).length)));
 		}
 	}
 

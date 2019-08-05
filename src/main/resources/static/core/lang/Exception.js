@@ -4,8 +4,6 @@
  * @desc	异常
  * @type	类
  * 
- * @constructor core.lang.Exception(object _this, string... message)
- * 
  * @date	2016年8月20日 09:32:06
  */
 

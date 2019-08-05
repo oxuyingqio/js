@@ -4,8 +4,6 @@
  * @desc	超类
  * @type	类扩展
  * 
- * @method	static object	clone(object object)	克隆对象(原型式继承)
- * 
  * @attention	1.若扩展Object.prototype,引入jQuery时会产生未知错误.
  * 
  * @date	2016年8月20日 09:15:16

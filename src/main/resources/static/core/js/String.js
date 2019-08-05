@@ -4,10 +4,6 @@
  * @desc	字符串
  * @type	类扩展
  * 
- * @method	string	replaceAll(string target, string result)	替换所有字符串
- * 			string	toBinaryString()							转为2进制字符串
- * 			string	toHexString()								转为16进制字符串
- * 
  * @date	2016年8月20日 09:38:33
  */
 

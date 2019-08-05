@@ -1,13 +1,16 @@
 /**
- * @name	Keydown
- * @package	core.html.event.document
- * @desc	键盘事件
- * @type	数组<函数>
+ * @name Keydown
+ * @package core.html.event.document
+ * @desc 键盘事件
+ * @type 数组<函数>
  * 
- * @date	2016年8月20日 10:12:28
+ * @date 2016年8月20日 10:12:28
  */
 core.html.event.document.Keydown = [];
 
+/**
+ * 键盘事件
+ */
 document.onkeydown = function(event) {
 
 	// 遍历键盘事件
