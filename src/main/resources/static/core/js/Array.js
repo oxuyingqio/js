@@ -43,7 +43,7 @@ Array.prototype.contains = function(object) {
 Array.prototype.indexOf = function(object) {
 
 	// 遍历数组
-	for (var index = 0, length = this.length; index < length; index++) {
+	for (var index = 0; index < this.length; index++) {
 
 		if (this[index] === object) {
 

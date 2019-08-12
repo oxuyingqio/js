@@ -18,7 +18,7 @@ core.lang.Exception = function(_this) {
 	// 异常信息
 	var message = [];
 	// 遍历参数
-	for (var i = 1, length = arguments.length; i < length; i++) {
+	for (var i = 1; i < arguments.length; i++) {
 
 		// 添加输出信息
 		message.push(arguments[i]);

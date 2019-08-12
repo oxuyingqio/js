@@ -7,51 +7,65 @@ import cn.xuyingqi.utils.tool.operate.file.impl.CopyFileContent2SpecifiedFile;
 import cn.xuyingqi.utils.tool.operate.file.impl.HandleSpecifyFormatFile;
 
 /**
- * 生成JavaScript核心发布文件
+ * 发布程序
  * 
  * @author XuYQ
  *
  */
-public class Release {
+public final class Release {
+
+	/**
+	 * 项目路径
+	 */
+	private static final String PROJECT_PATH = System.getProperty("user.dir");
+	/**
+	 * 公共路径
+	 */
+	private static final String COMMON_PATH = "/src/main/resources/static/core/";
 
 	/**
 	 * 生成JS发布文件
+	 * 
+	 * @param packagePaths    包路径集合
+	 * @param releaseFilePath 发布文件路径
 	 */
-	public static void releaseJs() {
-
-		// 项目路径
-		String projectPath = System.getProperty("user.dir");
-		// JavaScript核心包公共路径
-		String jsCommonPath = "/src/main/resources/static/core/";
-		// JavaScript核心包路径集合
-		String[] packagePaths = { "js", "package.js", "lang", "constant", "utils", "html", "plugins" };
+	public static void releaseJs(String[] packagePaths, String releaseFilePath) {
 
 		// 操作的文件类型
 		String fileType = ".js";
-		// 生成文件的位置
-		File coreFile = new File("D:/Users/XuYQ/Desktop/core.js");
-		// File coreFile = new File("D:/用户目录/我的桌面/core.js");
 
-		// 若生成文件存在,则先删除
-		if (coreFile.exists()) {
+		// 发布文件
+		File releaseFile = new File(releaseFilePath);
+		// 若发布文件存在,则先删除
+		if (releaseFile.exists()) {
 
-			coreFile.delete();
+			// 删除文件
+			releaseFile.delete();
 		}
 
-		// 循环遍历路径集合
-		for (int i = 0, length = packagePaths.length; i < length; i++) {
+		// 遍历包路径集合
+		for (int i = 0; i < packagePaths.length; i++) {
 
-			System.out.println("进度:" + (i + 1) + "/" + length);
+			// 打印信息
+			System.out.println("进度：" + (i + 1) + "/" + packagePaths.length);
 
-			FileUtils.recursionFile(new File(projectPath + jsCommonPath + packagePaths[i]),
-					new HandleSpecifyFormatFile(fileType, new CopyFileContent2SpecifiedFile(coreFile)));
+			// 递归处理文件
+			FileUtils.recursionFile(new File(PROJECT_PATH + COMMON_PATH + packagePaths[i]),
+					new HandleSpecifyFormatFile(fileType, new CopyFileContent2SpecifiedFile(releaseFile)));
 		}
 
+		// 打印信息
 		System.out.println("操作结束");
 	}
 
+	/**
+	 * Main函数测试
+	 * 
+	 * @param args
+	 */
 	public static void main(String[] args) {
 
-		Release.releaseJs();
+		// core.js
+		Release.releaseJs(new String[] { "js", "package.js", "lang", "constant", "utils", "html", "plugins" }, "D:/Users/XuYQ/Desktop/core.js");
 	}
 }

@@ -14,7 +14,7 @@ core.html.event.window.Resize = [];
 window.onresize = function(event) {
 
 	// 遍历窗口改变事件
-	for (var i = 0, length = core.html.event.window.Resize.length; i < length; i++) {
+	for (var i = 0; i < core.html.event.window.Resize.length; i++) {
 
 		// 获取窗口改变事件,且判断是否为函数
 		var resize = core.html.event.window.Resize[i];

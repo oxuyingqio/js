@@ -32,7 +32,7 @@ String.prototype.toBinaryString = function() {
 	var rtnStr = [];
 
 	// 遍历字符串所有字符
-	for (var i = 0, length = this.length; i < length; i++) {
+	for (var i = 0; i < this.length; i++) {
 
 		// 获取对应字符的2进制字符串
 		var bs = this.charCodeAt(i).toString(2);
@@ -60,7 +60,7 @@ String.prototype.toHexString = function() {
 	var rtnStr = [];
 
 	// 遍历字符串所有字符
-	for (var i = 0, length = this.length; i < length; i++) {
+	for (var i = 0; i < this.length; i++) {
 
 		// 获取对应字符的16进制字符串
 		var hs = this.charCodeAt(i).toString(16);

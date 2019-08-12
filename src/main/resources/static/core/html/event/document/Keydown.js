@@ -14,7 +14,7 @@ core.html.event.document.Keydown = [];
 document.onkeydown = function(event) {
 
 	// 遍历键盘事件
-	for (var i = 0, length = core.html.event.document.Keydown.length; i < length; i++) {
+	for (var i = 0; i < core.html.event.document.Keydown.length; i++) {
 
 		// 获取键盘事件,且判断是否为函数
 		var keydown = core.html.event.document.Keydown[i];

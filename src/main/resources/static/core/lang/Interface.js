@@ -28,7 +28,7 @@ core.lang.Interface = function(name, methods) {
 	// 接口方法
 	this.methods = [];
 	// 设置接口方法
-	for (var i = 0, length = methods.length; i < length; i++) {
+	for (var i = 0; i < methods.length; i++) {
 
 		if (typeof (methods[i]) !== "string") {
 
@@ -58,7 +58,7 @@ core.lang.Interface.ensureImplements = function(object) {
 	}
 
 	// 遍历实现的接口对象
-	for (var i = 1, length = arguments.length; i < length; i++) {
+	for (var i = 1; i < arguments.length; i++) {
 
 		// 获取实现的接口对象
 		var _interface = arguments[i];
@@ -77,7 +77,7 @@ core.lang.Interface.ensureImplements = function(object) {
 		}
 
 		// 遍历接口方法
-		for (var j = 0, jLength = _interface.methods.length; j < jLength; j++) {
+		for (var j = 0; j < _interface.methods.length; j++) {
 
 			// 获取接口方法
 			var method = _interface.methods[j];
